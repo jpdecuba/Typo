@@ -1,14 +1,13 @@
 package Model;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+public class HighScore {
+    private String name;
+    private int score;
+    private Difficulty diff;
 
-public abstract class Opportunity {
-
-    String name;
-    Difficulty diff;
-
-    public Opportunity(String name, Difficulty diff) {
+    public HighScore(String name, int score, Difficulty diff) {
         this.name = name;
+        this.score = score;
         this.diff = diff;
     }
 
@@ -20,15 +19,19 @@ public abstract class Opportunity {
         this.name = name;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public Difficulty getDiff() {
         return diff;
     }
 
     public void setDiff(Difficulty diff) {
         this.diff = diff;
-    }
-
-    public void Effect(Player p){
-        throw new NotImplementedException();
     }
 }

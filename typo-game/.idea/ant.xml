@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< Updated upstream:typo-game/.idea/ant.xml
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
   </component>
 </project>
 
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
+>>>>>>> Stashed changes:.idea/misc.xml
