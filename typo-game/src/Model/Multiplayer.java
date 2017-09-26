@@ -11,7 +11,6 @@ public class Multiplayer extends Session{
     //Constructor
     public Multiplayer(Difficulty difficulty){
         setDifficulty(difficulty);
-        
     }
 
     //start the game
@@ -19,9 +18,8 @@ public class Multiplayer extends Session{
     public void Start(){
         if(players.size() > 1){
             for (Player player: players){
-
+                player.addObserver(this);
             }
-
         }
         else{
             throw new NullPointerException("There are not enough players in the lobby");
@@ -38,8 +36,9 @@ public class Multiplayer extends Session{
         }
     }
 
+    //end the game after update
     @Override
     public void EndGame() {
-        //end the game after update
+
     }
 }

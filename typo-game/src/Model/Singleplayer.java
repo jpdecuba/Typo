@@ -10,10 +10,13 @@ public class Singleplayer extends Session {
         setDifficulty(difficulty);
     }
 
+    //start the game
     @Override
     public void Start() {
         if(players.size() == 1){
-            //start the game
+            for(Player player: players){
+                player.addObserver(this);
+            }
         }
         else{
             throw new NullPointerException("There are not enough players in the lobby");
@@ -21,12 +24,17 @@ public class Singleplayer extends Session {
     }
 
     @Override
-    public void EndGame() {
-
+    public void update(Observable o, Object arg) {
+        if(!(boolean)arg){
+            EndGame();
+        }
+        else{
+            throw new IllegalArgumentException("Session got an unexcpected update");
+        }
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void EndGame() {
 
     }
 }
