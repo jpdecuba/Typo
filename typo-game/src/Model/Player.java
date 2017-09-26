@@ -1,8 +1,9 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Player {
+public class Player extends Observable{
 
 	private int score;
 	private int lives;
@@ -57,7 +58,9 @@ public class Player {
 	    synchronized (LIVES){
             lives -= 1;
         }
-	    if(lives <= 0){
+	    if(lives <= 0){;
+
+	        notifyObservers(false);
 	        return false;
         }
         return  true;
@@ -101,4 +104,6 @@ public class Player {
     public void setHighScores(ArrayList<HighScore> highScores) {
         this.highScores = highScores;
     }
+
+
 }
