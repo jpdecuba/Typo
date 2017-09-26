@@ -27,27 +27,21 @@ public class Player extends Observable{
         combo = 1;
         tempPoints = 0;
     }
-
+    // Adding tempPoints to to score and set tempPoints on zero
     public void AwardPoints() {
 
-	    synchronized (this) {
+        synchronized (this) {
             score += (tempPoints);
             tempPoints = 0;
         }
 
     }
-
     public synchronized int getLives() {
 
             return this.lives;
-
-
 	}
 
-	/**
-	 *
-	 * @param lives
-	 */
+
 	public void AddLives(int lives) {
 	    synchronized (LIVES) {
             this.lives += lives;
