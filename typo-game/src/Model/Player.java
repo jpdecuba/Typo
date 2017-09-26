@@ -24,7 +24,7 @@ public class Player extends Observable{
 
         score = 0;
         lives = 3;
-        combo = 0;
+        combo = 1;
         tempPoints = 0;
     }
 
@@ -37,10 +37,11 @@ public class Player extends Observable{
 
     }
 
-    public int getLives() {
-	    synchronized (LIVES) {
+    public synchronized int getLives() {
+
             return this.lives;
-        }
+
+
 	}
 
 	/**
@@ -68,10 +69,9 @@ public class Player extends Observable{
     }
 
 
-	public int getCombo() {
-        synchronized (COMBO) {
+	public synchronized int getCombo() {
             return this.combo;
-        }
+
 	}
 
 

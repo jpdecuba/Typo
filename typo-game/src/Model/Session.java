@@ -18,7 +18,7 @@ public abstract class Session implements Observer {
     }
 
     public abstract void Start(); //start the game
-    public abstract void EndGame(); //Ends the current game
+    public abstract boolean EndGame(); //Ends the current game
 
 
     //adds a player to the game
