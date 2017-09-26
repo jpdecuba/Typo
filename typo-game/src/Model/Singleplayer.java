@@ -6,7 +6,7 @@ public class Singleplayer extends Session {
 
     //Constructor
     public Singleplayer(Difficulty difficulty){
-        //creates an singleplayer game
+        setDifficulty(difficulty);
     }
 
     @Override

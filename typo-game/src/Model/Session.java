@@ -7,8 +7,8 @@ public abstract class Session {
     //Atributes
     private Difficulty difficulty;
     public ArrayList<Player> players = new ArrayList<Player>();
-    public ArrayList<Set> sets;
-    private ArrayList<Opportunity> opportunities;
+    private ArrayList<Set> sets = new ArrayList<Set>();
+    private ArrayList<Opportunity> opportunities = new ArrayList<Opportunity>();
 
     //Methods
     public void ActiveOpportunity(Player player){
@@ -41,12 +41,13 @@ public abstract class Session {
     //calculates to give the next set
     public Set NextSet(){
         if (!sets.isEmpty()){
-            
+            Set s = sets.get(0);
+            sets.remove(s);
+            return s;
         }
-        else{
-
+        else {
+            throw new NullPointerException("there are no more sets available");
         }
-        return false;
     }
 
     //calculate if the character thats hit is correct
