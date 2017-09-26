@@ -10,6 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -97,7 +98,7 @@ public class PlayerTest {
 
     @Test
     public void setHighScores() throws Exception {
-        HighScore HS = new HighScore("test",10, Difficulty.Beginner);
+        HighScore HS = new HighScore("test",10, Difficulty.Beginner, LocalDate.now());
         ArrayList<HighScore> hslist = new ArrayList<>();
         hslist.add(HS);
         p1.setHighScores(hslist);
