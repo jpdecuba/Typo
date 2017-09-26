@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54dd4b7a-2d50-43e2-8941-21c25663b2bf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/typo-game/src/sample/sample.fxml" afterPath="$PROJECT_DIR$/typo-game/src/Views/sample.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/typo-game/src/Views/page2.fxml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/typo-game/sample/sample.fxml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typo-game/src/Model/Opportunity.java" afterPath="$PROJECT_DIR$/typo-game/src/Model/Opportunity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typo-game/src/Model/Player.java" afterPath="$PROJECT_DIR$/typo-game/src/Model/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typo-game/src/sample/Main.java" afterPath="$PROJECT_DIR$/typo-game/src/sample/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typo-game/src/Controller/Controller.java" afterPath="$PROJECT_DIR$/typo-game/src/Controller/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typo-game/src/Views/sample.fxml" afterPath="$PROJECT_DIR$/typo-game/src/Views/sample.fxml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,7 +27,7 @@
       <file leaf-file-name="Opportunity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typo-game/src/Model/Opportunity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
+            <state relative-caret-position="391">
               <caret line="31" column="26" lean-forward="false" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
               <folding>
                 <element signature="e#578#579#0" expanded="true" />
@@ -41,27 +40,71 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typo-game/src/Model/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1037">
-              <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+            <state relative-caret-position="68">
+              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
               <folding>
-                <element signature="e#431#432#0" expanded="true" />
-                <element signature="e#455#456#0" expanded="true" />
-                <element signature="e#522#523#0" expanded="true" />
-                <element signature="e#547#548#0" expanded="true" />
-                <element signature="e#573#574#0" expanded="true" />
-                <element signature="e#597#598#0" expanded="true" />
-                <element signature="e#664#665#0" expanded="true" />
-                <element signature="e#689#690#0" expanded="true" />
-                <element signature="e#715#716#0" expanded="true" />
-                <element signature="e#739#740#0" expanded="true" />
-                <element signature="e#806#807#0" expanded="true" />
-                <element signature="e#831#832#0" expanded="true" />
-                <element signature="e#862#863#0" expanded="true" />
-                <element signature="e#891#892#0" expanded="true" />
-                <element signature="e#973#974#0" expanded="true" />
-                <element signature="e#1008#1009#0" expanded="true" />
+                <element signature="e#261#262#0" expanded="true" />
+                <element signature="e#285#286#0" expanded="true" />
+                <element signature="e#569#570#0" expanded="true" />
+                <element signature="e#593#594#0" expanded="true" />
+                <element signature="e#660#661#0" expanded="true" />
+                <element signature="e#686#687#0" expanded="true" />
+                <element signature="e#897#898#0" expanded="true" />
+                <element signature="e#921#922#0" expanded="true" />
+                <element signature="e#958#959#0" expanded="true" />
+                <element signature="e#983#984#0" expanded="true" />
+                <element signature="e#1014#1015#0" expanded="true" />
+                <element signature="e#1043#1044#0" expanded="true" />
+                <element signature="e#1125#1126#0" expanded="true" />
+                <element signature="e#1170#1171#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HighScore.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/typo-game/src/Model/HighScore.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Difficulty.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/typo-game/src/Model/Difficulty.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sample.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/typo-game/src/Views/sample.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="249" lean-forward="false" selection-start-line="5" selection-start-column="249" selection-end-line="5" selection-end-column="249" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="page2.fxml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/typo-game/src/Views/page2.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
           </provider>
         </entry>
       </file>
@@ -69,7 +112,7 @@
         <entry file="file://$PROJECT_DIR$/typo-game/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="20" column="21" lean-forward="true" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+              <caret line="20" column="21" lean-forward="false" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
               <folding>
                 <element signature="e#556#557#0" expanded="true" />
                 <element signature="e#584#585#0" expanded="true" />
@@ -78,12 +121,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typo-game/src/Controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="155">
+              <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,6 +139,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -108,10 +154,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/typo-game/src/Controller/Controller.java" />
         <option value="$PROJECT_DIR$/typo-game/src/Model/Opportunity.java" />
         <option value="$PROJECT_DIR$/typo-game/src/sample/Main.java" />
         <option value="$PROJECT_DIR$/typo-game/src/Model/Player.java" />
+        <option value="$PROJECT_DIR$/typo-game/src/Views/sample.fxml" />
+        <option value="$PROJECT_DIR$/typo-game/src/Controller/Controller.java" />
+        <option value="$PROJECT_DIR$/typo-game/src/Views/page2.fxml" />
       </list>
     </option>
   </component>
@@ -456,7 +504,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1506410563773</updated>
-      <workItem from="1506410566801" duration="3006000" />
+      <workItem from="1506410566801" duration="5407000" />
     </task>
     <task id="LOCAL-00001" summary="Model + Controller packages">
       <created>1506411147316</created>
@@ -469,7 +517,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3006000" />
+    <option name="totallyTimeSpent" value="5407000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1284" height="804" extended-state="0" />
@@ -519,20 +567,9 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/typo-game/src/sample/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="20" column="21" lean-forward="true" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
-          <folding>
-            <element signature="e#556#557#0" expanded="true" />
-            <element signature="e#584#585#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/typo-game/src/Model/Opportunity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
+        <state relative-caret-position="391">
           <caret line="31" column="26" lean-forward="false" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
           <folding>
             <element signature="e#578#579#0" expanded="true" />
@@ -543,35 +580,84 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/typo-game/src/Model/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+        <state relative-caret-position="68">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding>
-            <element signature="e#431#432#0" expanded="true" />
-            <element signature="e#455#456#0" expanded="true" />
-            <element signature="e#522#523#0" expanded="true" />
-            <element signature="e#547#548#0" expanded="true" />
-            <element signature="e#573#574#0" expanded="true" />
-            <element signature="e#597#598#0" expanded="true" />
-            <element signature="e#664#665#0" expanded="true" />
-            <element signature="e#689#690#0" expanded="true" />
-            <element signature="e#715#716#0" expanded="true" />
-            <element signature="e#739#740#0" expanded="true" />
-            <element signature="e#806#807#0" expanded="true" />
-            <element signature="e#831#832#0" expanded="true" />
-            <element signature="e#862#863#0" expanded="true" />
-            <element signature="e#891#892#0" expanded="true" />
-            <element signature="e#973#974#0" expanded="true" />
-            <element signature="e#1008#1009#0" expanded="true" />
+            <element signature="e#261#262#0" expanded="true" />
+            <element signature="e#285#286#0" expanded="true" />
+            <element signature="e#569#570#0" expanded="true" />
+            <element signature="e#593#594#0" expanded="true" />
+            <element signature="e#660#661#0" expanded="true" />
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#897#898#0" expanded="true" />
+            <element signature="e#921#922#0" expanded="true" />
+            <element signature="e#958#959#0" expanded="true" />
+            <element signature="e#983#984#0" expanded="true" />
+            <element signature="e#1014#1015#0" expanded="true" />
+            <element signature="e#1043#1044#0" expanded="true" />
+            <element signature="e#1125#1126#0" expanded="true" />
+            <element signature="e#1170#1171#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/typo-game/src/Controller/Controller.java">
+    <entry file="file://$PROJECT_DIR$/typo-game/src/Model/HighScore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state relative-caret-position="34">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typo-game/src/Model/Difficulty.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typo-game/src/Views/sample.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="249" lean-forward="false" selection-start-line="5" selection-start-column="249" selection-end-line="5" selection-end-column="249" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typo-game/src/Controller/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typo-game/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="20" column="21" lean-forward="false" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+          <folding>
+            <element signature="e#556#557#0" expanded="true" />
+            <element signature="e#584#585#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typo-game/src/Views/page2.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
   </component>
