@@ -10,6 +10,7 @@ import java.util.List;
 public class DBHighScore implements IHighScoreContext {
     private Database database = new Database();
 
+    @Override
     public boolean Save(HighScore highScore)
     {
         try
@@ -30,6 +31,7 @@ public class DBHighScore implements IHighScoreContext {
         return false;
     }
 
+    @Override
     public List<HighScore> GetHighScores()
     {
         List<HighScore> highScores = new ArrayList<>();
