@@ -8,13 +8,14 @@ public class Database {
 
     public static Connection connection(){
         Connection con = null;
-        Properties properties = null;
+        Properties properties = new Properties();
         try
         {
-            InputStream input = new FileInputStream("config.properties");
+            InputStream input = new FileInputStream(new File("config.properties").getAbsolutePath());
             properties.load(input);
             
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            System.out.println(properties.getProperty("path") + "   " + properties.getProperty("user") + "  " + properties.getProperty("password"));
             con = DriverManager.getConnection(properties.getProperty("path"), properties.getProperty("user"), properties.getProperty("password"));
         }
         catch (FileNotFoundException ex)
