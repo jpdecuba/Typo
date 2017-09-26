@@ -13,6 +13,7 @@ public class HighScoreRepository {
     public HighScoreRepository(IHighScoreContext context)
     {
         this.context = context;
+        dbHighScore = new DBHighScore();
     }
 
     public boolean Save(HighScore highScore)
