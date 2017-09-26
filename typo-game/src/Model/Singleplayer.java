@@ -33,8 +33,10 @@ public class Singleplayer extends Session {
         }
     }
 
+    //end the game after update
     @Override
-    public void EndGame() {
-
+    public boolean EndGame() {
+        
+        return false;
     }
 }
