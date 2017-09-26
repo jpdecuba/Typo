@@ -11,8 +11,7 @@ public class Player {
 	private ArrayList<HighScore> highScores;
 
 	private Object LIVES = new Object();
-
-
+    private Object COMBO = new Object();
 
 
 	public int getScore() {
@@ -32,7 +31,6 @@ public class Player {
 
 	    synchronized (this) {
             score += (tempPoints);
-
             tempPoints = 0;
         }
 
@@ -40,7 +38,9 @@ public class Player {
 
 
     public int getLives() {
-		return this.lives;
+	    synchronized (LIVES) {
+            return this.lives;
+        }
 	}
 
 	/**
@@ -48,7 +48,9 @@ public class Player {
 	 * @param lives
 	 */
 	public void AddLives(int lives) {
-		this.lives += lives;
+	    synchronized (LIVES) {
+            this.lives += lives;
+        }
 	}
 
 
@@ -56,26 +58,25 @@ public class Player {
 	    synchronized (LIVES){
             lives -= 1;
         }
-
-
 	    if(lives <= 0){
-
 	        return false;
-
         }
-
         return  true;
 
     }
 
 
 	public int getCombo() {
-		return this.combo;
+        synchronized (COMBO) {
+            return this.combo;
+        }
 	}
 
 
 	public void setCombo(int combo) {
-		this.combo = combo;
+	    synchronized (COMBO) {
+            this.combo = combo;
+        }
 	}
 
 	public int getTempPoints() {
@@ -87,7 +88,18 @@ public class Player {
 	 * @param tempPoints
 	 */
 	public void setTempPoints(int tempPoints) {
-		this.tempPoints += tempPoints * combo ;
+	    synchronized(this) {
+
+            this.tempPoints += tempPoints * combo;
+
+        }
 	}
 
+    public ArrayList<HighScore> getHighScores() {
+        return highScores;
+    }
+
+    public void setHighScores(ArrayList<HighScore> highScores) {
+        this.highScores = highScores;
+    }
 }
