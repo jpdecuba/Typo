@@ -36,7 +36,6 @@ public class Player {
 
     }
 
-
     public int getLives() {
 	    synchronized (LIVES) {
             return this.lives;
