@@ -1,5 +1,7 @@
 package Model;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 public abstract class Opportunity {
 
     String name;
@@ -27,6 +29,6 @@ public abstract class Opportunity {
     }
 
     public void Effect(Player p){
-        
+        throw new NotImplementedException();
     }
 }

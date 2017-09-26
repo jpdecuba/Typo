@@ -44,7 +44,7 @@ public class Player {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param lives
 	 */
 	public void AddLives(int lives) {
@@ -83,7 +83,7 @@ public class Player {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param tempPoints
 	 */
 	public void setTempPoints(int tempPoints) {
