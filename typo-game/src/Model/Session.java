@@ -1,14 +1,16 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
-public abstract class Session {
+public abstract class Session implements Observer {
 
     //Atributes
     private Difficulty difficulty;
     public ArrayList<Player> players = new ArrayList<Player>();
     private ArrayList<Set> sets = new ArrayList<Set>();
     private ArrayList<Opportunity> opportunities = new ArrayList<Opportunity>();
+    private Set currentSet = null;
 
     //Methods
     public void ActiveOpportunity(Player player){
@@ -41,9 +43,9 @@ public abstract class Session {
     //calculates to give the next set
     public Set NextSet(){
         if (!sets.isEmpty()){
-            Set s = sets.get(0);
-            sets.remove(s);
-            return s;
+            currentSet = sets.get(0);
+            sets.remove(currentSet);
+            return currentSet;
         }
         else {
             throw new NullPointerException("there are no more sets available");
@@ -51,8 +53,17 @@ public abstract class Session {
     }
 
     //calculate if the character thats hit is correct
-    public boolean TypeCharacter() {
-        return false;
+    public boolean TypeCharacter(char character, Player player) {
+        char currentCharacter = currentSet.getCharacters()[0].getCharacter();
+        if(character == currentCharacter){
+            //character is typed correct
+            return true;
+        }
+        else{
+            //character is typed incorrect
+            player.WrongKeypress();
+            return false;
+        }
     }
 
     //Properties

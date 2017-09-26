@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.util.Observable;
 
 public class Singleplayer extends Session {
 
@@ -21,6 +22,11 @@ public class Singleplayer extends Session {
 
     @Override
     public void EndGame() {
+
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
 
     }
 }
