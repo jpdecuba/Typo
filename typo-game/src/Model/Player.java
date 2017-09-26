@@ -1,67 +1,93 @@
+package Model;
+
+import java.util.ArrayList;
+
 public class Player {
 
-	private Int score;
-	private Int lives;
-	private Int combo;
-	private Int tempPoints;
-	private List<HighScore> highScores;
+	private int score;
+	private int lives;
+	private int combo;
+	private int tempPoints;
+	private ArrayList<HighScore> highScores;
 
-	public Player() {
-		// TODO - implement Player.Player
-		throw new UnsupportedOperationException();
-	}
+	private Object LIVES = new Object();
 
-	public void AwardPoints() {
-		// TODO - implement Player.AwardPoints
-		throw new UnsupportedOperationException();
-	}
 
-	public Int getScore() {
+
+
+	public int getScore() {
 		return this.score;
 	}
 
-	/**
-	 * 
-	 * @param score
-	 */
-	public void setScore(Int score) {
-		this.score = score;
-	}
 
-	public Int getLives() {
+    public Player() {
+
+        score = 0;
+        lives = 3;
+        combo = 0;
+        tempPoints = 0;
+    }
+
+    public void AwardPoints() {
+
+	    synchronized (this) {
+            score += (tempPoints);
+
+            tempPoints = 0;
+        }
+
+    }
+
+
+    public int getLives() {
 		return this.lives;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param lives
 	 */
-	public void setLives(Int lives) {
-		this.lives = lives;
+	public void AddLives(int lives) {
+		this.lives += lives;
 	}
 
-	public Int getCombo() {
+
+	public boolean WrongKeypress(){
+	    synchronized (LIVES){
+            lives -= 1;
+        }
+
+
+	    if(lives <= 0){
+
+	        return false;
+
+        }
+
+        return  true;
+
+    }
+
+
+	public int getCombo() {
 		return this.combo;
 	}
 
-	/**
-	 * 
-	 * @param combo
-	 */
-	public void setCombo(Int combo) {
+
+	public void setCombo(int combo) {
 		this.combo = combo;
 	}
 
-	public Int getTempPoints() {
+	public int getTempPoints() {
 		return this.tempPoints;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param tempPoints
 	 */
-	public void setTempPoints(Int tempPoints) {
-		this.tempPoints = tempPoints;
+	public void setTempPoints(int tempPoints) {
+		this.tempPoints += tempPoints * combo ;
 	}
 
 }
