@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.*;
 
 public class Database {
+
     public static Connection connection(){
         Connection con = null;
         Properties properties = null;
