@@ -2,10 +2,13 @@ package Model;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public abstract class Opportunity {
+import java.util.Observable;
 
-    String name;
-    Difficulty diff;
+public class Opportunity extends Observable {
+
+    private String name;
+    private Difficulty diff;
+    private Player p;
 
     public Opportunity(String name, Difficulty diff) {
         this.name = name;
@@ -28,7 +31,12 @@ public abstract class Opportunity {
         this.diff = diff;
     }
 
-    public void Effect(Player p){
-        throw new NotImplementedException();
+    public Player getPlayer() {
+        return p;
+    }
+
+    public void Effect(Player p) {
+        this.p = p;
+        notifyObservers(this);
     }
 }
