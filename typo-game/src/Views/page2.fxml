@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
 
-
-<AnchorPane minHeight="720" minWidth="1240" style="-fx-background-color: #fffafa;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
+<AnchorPane minHeight="626.0" minWidth="1240" prefHeight="626.0" prefWidth="1240.0" style="-fx-background-color: #fffafa;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller2">
    <children>
-
+      <Canvas fx:id="canvas" height="469.0" onMouseClicked="#meth" width="982.0" AnchorPane.bottomAnchor="157.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="258.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>
