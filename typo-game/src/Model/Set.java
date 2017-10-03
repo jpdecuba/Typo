@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Set {
+public class Set implements Serializable {
     private ArrayList<Letter> characters;
 
     public Set(String string){

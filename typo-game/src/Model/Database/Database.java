@@ -4,7 +4,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 
-public final class Database {
+public class Database {
 
     public static Connection connection(){
         Connection con = null;
