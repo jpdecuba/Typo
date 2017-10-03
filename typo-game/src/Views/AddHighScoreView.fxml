@@ -12,11 +12,11 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15">
                <children>
-                  <TextField alignment="CENTER" prefHeight="100.0" prefWidth="80.0" />
-                  <TextField alignment="CENTER" prefHeight="100.0" prefWidth="80.0" />
-                  <TextField alignment="CENTER" prefHeight="100.0" prefWidth="80.0" />
+                  <TextField fx:id="tfHSletter1" alignment="CENTER" prefHeight="100.0" prefWidth="80.0" />
+                  <TextField fx:id="tfHSletter2" alignment="CENTER" prefHeight="100.0" prefWidth="80.0" />
+                  <TextField fx:id="tfHSletter3" alignment="CENTER" prefHeight="100.0" prefWidth="80.0" />
                </children></HBox>
-            <Button fx:id="btnHSsubmit" alignment="CENTER" mnemonicParsing="false" onAction="#HSsubmit" prefHeight="60.0" prefWidth="540.0" style="-fx-background-color: b0c4de" text="Submit" />
+            <Button fx:id="btnHSsubmit" alignment="CENTER" mnemonicParsing="false" onAction="#HSsubmit" prefHeight="40.0" prefWidth="270.0" style="-fx-background-color: b0c4de" text="Submit" />
          </children>
       </VBox>
    </children>
