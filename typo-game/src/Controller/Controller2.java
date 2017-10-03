@@ -54,6 +54,7 @@ public class Controller2 implements Initializable {
     private Session sp;
     private Player pl;
     private AnimationTimer timer;
+    private int sets = 1;
 
     public void setSession(Session session){
         this.sp =  session;
@@ -68,17 +69,13 @@ public class Controller2 implements Initializable {
     public void meth() {
         loop = new AnimationTimer() {
             double startX = 100;
-            double endX = 200;
             double y = 100;
             double x = startX;
-            double speed = 3;
+            double speed = 30;
 
             @Override
             public void handle(long now) {
                 //ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
-                gContext.clearRect(0,0, 3000, 3000);
-//                gContext.drawImage(img,x,y, 100, 100);
-//                gContext.fillText("A" ,x, y, 100);
                 x+=speed;
             }
         };
@@ -111,16 +108,15 @@ public class Controller2 implements Initializable {
     }
 
     private void Letters(){
-
         int x = 100;
         int y = 100;
-
+        double r = (canvas.getHeight() / sp.sets.size()) * sets;
         gContext.clearRect(0,0, 3000, 3000);
-
+        gContext.drawImage(img, canvas.getWidth() - 200, canvas.getHeight() - r - 200, 100, 100);
         try{
             List<Letter> L = sp.getCurrentSet().getCharacters();
             for(Letter item : L){
-
+                sets++;
                 gContext.fillText(item.getCharacter() ,x, y, 100);
 
                 x += 20;
