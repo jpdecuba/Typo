@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,21 +23,30 @@ public class Controller implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     @FXML
     Button SingleplayerBtn;
+    @FXML
+    Button ExitBtn;
 
     @FXML
     public void test(ActionEvent event) throws IOException {
-        System.out.println("test");
         Stage stage;
         Parent root;
         stage=(Stage) SingleplayerBtn.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("/Views/page2.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml"));
         Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
         stage.setScene(scene);
+        stage.setTitle("Mode: Singleplayer");
         stage.show();
+    }
+
+    @FXML
+    public void Exit(){
+        System.exit(0);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+
 }
