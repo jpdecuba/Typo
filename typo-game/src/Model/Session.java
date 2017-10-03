@@ -78,6 +78,7 @@ public abstract class Session implements Observer {
         */
     }
 
+    /*
     //calculates to give the next set
     public Set NextSet(){
         if (!sets.isEmpty()){
@@ -89,12 +90,30 @@ public abstract class Session implements Observer {
             throw new NullPointerException("there are no more sets available");
         }
     }
+    */
+
+    public Set NextSet(Player player){
+        if (!sets.isEmpty()){
+            if(player != null){
+                player.AwardPoints();
+            }
+            currentSet = sets.get(0);
+            sets.remove(currentSet);
+            return currentSet;
+        }
+        else {
+            throw new NullPointerException("there are no more sets available");
+        }
+    }
 
     //calculate if the character thats hit is correct
     public boolean TypeCharacter(char character, Player player) {
-        char currentCharacter = currentSet.getCharacters()[0].getCharacter();
-        if(character == currentCharacter){
+        if(currentSet.getCharacters().get(0).type(character)){
             //character is typed correct
+            currentSet.getCharacters().remove(0);
+            if(currentSet.getCharacters().isEmpty()){
+                NextSet(player);
+            }
             return true;
         }
         else{
@@ -108,7 +127,6 @@ public abstract class Session implements Observer {
     public Difficulty getDifficulty() { return difficulty; }
     public void setDifficulty(Difficulty difficulty) { this.difficulty = difficulty; }
     public Player getPlayerOne() { return playerOne; }
-    public void setPlayerOne(Player playerOne) { this.playerOne = playerOne; }
     public Player getPlayerTwo() { return playerTwo; }
-    public void setPlayerTwo(Player playerTwo) { this.playerTwo = playerTwo; }
+    public Set getCurrentSet() { return currentSet; }
 }

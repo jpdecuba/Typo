@@ -1,16 +1,18 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Set {
-    private Letter[] characters;
+    private ArrayList<Letter> characters;
 
     public Set(String string){
-        characters = new Letter[string.length()];
+        characters = new ArrayList<Letter>();
         for(int i = 0; i < string.length(); i++){
-            characters[i] = new Letter(string.charAt(i));
+            characters.add(new Letter(string.charAt(i)));
         }
     }
 
-    public Letter[] getCharacters() {
+    public ArrayList<Letter> getCharacters() {
         return characters;
     }
 }

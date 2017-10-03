@@ -15,6 +15,7 @@ public class Singleplayer extends Session {
     public void Start() {
         if(getPlayerOne() != null && getPlayerTwo() == null){
             getPlayerOne().addObserver(this);
+            NextSet(null);
         }
         else{
             throw new NullPointerException("There are not enough players in teh lobby");

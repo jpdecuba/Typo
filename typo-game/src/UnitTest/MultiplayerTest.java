@@ -16,7 +16,6 @@ public class MultiplayerTest {
     Player p1 = new Player();
     Player p2 = new Player();
     Set s1 = new Set("TEST1");
-    Set s2 = new Set("TEST2");
 
     @Before
     public void setUp() throws Exception {
@@ -27,17 +26,20 @@ public class MultiplayerTest {
     public void start() throws Exception {
         mp.AddPlayer(p1);
         mp.AddPlayer(p2);
+        mp.sets.add(s1);
         mp.Start();
     }
 
     @Test (expected = NullPointerException.class)
     public void start2() throws Exception {
+        mp.sets.add(s1);
         mp.Start(); }
 
     @Test
     public void update() throws Exception {
         mp.AddPlayer(p1);
         mp.AddPlayer(p2);
+        mp.sets.add(s1);
         mp.Start();
         p1.WrongKeypress();
         p1.WrongKeypress();
