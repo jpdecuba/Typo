@@ -23,6 +23,10 @@ public class Controller implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     @FXML
     Button SingleplayerBtn;
+
+    @FXML
+    Button SettingsBtn;
+
     @FXML
     Button ExitBtn;
 
@@ -30,8 +34,20 @@ public class Controller implements Initializable {
     public void test(ActionEvent event) throws IOException {
         Stage stage;
         Parent root;
-        stage=(Stage) SingleplayerBtn.getScene().getWindow();
+        stage=(Stage) SettingsBtn.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml"));
+        Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
+        stage.setScene(scene);
+        stage.setTitle("Settings");
+        stage.show();
+    }
+
+    @FXML
+    public void setting(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage=(Stage) SingleplayerBtn.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("/Views/settings.fxml"));
         Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
         stage.setScene(scene);
         stage.setTitle("Mode: Singleplayer");
