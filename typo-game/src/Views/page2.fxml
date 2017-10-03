@@ -26,7 +26,7 @@
                     <Font name="Verdana Bold" size="25.0"/>
                 </font>
             </Label>
-            <Button fx:id="Quit" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#Quitgame"
+            <Button fx:id="Quit" alignment="CENTER_RIGHT" mnemonicParsing="false" onMouseClicked="#Quitgame"
                     style="-fx-background-color: #b0c4de; -fx-background-radius: 5;" text="Quit">
                 <font>
                     <Font name="Verdana Bold" size="12.0"/>
