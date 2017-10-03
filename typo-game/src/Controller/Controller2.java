@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,11 +20,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.junit.FixMethodOrder;
 import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
 
 public class Controller2 implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
@@ -37,14 +40,20 @@ public class Controller2 implements Initializable {
     Label ScoreLbl;
     Image img = new Image("/rocket.gif");
 
+    @FXML
+    Label
+
     private GraphicsContext gContext;
     private AnimationTimer loop;
     private Scene scene;
     private Session sp;
+    private Player pl;
+    private Timer timer;
 
     public void setSession(Session session){
         this.sp =  session;
         sp.AddPlayer(new Player());
+        pl = sp.getPlayerOne();
     }
     public void setScene(Scene scene){
         this.scene = scene;
@@ -73,14 +82,68 @@ public class Controller2 implements Initializable {
         };
 
         loop.start();
-        keypress();
+
+        sp.sets.add(new Set("test"));
+
+        sp.Start();
+        Platform.runLater(()-> {
+            keypress();
+
+        });
+
     }
+
+
+    public  void begintimer(){
+
+
+
+
+        timer = new Timer(){
+
+            Set sets = sp.getCurrentSet();
+
+
+
+
+
+
+
+
+        };
+    }
+
+
 
     public void keypress(){
 
         scene.setOnKeyPressed( event -> {
 
-            System.out.println("key =" + event.getCode().toString());
+            System.out.println("key = " + event.getCode().toString());
+
+            String s = event.getCode().toString();
+
+            //char c = s.charAt(0);
+
+            //typechar(c);
+
+
+
+
+    });
+
+
+
+    }
+
+
+
+    public synchronized void typechar (char c){
+
+
+        Platform.runLater(()-> {
+            System.out.println(sp.TypeCharacter(c, sp.getPlayerOne()));
+
         });
     }
 
