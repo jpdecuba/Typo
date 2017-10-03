@@ -25,6 +25,7 @@ import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
 
@@ -38,17 +39,20 @@ public class Controller2 implements Initializable {
     Button Quit;
     @FXML
     Label ScoreLbl;
-    Image img = new Image("/rocket.gif");
 
     @FXML
-    Label
+    Label Combo;
+
+    Image img = new Image("/rocket.gif");
+
+
 
     private GraphicsContext gContext;
     private AnimationTimer loop;
     private Scene scene;
     private Session sp;
     private Player pl;
-    private Timer timer;
+    private AnimationTimer timer;
 
     public void setSession(Session session){
         this.sp =  session;
@@ -94,23 +98,50 @@ public class Controller2 implements Initializable {
     }
 
 
+    private void SetValues(){
+
+        ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
+        Combo.setText("COMBO: " + String.valueOf(sp.getPlayerOne().getCombo()));
+
+
+    }
+
+    private void Letters(){
+
+        int x = 100;
+        int y = 100;
+
+        gContext.clearRect(0,0, 3000, 3000);
+        Set sets = sp.getCurrentSet();
+
+        List<Letter> L = sp.getCurrentSet().getCharacters();
+        for(Letter item : L){
+
+            gContext.fillText(item.getCharacter() ,x, y, 100);
+
+            x += 20;
+
+        }
+
+    }
+
+
+
+
     public  void begintimer(){
 
+        timer = new AnimationTimer(){
 
+            public void handle(long now)
+            {
+                SetValues();
+                Letters();
 
-
-        timer = new Timer(){
-
-            Set sets = sp.getCurrentSet();
-
-
-
-
-
-
-
+            }
 
         };
+        timer.start();
+
     }
 
 
