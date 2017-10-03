@@ -27,8 +27,7 @@ public class SingleplayerTest {
 
     @Test (expected = NullPointerException.class)
     public void start2() throws Exception {
-        sp.Start();
-    }
+        sp.Start(); }
 
     @Test
     public void update() throws Exception {
@@ -37,8 +36,7 @@ public class SingleplayerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void update2() throws Exception {
-        sp.update(null, true);
-    }
+        sp.update(null, true); }
 
     @Test
     public void endGame() throws Exception {

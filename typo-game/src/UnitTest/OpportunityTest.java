@@ -57,7 +57,6 @@ public class OpportunityTest{
 
 
 
-        assertEquals(true, testObserver2.success);
-    }
+        assertEquals(true, testObserver2.success); }
 
 }

@@ -11,21 +11,12 @@ public class TestObserver implements Observer {
 
     public boolean success;
 
-
-
     @Override
     public void update(Observable observable, Object o) {
 
         if (o.getClass() == Opportunity.class) {
             Opportunity opp = (Opportunity)o;
-
-
             success = true;
         }
-        else {
-            success = false;
-
-        }
-
     }
 }

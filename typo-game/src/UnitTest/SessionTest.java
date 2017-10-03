@@ -24,8 +24,7 @@ public class SessionTest {
 
     @Test(expected = NotImplementedException.class)
     public void activeOpportunity() throws Exception {
-        mp.ActiveOpportunity(p1);
-    }
+        mp.ActiveOpportunity(p1); }
 
     @Test
     public void addPlayer() throws Exception {
@@ -36,8 +35,7 @@ public class SessionTest {
     @Test(expected = IllegalArgumentException.class)
     public void addPlayer2() throws Exception {
         mp.AddPlayer(p1);
-        mp.AddPlayer(p1);
-    }
+        mp.AddPlayer(p1); }
 
     @Test
     public void removePlayer() throws Exception {
@@ -48,13 +46,11 @@ public class SessionTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void removePlayer2() throws Exception {
-        mp.RemovePlayer(p1);
-    }
+        mp.RemovePlayer(p1); }
 
     @Test(expected = NullPointerException.class)
     public void nextSet1() throws Exception {
-        mp.NextSet();
-    }
+        mp.NextSet(); }
 
     @Test
     public void nextSet() throws Exception {
