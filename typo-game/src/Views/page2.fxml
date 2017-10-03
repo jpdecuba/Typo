@@ -19,8 +19,13 @@
                 </font>
             </Label>
         </HBox>
-        <HBox alignment="TOP_RIGHT" layoutX="14.0" layoutY="12.0" prefHeight="85.0" prefWidth="500.0"
+        <HBox spacing="50" alignment="TOP_RIGHT" layoutX="14.0" layoutY="12.0" prefHeight="85.0" prefWidth="500.0"
               AnchorPane.topAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <Label fx:id="ComboLbl" text="COMBO: ">
+                <font>
+                    <Font name="Verdana Bold" size="25.0"/>
+                </font>
+            </Label>
             <Button fx:id="Quit" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#Quitgame"
                     style="-fx-background-color: #b0c4de; -fx-background-radius: 5;" text="Quit">
                 <font>

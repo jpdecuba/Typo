@@ -4,7 +4,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 
-public final class Database {
+public class Database {
 
     public static Connection connection(){
         Connection con = null;
@@ -15,7 +15,6 @@ public final class Database {
             properties.load(input);
             
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            System.out.println(properties.getProperty("path") + "   " + properties.getProperty("user") + "  " + properties.getProperty("password"));
             con = DriverManager.getConnection(properties.getProperty("path"), properties.getProperty("user"), properties.getProperty("password"));
         }
         catch (FileNotFoundException ex)
