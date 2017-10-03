@@ -32,8 +32,7 @@ public class MultiplayerTest {
 
     @Test (expected = NullPointerException.class)
     public void start2() throws Exception {
-        mp.Start();
-    }
+        mp.Start(); }
 
     @Test
     public void update() throws Exception {
@@ -48,8 +47,7 @@ public class MultiplayerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void update2() throws Exception {
-        mp.update(null, true);
-    }
+        mp.update(null, true); }
 
     @Test
     public void endGame() throws Exception {
