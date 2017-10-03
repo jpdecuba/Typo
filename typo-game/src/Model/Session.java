@@ -7,7 +7,7 @@ import java.util.Observer;
 
 public abstract class Session implements Observer {
 
-    //Atributes
+    //Attributes
     private Difficulty difficulty;
     //public ArrayList<Player> players = new ArrayList<Player>();
     public ArrayList<Set> sets = new ArrayList<Set>();

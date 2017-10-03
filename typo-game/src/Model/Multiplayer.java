@@ -5,7 +5,7 @@ import javafx.beans.Observable;
 
 public class Multiplayer extends Session{
 
-    //Atributes
+    //Attributes
     private Database connection;
 
     //Constructor
