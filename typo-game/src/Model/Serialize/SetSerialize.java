@@ -49,7 +49,7 @@ public class SetSerialize {
         }
     }
 
-    public List<Set> GetSets(Difficulty difficulty)
+    public static List<Set> GetSets(Difficulty difficulty)
     {
         try
         {
