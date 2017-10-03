@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import sample.Main;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -24,6 +25,8 @@ public class DifficultyController {
     Button BeginnerBtn;
     @FXML
     Button ExpertBtn;
+    @FXML
+    Button BackBtn;
 
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
@@ -43,7 +46,7 @@ public class DifficultyController {
             stage.setTitle("TYPO Singleplayer - Difficulty: Beginner");
             stage.show();
         }
-        else {
+        else if(button == ExpertBtn) {
             Singleplayer sp = new Singleplayer(Difficulty.Expert);
             Stage stage;
             stage=(Stage) BeginnerBtn.getScene().getWindow();
@@ -57,6 +60,11 @@ public class DifficultyController {
             stage.setTitle("TYPO Singleplayer - Difficulty: Expert");
             stage.show();
         }
-
+        else {
+            Parent parent = FXMLLoader.load(getClass().getResource("/Views/sample.fxml"));
+            Scene scene = new Scene(parent, screenSize.getWidth(), screenSize.getHeight());
+            Main.Stage.setScene(scene);
+            Main.Stage.show();
+        }
     }
 }

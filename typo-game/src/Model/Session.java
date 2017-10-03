@@ -107,7 +107,7 @@ public abstract class Session implements Observer {
     }
 
     //calculate if the character thats hit is correct
-    public boolean TypeCharacter(char character, Player player) {
+    public boolean TypeCharacter(String character, Player player) {
         if(currentSet.getCharacters().get(0).type(character)){
             //character is typed correct
             currentSet.getCharacters().remove(0);

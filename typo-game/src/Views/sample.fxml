@@ -10,25 +10,25 @@
     <children>
         <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <children>
-                <Button fx:id="SingleplayerBtn" alignment="CENTER" mnemonicParsing="false" onAction="#test" prefHeight="60.0" prefWidth="540.0" style="-fx-background-color: b0c4de" text="Singleplayer">
+                <Button fx:id="SingleplayerBtn" alignment="CENTER" mnemonicParsing="false" onAction="#test" prefHeight="60.0" prefWidth="540.0" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Singleplayer">
                <font>
                   <Font name="Tahoma Bold" size="16.0" />
                </font></Button>
-                <Button fx:id="MultiplayerBtn" alignment="CENTER" mnemonicParsing="false" onAction="#test" prefHeight="60.0" prefWidth="540.0" style="-fx-background-color: b0c4de" text="Multiplayer">
+                <Button fx:id="MultiplayerBtn" alignment="CENTER" mnemonicParsing="false" onAction="#test" prefHeight="60.0" prefWidth="540.0" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Multiplayer">
                <font>
                   <Font name="Tahoma Bold" size="16.0" />
                </font></Button>
-                <Button fx:id="HighscoreBtn" alignment="CENTER" mnemonicParsing="false" onAction="#test" prefHeight="60.0" prefWidth="540.0" style="-fx-background-color: b0c4de;" text="Highscore" textAlignment="CENTER">
+                <Button fx:id="HighscoreBtn" alignment="CENTER" mnemonicParsing="false" onAction="#test" prefHeight="60.0" prefWidth="540.0" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Highscore" textAlignment="CENTER">
                <font>
                   <Font name="Tahoma Bold" size="16.0" />
                </font></Button>
             <HBox alignment="CENTER" spacing="15">
                 <children>
-                    <Button fx:id="SettingsBtn" alignment="CENTER" mnemonicParsing="false" onAction="#test" prefHeight="60.0" prefWidth="262.5" style="-fx-background-color: b0c4de" text="Settings">
+                    <Button fx:id="SettingsBtn" alignment="CENTER" mnemonicParsing="false" onAction="#setting" prefHeight="60.0" prefWidth="262.5" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Settings">
                      <font>
                         <Font name="Tahoma Bold" size="16.0" />
                      </font></Button>
-                    <Button fx:id="ExitBtn" alignment="CENTER" mnemonicParsing="false" onAction="#Exit" prefHeight="60.0" prefWidth="262.5" style="-fx-background-color: b0c4de;" text="Exit" textAlignment="CENTER">
+                    <Button fx:id="ExitBtn" alignment="CENTER" mnemonicParsing="false" onAction="#Exit" prefHeight="60.0" prefWidth="262.5" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Exit" textAlignment="CENTER">
                      <font>
                         <Font name="Tahoma Bold" size="16.0" />
                      </font></Button>

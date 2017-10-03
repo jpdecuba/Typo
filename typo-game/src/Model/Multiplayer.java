@@ -1,12 +1,15 @@
 package Model;
 
+import Model.Database.DBSet;
 import Model.Database.Database;
+import Model.Repository.SetRepository;
 import javafx.beans.Observable;
 
 public class Multiplayer extends Session{
 
     //Attributes
     private Database connection;
+    private SetRepository setRepository = new SetRepository(new DBSet());
 
     //Constructor
     public Multiplayer(Difficulty difficulty){
@@ -17,6 +20,7 @@ public class Multiplayer extends Session{
     @Override
     public void Start(){
         if(getPlayerOne() != null && getPlayerTwo() != null){
+            try{ sets.addAll(setRepository.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
             getPlayerOne().addObserver(this);
             getPlayerTwo().addObserver(this);
             NextSet(null);
