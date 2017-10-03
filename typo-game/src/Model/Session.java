@@ -93,10 +93,10 @@ public abstract class Session implements Observer {
     */
 
     public Set NextSet(Player player){
+        if(player != null){
+            player.AwardPoints();
+        }
         if (!sets.isEmpty()){
-            if(player != null){
-                player.AwardPoints();
-            }
             currentSet = sets.get(0);
             sets.remove(currentSet);
             return currentSet;
@@ -111,7 +111,7 @@ public abstract class Session implements Observer {
         if(currentSet.getCharacters().get(0).getCharacter().toLowerCase().contains(character.toLowerCase())){
             //character is typed correct
             player.setTempPoints(5); //temporary points set to 5
-            player.AwardPoints(); //temporary award ponts REMOVE LATER!
+            //player.AwardPoints(); //temporary award ponts REMOVE LATER!
             currentSet.getCharacters().remove(0);
             if(currentSet.getCharacters().isEmpty()){
                 NextSet(player);

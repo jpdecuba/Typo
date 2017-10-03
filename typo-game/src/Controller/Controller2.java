@@ -85,7 +85,8 @@ public class Controller2 implements Initializable {
 
         loop.start();
 
-        sp.sets.add(new Set("test"));
+        //sp.sets.add(new Set("test"));
+        //sp.sets.add(new Set("apple  "));
         try {
             sp.Start();
         }
@@ -159,6 +160,10 @@ public class Controller2 implements Initializable {
             System.out.println("key = " + event.getCode().toString());
 
             String s = event.getCode().toString();
+
+            if(s.contains("DIGIT")){
+                s = s.substring(5);
+            }
 
             //char c = s.charAt(0);
 
