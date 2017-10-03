@@ -5,10 +5,7 @@ import Model.Difficulty;
 import Model.Repository.SetRepository;
 import Model.Set;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.List;
 
 public class SetSerialize {
@@ -50,5 +47,33 @@ public class SetSerialize {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static List<Set> GetSets(Difficulty difficulty)
+    {
+        try
+        {
+            String path = System.getenv("APPDATA") + "\\Typo\\";
+            if(difficulty == Difficulty.Beginner)
+                path += "BeginnerSets.ser";
+            else
+                path += "ExpertSets.ser";
+            FileInputStream fileIn = new FileInputStream(path);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            List<Set> sets = (List<Set>) in.readObject();
+            in.close();
+            fileIn.close();
+            return sets;
+        }
+        catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+        catch (ClassNotFoundException c)
+        {
+            System.out.println("List<Set> class not found");
+            c.printStackTrace();
+        }
+        return null;
     }
 }
