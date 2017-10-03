@@ -28,7 +28,7 @@
                      <font>
                         <Font name="Tahoma Bold" size="16.0" />
                      </font></Button>
-                    <Button fx:id="ExitBtn" alignment="CENTER" mnemonicParsing="false" onAction="#test" prefHeight="60.0" prefWidth="262.5" style="-fx-background-color: b0c4de;" text="Exit" textAlignment="CENTER">
+                    <Button fx:id="ExitBtn" alignment="CENTER" mnemonicParsing="false" onAction="#Exit" prefHeight="60.0" prefWidth="262.5" style="-fx-background-color: b0c4de;" text="Exit" textAlignment="CENTER">
                      <font>
                         <Font name="Tahoma Bold" size="16.0" />
                      </font></Button>
