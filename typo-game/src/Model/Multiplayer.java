@@ -20,7 +20,12 @@ public class Multiplayer extends Session{
     @Override
     public void Start(){
         if(getPlayerOne() != null && getPlayerTwo() != null){
-            try{ sets.addAll(setRepository.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
+            if(Database.checkConnection()){
+                try{ sets.addAll(setRepository.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
+            }
+            else {
+
+            }
             getPlayerOne().addObserver(this);
             getPlayerTwo().addObserver(this);
             NextSet(null);
