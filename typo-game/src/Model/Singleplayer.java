@@ -17,7 +17,7 @@ public class Singleplayer extends Session {
     @Override
     public void Start() {
         if(getPlayerOne() != null && getPlayerTwo() == null){
-            sets.addAll(setRepository.GetSets(getDifficulty()));
+            try{ sets.addAll(setRepository.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
             getPlayerOne().addObserver(this);
             NextSet(null);
         }
