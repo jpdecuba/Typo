@@ -37,6 +37,7 @@ public class Opportunity extends Observable {
 
     public void Effect(Player p) {
         this.p = p;
-        notifyObservers(this);
+        this.setChanged();
+        this.notifyObservers(this);
     }
 }
