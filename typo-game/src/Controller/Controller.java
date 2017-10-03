@@ -38,7 +38,7 @@ public class Controller implements Initializable {
         root = FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml"));
         Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
         stage.setScene(scene);
-        stage.setTitle("Settings");
+        stage.setTitle("Mode: Singleplayer");
         stage.show();
     }
 
@@ -50,7 +50,7 @@ public class Controller implements Initializable {
         root = FXMLLoader.load(getClass().getResource("/Views/settings.fxml"));
         Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
         stage.setScene(scene);
-        stage.setTitle("Mode: Singleplayer");
+        stage.setTitle("Settings");
         stage.show();
     }
 

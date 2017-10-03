@@ -13,7 +13,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sample.Main;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 
@@ -23,6 +25,9 @@ public class SettingsController {
     Button BackBtn;
     @FXML
     CheckBox BorderBox;
+
+    Stage s;
+    Parent root;
 
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
@@ -34,5 +39,32 @@ public class SettingsController {
             Main.Stage.setScene(scene);
             Main.Stage.show();
         }
+    }
+
+    @FXML
+    public void borderless(ActionEvent e) throws IOException {
+        throw new NotImplementedException();
+
+        /*
+        Stage stage;
+        Parent root;
+        stage=(Stage) BorderBox.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("/Views/settings.fxml"));
+        Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
+        stage.setScene(scene);
+        stage.setTitle("Settings");
+        stage.show();
+
+
+        if (BorderBox.isSelected()) {
+            s.set
+            s = new Stage(StageStyle.UNDECORATED);
+            stage.
+        }
+        else {
+            s = new Stage(StageStyle.DECORATED);
+        }
+        s.show();
+        */
     }
 }
