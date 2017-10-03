@@ -38,5 +38,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="mssql-jdbc-6.2.1.jre8" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1" level="project" />
   </component>
 </module>
