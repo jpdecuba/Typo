@@ -35,4 +35,18 @@ public class Database {
         }
         return con;
     }
+
+    public static boolean checkConnection(){
+        Connection con = connection();
+        boolean isOpen = false;
+        String query = "SELECT 1";
+        try{
+            PreparedStatement statement = con.prepareStatement(query);
+            isOpen = true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return isOpen;
+    }
 }
