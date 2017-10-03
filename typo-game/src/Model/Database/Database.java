@@ -15,7 +15,6 @@ public class Database {
             properties.load(input);
             
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            System.out.println(properties.getProperty("path") + "   " + properties.getProperty("user") + "  " + properties.getProperty("password"));
             con = DriverManager.getConnection(properties.getProperty("path"), properties.getProperty("user"), properties.getProperty("password"));
         }
         catch (FileNotFoundException ex)

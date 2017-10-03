@@ -24,14 +24,9 @@ public class SetSerialize {
                 return false;
 
             File file = new File(System.getenv("APPDATA") + "\\Typo");
-            if(file.mkdirs())
-            {
-                if(Write(file.getCanonicalPath() + "\\BeginnerSets.ser", setsBeginner) && Write(file.getCanonicalPath() + "\\ExpertSets.ser", setsExpert))
-                {
+            file.mkdirs();
+            if(Write(file.getCanonicalPath() + "\\BeginnerSets.ser", setsBeginner) && Write(file.getCanonicalPath() + "\\ExpertSets.ser", setsExpert))
                     return true;
-                }
-            }
-            return false;
         }
         catch (Exception e)
         {

@@ -22,6 +22,11 @@ public class Main extends Application {
         primaryStage.setMaximized(true);
         primaryStage.show();
         Stage = primaryStage;
+
+        Platform.runLater(()->{
+            if(!SetSerialize.SaveSets())
+                System.out.println("The single player sets could not be saved.");
+        });
     }
 
     public static void main(String[] args) {
