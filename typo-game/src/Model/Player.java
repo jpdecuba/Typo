@@ -53,9 +53,11 @@ public class Player extends Observable{
 	    synchronized (LIVES){
             lives -= 1;
         }
-	    if(lives <= 0){;
+	    if(lives <= 0){
 
-	        notifyObservers(false);
+	        this.setChanged();
+
+	        this.notifyObservers(false);
 	        return false;
         }
         return  true;

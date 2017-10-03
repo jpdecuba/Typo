@@ -43,10 +43,21 @@ public class OpportunityTest{
 
     @Test
     public void effect() throws Exception {
-        opp.addObserver(testObserver);
-        opp.Effect(new Player());
 
-        assertEquals(true, testObserver.success);
+        TestObserver testObserver2 = new TestObserver();
+
+        Opportunity opp3 = new Opportunity("test", Difficulty.Beginner);
+
+        opp3.addObserver(testObserver2);
+
+        opp3.Effect(new Player());
+
+
+
+
+
+
+        assertEquals(true, testObserver2.success);
     }
 
 }
