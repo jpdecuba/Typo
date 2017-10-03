@@ -7,7 +7,6 @@ import java.sql.*;
 import java.util.*;
 
 public class DBOpportunity implements IOpportunityContext {
-    private Database database = new Database();
 
     @Override
     public List<Opportunity> GetOpportunities(Difficulty difficulty) {
@@ -15,7 +14,7 @@ public class DBOpportunity implements IOpportunityContext {
         try
         {
             String sql = "SELECT effect, Difficultyid FROM Opportunity WHERE Difficultyid <= ?";
-            PreparedStatement statement = database.connection().prepareStatement(sql);
+            PreparedStatement statement = Database.connection().prepareStatement(sql);
             statement.setInt(1, difficulty.getValue());
             ResultSet rs = statement.executeQuery();
             while (rs.next())

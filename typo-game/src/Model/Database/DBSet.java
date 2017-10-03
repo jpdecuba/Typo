@@ -8,7 +8,6 @@ import java.sql.*;
 import java.util.*;
 
 public class DBSet implements ISetContext{
-    private Database database = new Database();
 
     @Override
     public List<Set> GetSets(Difficulty difficulty) {
@@ -16,7 +15,7 @@ public class DBSet implements ISetContext{
         try
         {
             String sql = "SELECT letters FROM Set WHERE Difficultyid = ?";
-            PreparedStatement statement = database.connection().prepareStatement(sql);
+            PreparedStatement statement = Database.connection().prepareStatement(sql);
             statement.setInt(1, difficulty.getValue());
             ResultSet rs = statement.executeQuery();
             while (rs.next())
