@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -24,23 +26,25 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller2 implements Initializable {
+    Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     @FXML
     Canvas canvas;
     @FXML
     AnchorPane anchor;
     @FXML
     Button Quit;
+    @FXML
+    Label ScoreLbl;
+    Image img = new Image("/rocket.gif");
 
     private GraphicsContext gContext;
     private AnimationTimer loop;
     private Scene scene;
     private Session sp;
-    private Player pl;
 
     public void setSession(Session session){
         this.sp =  session;
         sp.AddPlayer(new Player());
-        pl = (Player) sp.players.get(0);
     }
     public void setScene(Scene scene){
         this.scene = scene;
@@ -53,15 +57,17 @@ public class Controller2 implements Initializable {
             double endX = 200;
             double y = 100;
             double x = startX;
-            double speed = 4;
+            double speed = 3;
 
             @Override
             public void handle(long now) {
-//                pl.setCombo(2);
-//                pl.setTempPoints(40);
-//                pl.AwardPoints();
+                sp.getPlayerOne().setCombo(2);
+                sp.getPlayerOne().setTempPoints(40);
+                sp.getPlayerOne().AwardPoints();
+                ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
                 gContext.clearRect(0,0, 3000, 3000);
-                gContext.fillText(String.valueOf(pl.getScore()) ,x, y, 100);
+//                gContext.drawImage(img,x,y, 100, 100);
+//                gContext.fillText("A" ,x, y, 100);
                 x+=speed;
             }
         };
@@ -79,7 +85,10 @@ public class Controller2 implements Initializable {
     }
 
     @FXML
-    public void Quitgame() {
+    public void Quitgame() throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/Views/sample.fxml"));
+        Scene scene = new Scene(parent, screenSize.getWidth(), screenSize.getHeight());
+        Main.Stage.setScene(scene);
         Main.Stage.show();
     }
 

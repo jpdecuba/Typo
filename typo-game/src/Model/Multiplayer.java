@@ -19,6 +19,7 @@ public class Multiplayer extends Session{
         if(getPlayerOne() != null && getPlayerTwo() != null){
             getPlayerOne().addObserver(this);
             getPlayerTwo().addObserver(this);
+            NextSet(null);
         }
         else{
             throw new NullPointerException("There are not enough players in the lobby");

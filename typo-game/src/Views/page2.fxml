@@ -2,12 +2,33 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" minHeight="626.0" minWidth="1240" prefHeight="626.0" prefWidth="1240.0" style="-fx-background-color: #fffafa;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller2">
-   <children>
-      <Button fx:id="Quit" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#Quitgame" text="Quit Game" />
-      
-      <Canvas fx:id="canvas" height="469.0" onMousePressed="#meth" width="482.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
-   </children>
+<AnchorPane fx:id="anchor" minHeight="626.0" minWidth="1240" prefHeight="626.0" prefWidth="1240.0"
+            style="-fx-background-color: #fffafa;" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller2">
+    <children>
+        <HBox alignment="TOP_LEFT" layoutX="14.0" layoutY="12.0" prefHeight="85.0" prefWidth="500.0"
+              AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0">
+            <Label fx:id="ScoreLbl" text="SCORE: ">
+                <font>
+                    <Font name="Verdana Bold" size="50.0"/>
+                </font>
+            </Label>
+        </HBox>
+        <HBox alignment="TOP_RIGHT" layoutX="14.0" layoutY="12.0" prefHeight="85.0" prefWidth="500.0"
+              AnchorPane.topAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <Button fx:id="Quit" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#Quitgame"
+                    style="-fx-background-color: #b0c4de; -fx-background-radius: 5;" text="Quit">
+                <font>
+                    <Font name="Verdana Bold" size="12.0"/>
+                </font>
+            </Button>
+        </HBox>
+        <Canvas fx:id="canvas" height="469.0" onMousePressed="#meth" width="482.0" AnchorPane.bottomAnchor="0.0"
+                AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0"/>
+    </children>
 </AnchorPane>
