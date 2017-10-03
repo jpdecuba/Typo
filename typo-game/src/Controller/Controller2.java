@@ -158,9 +158,6 @@ public class Controller2 implements Initializable {
 
             //typechar(c);
 
-
-
-
     });
 
 
@@ -169,8 +166,7 @@ public class Controller2 implements Initializable {
 
 
 
-    public synchronized void typechar (char c){
-
+    public synchronized void typechar (String c){
 
         Platform.runLater(()-> {
             System.out.println(sp.TypeCharacter(c, sp.getPlayerOne()));
