@@ -165,7 +165,7 @@ public class Controller2 implements Initializable {
 
             //char c = s.charAt(0);
 
-            //typechar(c);
+            typechar(s);
 
     });
 
