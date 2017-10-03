@@ -110,6 +110,8 @@ public abstract class Session implements Observer {
     public boolean TypeCharacter(String character, Player player) {
         if(currentSet.getCharacters().get(0).getCharacter().toLowerCase().contains(character.toLowerCase())){
             //character is typed correct
+            player.setTempPoints(5); //temporary points set to 5
+            player.AwardPoints(); //temporary award ponts REMOVE LATER!
             currentSet.getCharacters().remove(0);
             if(currentSet.getCharacters().isEmpty()){
                 NextSet(player);
