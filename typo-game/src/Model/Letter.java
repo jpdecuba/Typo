@@ -1,14 +1,14 @@
 package Model;
 
 public class Letter {
-    private char character;
+    private String character;
     private boolean typed;
 
-    public Letter(char character){
+    public Letter(String character){
         this.character = character;
     }
 
-    public boolean type(char character){
+    public boolean type(String character){
         if(this.character == character){
             typed = true;
             return typed;
@@ -19,7 +19,7 @@ public class Letter {
         }
     }
 
-    public char getCharacter(){
+    public String getCharacter(){
         return character;
     }
 

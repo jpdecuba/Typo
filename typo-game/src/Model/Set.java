@@ -8,7 +8,7 @@ public class Set {
     public Set(String string){
         characters = new ArrayList<Letter>();
         for(int i = 0; i < string.length(); i++){
-            characters.add(new Letter(string.charAt(i)));
+            characters.add(new Letter(string.substring(i)));
         }
     }
 
