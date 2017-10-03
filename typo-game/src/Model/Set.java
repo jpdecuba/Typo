@@ -6,7 +6,7 @@ public class Set {
     public Set(String string){
         characters = new Letter[string.length()];
         for(int i = 0; i < string.length(); i++){
-            characters[i] = new Letter(string.charAt(i));
+            characters[i] = new Letter(string.substring(i));
         }
     }
 
