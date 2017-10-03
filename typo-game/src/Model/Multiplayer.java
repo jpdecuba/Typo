@@ -16,6 +16,14 @@ public class Multiplayer extends Session{
     //start the game
     @Override
     public void Start(){
+        if(getPlayerOne() != null && getPlayerTwo() != null){
+            getPlayerOne().addObserver(this);
+            getPlayerTwo().addObserver(this);
+        }
+        else{
+            throw new NullPointerException("There are not enough players in the lobby");
+        }
+        /*
         if(players.size() > 1){
             for (Player player: players){
                 player.addObserver(this);
@@ -24,6 +32,7 @@ public class Multiplayer extends Session{
         else{
             throw new NullPointerException("There are not enough players in the lobby");
         }
+        */
     }
 
     @Override
@@ -32,7 +41,7 @@ public class Multiplayer extends Session{
             EndGame();
         }
         else{
-            throw new IllegalArgumentException("Session got an unexcpected update");
+            throw new IllegalArgumentException("Session got an unexpected update");
         }
     }
 

@@ -9,15 +9,25 @@ public abstract class Session implements Observer {
 
     //Atributes
     private Difficulty difficulty;
-    public ArrayList<Player> players = new ArrayList<Player>();
+    //public ArrayList<Player> players = new ArrayList<Player>();
     public ArrayList<Set> sets = new ArrayList<Set>();
     public ArrayList<Opportunity> opportunities = new ArrayList<Opportunity>();
     private Set currentSet = null;
+    private Player playerOne = null;
+    private Player playerTwo = null;
 
     //Methods
     public void ActiveOpportunity(Player player){
-        //give the active opportunity in effect
-        throw new NotImplementedException();
+        //give the active opportunity in effect on which player???
+        if(player == playerOne){
+            throw new NotImplementedException();
+        }
+        else if(player == playerTwo){
+            throw new NotImplementedException();
+        }
+        else{
+            throw new IllegalArgumentException("player does not exist in lobby");
+        }
     }
 
     public abstract void Start(); //start the game
@@ -26,21 +36,46 @@ public abstract class Session implements Observer {
 
     //adds a player to the game
     public void AddPlayer(Player player){
+        if(playerOne == null && player != playerTwo){
+            playerOne = player;
+        }
+        else if(playerTwo == null && player != playerOne){
+            playerTwo = player;
+        }
+        else{
+            throw new NumberFormatException("there are already two players");
+        }
+
+        /*
         if(players.contains(player)){
             throw new IllegalArgumentException("player already exsists in lobby");
         }
         else{
             players.add(player);
         }
+        */
     }
 
+    //Removes the asked player from the game
     public void RemovePlayer(Player player){
+        if(playerOne == player){
+            playerOne = null;
+        }
+        else if(playerTwo == player){
+            playerTwo = null;
+        }
+        else{
+            throw new IllegalArgumentException("player does not exist in the lobby");
+        }
+
+        /*
         if(!players.contains(player)){
             throw new IllegalArgumentException("player does not exist in lobby");
         }
         else{
             players.remove(player);
         }
+        */
     }
 
     //calculates to give the next set
@@ -72,4 +107,8 @@ public abstract class Session implements Observer {
     //Properties
     public Difficulty getDifficulty() { return difficulty; }
     public void setDifficulty(Difficulty difficulty) { this.difficulty = difficulty; }
+    public Player getPlayerOne() { return playerOne; }
+    public void setPlayerOne(Player playerOne) { this.playerOne = playerOne; }
+    public Player getPlayerTwo() { return playerTwo; }
+    public void setPlayerTwo(Player playerTwo) { this.playerTwo = playerTwo; }
 }

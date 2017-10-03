@@ -56,7 +56,6 @@ public class Player extends Observable{
 	    if(lives <= 0){
 
 	        this.setChanged();
-
 	        this.notifyObservers(false);
 	        return false;
         }
@@ -73,7 +72,9 @@ public class Player extends Observable{
 
 	public void setCombo(int combo) {
 	    synchronized (COMBO) {
-            this.combo = combo;
+            if (combo >= 1) {
+                this.combo = combo;
+            }
         }
 	}
 
