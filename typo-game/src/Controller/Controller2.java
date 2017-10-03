@@ -28,6 +28,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
+import java.util.concurrent.Executors;
 
 public class Controller2 implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
@@ -41,7 +42,7 @@ public class Controller2 implements Initializable {
     Label ScoreLbl;
 
     @FXML
-    Label Combo;
+    Label ComboLbl;
 
     Image img = new Image("/rocket.gif");
 
@@ -77,7 +78,7 @@ public class Controller2 implements Initializable {
                 sp.getPlayerOne().setCombo(2);
                 sp.getPlayerOne().setTempPoints(40);
                 sp.getPlayerOne().AwardPoints();
-                ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
+//                ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
                 gContext.clearRect(0,0, 3000, 3000);
 //                gContext.drawImage(img,x,y, 100, 100);
 //                gContext.fillText("A" ,x, y, 100);
@@ -88,8 +89,14 @@ public class Controller2 implements Initializable {
         loop.start();
 
         sp.sets.add(new Set("test"));
+        try {
+            sp.Start();
+        }
+        catch (Exception e){
+            System.out.println("not working");
+        }
 
-        sp.Start();
+        begintimer();
         Platform.runLater(()-> {
             keypress();
 
@@ -101,7 +108,7 @@ public class Controller2 implements Initializable {
     private void SetValues(){
 
         ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
-        Combo.setText("COMBO: " + String.valueOf(sp.getPlayerOne().getCombo()));
+        ComboLbl.setText("COMBO: " + String.valueOf(sp.getPlayerOne().getCombo()));
 
 
     }
@@ -112,17 +119,19 @@ public class Controller2 implements Initializable {
         int y = 100;
 
         gContext.clearRect(0,0, 3000, 3000);
-        Set sets = sp.getCurrentSet();
 
-        List<Letter> L = sp.getCurrentSet().getCharacters();
-        for(Letter item : L){
+        try{
+            List<Letter> L = sp.getCurrentSet().getCharacters();
+            for(Letter item : L){
 
-            gContext.fillText(item.getCharacter() ,x, y, 100);
+                gContext.fillText(item.getCharacter() ,x, y, 100);
 
-            x += 20;
+                x += 20;
 
+            }
+        }catch (Exception e){
+            System.out.println("No more letters");
         }
-
     }
 
 
@@ -194,5 +203,6 @@ public class Controller2 implements Initializable {
         });
         gContext.setFill(Color.BLACK);
         gContext.setFont(new Font("Arial", 30));
+//        Thread.sleep(4000);
     }
 }
