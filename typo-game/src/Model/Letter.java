@@ -1,6 +1,8 @@
 package Model;
 
-public class Letter {
+import java.io.Serializable;
+
+public class Letter implements Serializable {
     private String character;
     private boolean typed;
 

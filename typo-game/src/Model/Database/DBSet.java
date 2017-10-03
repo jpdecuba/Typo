@@ -14,7 +14,7 @@ public class DBSet implements ISetContext{
         List<Set> sets = new ArrayList<>();
         try
         {
-            String sql = "SELECT letters FROM Set WHERE Difficultyid = ?";
+            String sql = "SELECT letters FROM [Set] WHERE Difficultyid = ?";
             PreparedStatement statement = Database.connection().prepareStatement(sql);
             statement.setInt(1, difficulty.getValue());
             ResultSet rs = statement.executeQuery();
