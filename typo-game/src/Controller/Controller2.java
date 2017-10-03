@@ -78,7 +78,7 @@ public class Controller2 implements Initializable {
                 sp.getPlayerOne().setCombo(2);
                 sp.getPlayerOne().setTempPoints(40);
                 sp.getPlayerOne().AwardPoints();
-//                ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
+                //ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
                 gContext.clearRect(0,0, 3000, 3000);
 //                gContext.drawImage(img,x,y, 100, 100);
 //                gContext.fillText("A" ,x, y, 100);

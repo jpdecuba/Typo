@@ -1,10 +1,13 @@
 package Model;
 
+import Model.Database.DBSet;
+import Model.Repository.SetRepository;
+
 import java.sql.Connection;
 import java.util.Observable;
 
 public class Singleplayer extends Session {
-
+    private SetRepository setRepository = new SetRepository(new DBSet());
     //Constructor
     public Singleplayer(Difficulty difficulty){
         setDifficulty(difficulty);
@@ -14,6 +17,7 @@ public class Singleplayer extends Session {
     @Override
     public void Start() {
         if(getPlayerOne() != null && getPlayerTwo() == null){
+            sets.addAll(setRepository.GetSets(getDifficulty()));
             getPlayerOne().addObserver(this);
             NextSet(null);
         }
