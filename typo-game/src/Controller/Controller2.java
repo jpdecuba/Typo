@@ -3,6 +3,7 @@ package Controller;
 import Model.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -150,12 +152,24 @@ public class Controller2 implements Initializable {
         timer.start();
 
     }
-
+    private boolean shift;
 
 
     public void keypress(){
 
-        scene.setOnKeyPressed( event -> {
+        shift = false;
+
+
+
+        scene.setOnKeyPressed(event -> {
+            switch (event.getCode()){
+                case SHIFT:
+                    shift = true;
+                    break;
+            }
+        });
+        
+        scene.setOnKeyReleased( event -> {
 
             System.out.println("key = " + event.getCode().toString());
 
@@ -165,9 +179,22 @@ public class Controller2 implements Initializable {
                 s = s.substring(5);
             }
 
+
+            if(shift)
+            {
+                s.toUpperCase();
+            }
+            else {
+                s = s.toLowerCase();
+            }
+
+
             //char c = s.charAt(0);
 
+            System.out.println("key = " + s);
+
             typechar(s);
+            shift = false;
 
     });
 
