@@ -1,13 +1,15 @@
 package Model;
 
 import Model.Database.DBSet;
+import Model.Database.Database;
 import Model.Repository.SetRepository;
+import Model.Serialize.SetSerialize;
 
 import java.sql.Connection;
 import java.util.Observable;
 
 public class Singleplayer extends Session {
-    private SetRepository setRepository = new SetRepository(new DBSet());
+    private SetRepository setRepository;
     //Constructor
     public Singleplayer(Difficulty difficulty){
         setDifficulty(difficulty);
@@ -17,7 +19,13 @@ public class Singleplayer extends Session {
     @Override
     public void Start() {
         if(getPlayerOne() != null && getPlayerTwo() == null){
-            try{ sets.addAll(setRepository.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
+            if(Database.checkConnection()){
+                setRepository = new SetRepository(new DBSet());
+                try{ sets.addAll(setRepository.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
+            }
+            else {
+                try{ sets.addAll(SetSerialize.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
+            }
             getPlayerOne().addObserver(this);
             NextSet(null);
         }
