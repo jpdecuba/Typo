@@ -1,10 +1,9 @@
 package Controller;
 
 import Model.*;
+import Model.Threads.KeyPress;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
-import javafx.collections.ObservableMap;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,23 +15,19 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
-import org.junit.FixMethodOrder;
 import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Observer;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.concurrent.Executors;
 
-public class Controller2 implements Initializable {
+public class Controller2 implements Initializable, Observer {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     @FXML
     Canvas canvas;
@@ -57,11 +52,25 @@ public class Controller2 implements Initializable {
     private Player pl;
     private AnimationTimer timer;
     private int sets = 1;
+    private boolean GamePlay;
+    private Thread keypress;
+
+    @Override
+    public void update(java.util.Observable o, Object arg) {
+        loop.stop();
+        timer.stop();
+        //GamePlay = false;
+        keypress.interrupt();
+
+
+    }
 
     public void setSession(Session session){
         this.sp =  session;
         sp.AddPlayer(new Player());
         pl = sp.getPlayerOne();
+
+
     }
     public void setScene(Scene scene){
         this.scene = scene;
@@ -83,6 +92,7 @@ public class Controller2 implements Initializable {
         };
 
         loop.start();
+        GamePlay = true;
 
         //sp.sets.add(new Set("test"));
         //sp.sets.add(new Set("apple  "));
@@ -94,10 +104,11 @@ public class Controller2 implements Initializable {
         }
 
         begintimer();
-        Platform.runLater(()-> {
-            keypress();
 
-        });
+        keypress = new Thread(new KeyPress(scene,sp));
+
+        keypress.start();
+
 
     }
 
@@ -148,59 +159,17 @@ public class Controller2 implements Initializable {
         timer.start();
 
     }
-    private boolean shift;
-
-
-    public void keypress(){
-
-        shift = false;
 
 
 
-        scene.setOnKeyPressed(event -> {
-            switch (event.getCode()){
-                case SHIFT:
-                    shift = true;
-                    break;
-            }
-        });
-        
-        scene.setOnKeyReleased( event -> {
-
-            System.out.println("key = " + event.getCode().toString());
-
-            String s = event.getCode().toString();
-
-            if(s.contains("DIGIT")){
-                s = s.substring(5);
-            }
-
-
-            if(shift)
-            {
-                s.toUpperCase();
-            }
-            else {
-                s = s.toLowerCase();
-            }
-
-
-            //char c = s.charAt(0);
-
-            System.out.println("key = " + s);
-
-            typechar(s);
-            shift = false;
-
-    });
 
 
 
-    }
 
 
 
-    public synchronized void typechar (String c){
+
+        public synchronized void typechar (String c){
 
         Platform.runLater(()-> {
             System.out.println(sp.TypeCharacter(c, sp.getPlayerOne()));
