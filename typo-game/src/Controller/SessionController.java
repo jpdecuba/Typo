@@ -26,8 +26,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.Observer;
 import java.util.ResourceBundle;
+import java.util.Timer;
 
-public class Controller2 implements Initializable, Observer {
+public class SessionController implements Initializable, Observer {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     @FXML
     Canvas canvas;
@@ -41,8 +42,12 @@ public class Controller2 implements Initializable, Observer {
     @FXML
     Label ComboLbl;
 
-    Image img = new Image("/rocket.gif");
+    @FXML
+    Label LivesLB1;
+    @FXML
+    Label CountDownLB1;
 
+    Image img = new Image("/rocket.gif");
 
 
     private GraphicsContext gContext;
@@ -53,6 +58,7 @@ public class Controller2 implements Initializable, Observer {
     private AnimationTimer timer;
     private int sets = 1;
     private Thread keypress;
+    private int Count = 5;
 
     @Override
     public void update(java.util.Observable o, Object arg) {
@@ -65,19 +71,22 @@ public class Controller2 implements Initializable, Observer {
 
     }
 
-    public void setSession(Session session){
-        this.sp =  session;
+    public void setSession(Session session) {
+        this.sp = session;
         sp.AddPlayer(new Player());
         pl = sp.getPlayerOne();
 
 
     }
-    public void setScene(Scene scene){
+
+    public void setScene(Scene scene) {
         this.scene = scene;
     }
 
     @FXML
     public void meth() {
+
+        
         loop = new AnimationTimer() {
             double startX = 100;
             double y = 100;
@@ -87,13 +96,13 @@ public class Controller2 implements Initializable, Observer {
             @Override
             public void handle(long now) {
                 //ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
-                x+=speed;
+                x += speed;
             }
         };
 
         sp.addObserver(this);
 
-        KeyPress keyFuction = new KeyPress(scene,sp);
+        KeyPress keyFuction = new KeyPress(scene, sp);
 
         keypress = new Thread(keyFuction);
 
@@ -104,61 +113,53 @@ public class Controller2 implements Initializable, Observer {
         //sp.sets.add(new Set("apple  "));
         try {
             sp.Start();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("not working");
         }
 
         begintimer();
 
-
-
         keypress.start();
-
-
 
     }
 
 
-    private void SetValues(){
+    private void SetValues() {
 
         ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
         ComboLbl.setText("COMBO: " + String.valueOf(sp.getPlayerOne().getCombo()));
+        LivesLB1.setText("LIVES:    " + String.valueOf(sp.getPlayerOne().getLives()));
     }
 
-    private void Letters(){
+    private void Letters() {
         int x = 100;
         int y = 100;
         double r = (canvas.getHeight() / sp.sets.size()) * sets;
-        gContext.clearRect(0,0, 3000, 3000);
+        gContext.clearRect(0, 0, 3000, 3000);
         gContext.drawImage(img, canvas.getWidth() - 200, canvas.getHeight() - r - 200, 100, 100);
-        try{
+        try {
             List<Letter> L = sp.getCurrentSet().getCharacters();
-            for(Letter item : L){
+            for (Letter item : L) {
                 sets++;
-                gContext.fillText(item.getCharacter() ,x, y, 100);
-                x += 20;
+                gContext.fillText(item.getCharacter(), x, y, 100);
+                x += 35;
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("No more letters");
         }
     }
 
 
+    public void begintimer() {
 
+        timer = new AnimationTimer() {
 
-    public  void begintimer(){
-
-        timer = new AnimationTimer(){
-
-            public void handle(long now)
-            {
+            public void handle(long now) {
                 SetValues();
                 Letters();
 
             }
-
         };
         timer.start();
 
@@ -184,6 +185,16 @@ public class Controller2 implements Initializable, Observer {
         });
         gContext.setFill(Color.BLACK);
         gContext.setFont(new Font("Arial", 30));
-//        Thread.sleep(4000);
+
+        //meth();
+
+
+
+
+
+
     }
+
+
+
 }

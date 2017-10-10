@@ -10,13 +10,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sample.Main;
+import Controller.*;
 
-import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class DifficultyController {
@@ -38,7 +36,7 @@ public class DifficultyController {
             stage=(Stage) BeginnerBtn.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/page2.fxml"));
             AnchorPane anchor = loader.load();
-            Controller2 controller = loader.getController();
+            SessionController controller = loader.getController();
             controller.setSession(sp);
             Scene scene = new Scene(anchor, screenSize.getWidth(), screenSize.getHeight());
             controller.setScene(scene);
@@ -52,7 +50,7 @@ public class DifficultyController {
             stage=(Stage) BeginnerBtn.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/page2.fxml"));
             AnchorPane anchor = loader.load();
-            Controller2 controller = loader.getController();
+            SessionController controller = loader.getController();
             controller.setSession(sp);
             Scene scene = new Scene(anchor, screenSize.getWidth(), screenSize.getHeight());
             controller.setScene(scene);
