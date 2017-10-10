@@ -12,7 +12,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -72,6 +74,11 @@ public class SessionController implements Initializable, Observer {
         //GamePlay = false;
         keypress.interrupt();
         System.out.println("end game");
+        try {
+            EndGame();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -202,6 +209,12 @@ public class SessionController implements Initializable, Observer {
     @FXML
     public void Quitgame() throws IOException {
         Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")), "TYPO");
+    }
+
+
+
+    private void EndGame() throws IOException {
+        Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/HighScoreView.fxml")), "HighScore");
     }
 
     @Override
