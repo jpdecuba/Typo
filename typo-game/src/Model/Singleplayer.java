@@ -3,9 +3,8 @@ package Model;
 import Model.Database.DBSet;
 import Model.Database.Database;
 import Model.Repository.SetRepository;
-import Model.Serialize.SetSerialize;
+import Model.SaveProps.SetSerialize;
 
-import java.sql.Connection;
 import java.util.Observable;
 
 public class Singleplayer extends Session {

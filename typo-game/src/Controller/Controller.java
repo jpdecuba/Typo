@@ -31,8 +31,6 @@ public class Controller implements Initializable {
     @FXML
     Button ExitBtn;
 
-    private Parent parent;
-
     @FXML
     public void test(ActionEvent event) throws IOException {
         Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml")), "Mode: Singleplayer");

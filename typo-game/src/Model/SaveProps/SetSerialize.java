@@ -1,4 +1,4 @@
-package Model.Serialize;
+package Model.SaveProps;
 
 import Model.Database.DBSet;
 import Model.Difficulty;
