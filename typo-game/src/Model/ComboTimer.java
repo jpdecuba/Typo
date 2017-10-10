@@ -4,33 +4,65 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.TimerTask;
 
-public class ComboTimer extends TimerTask {
-    private LocalDateTime startTime = null;
-    private LocalDateTime endTime = null;
+class Time{
+    private LocalDateTime time;
 
-    public ComboTimer(){
-
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 
-    @Override
-    public void run() {
-        //do something after a specified time
+    public LocalDateTime getTime() {
+        return time;
+    }
 
+    public int difference(Time t){
+        return (int) (this.time.getSecond() - t.time.getSecond());
+    }
+}
+
+public class ComboTimer {
+    private Time startTime = new Time();
+    private Time endTime = new Time();
+
+    private float constTime = 5;
+    private float amountOfTime = 0;
+
+    public ComboTimer(){
+        startTime.setTime(LocalDateTime.now());
+        amountOfTime = constTime;
     }
 
     public long DeltaTime(){
-        Duration end = Duration.ZERO;
-        Duration start = Duration.ZERO;
-        end.plusSeconds(endTime.getSecond());
-        start.plusSeconds(startTime.getSecond());
-        return end.minus(start).getSeconds();
+        return endTime.difference(startTime);
     }
 
     public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
+        System.out.println("st: " + startTime);
+        this.startTime.setTime(startTime);
     }
 
     public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
+        System.out.println("Et: " + endTime);
+        this.endTime.setTime(endTime);
+    }
+
+    public int getCombo(int combo){
+        setEndTime(LocalDateTime.now());
+
+        System.out.println("st: " + startTime);
+        System.out.println("et: " + endTime);
+        System.out.println("dt: " + DeltaTime());
+        System.out.println("ct: " + constTime);
+        System.out.println("at: " + amountOfTime);
+        System.out.println("c: " + combo);
+
+        if(DeltaTime() <= amountOfTime){
+            combo++;
+        }
+        else{
+            combo = 1;
+        }
+        amountOfTime = constTime - (0.4f * combo);
+        return combo;
     }
 }
