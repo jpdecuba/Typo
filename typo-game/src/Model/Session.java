@@ -3,13 +3,13 @@ package Model;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Observer;
 
-public abstract class Session implements Observer {
+public abstract class Session extends Observable implements Observer {
 
     //Attributes
     private Difficulty difficulty;
-    //public ArrayList<Player> players = new ArrayList<Player>();
     public ArrayList<Set> sets = new ArrayList<Set>();
     public ArrayList<Opportunity> opportunities = new ArrayList<Opportunity>();
     private Set currentSet = null;
@@ -45,15 +45,6 @@ public abstract class Session implements Observer {
         else{
             throw new NumberFormatException("there are already two players");
         }
-
-        /*
-        if(players.contains(player)){
-            throw new IllegalArgumentException("player already exsists in lobby");
-        }
-        else{
-            players.add(player);
-        }
-        */
     }
 
     //Removes the asked player from the game
@@ -67,30 +58,7 @@ public abstract class Session implements Observer {
         else{
             throw new IllegalArgumentException("player does not exist in the lobby");
         }
-
-        /*
-        if(!players.contains(player)){
-            throw new IllegalArgumentException("player does not exist in lobby");
-        }
-        else{
-            players.remove(player);
-        }
-        */
     }
-
-    /*
-    //calculates to give the next set
-    public Set NextSet(){
-        if (!sets.isEmpty()){
-            currentSet = sets.get(0);
-            sets.remove(currentSet);
-            return currentSet;
-        }
-        else {
-            throw new NullPointerException("there are no more sets available");
-        }
-    }
-    */
 
     public Set NextSet(Player player){
         if(player != null){
@@ -109,10 +77,7 @@ public abstract class Session implements Observer {
     //calculate if the character thats hit is correct
     public boolean TypeCharacter(String character, Player player) {
 
-
-
         String currentletter = currentSet.getCharacters().get(0).getCharacter().toString();
-
 
         if(character.equals(currentletter)){
             //character is typed correct
