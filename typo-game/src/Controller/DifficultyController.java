@@ -10,13 +10,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sample.Main;
+import Controller.*;
 
-import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class DifficultyController {
@@ -52,7 +50,7 @@ public class DifficultyController {
         if(difficulty != null)
         {
             Singleplayer sp = new Singleplayer(difficulty);
-            Controller2 controller = loader.getController();
+            SessionController controller = loader.getController();
             controller.setSession(sp);
         }
 
