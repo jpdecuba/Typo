@@ -102,7 +102,7 @@ public class SessionController implements Initializable, Observer {
 
         sp.addObserver(this);
 
-        KeyPress keyFuction = new KeyPress(scene, sp);
+        KeyPress keyFuction = new KeyPress(Main.Stage.getScene(), sp);
 
         keypress = new Thread(keyFuction);
 
@@ -167,10 +167,7 @@ public class SessionController implements Initializable, Observer {
 
     @FXML
     public void Quitgame() throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/Views/sample.fxml"));
-        Scene scene = new Scene(parent, screenSize.getWidth(), screenSize.getHeight());
-        Main.Stage.setScene(scene);
-        Main.Stage.show();
+        Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")), "TYPO");
     }
 
     @Override

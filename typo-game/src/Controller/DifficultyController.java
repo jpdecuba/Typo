@@ -50,7 +50,7 @@ public class DifficultyController {
         if(difficulty != null)
         {
             Singleplayer sp = new Singleplayer(difficulty);
-            Controller2 controller = loader.getController();
+            SessionController controller = loader.getController();
             controller.setSession(sp);
         }
 
