@@ -36,7 +36,7 @@ public class DBHighScore implements IHighScoreContext {
         List<HighScore> highScores = new ArrayList<>();
         try
         {
-            String sql = "SELECT name, score, Difficultyid, date FROM HighScore";
+            String sql = "SELECT name, score, Difficultyid, date FROM HighScore ORDER BY score DESC";
             PreparedStatement statement = Database.connection().prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next())
