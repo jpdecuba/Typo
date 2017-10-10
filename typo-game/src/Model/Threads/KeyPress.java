@@ -31,7 +31,7 @@ public class KeyPress implements Runnable {
 
 
         scene.addEventFilter(KeyEvent.ANY, keyEvent -> {
-            System.out.println(keyEvent);
+            //System.out.println(keyEvent);
 
             String s = keyEvent.getCode().toString();
             if (keyEvent.getCode() != KeyCode.SHIFT) {
