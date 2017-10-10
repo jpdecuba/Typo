@@ -52,7 +52,6 @@ public class Controller2 implements Initializable, Observer {
     private Player pl;
     private AnimationTimer timer;
     private int sets = 1;
-    private boolean GamePlay;
     private Thread keypress;
 
     @Override
@@ -61,6 +60,7 @@ public class Controller2 implements Initializable, Observer {
         timer.stop();
         //GamePlay = false;
         keypress.interrupt();
+        System.out.println("end game");
 
 
     }
@@ -91,8 +91,14 @@ public class Controller2 implements Initializable, Observer {
             }
         };
 
+        sp.addObserver(this);
+
+        KeyPress keyFuction = new KeyPress(scene,sp);
+
+        keypress = new Thread(keyFuction);
+
         loop.start();
-        GamePlay = true;
+
 
         //sp.sets.add(new Set("test"));
         //sp.sets.add(new Set("apple  "));
@@ -105,9 +111,10 @@ public class Controller2 implements Initializable, Observer {
 
         begintimer();
 
-        keypress = new Thread(new KeyPress(scene,sp));
+
 
         keypress.start();
+
 
 
     }
@@ -117,8 +124,6 @@ public class Controller2 implements Initializable, Observer {
 
         ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
         ComboLbl.setText("COMBO: " + String.valueOf(sp.getPlayerOne().getCombo()));
-
-
     }
 
     private void Letters(){
@@ -132,7 +137,6 @@ public class Controller2 implements Initializable, Observer {
             for(Letter item : L){
                 sets++;
                 gContext.fillText(item.getCharacter() ,x, y, 100);
-
                 x += 20;
 
             }
@@ -158,23 +162,6 @@ public class Controller2 implements Initializable, Observer {
         };
         timer.start();
 
-    }
-
-
-
-
-
-
-
-
-
-
-        public synchronized void typechar (String c){
-
-        Platform.runLater(()-> {
-            System.out.println(sp.TypeCharacter(c, sp.getPlayerOne()));
-
-        });
     }
 
     @FXML
