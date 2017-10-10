@@ -3,13 +3,9 @@ package Controller;
 import Model.*;
 import Model.Threads.KeyPress;
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -18,7 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
 import sample.Main;
 
 import java.io.IOException;
@@ -28,7 +23,6 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 public class Controller2 implements Initializable, Observer {
-    Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     @FXML
     Canvas canvas;
     @FXML
@@ -47,7 +41,6 @@ public class Controller2 implements Initializable, Observer {
 
     private GraphicsContext gContext;
     private AnimationTimer loop;
-    private Scene scene;
     private Session sp;
     private Player pl;
     private AnimationTimer timer;
@@ -72,9 +65,6 @@ public class Controller2 implements Initializable, Observer {
 
 
     }
-    public void setScene(Scene scene){
-        this.scene = scene;
-    }
 
     @FXML
     public void meth() {
@@ -93,7 +83,7 @@ public class Controller2 implements Initializable, Observer {
 
         sp.addObserver(this);
 
-        KeyPress keyFuction = new KeyPress(scene,sp);
+        KeyPress keyFuction = new KeyPress(Main.Stage.getScene(),sp);
 
         keypress = new Thread(keyFuction);
 
