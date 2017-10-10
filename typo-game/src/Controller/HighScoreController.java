@@ -1,6 +1,9 @@
 package Controller;
 
+import Model.Database.DBHighScore;
 import Model.Difficulty;
+import Model.HighScore;
+import Model.Repository.HighScoreRepository;
 import Model.Singleplayer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,10 +26,12 @@ import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class HighScoreController implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+    HighScoreRepository hsRep;
     @FXML
     Button btnMode;
     @FXML
@@ -79,29 +84,47 @@ public class HighScoreController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        btnMode.setText("Singleplayer");
-        btnBeginner_Easy.setText("Beginner");
-        btnExpert_Normal.setText("Expert");
-        btnHard.setVisible(false);
+    public void FillGrid(String difficulty){
         Label col1 = new Label("Rank");
         Label col2 = new Label("Name");
         Label col3 = new Label("Score");
         col1.setFont(Font.font(null, FontWeight.BOLD, 30));
         col2.setFont(Font.font(null, FontWeight.BOLD, 30));
         col3.setFont(Font.font(null, FontWeight.BOLD, 30));
-        TextField tF = new TextField("1");
-        TextField tF1 = new TextField("JP");
-        TextField tF2 = new TextField("9999999");
-        tF.setFont(Font.font(null, FontWeight.NORMAL, 18));
-        tF1.setFont(Font.font(null, FontWeight.NORMAL, 18));
-        tF2.setFont(Font.font(null, FontWeight.NORMAL, 18));
         lvHighscores.add(col1, 0, 0);
         lvHighscores.add(col2, 1, 0);
         lvHighscores.add(col3, 2, 0);
-        lvHighscores.add(tF, 0, 1);
-        lvHighscores.add(tF1, 1, 1);
-        lvHighscores.add(tF2, 2, 1);
+        List<HighScore> hscores = hsRep.GetHighScores();
+        int count = 0;
+        if(difficulty == "Beginner"){
+            for (HighScore hs: hscores
+                 ) {
+                if (count != 10 && hs.getDiff() == Difficulty.Beginner){
+                    count++;
+                    TextField tf = new TextField(String.valueOf(count));
+                    TextField tf1 = new TextField(hs.getName());
+                    TextField tf2 = new TextField(String.valueOf(hs.getScore()));
+                    tf.setFont(Font.font(null, FontWeight.NORMAL, 18));
+                    tf1.setFont(Font.font(null, FontWeight.NORMAL, 18));
+                    tf2.setFont(Font.font(null, FontWeight.NORMAL, 18));
+                    tf.setEditable(false);
+                    tf1.setEditable(false);
+                    tf2.setEditable(false);
+                    lvHighscores.add(tf, 0, count);
+                    lvHighscores.add(tf1, 1, count);
+                    lvHighscores.add(tf2, 2, count);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        btnMode.setText("Singleplayer");
+        btnBeginner_Easy.setText("Beginner");
+        btnExpert_Normal.setText("Expert");
+        btnHard.setVisible(false);
+        hsRep = new HighScoreRepository(new DBHighScore());
+        FillGrid("Beginner");
     }
 }
