@@ -10,13 +10,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sample.Main;
+import Controller.*;
 
-import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class DifficultyController {
@@ -33,38 +31,29 @@ public class DifficultyController {
         Button button = (Button) e.getSource();
         if (button == BeginnerBtn)
         {
-            Singleplayer sp = new Singleplayer(Difficulty.Beginner);
-            Stage stage;
-            stage=(Stage) BeginnerBtn.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/page2.fxml"));
-            AnchorPane anchor = loader.load();
-            Controller2 controller = loader.getController();
+            difficulty(Difficulty.Beginner, "/Views/page2.fxml","TYPO Singleplayer - Difficulty: Beginner");
+        }
+        else if(button == ExpertBtn)
+        {
+            difficulty(Difficulty.Expert, "/Views/page2.fxml","TYPO Singleplayer - Difficulty: Expert");
+        }
+        else
+        {
+            difficulty(null, "/Views/sample.fxml","TYPO");
+        }
+    }
+
+    private void difficulty(Difficulty difficulty, String page, String title) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(page));
+        Parent parent = loader.load();
+        if(difficulty != null)
+        {
+            Singleplayer sp = new Singleplayer(difficulty);
+            SessionController controller = loader.getController();
             controller.setSession(sp);
-            Scene scene = new Scene(anchor, screenSize.getWidth(), screenSize.getHeight());
-            controller.setScene(scene);
-            stage.setScene(scene);
-            stage.setTitle("TYPO Singleplayer - Difficulty: Beginner");
-            stage.show();
         }
-        else if(button == ExpertBtn) {
-            Singleplayer sp = new Singleplayer(Difficulty.Expert);
-            Stage stage;
-            stage=(Stage) BeginnerBtn.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/page2.fxml"));
-            AnchorPane anchor = loader.load();
-            Controller2 controller = loader.getController();
-            controller.setSession(sp);
-            Scene scene = new Scene(anchor, screenSize.getWidth(), screenSize.getHeight());
-            controller.setScene(scene);
-            stage.setScene(scene);
-            stage.setTitle("TYPO Singleplayer - Difficulty: Expert");
-            stage.show();
-        }
-        else {
-            Parent parent = FXMLLoader.load(getClass().getResource("/Views/sample.fxml"));
-            Scene scene = new Scene(parent, screenSize.getWidth(), screenSize.getHeight());
-            Main.Stage.setScene(scene);
-            Main.Stage.show();
-        }
+
+        Main.switchPage(parent, title);
     }
 }
