@@ -36,6 +36,8 @@ public class HighScoreController implements Initializable {
     @FXML
     Button btnHard;
     @FXML
+    Button btnBack;
+    @FXML
     GridPane lvHighscores;
 
     @FXML
@@ -67,6 +69,14 @@ public class HighScoreController implements Initializable {
 //        else {
 //
 //        }
+    }
+    @FXML
+    public void btnBackClick(ActionEvent e) throws IOException {
+        Button button = (Button) e.getSource();
+        if (button == btnBack)
+        {
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")), "TYPO");
+        }
     }
 
     @Override

@@ -13,7 +13,7 @@
 <AnchorPane prefHeight="720.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HighScoreController">
     <children>
-        <VBox alignment="TOP_CENTER" spacing="15" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+        <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
               AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <children>
                 <Label text="High Score">
@@ -24,14 +24,14 @@
                 <HBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" spacing="100" AnchorPane.leftAnchor="0"
                       AnchorPane.rightAnchor="0">
                     <children>
-                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" spacing="15"
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="300.0" spacing="15"
                               AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
                             <children>
                                 <Button fx:id="btnMode" alignment="CENTER" mnemonicParsing="false"
                                         onAction="#btnModeClick"
                                         prefHeight="60.0" prefWidth="262.5"
-                                        style="-fx-background-color: b0c4de; -fx-background-radius: 15;"
-                                        text="Singleplayer"
+                                        style="-fx-background-color: black; -fx-background-radius: 15;"
+                                        text="Singleplayer" textFill="LIGHTSTEELBLUE"
                                         textAlignment="CENTER">
                                     <font>
                                         <Font name="Tahoma Bold" size="16.0"/>
@@ -66,7 +66,8 @@
                                         <Font name="Tahoma Bold" size="16.0"/>
                                     </font>
                                 </Button>
-                                <Button fx:id="BackBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick"
+                                <Button fx:id="btnBack" alignment="CENTER" mnemonicParsing="false"
+                                        onAction="#btnBackClick"
                                         prefHeight="60.0" prefWidth="262.5"
                                         style="-fx-background-color: Black; -fx-background-radius: 15;" text="Back"
                                         textFill="LIGHTSTEELBLUE"
@@ -77,7 +78,7 @@
                                 </Button>
                             </children>
                         </VBox>
-                        <GridPane alignment="CENTER" fx:id="lvHighscores" prefHeight="200.0" minWidth="200.0"
+                        <GridPane alignment="TOP_CENTER" fx:id="lvHighscores" prefHeight="200.0" minWidth="200.0"
                                   AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
                             <columnConstraints>
                                 <ColumnConstraints minWidth="10.0" percentWidth="27"/>
