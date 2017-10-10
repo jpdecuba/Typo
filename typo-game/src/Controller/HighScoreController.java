@@ -1,6 +1,9 @@
 package Controller;
 
+import Model.Database.DBHighScore;
 import Model.Difficulty;
+import Model.HighScore;
+import Model.Repository.HighScoreRepository;
 import Model.Singleplayer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,10 +26,12 @@ import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class HighScoreController implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+    HighScoreRepository hsRep;
     @FXML
     Button btnMode;
     @FXML
@@ -79,8 +84,7 @@ public class HighScoreController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void FillGrid(String difficulty){
         btnMode.setText("Singleplayer");
         btnBeginner_Easy.setText("Beginner");
         btnExpert_Normal.setText("Expert");
@@ -91,17 +95,33 @@ public class HighScoreController implements Initializable {
         col1.setFont(Font.font(null, FontWeight.BOLD, 30));
         col2.setFont(Font.font(null, FontWeight.BOLD, 30));
         col3.setFont(Font.font(null, FontWeight.BOLD, 30));
-        TextField tF = new TextField("1");
-        TextField tF1 = new TextField("JP");
-        TextField tF2 = new TextField("9999999");
-        tF.setFont(Font.font(null, FontWeight.NORMAL, 18));
-        tF1.setFont(Font.font(null, FontWeight.NORMAL, 18));
-        tF2.setFont(Font.font(null, FontWeight.NORMAL, 18));
         lvHighscores.add(col1, 0, 0);
         lvHighscores.add(col2, 1, 0);
         lvHighscores.add(col3, 2, 0);
-        lvHighscores.add(tF, 0, 1);
-        lvHighscores.add(tF1, 1, 1);
-        lvHighscores.add(tF2, 2, 1);
+        List<HighScore> hscores = hsRep.GetHighScores();
+        int count = 0;
+        if(difficulty == "Beginner"){
+            for (HighScore hs: hscores
+                 ) {
+                if (count != 10 && hs.getDiff() == Difficulty.Beginner){
+                    count++;
+                    TextField tf = new TextField(String.valueOf(count));
+                    TextField tf1 = new TextField(hs.getName());
+                    TextField tf2 = new TextField(String.valueOf(hs.getScore()));
+                    tf1.setFont(Font.font(null, FontWeight.NORMAL, 18));
+                    tf1.setFont(Font.font(null, FontWeight.NORMAL, 18));
+                    tf1.setFont(Font.font(null, FontWeight.NORMAL, 18));
+                    lvHighscores.add(tf, count, 0);
+                    lvHighscores.add(tf1, count, 1);
+                    lvHighscores.add(tf2, count, 2);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        hsRep = new HighScoreRepository(new DBHighScore());
+        FillGrid("Beginner");
     }
 }
