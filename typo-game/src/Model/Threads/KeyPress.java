@@ -3,7 +3,11 @@ package Model.Threads;
 import Model.Session;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
+import static javafx.scene.input.KeyEvent.KEY_PRESSED;
+import static javafx.scene.input.KeyEvent.KEY_RELEASED;
 
 public class KeyPress implements Runnable {
 
@@ -23,40 +27,38 @@ public class KeyPress implements Runnable {
     @Override
     public void run() {
 
-        shifts();
+        //shifts();
 
 
-        scene.setOnKeyReleased(event -> {
+        scene.addEventFilter(KeyEvent.ANY, keyEvent -> {
+            System.out.println(keyEvent);
 
-            System.out.println("key = " + event.getCode().toString());
+            String s = keyEvent.getCode().toString();
+            if (keyEvent.getCode() != KeyCode.SHIFT) {
+            if (keyEvent.getEventType() == KEY_PRESSED) {
 
-            String s = event.getCode().toString();
-            switch (event.getCode()) {
-                case SHIFT:
-                    shift = false;
-                    break;
+                    if (s.contains("DIGIT")) {
+                        s = s.substring(5);
+                    }
+
+
+                    if (keyEvent.isShiftDown()) {
+                        s.toUpperCase();
+                    } else {
+                        s = s.toLowerCase();
+                    }
+
+
+                    //char c = s.charAt(0);
+
+                    System.out.println("key = " + s);
+
+                    typechar(s);
+                }
             }
-
-            if (s.contains("DIGIT")) {
-                s = s.substring(5);
-            }
-
-
-            if (shift) {
-                s.toUpperCase();
-            } else {
-                s = s.toLowerCase();
-            }
-
-
-            //char c = s.charAt(0);
-
-            System.out.println("key = " + s);
-
-            typechar(s);
-            shift = false;
 
         });
+
 
     }
 
@@ -69,18 +71,6 @@ public class KeyPress implements Runnable {
         });
     }
 
-    private void shifts (){
 
-        scene.setOnKeyPressed(event -> {
-            switch (event.getCode()) {
-                case SHIFT:
-                    shift = true;
-                    break;
-            }
-
-        });
-
-
-    }
 
 }
