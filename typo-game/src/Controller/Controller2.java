@@ -3,13 +3,9 @@ package Controller;
 import Model.*;
 import Model.Threads.KeyPress;
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -18,7 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
 import sample.Main;
 
 import java.io.IOException;
@@ -28,7 +23,6 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 public class Controller2 implements Initializable, Observer {
-    Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     @FXML
     Canvas canvas;
     @FXML
@@ -47,12 +41,10 @@ public class Controller2 implements Initializable, Observer {
 
     private GraphicsContext gContext;
     private AnimationTimer loop;
-    private Scene scene;
     private Session sp;
     private Player pl;
     private AnimationTimer timer;
     private int sets = 1;
-    private boolean GamePlay;
     private Thread keypress;
 
     @Override
@@ -61,6 +53,7 @@ public class Controller2 implements Initializable, Observer {
         timer.stop();
         //GamePlay = false;
         keypress.interrupt();
+        System.out.println("end game");
 
 
     }
@@ -71,9 +64,6 @@ public class Controller2 implements Initializable, Observer {
         pl = sp.getPlayerOne();
 
 
-    }
-    public void setScene(Scene scene){
-        this.scene = scene;
     }
 
     @FXML
@@ -91,8 +81,14 @@ public class Controller2 implements Initializable, Observer {
             }
         };
 
+        sp.addObserver(this);
+
+        KeyPress keyFuction = new KeyPress(Main.Stage.getScene(),sp);
+
+        keypress = new Thread(keyFuction);
+
         loop.start();
-        GamePlay = true;
+
 
         //sp.sets.add(new Set("test"));
         //sp.sets.add(new Set("apple  "));
@@ -105,9 +101,10 @@ public class Controller2 implements Initializable, Observer {
 
         begintimer();
 
-        keypress = new Thread(new KeyPress(scene,sp));
+
 
         keypress.start();
+
 
 
     }
@@ -117,8 +114,6 @@ public class Controller2 implements Initializable, Observer {
 
         ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
         ComboLbl.setText("COMBO: " + String.valueOf(sp.getPlayerOne().getCombo()));
-
-
     }
 
     private void Letters(){
@@ -132,7 +127,6 @@ public class Controller2 implements Initializable, Observer {
             List<Letter> L = sp.getCurrentSet().getCharacters();
             for(Letter item : L){
                 gContext.fillText(item.getCharacter() ,x, y, 100);
-
                 x += 20;
 
             }
@@ -160,29 +154,9 @@ public class Controller2 implements Initializable, Observer {
 
     }
 
-
-
-
-
-
-
-
-
-
-        public synchronized void typechar (String c){
-
-        Platform.runLater(()-> {
-            System.out.println(sp.TypeCharacter(c, sp.getPlayerOne()));
-
-        });
-    }
-
     @FXML
     public void Quitgame() throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/Views/sample.fxml"));
-        Scene scene = new Scene(parent, screenSize.getWidth(), screenSize.getHeight());
-        Main.Stage.setScene(scene);
-        Main.Stage.show();
+        Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")), "TYPO");
     }
 
     @Override

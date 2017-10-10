@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,28 +31,16 @@ public class Controller implements Initializable {
     @FXML
     Button ExitBtn;
 
+    private Parent parent;
+
     @FXML
     public void test(ActionEvent event) throws IOException {
-        Stage stage;
-        Parent root;
-        stage=(Stage) SettingsBtn.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("/Views/HighScoreView.fxml"));
-        Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
-        stage.setScene(scene);
-        stage.setTitle("Mode: Singleplayer");
-        stage.show();
+        Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml")), "Mode: Singleplayer");
     }
 
     @FXML
     public void setting(ActionEvent event) throws IOException {
-        Stage stage;
-        Parent root;
-        stage=(Stage) SingleplayerBtn.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("/Views/settings.fxml"));
-        Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
-        stage.setScene(scene);
-        stage.setTitle("Settings");
-        stage.show();
+        Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/settings.fxml")), "Settings");
     }
 
     @FXML

@@ -15,19 +15,16 @@ public class KeyPress implements Runnable {
 
     private Session sp;
 
-    private boolean shift;
 
     public KeyPress(Scene scene, Session sp) {
         this.scene = scene;
         this.sp = sp;
-        this.shift = false;
+
     }
 
 
     @Override
     public void run() {
-
-        //shifts();
 
 
         scene.addEventFilter(KeyEvent.ANY, keyEvent -> {
@@ -35,7 +32,7 @@ public class KeyPress implements Runnable {
 
             String s = keyEvent.getCode().toString();
             if (keyEvent.getCode() != KeyCode.SHIFT) {
-            if (keyEvent.getEventType() == KEY_PRESSED) {
+                if (keyEvent.getEventType() == KEY_PRESSED) {
 
                     if (s.contains("DIGIT")) {
                         s = s.substring(5);
@@ -48,10 +45,9 @@ public class KeyPress implements Runnable {
                         s = s.toLowerCase();
                     }
 
-
                     //char c = s.charAt(0);
 
-                    System.out.println("key = " + s);
+                    //System.out.println("key = " + s);
 
                     typechar(s);
                 }
@@ -59,18 +55,13 @@ public class KeyPress implements Runnable {
 
         });
 
-
     }
 
+    public synchronized void typechar(String c) {
 
-    public synchronized void typechar (String c){
-
-        Platform.runLater(()-> {
-            System.out.println(sp.TypeCharacter(c, sp.getPlayerOne()));
-
+        Platform.runLater(() -> {
+            sp.TypeCharacter(c, sp.getPlayerOne());
         });
     }
-
-
 
 }
