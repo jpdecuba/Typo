@@ -83,7 +83,7 @@ public abstract class Session extends Observable implements Observer {
         String currentletter = currentSet.getCharacters().get(0).getCharacter().toString();
 
         if(character.equals(currentletter)){
-            //character is typed correct
+            //character is typed correc
             player.setTempPoints(5); //temporary points set to 5
             currentSet.getCharacters().remove(0);
             if(currentSet.getCharacters().isEmpty()){

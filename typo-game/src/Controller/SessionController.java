@@ -12,11 +12,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import sample.Main;
@@ -58,7 +63,9 @@ public class SessionController implements Initializable, Observer {
     private AnimationTimer timer;
     private int sets = 1;
     private Thread keypress;
-    private int Count = 5;
+    private int Lives;
+
+    private int colourCount;
 
     @Override
     public void update(java.util.Observable o, Object arg) {
@@ -67,6 +74,11 @@ public class SessionController implements Initializable, Observer {
         //GamePlay = false;
         keypress.interrupt();
         System.out.println("end game");
+        try {
+            EndGame();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -86,7 +98,7 @@ public class SessionController implements Initializable, Observer {
     @FXML
     public void meth() {
 
-        
+
         loop = new AnimationTimer() {
             double startX = 100;
             double y = 100;
@@ -126,9 +138,38 @@ public class SessionController implements Initializable, Observer {
 
     private void SetValues() {
 
+
+        if(Lives != sp.getPlayerOne().getLives() && Lives != 0) {
+            Platform.runLater(() -> {
+
+                gContext.setFill(Paint.valueOf("RED"));
+                LivesLB1.setTextFill(Paint.valueOf("RED"));
+
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                // your code here
+                                gContext.setFill(Paint.valueOf("BlACK"));
+                                LivesLB1.setTextFill(Paint.valueOf("BlACK"));
+                            }
+                        },
+                        300
+                );
+
+
+            });
+
+        }
+
+
+
         ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
         ComboLbl.setText("COMBO: " + String.valueOf(sp.getPlayerOne().getCombo()));
         LivesLB1.setText("LIVES:    " + String.valueOf(sp.getPlayerOne().getLives()));
+
+        Lives = sp.getPlayerOne().getLives();
+
     }
 
     private void Letters() {
@@ -170,6 +211,20 @@ public class SessionController implements Initializable, Observer {
         Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")), "TYPO");
     }
 
+
+
+    private void EndGame() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddHighScoreView.fxml"));
+        Parent parent = loader.load();
+        if(sp.getPlayerOne() != null)
+        {
+            AddHighScoreController controller = loader.getController();
+            controller.setPlayer(sp.getPlayerOne(), sp.getDifficulty());
+        }
+
+        Main.switchPage(parent, "Add HighScore");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gContext = canvas.getGraphicsContext2D();
@@ -183,15 +238,8 @@ public class SessionController implements Initializable, Observer {
         gContext.setFill(Color.BLACK);
         gContext.setFont(new Font("Arial", 30));
 
-        //meth();
-
-
-
-
-
 
     }
-
 
 
 }
