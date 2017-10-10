@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="720" minWidth="1240" style="-fx-background-color: #fffafa;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SettingsController">
+    <children>
+        <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <children>
+            <Label text="Settings">
+               <font>
+                  <Font size="36.0" />
+               </font></Label>
+            <HBox alignment="CENTER" spacing="15">
+                <children>
+                  <CheckBox fx:id="BorderBox" mnemonicParsing="false" text="Borderless Mode" onAction="#borderless"/>
+                </children>
+            </HBox>
+              <Button fx:id="BackBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick" prefHeight="60.0" prefWidth="262.5" style="-fx-background-color: b0c4de;" text="Back" textAlignment="CENTER">
+               <font>
+                  <Font name="Tahoma Bold" size="16.0" />
+               </font>
+            </Button>
+
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

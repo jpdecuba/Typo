@@ -157,7 +157,7 @@ public class Controller2 implements Initializable {
 
 
 
-        scene.setOnKeyPressed(event -> {
+        Main.Stage.getScene().setOnKeyPressed(event -> {
             switch (event.getCode()){
                 case SHIFT:
                     shift = true;
@@ -165,7 +165,7 @@ public class Controller2 implements Initializable {
             }
         });
         
-        scene.setOnKeyReleased( event -> {
+        Main.Stage.getScene().setOnKeyReleased( event -> {
 
             System.out.println("key = " + event.getCode().toString());
 
@@ -210,10 +210,7 @@ public class Controller2 implements Initializable {
 
     @FXML
     public void Quitgame() throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/Views/sample.fxml"));
-        Scene scene = new Scene(parent, screenSize.getWidth(), screenSize.getHeight());
-        Main.Stage.setScene(scene);
-        Main.Stage.show();
+        Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")), "TYPO");
     }
 
     @Override

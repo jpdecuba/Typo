@@ -8,6 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -19,14 +22,22 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/Views/sample.fxml"));
         primaryStage.setTitle("TYPO");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setMaximized(true);
-        primaryStage.show();
+        //primaryStage.setMaximized(true);
+        primaryStage.setFullScreen(true);
         Stage = primaryStage;
+        Stage.show();
 
         Platform.runLater(()->{
             if(!SetSerialize.SaveSets())
                 System.out.println("The single player sets could not be saved.");
         });
+    }
+
+    public static void switchPage(Parent parent, String title) throws IOException
+    {
+        Main.Stage.getScene().setRoot(parent);
+        Main.Stage.setTitle(title);
+        Main.Stage.show();
     }
 
     public static void main(String[] args) {
