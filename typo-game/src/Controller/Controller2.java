@@ -127,10 +127,10 @@ public class Controller2 implements Initializable, Observer {
         double r = (canvas.getHeight() / sp.sets.size()) * sets;
         gContext.clearRect(0,0, 3000, 3000);
         gContext.drawImage(img, canvas.getWidth() - 200, canvas.getHeight() - r - 200, 100, 100);
+        sets++;
         try{
             List<Letter> L = sp.getCurrentSet().getCharacters();
             for(Letter item : L){
-                sets++;
                 gContext.fillText(item.getCharacter() ,x, y, 100);
 
                 x += 20;
@@ -196,7 +196,7 @@ public class Controller2 implements Initializable, Observer {
             canvas.setHeight(newValue.doubleValue());
         });
         gContext.setFill(Color.BLACK);
-        gContext.setFont(new Font("Arial", 30));
+        gContext.setFont(new Font("Verdana", 30));
 //        Thread.sleep(4000);
     }
 }

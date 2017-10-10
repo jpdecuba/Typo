@@ -35,7 +35,7 @@ public class Controller implements Initializable {
         Stage stage;
         Parent root;
         stage=(Stage) SettingsBtn.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/Views/HighScoreView.fxml"));
         Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
         stage.setScene(scene);
         stage.setTitle("Mode: Singleplayer");

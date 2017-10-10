@@ -19,7 +19,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/Views/sample.fxml"));
         primaryStage.setTitle("TYPO");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setMaximized(true);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
         Stage = primaryStage;
 
