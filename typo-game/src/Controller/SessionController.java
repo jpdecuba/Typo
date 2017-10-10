@@ -214,7 +214,15 @@ public class SessionController implements Initializable, Observer {
 
 
     private void EndGame() throws IOException {
-        Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/HighScoreView.fxml")), "HighScore");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddHighScoreView.fxml"));
+        Parent parent = loader.load();
+        if(sp.getPlayerOne() != null)
+        {
+            AddHighScoreController controller = loader.getController();
+            controller.setPlayer(sp.getPlayerOne());
+        }
+
+        Main.switchPage(parent, "Add HighScore");
     }
 
     @Override
@@ -232,7 +240,6 @@ public class SessionController implements Initializable, Observer {
 
 
     }
-
 
 
 }
