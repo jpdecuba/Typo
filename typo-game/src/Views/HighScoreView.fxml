@@ -24,8 +24,7 @@
                 <HBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" spacing="100" AnchorPane.leftAnchor="0"
                       AnchorPane.rightAnchor="0">
                     <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="300.0" spacing="15"
-                              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                        <VBox alignment="TOP_LEFT" prefHeight="100.0" minWidth="250.0" spacing="15">
                             <children>
                                 <Button fx:id="btnMode" alignment="CENTER" mnemonicParsing="false"
                                         onAction="#btnModeClick"
@@ -78,12 +77,12 @@
                                 </Button>
                             </children>
                         </VBox>
-                        <GridPane alignment="TOP_CENTER" fx:id="lvHighscores" prefHeight="200.0" minWidth="200.0"
-                                  AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                        <GridPane alignment="TOP_RIGHT" fx:id="lvHighscores" prefHeight="200.0" minWidth="600.0"
+                                  AnchorPane.rightAnchor="10" AnchorPane.leftAnchor="10">
                             <columnConstraints>
-                                <ColumnConstraints minWidth="10.0" percentWidth="27"/>
-                                <ColumnConstraints minWidth="10.0" percentWidth="27"/>
-                                <ColumnConstraints minWidth="10.0" percentWidth="27"/>
+                                <ColumnConstraints minWidth="10.0" percentWidth="33"/>
+                                <ColumnConstraints minWidth="10.0" percentWidth="33"/>
+                                <ColumnConstraints minWidth="10.0" percentWidth="33"/>
                             </columnConstraints>
                         </GridPane>
                     </children>

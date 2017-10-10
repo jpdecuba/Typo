@@ -85,10 +85,6 @@ public class HighScoreController implements Initializable {
     }
 
     public void FillGrid(String difficulty){
-        btnMode.setText("Singleplayer");
-        btnBeginner_Easy.setText("Beginner");
-        btnExpert_Normal.setText("Expert");
-        btnHard.setVisible(false);
         Label col1 = new Label("Rank");
         Label col2 = new Label("Name");
         Label col3 = new Label("Score");
@@ -108,12 +104,15 @@ public class HighScoreController implements Initializable {
                     TextField tf = new TextField(String.valueOf(count));
                     TextField tf1 = new TextField(hs.getName());
                     TextField tf2 = new TextField(String.valueOf(hs.getScore()));
+                    tf.setFont(Font.font(null, FontWeight.NORMAL, 18));
                     tf1.setFont(Font.font(null, FontWeight.NORMAL, 18));
-                    tf1.setFont(Font.font(null, FontWeight.NORMAL, 18));
-                    tf1.setFont(Font.font(null, FontWeight.NORMAL, 18));
-                    lvHighscores.add(tf, count, 0);
-                    lvHighscores.add(tf1, count, 1);
-                    lvHighscores.add(tf2, count, 2);
+                    tf2.setFont(Font.font(null, FontWeight.NORMAL, 18));
+                    tf.setEditable(false);
+                    tf1.setEditable(false);
+                    tf2.setEditable(false);
+                    lvHighscores.add(tf, 0, count);
+                    lvHighscores.add(tf1, 1, count);
+                    lvHighscores.add(tf2, 2, count);
                 }
             }
         }
@@ -121,6 +120,10 @@ public class HighScoreController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        btnMode.setText("Singleplayer");
+        btnBeginner_Easy.setText("Beginner");
+        btnExpert_Normal.setText("Expert");
+        btnHard.setVisible(false);
         hsRep = new HighScoreRepository(new DBHighScore());
         FillGrid("Beginner");
     }
