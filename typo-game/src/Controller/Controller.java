@@ -26,24 +26,35 @@ public class Controller implements Initializable {
     Button SingleplayerBtn;
 
     @FXML
+    Button MultiplayerBtn;
+
+    @FXML
+    Button HighscoreBtn;
+
+    @FXML
     Button SettingsBtn;
 
     @FXML
     Button ExitBtn;
 
     @FXML
-    public void test(ActionEvent event) throws IOException {
-        Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml")), "Mode: Singleplayer");
-    }
-
-    @FXML
-    public void setting(ActionEvent event) throws IOException {
-        Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/settings.fxml")), "Settings");
-    }
-
-    @FXML
-    public void Exit(){
-        System.exit(0);
+    public void btnClick(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        if (button == SingleplayerBtn){
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml")), "Mode: Singleplayer");
+        }
+        else if(button == MultiplayerBtn){
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml")), "Mode: Multiplayer");
+        }
+        else if(button == HighscoreBtn){
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/HighScoreView.fxml")), "High Score");
+        }
+        else if(button == SettingsBtn){
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/settings.fxml")), "Settings");
+        }
+        else {
+            System.exit(0);
+        }
     }
 
     @Override

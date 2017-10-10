@@ -2,6 +2,7 @@ package Model;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -62,25 +63,27 @@ public abstract class Session extends Observable implements Observer {
 
     public Set NextSet(Player player){
         if(player != null){
+            player.setCombo(player.ComboTimer.getCombo(player.getCombo()));
             player.AwardPoints();
         }
         if (!sets.isEmpty()){
             currentSet = sets.get(0);
             sets.remove(currentSet);
+            player.ComboTimer.setStartTime(LocalDateTime.now());
             return currentSet;
         }
         else {
+            EndGame();
             throw new NullPointerException("there are no more sets available");
         }
     }
 
     //calculate if the character thats hit is correct
     public boolean TypeCharacter(String character, Player player) {
-
         String currentletter = currentSet.getCharacters().get(0).getCharacter().toString();
 
         if(character.equals(currentletter)){
-            //character is typed correct
+            //character is typed correc
             player.setTempPoints(5); //temporary points set to 5
             currentSet.getCharacters().remove(0);
             if(currentSet.getCharacters().isEmpty()){
