@@ -73,6 +73,7 @@ public abstract class Session extends Observable implements Observer {
             return currentSet;
         }
         else {
+            EndGame();
             throw new NullPointerException("there are no more sets available");
         }
     }
