@@ -219,7 +219,7 @@ public class SessionController implements Initializable, Observer {
         if(sp.getPlayerOne() != null)
         {
             AddHighScoreController controller = loader.getController();
-            controller.setPlayer(sp.getPlayerOne());
+            controller.setPlayer(sp.getPlayerOne(), sp.getDifficulty());
         }
 
         Main.switchPage(parent, "Add HighScore");

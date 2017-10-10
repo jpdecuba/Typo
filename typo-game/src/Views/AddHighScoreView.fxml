@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.HighScoreView">
+<AnchorPane prefHeight="720.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddHighScoreController">
    <children>
-      <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+      <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="300" AnchorPane.rightAnchor="300" AnchorPane.topAnchor="0">
          <children>
-            <Label id="Score" prefHeight="27.0" prefWidth="96.0" text="Score:" />
-            <TextField prefHeight="39.0" prefWidth="114.0" />
+            <Label fx:id="scoreLbl" alignment="CENTER" id="Score" prefHeight="27.0" prefWidth="96.0" text="Score:" />
+            <TextField fx:id="textField" prefHeight="39.0" prefWidth="114.0" />
             <HBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="15">
                <children>
-                  <Button id="Submit" fx:id="btnHSsubmit" alignment="CENTER" mnemonicParsing="false" onAction="#HSsubmit" prefHeight="60.0" prefWidth="480.0" style="-fx-background-color: b0c4de" text="Submit" />
-                  <Button id="Cancel" fx:id="btnHSsubmit1" alignment="CENTER" layoutX="390.0" layoutY="80.0" mnemonicParsing="false" onAction="#HSsubmit" prefHeight="60.0" prefWidth="480.0" style="-fx-background-color: b0c4de" text="Cancel" />
+                  <Button id="Submit" fx:id="btnHSsubmit" onAction="#btnSubmit" alignment="CENTER" mnemonicParsing="false"  prefHeight="60.0" prefWidth="480.0" style="-fx-background-color: b0c4de" text="Submit" />
+                  <Button id="Cancel" fx:id="btnHSsubmit1" onAction="#btnCancel" alignment="CENTER" layoutX="390.0" layoutY="80.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="480.0" style="-fx-background-color: b0c4de" text="Cancel" />
                </children></HBox>
          </children>
       </VBox>

@@ -49,7 +49,7 @@ public class Controller implements Initializable {
             Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml")), "Mode: Multiplayer");
         }
         else if(button == HighscoreBtn){
-            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/HighScoreView.fxml")), "HighScore");
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/HighScoreView.fxml")), "High Score");
         }
         else if(button == SettingsBtn){
             Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/settings.fxml")), "Settings");
