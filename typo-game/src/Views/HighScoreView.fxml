@@ -79,9 +79,9 @@
                         </VBox>
                         <GridPane alignment="TOP_CENTER" fx:id="lvHighscores" prefHeight="200.0" minWidth="200.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
                             <columnConstraints>
-                                <ColumnConstraints minWidth="10.0" percentWidth="27"/>
-                                <ColumnConstraints minWidth="10.0" percentWidth="27"/>
-                                <ColumnConstraints minWidth="10.0" percentWidth="27"/>
+                                <ColumnConstraints minWidth="10.0" percentWidth="22"/>
+                                <ColumnConstraints minWidth="10.0" percentWidth="22"/>
+                                <ColumnConstraints minWidth="10.0" percentWidth="22"/>
                             </columnConstraints>
                         </GridPane>
                     </children>

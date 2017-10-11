@@ -15,8 +15,8 @@
             <TextField fx:id="textField" prefHeight="39.0" prefWidth="114.0" />
             <HBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="15">
                <children>
-                  <Button id="Submit" fx:id="btnHSsubmit" onAction="#btnSubmit" alignment="CENTER" mnemonicParsing="false"  prefHeight="60.0" prefWidth="480.0" style="-fx-background-color: b0c4de" text="Submit" />
-                  <Button id="Cancel" fx:id="btnHSsubmit1" onAction="#btnCancel" alignment="CENTER" layoutX="390.0" layoutY="80.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="480.0" style="-fx-background-color: b0c4de" text="Cancel" />
+                  <Button id="Submit" fx:id="btnHSsubmit" alignment="CENTER" mnemonicParsing="false" onAction="#btnSubmit" prefHeight="60.0" prefWidth="480.0" style="-fx-background-color: b0c4de" text="Submit" />
+                  <Button id="Cancel" fx:id="btnHSCancel" alignment="CENTER" layoutX="390.0" layoutY="80.0" mnemonicParsing="false" onAction="#btnCancel" prefHeight="60.0" prefWidth="480.0" style="-fx-background-color: b0c4de" text="Cancel" />
                </children></HBox>
          </children>
       </VBox>

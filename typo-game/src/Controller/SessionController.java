@@ -4,6 +4,7 @@ import Model.*;
 import Model.Threads.KeyPress;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -32,6 +35,8 @@ import java.util.List;
 import java.util.Observer;
 import java.util.ResourceBundle;
 import java.util.Timer;
+
+import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
 public class SessionController implements Initializable, Observer {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
@@ -67,18 +72,34 @@ public class SessionController implements Initializable, Observer {
 
     private int colourCount;
 
+
+
+    private EventHandler keypressevent;
+
     @Override
     public void update(java.util.Observable o, Object arg) {
+
+
         loop.stop();
         timer.stop();
+
         //GamePlay = false;
-        keypress.interrupt();
+
+        //keyFuction.update();
+
+
+        //keypress.isInterrupted();
+
+        Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
+
+        Main.Stage.getScene().removeEventHandler(KeyEvent.ANY, keypressevent);
+
+
         System.out.println("end game");
-        try {
-            EndGame();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+
+        EndGame();
+
 
 
     }
@@ -114,15 +135,14 @@ public class SessionController implements Initializable, Observer {
 
         sp.addObserver(this);
 
-        KeyPress keyFuction = new KeyPress(Main.Stage.getScene(), sp);
 
-        keypress = new Thread(keyFuction);
 
         loop.start();
 
+        startkeypress();
 
-        //sp.sets.add(new Set("test"));
-        //sp.sets.add(new Set("apple  "));
+
+
         try {
             sp.Start();
         } catch (Exception e) {
@@ -131,7 +151,6 @@ public class SessionController implements Initializable, Observer {
 
         begintimer();
 
-        keypress.start();
 
     }
 
@@ -213,9 +232,12 @@ public class SessionController implements Initializable, Observer {
 
 
 
-    private void EndGame() throws IOException {
+    private void EndGame() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddHighScoreView.fxml"));
-        Parent parent = loader.load();
+        Parent parent = null;
+        try {
+            parent = loader.load();
+
         if(sp.getPlayerOne() != null)
         {
             AddHighScoreController controller = loader.getController();
@@ -223,6 +245,10 @@ public class SessionController implements Initializable, Observer {
         }
 
         Main.switchPage(parent, "Add HighScore");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -238,6 +264,63 @@ public class SessionController implements Initializable, Observer {
         gContext.setFill(Color.BLACK);
         gContext.setFont(new Font("Arial", 30));
 
+
+    }
+
+
+    public void startkeypress() {
+
+
+
+
+
+        keypressevent = new EventHandler<KeyEvent>(){
+
+            @Override
+            public void handle(KeyEvent keyEvent){
+
+
+                String s = keyEvent.getCode().toString();
+                if (keyEvent.getCode() != KeyCode.SHIFT) {
+                    if (keyEvent.getEventType() == KEY_PRESSED) {
+
+                        if (s.contains("DIGIT")) {
+                            s = s.substring(5);
+                        }
+
+
+                        if (keyEvent.isShiftDown()) {
+                            s.toUpperCase();
+                        } else {
+                            s = s.toLowerCase();
+                        }
+
+                        //char c = s.charAt(0);
+
+                        //System.out.println("key = " + s);
+
+                        typechar(s);
+                    }
+                }
+
+            }
+
+
+        };
+
+
+
+
+        Main.Stage.getScene().addEventFilter(KeyEvent.ANY, keypressevent);
+
+
+
+    }
+
+    public synchronized void typechar(String c) {
+
+
+        sp.TypeCharacter(c, sp.getPlayerOne());
 
     }
 

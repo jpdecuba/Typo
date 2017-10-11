@@ -37,8 +37,6 @@ public class Controller implements Initializable {
     @FXML
     Button ExitBtn;
 
-    private Parent parent;
-
     @FXML
     public void btnClick(ActionEvent event) throws IOException {
         Button button = (Button) event.getSource();
