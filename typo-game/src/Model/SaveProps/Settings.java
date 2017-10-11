@@ -40,8 +40,7 @@ public class Settings {
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }
