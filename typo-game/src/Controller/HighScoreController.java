@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -64,16 +65,22 @@ public class HighScoreController implements Initializable {
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
         Button button = (Button) e.getSource();
-//        if (button == BeginnerBtn)
-//        {
-//
-//        }
-//        else if(button == ExpertBtn) {
-//
-//        }
-//        else {
-//
-//        }
+        if (button == btnBeginner_Easy && btnMode.getText() == "Singleplayer")
+        {
+            FillGrid(Difficulty.Beginner);
+        }
+        else if(button == btnBeginner_Easy && btnMode.getText() == "Multiplayer") {
+            FillGrid(Difficulty.Easy);
+        }
+        else if(button == btnExpert_Normal && btnMode.getText() == "Singleplayer") {
+            FillGrid(Difficulty.Expert);
+        }
+        else if(button == btnExpert_Normal && btnMode.getText() == "Multiplayer") {
+            FillGrid(Difficulty.Medium);
+        }
+        else {
+            FillGrid(Difficulty.Hard);
+        }
     }
     @FXML
     public void btnBackClick(ActionEvent e) throws IOException {
@@ -84,7 +91,8 @@ public class HighScoreController implements Initializable {
         }
     }
 
-    public void FillGrid(String difficulty){
+    public void FillGrid(Difficulty difficulty){
+        lvHighscores.getChildren().clear();
         Label col1 = new Label("Rank");
         Label col2 = new Label("Name");
         Label col3 = new Label("Score");
@@ -96,24 +104,22 @@ public class HighScoreController implements Initializable {
         lvHighscores.add(col3, 2, 0);
         List<HighScore> hscores = hsRep.GetHighScores();
         int count = 0;
-        if(difficulty == "Beginner"){
-            for (HighScore hs: hscores
-                 ) {
-                if (count != 10 && hs.getDiff() == Difficulty.Beginner){
-                    count++;
-                    TextField tf = new TextField(String.valueOf(count));
-                    TextField tf1 = new TextField(hs.getName());
-                    TextField tf2 = new TextField(String.valueOf(hs.getScore()));
-                    tf.setFont(Font.font(null, FontWeight.NORMAL, 18));
-                    tf1.setFont(Font.font(null, FontWeight.NORMAL, 18));
-                    tf2.setFont(Font.font(null, FontWeight.NORMAL, 18));
-                    tf.setEditable(false);
-                    tf1.setEditable(false);
-                    tf2.setEditable(false);
-                    lvHighscores.add(tf, 0, count);
-                    lvHighscores.add(tf1, 1, count);
-                    lvHighscores.add(tf2, 2, count);
-                }
+        for (HighScore hs: hscores
+                ) {
+            if (count != 10 && hs.getDiff() == difficulty){
+                count++;
+                TextField tf = new TextField(String.valueOf(count));
+                TextField tf1 = new TextField(hs.getName());
+                TextField tf2 = new TextField(String.valueOf(hs.getScore()));
+                tf.setFont(Font.font(null, FontWeight.NORMAL, 18));
+                tf1.setFont(Font.font(null, FontWeight.NORMAL, 18));
+                tf2.setFont(Font.font(null, FontWeight.NORMAL, 18));
+                tf.setEditable(false);
+                tf1.setEditable(false);
+                tf2.setEditable(false);
+                lvHighscores.add(tf, 0, count);
+                lvHighscores.add(tf1, 1, count);
+                lvHighscores.add(tf2, 2, count);
             }
         }
     }
@@ -125,6 +131,6 @@ public class HighScoreController implements Initializable {
         btnExpert_Normal.setText("Expert");
         btnHard.setVisible(false);
         hsRep = new HighScoreRepository(new DBHighScore());
-        FillGrid("Beginner");
+        FillGrid(Difficulty.Beginner);
     }
 }
