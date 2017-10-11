@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.*;
+import Model.Database.DBHighScore;
+import Model.Repository.HighScoreRepository;
 import Model.Threads.KeyPress;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -66,7 +68,7 @@ public class SessionController implements Initializable, Observer {
     private Session sp;
     private Player pl;
     private AnimationTimer timer;
-    private int sets = 1;
+    private int hs = 0;
     private Thread keypress;
     private int Lives;
 
@@ -108,8 +110,7 @@ public class SessionController implements Initializable, Observer {
         this.sp = session;
         sp.AddPlayer(new Player());
         pl = sp.getPlayerOne();
-
-
+        hs = getHighscore();
     }
 
     public void setScene(Scene scene) {
@@ -194,13 +195,12 @@ public class SessionController implements Initializable, Observer {
     private void Letters() {
         int x = 100;
         int y = 100;
-        double r = (canvas.getHeight() / sp.sets.size()) * sets;
+        double r = (canvas.getHeight() / hs) * sp.getPlayerOne().getScore();
         gContext.clearRect(0, 0, 3000, 3000);
         gContext.drawImage(img, canvas.getWidth() - 200, canvas.getHeight() - r - 200, 100, 100);
         try {
             List<Letter> L = sp.getCurrentSet().getCharacters();
             for (Letter item : L) {
-                sets++;
                 gContext.fillText(item.getCharacter(), x, y, 100);
                 x += 35;
 
@@ -263,8 +263,17 @@ public class SessionController implements Initializable, Observer {
         });
         gContext.setFill(Color.BLACK);
         gContext.setFont(new Font("Arial", 30));
+    }
 
-
+    private int getHighscore() {
+        HighScoreRepository hsRep = new HighScoreRepository(new DBHighScore());
+        List<HighScore> highscores = hsRep.GetHighScores();
+        for (HighScore h : highscores){
+            if (h.getDiff() == sp.getDifficulty()){
+                return h.getScore();
+            }
+        }
+        return 0;
     }
 
 
