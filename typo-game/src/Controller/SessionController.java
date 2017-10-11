@@ -195,8 +195,11 @@ public class SessionController implements Initializable, Observer {
     private void Letters() {
         int x = 100;
         int y = 100;
-        double r = (canvas.getHeight() / hs) * sp.getPlayerOne().getScore();
+        double r = ((canvas.getHeight() - 300) / hs) * sp.getPlayerOne().getScore();
         gContext.clearRect(0, 0, 3000, 3000);
+        gContext.fillRect(canvas.getWidth() - 200, 100, 100, 10);
+        gContext.fillRect(canvas.getWidth() - 155, 100, 10, canvas.getHeight() - 200);
+        gContext.fillText("High Score: " + hs, canvas.getWidth() - 250, 70);
         gContext.drawImage(img, canvas.getWidth() - 200, canvas.getHeight() - r - 200, 100, 100);
         try {
             List<Letter> L = sp.getCurrentSet().getCharacters();
