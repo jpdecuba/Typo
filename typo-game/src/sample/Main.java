@@ -26,12 +26,8 @@ public class Main extends Application {
             Settings.SaveSettings(null);
             this.settings = Settings.GetProperties();
         }
-        primaryStage.getIcons().add(new Image("/Y.png"));
-        Parent root = FXMLLoader.load(getClass().getResource("/Views/sample.fxml"));
-        primaryStage.setTitle("TYPO");
-        primaryStage.setScene(new Scene(root));
         Stage = primaryStage;
-        applySettings(null);
+        applySettings(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")));
         Stage.show();
 
         Platform.runLater(()->{
@@ -68,25 +64,16 @@ public class Main extends Application {
 
     private static void screenMode(StageStyle style, boolean fullscreen, Parent parent)
     {
-        if(parent == null)
-        {
-            Stage.initStyle(style);
-            Stage.setMaximized(true);
-            Stage.setFullScreen(fullscreen);
-        }
-        else
-        {
-            Stage.close();
-            Stage Stage2 = new Stage();
-            Stage2.getIcons().add(new Image("/Y.png"));
-            Stage2.setTitle("TYPO");
-            Stage2.setScene(new Scene(parent));
-            Stage2.initStyle(style);
-            Stage2.setMaximized(true);
-            Stage2.setFullScreen(fullscreen);
-            Stage = Stage2;
-            Stage.show();
-        }
+        Stage.close();
+        Stage Stage2 = new Stage();
+        Stage2.getIcons().add(new Image("/Y.png"));
+        Stage2.setTitle("TYPO");
+        Stage2.setScene(new Scene(parent));
+        Stage2.initStyle(style);
+        Stage2.setMaximized(true);
+        Stage2.setFullScreen(fullscreen);
+        Stage = Stage2;
+        Stage.show();
     }
 
     public static void switchPage(Parent parent, String title)
