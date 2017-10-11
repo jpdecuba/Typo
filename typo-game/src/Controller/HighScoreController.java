@@ -65,17 +65,17 @@ public class HighScoreController implements Initializable {
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
         Button button = (Button) e.getSource();
-        if (button == btnBeginner_Easy && btnMode.getText() == "Singleplayer")
+        if (button == btnBeginner_Easy && btnMode.getText().equals("Singleplayer"))
         {
             FillGrid(Difficulty.Beginner);
         }
-        else if(button == btnBeginner_Easy && btnMode.getText() == "Multiplayer") {
+        else if(button == btnBeginner_Easy && btnMode.getText().equals("Multiplayer")) {
             FillGrid(Difficulty.Easy);
         }
-        else if(button == btnExpert_Normal && btnMode.getText() == "Singleplayer") {
+        else if(button == btnExpert_Normal && btnMode.getText().equals("Singleplayer")) {
             FillGrid(Difficulty.Expert);
         }
-        else if(button == btnExpert_Normal && btnMode.getText() == "Multiplayer") {
+        else if(button == btnExpert_Normal && btnMode.getText().equals("Multiplayer")) {
             FillGrid(Difficulty.Medium);
         }
         else {
@@ -126,11 +126,11 @@ public class HighScoreController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        btnMode.setText("Singleplayer");
         btnBeginner_Easy.setText("Beginner");
         btnExpert_Normal.setText("Expert");
         btnHard.setVisible(false);
         hsRep = new HighScoreRepository(new DBHighScore());
         FillGrid(Difficulty.Beginner);
+        btnMode.setText("Singleplayer");
     }
 }
