@@ -2,14 +2,15 @@ package Model;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Observer;
 
-public abstract class Session implements Observer {
+public abstract class Session extends Observable implements Observer {
 
     //Attributes
     private Difficulty difficulty;
-    //public ArrayList<Player> players = new ArrayList<Player>();
     public ArrayList<Set> sets = new ArrayList<Set>();
     public ArrayList<Opportunity> opportunities = new ArrayList<Opportunity>();
     private Set currentSet = null;
@@ -17,16 +18,24 @@ public abstract class Session implements Observer {
     private Player playerTwo = null;
 
     //Methods
-    public void ActiveOpportunity(Player player){
+    public void ActiveOpportunity(Player player,Opportunity opp){
         //give the active opportunity in effect on which player???
-        if(player == playerOne){
-            throw new NotImplementedException();
-        }
-        else if(player == playerTwo){
-            throw new NotImplementedException();
-        }
-        else{
-            throw new IllegalArgumentException("player does not exist in lobby");
+        switch (opp.getName()) {
+            case Reverse:
+                throw new NotImplementedException();
+            case Spotlight:
+                throw new NotImplementedException();
+            case ComboBonus:
+                throw new NotImplementedException();
+            case ComboPunish:
+                throw new NotImplementedException();
+            case ExtraLife:
+                if (player == playerOne) {
+                    playerOne.AddLives(1);
+                } else if (player == playerTwo) {
+                    playerTwo.AddLives(1);
+                }
+                break;
         }
     }
 
@@ -45,15 +54,6 @@ public abstract class Session implements Observer {
         else{
             throw new NumberFormatException("there are already two players");
         }
-
-        /*
-        if(players.contains(player)){
-            throw new IllegalArgumentException("player already exsists in lobby");
-        }
-        else{
-            players.add(player);
-        }
-        */
     }
 
     //Removes the asked player from the game
@@ -67,51 +67,32 @@ public abstract class Session implements Observer {
         else{
             throw new IllegalArgumentException("player does not exist in the lobby");
         }
-
-        /*
-        if(!players.contains(player)){
-            throw new IllegalArgumentException("player does not exist in lobby");
-        }
-        else{
-            players.remove(player);
-        }
-        */
     }
-
-    /*
-    //calculates to give the next set
-    public Set NextSet(){
-        if (!sets.isEmpty()){
-            currentSet = sets.get(0);
-            sets.remove(currentSet);
-            return currentSet;
-        }
-        else {
-            throw new NullPointerException("there are no more sets available");
-        }
-    }
-    */
 
     public Set NextSet(Player player){
+        if(player != null){
+            player.setCombo(player.ComboTimer.getCombo(player.getCombo()));
+            player.AwardPoints();
+        }
         if (!sets.isEmpty()){
-            if(player != null){
-                player.AwardPoints();
-            }
             currentSet = sets.get(0);
             sets.remove(currentSet);
+            player.ComboTimer.setStartTime(LocalDateTime.now());
             return currentSet;
         }
         else {
+            EndGame();
             throw new NullPointerException("there are no more sets available");
         }
     }
 
     //calculate if the character thats hit is correct
     public boolean TypeCharacter(String character, Player player) {
-        if(currentSet.getCharacters().get(0).getCharacter().toLowerCase().contains(character.toLowerCase())){
-            //character is typed correct
+        String currentletter = currentSet.getCharacters().get(0).getCharacter().toString();
+
+        if(character.equals(currentletter)){
+            //character is typed correc
             player.setTempPoints(5); //temporary points set to 5
-            player.AwardPoints(); //temporary award ponts REMOVE LATER!
             currentSet.getCharacters().remove(0);
             if(currentSet.getCharacters().isEmpty()){
                 NextSet(player);

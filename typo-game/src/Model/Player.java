@@ -14,6 +14,7 @@ public class Player extends Observable{
 	private Object LIVES = new Object();
     private Object COMBO = new Object();
 
+    public ComboTimer ComboTimer = new ComboTimer();
 
 	public int getScore() {
 		return this.score;
@@ -21,7 +22,6 @@ public class Player extends Observable{
 
 
     public Player() {
-
         score = 0;
         lives = 3;
         combo = 1;

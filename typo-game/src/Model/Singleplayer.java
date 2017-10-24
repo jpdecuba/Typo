@@ -3,9 +3,8 @@ package Model;
 import Model.Database.DBSet;
 import Model.Database.Database;
 import Model.Repository.SetRepository;
-import Model.Serialize.SetSerialize;
+import Model.SaveProps.SetSerialize;
 
-import java.sql.Connection;
 import java.util.Observable;
 
 public class Singleplayer extends Session {
@@ -32,17 +31,6 @@ public class Singleplayer extends Session {
         else{
             throw new NullPointerException("There are not enough players in teh lobby");
         }
-
-        /*
-        if(players.size() == 1){
-            for(Player player: players){
-                player.addObserver(this);
-            }
-        }
-        else{
-            throw new NullPointerException("There are not enough players in the lobby");
-        }
-        */
     }
 
     //update when game needs to end
@@ -59,6 +47,7 @@ public class Singleplayer extends Session {
     //end the game after update
     @Override
     public boolean EndGame() {
+        setChanged(); notifyObservers();
         return false;
     }
 }

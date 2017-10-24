@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,38 +26,35 @@ public class Controller implements Initializable {
     Button SingleplayerBtn;
 
     @FXML
+    Button MultiplayerBtn;
+
+    @FXML
+    Button HighscoreBtn;
+
+    @FXML
     Button SettingsBtn;
 
     @FXML
     Button ExitBtn;
 
     @FXML
-    public void test(ActionEvent event) throws IOException {
-        Stage stage;
-        Parent root;
-        stage=(Stage) SettingsBtn.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml"));
-        Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
-        stage.setScene(scene);
-        stage.setTitle("Mode: Singleplayer");
-        stage.show();
-    }
-
-    @FXML
-    public void setting(ActionEvent event) throws IOException {
-        Stage stage;
-        Parent root;
-        stage=(Stage) SingleplayerBtn.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("/Views/settings.fxml"));
-        Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
-        stage.setScene(scene);
-        stage.setTitle("Settings");
-        stage.show();
-    }
-
-    @FXML
-    public void Exit(){
-        System.exit(0);
+    public void btnClick(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        if (button == SingleplayerBtn){
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml")), "Mode: Singleplayer");
+        }
+        else if(button == MultiplayerBtn){
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/DifficultyView.fxml")), "Mode: Multiplayer");
+        }
+        else if(button == HighscoreBtn){
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/HighScoreView.fxml")), "High Score");
+        }
+        else if(button == SettingsBtn){
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/settings.fxml")), "Settings");
+        }
+        else {
+            System.exit(0);
+        }
     }
 
     @Override
