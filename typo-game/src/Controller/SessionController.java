@@ -18,16 +18,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -44,9 +40,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Observer;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
@@ -75,37 +68,47 @@ public class SessionController implements Initializable, Observer {
     private Player pl;
     private AnimationTimer timer;
     private int hs = 0;
-    private Thread keypress;
     private int Lives;
+
     private EventHandler keypressevent;
+    private EventHandler MouseClickEvent;
+
     private int remaining = 5;
     private MediaPlayer mp = null;
+    private MediaPlayer effect = null;
+    private Media sEffect = new Media(new File("typo-game/src/chirp.mp3").toURI().toString());
+
+    private Opportunity Opp;
 
     @Override
     public void update(java.util.Observable o, Object arg) {
 
+        if(arg == null) {
+            loop.stop();
+            timer.stop();
 
-        loop.stop();
-        timer.stop();
+            Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
 
-        //GamePlay = false;
-
-        //keyFuction.update();
-
-
-        //keypress.isInterrupted();
-
-        Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
-
-        Main.Stage.getScene().removeEventHandler(KeyEvent.ANY, keypressevent);
+            Main.Stage.getScene().removeEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, MouseClickEvent);
 
 
-        System.out.println("end game");
+            System.out.println("end game");
+            EndGame();
+        }
+
+        if(arg.getClass() == Opportunity.class){
+
+            Opp = (Opportunity) arg;
 
 
-        EndGame();
 
+        }else if(arg.getClass() == boolean.class){
+            if(!(boolean) arg){
+                Opp = null;
 
+            }
+
+        }
 
     }
 
@@ -133,6 +136,7 @@ public class SessionController implements Initializable, Observer {
         mp = new MediaPlayer(sound);
         mp.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
         mp.setCycleCount(AudioClip.INDEFINITE);
+
         mp.play();
     }
 
@@ -183,7 +187,7 @@ public class SessionController implements Initializable, Observer {
 
         loop.start();
 
-        startkeypress();
+        startEvents();
 
 
 
@@ -203,8 +207,11 @@ public class SessionController implements Initializable, Observer {
 
 
         if(Lives != sp.getPlayerOne().getLives() && Lives != 0) {
-            Platform.runLater(() -> {
 
+            Platform.runLater(() -> {
+                effect = new MediaPlayer(sEffect);
+                effect.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
+                effect.play();
                 gContext.setFill(Paint.valueOf("RED"));
                 LivesLB1.setTextFill(Paint.valueOf("RED"));
 
@@ -222,10 +229,7 @@ public class SessionController implements Initializable, Observer {
 
 
             });
-
         }
-
-
 
         ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
         ComboLbl.setText("COMBO: " + String.valueOf(sp.getPlayerOne().getCombo()));
@@ -281,6 +285,11 @@ public class SessionController implements Initializable, Observer {
 
 
     private void EndGame() {
+        if (sp.getPlayerOne().getLives() == 0){
+            effect = new MediaPlayer(sEffect);
+            effect.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
+            effect.play();
+        }
         mp.stop();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddHighScoreView.fxml"));
         Parent parent = null;
@@ -327,13 +336,16 @@ public class SessionController implements Initializable, Observer {
     }
 
 
-    public void startkeypress() {
+    public void startEvents() {
+
 
 
 
 
 
         keypressevent = new EventHandler<KeyEvent>(){
+
+
 
             @Override
             public void handle(KeyEvent keyEvent){
@@ -368,16 +380,34 @@ public class SessionController implements Initializable, Observer {
         };
 
 
+        MouseClickEvent = new EventHandler<javafx.scene.input.MouseEvent>() {
+            @Override
+            public void handle(javafx.scene.input.MouseEvent event) {
+
+                if(Opp != null){
+
+
+                }
+
+
+
+            }
+
+
+        };
+
+
 
 
         Main.Stage.getScene().addEventFilter(KeyEvent.ANY, keypressevent);
+
+        Main.Stage.getScene().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, MouseClickEvent);
 
 
 
     }
 
     public synchronized void typechar(String c) {
-
 
         sp.TypeCharacter(c, sp.getPlayerOne());
 
