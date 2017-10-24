@@ -140,10 +140,11 @@ public class SessionController implements Initializable, Observer {
 
     public void setSession(Session session) {
         this.sp = session;
+
+        countdownTimer();
         sp.AddPlayer(new Player());
         pl = sp.getPlayerOne();
         hs = getHighscore();
-        countdownTimer();
     }
 
     public void setScene(Scene scene) {
@@ -229,14 +230,16 @@ public class SessionController implements Initializable, Observer {
         int x = 100;
         int y = 100;
         double r = ((canvas.getHeight() - 300) / hs) * sp.getPlayerOne().getScore();
+        gContext.setFont(new Font("Verdana", 30));
         gContext.clearRect(0, 0, 3000, 3000);
         gContext.fillRect(canvas.getWidth() - 200, 100, 100, 5);
         gContext.fillRect(canvas.getWidth() - 152.5, 100, 5, canvas.getHeight() - 200);
-        gContext.fillText("High Score: " + hs, canvas.getWidth() - 250, 70);
+        gContext.fillText("High Score: " + hs, canvas.getWidth() - 270, 70);
         gContext.drawImage(img, canvas.getWidth() - 197.5, canvas.getHeight() - r - 200, 100, 100);
         try {
             List<Letter> L = sp.getCurrentSet().getCharacters();
             for (Letter item : L) {
+                gContext.setFont(new Font("Verdana", 50));
                 gContext.fillText(item.getCharacter(), x, y, 100);
                 x += 35;
 
@@ -263,7 +266,7 @@ public class SessionController implements Initializable, Observer {
 
     @FXML
     public void Quitgame() throws IOException {
-        Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")), "TYPO");
+        EndGame();
     }
 
 
@@ -271,6 +274,7 @@ public class SessionController implements Initializable, Observer {
     private void EndGame() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddHighScoreView.fxml"));
         Parent parent = null;
+        Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
         try {
             parent = loader.load();
 
@@ -298,7 +302,7 @@ public class SessionController implements Initializable, Observer {
             canvas.setHeight(newValue.doubleValue());
         });
         gContext.setFill(Color.BLACK);
-        gContext.setFont(new Font("Arial", 30));
+
     }
 
     private int getHighscore() {
