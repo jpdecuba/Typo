@@ -1,9 +1,5 @@
 package Model;
 
-import Model.Database.DBSet;
-import Model.Database.Database;
-import Model.Repository.SetRepository;
-import Model.SaveProps.SetSerialize;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDateTime;
@@ -76,7 +72,7 @@ public abstract class Session extends Observable implements Observer {
             player.setCombo(player.ComboTimer.getCombo(player.getCombo()));
             player.AwardPoints();
             Random r = new Random();
-            if(r.nextInt(100) <= 100){
+            if(r.nextInt(100) <= 10){
                 opp = new Opportunity(OppName.ExtraLife, difficulty);
                 this.setChanged();
                 this.notifyObservers(opp);
@@ -86,9 +82,6 @@ public abstract class Session extends Observable implements Observer {
             if(difficulty != Difficulty.Beginner || difficulty != Difficulty.Expert){
                 sets.remove(currentSet);
             }
-            else{
-                getAllSets();
-            }
             Random r = new Random();
             currentSet = sets.get(r.nextInt(sets.size()));
             player.ComboTimer.setStartTime(LocalDateTime.now());
@@ -97,16 +90,6 @@ public abstract class Session extends Observable implements Observer {
         else {
             EndGame();
             throw new NullPointerException("there are no more sets available");
-        }
-    }
-
-    public void getAllSets(){
-        if(Database.checkConnection()){
-            SetRepository setRepository = new SetRepository(new DBSet());
-            try{ sets.addAll(setRepository.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
-        }
-        else {
-            try{ sets.addAll(SetSerialize.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
         }
     }
 
@@ -120,7 +103,7 @@ public abstract class Session extends Observable implements Observer {
 
     //calculate if the character thats hit is correct
     public boolean TypeCharacter(String character, Player player) {
-        String currentletter = currentSet.getCharacters().get(0).getCharacter();
+        String currentletter = currentSet.getCharacters().get(0).getCharacter().toString();
 
         if(character.equals(currentletter)){
             //character is typed correc
