@@ -79,8 +79,11 @@ public abstract class Session extends Observable implements Observer {
             }
         }
         if (!sets.isEmpty()){
-            currentSet = sets.get(0);
-            sets.remove(currentSet);
+            if(difficulty != Difficulty.Beginner || difficulty != Difficulty.Expert){
+                sets.remove(currentSet);
+            }
+            Random r = new Random();
+            currentSet = sets.get(r.nextInt(sets.size()));
             player.ComboTimer.setStartTime(LocalDateTime.now());
             return currentSet;
         }
