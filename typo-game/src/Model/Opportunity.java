@@ -11,18 +11,12 @@ public class Opportunity extends Observable {
     private Difficulty diff;
     private Player p;
     private int posX, posY;
-    private int width = 25, length = 25;
+    private int width = 50, length = 50;
     private int minX,minY,maxX,maxY;
 
     public Opportunity(OppName name, Difficulty diff) {
         this.name = name;
         this.diff = diff;
-
-        int low = 25;
-        int high = 125;
-        Random r = new Random();
-        posX = r.nextInt(maxX-minX)+minX;
-        posY = r.nextInt(maxY-minY)+minY;
     }
 
     public OppName getName() {
@@ -56,8 +50,16 @@ public class Opportunity extends Observable {
     }
 
     //properties anchor
-    public int getPosX() { return posX; }
-    public int getPosY() { return posY; }
+    public int getPosX() {
+        Random r = new Random();
+        posX = r.nextInt(maxX-minX)+minX;
+        return posX;
+    }
+    public int getPosY() {
+        Random r = new Random();
+        posY = r.nextInt(maxY-minY)+minY;
+        return posY;
+    }
     public void setPosX(int posX) { this.posX = posX; }
     public void setPosY(int posY) { this.posY = posY; }
 
