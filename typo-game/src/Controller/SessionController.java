@@ -28,6 +28,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -35,6 +38,7 @@ import javafx.stage.Screen;
 import javafx.util.Duration;
 import sample.Main;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -75,6 +79,7 @@ public class SessionController implements Initializable, Observer {
     private int Lives;
     private EventHandler keypressevent;
     private int remaining = 5;
+    private MediaPlayer mp = null;
 
     @Override
     public void update(java.util.Observable o, Object arg) {
@@ -124,6 +129,17 @@ public class SessionController implements Initializable, Observer {
                         }));
         SetTimerLabel();
         timeline.playFromStart();
+        Media sound = new Media(new File("typo-game/src/DNBTTLoop3.wav").toURI().toString());
+        mp = new MediaPlayer(sound);
+        mp.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mp.seek(Duration.ZERO);
+            }
+        });
+        mp.setVolume(Double.valueOf(Main.settings.getProperty("Volume")));
+        mp.setCycleCount(AudioClip.INDEFINITE);
+        mp.play();
     }
 
     //Change Timer text to second remaining and fade away.
@@ -271,6 +287,7 @@ public class SessionController implements Initializable, Observer {
 
 
     private void EndGame() {
+        mp.stop();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddHighScoreView.fxml"));
         Parent parent = null;
         Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
