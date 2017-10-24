@@ -5,7 +5,11 @@ import Model.Database.DBHighScore;
 import Model.Repository.HighScoreRepository;
 import Model.Threads.KeyPress;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +33,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
+import javafx.util.Duration;
 import sample.Main;
 
 import java.io.IOException;
@@ -37,6 +42,8 @@ import java.util.List;
 import java.util.Observer;
 import java.util.ResourceBundle;
 import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
@@ -50,18 +57,14 @@ public class SessionController implements Initializable, Observer {
     Button Quit;
     @FXML
     Label ScoreLbl;
-
     @FXML
     Label ComboLbl;
-
     @FXML
     Label LivesLB1;
     @FXML
-    Label CountDownLB1;
+    Label timerLabeltimeStamp;
 
-    Image img = new Image("/rocket.gif");
-
-
+    private Image img = new Image("/rocket.gif");
     private GraphicsContext gContext;
     private AnimationTimer loop;
     private Scene scene;
@@ -71,12 +74,8 @@ public class SessionController implements Initializable, Observer {
     private int hs = 0;
     private Thread keypress;
     private int Lives;
-
-    private int colourCount;
-
-
-
     private EventHandler keypressevent;
+    private int remaining = 5;
 
     @Override
     public void update(java.util.Observable o, Object arg) {
@@ -106,18 +105,52 @@ public class SessionController implements Initializable, Observer {
 
     }
 
+    //Start countdown timer for starting the game.
+    public void countdownTimer(){
+        Timeline timeline;
+        timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(1),
+                        new EventHandler<ActionEvent>() {
+                            public void handle(ActionEvent event) {
+                                remaining--;
+                                SetTimerLabel();
+                                if (remaining <= 0) {
+                                    timeline.stop();
+                                    timerLabeltimeStamp.setVisible(false);
+                                    meth();
+                                }
+                            }
+                        }));
+        SetTimerLabel();
+        timeline.playFromStart();
+    }
+
+    //Change Timer text to second remaining and fade away.
+    public void SetTimerLabel(){
+        timerLabeltimeStamp.setText(String.valueOf(remaining));
+        FadeTransition ft = new FadeTransition(Duration.millis(1000), timerLabeltimeStamp);
+        ft.setFromValue(1.0);
+        ft.setToValue(0.3);
+        ft.setCycleCount(4);
+        ft.setAutoReverse(true);
+        ft.play();
+    }
+
     public void setSession(Session session) {
         this.sp = session;
         sp.AddPlayer(new Player());
         pl = sp.getPlayerOne();
         hs = getHighscore();
+        countdownTimer();
     }
 
     public void setScene(Scene scene) {
         this.scene = scene;
     }
 
-    @FXML
+
     public void meth() {
 
 
@@ -197,10 +230,10 @@ public class SessionController implements Initializable, Observer {
         int y = 100;
         double r = ((canvas.getHeight() - 300) / hs) * sp.getPlayerOne().getScore();
         gContext.clearRect(0, 0, 3000, 3000);
-        gContext.fillRect(canvas.getWidth() - 200, 100, 100, 10);
-        gContext.fillRect(canvas.getWidth() - 155, 100, 10, canvas.getHeight() - 200);
+        gContext.fillRect(canvas.getWidth() - 200, 100, 100, 5);
+        gContext.fillRect(canvas.getWidth() - 152.5, 100, 5, canvas.getHeight() - 200);
         gContext.fillText("High Score: " + hs, canvas.getWidth() - 250, 70);
-        gContext.drawImage(img, canvas.getWidth() - 200, canvas.getHeight() - r - 200, 100, 100);
+        gContext.drawImage(img, canvas.getWidth() - 197.5, canvas.getHeight() - r - 200, 100, 100);
         try {
             List<Letter> L = sp.getCurrentSet().getCharacters();
             for (Letter item : L) {
