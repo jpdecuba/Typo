@@ -38,6 +38,11 @@
                 </font>
             </Button>
         </HBox>
-        <Canvas fx:id="canvas" onMousePressed="#meth" height="469.0" width="482.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
+        <Canvas fx:id="canvas" height="469.0" width="482.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
+        <Label fx:id="timerLabeltimeStamp" alignment="CENTER" text="" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <font>
+                <Font name="Verdana Bold" size="80.0" />
+            </font>
+        </Label>
     </children>
 </AnchorPane>

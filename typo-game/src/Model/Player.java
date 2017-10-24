@@ -52,6 +52,7 @@ public class Player extends Observable{
 	public boolean WrongKeypress(){
 	    synchronized (LIVES){
             lives -= 1;
+            setCombo(1);
         }
 	    if(lives <= 0){
 

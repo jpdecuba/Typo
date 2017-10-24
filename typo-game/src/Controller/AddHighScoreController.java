@@ -47,7 +47,7 @@ public class AddHighScoreController implements Initializable {
         HighScore hs = new HighScore(textField.getText(), player.getScore(), difficulty, LocalDate.now());
         hsRep.Save(hs);
         try {
-            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")), "High Score");
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/HighScoreView.fxml")), "High Score");
         } catch (IOException e) {
             e.printStackTrace();
         }
