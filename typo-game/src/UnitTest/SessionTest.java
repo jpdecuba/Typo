@@ -15,6 +15,8 @@ public class SessionTest {
     Player p2 = new Player();
     Set s1 = new Set("TEST1");
     Set s2 = new Set("TEST2");
+    Opportunity ComboPunish = new Opportunity(OppName.ComboPunish, Difficulty.Beginner);
+    Opportunity ExtraLife = new Opportunity(OppName.ExtraLife, Difficulty.Beginner);
 
     @Before
     public void setUp() throws Exception {
@@ -25,18 +27,19 @@ public class SessionTest {
     @Test(expected = NotImplementedException.class)
     public void activeOpportunity() throws Exception {
         mp.AddPlayer(p1);
-        mp.ActiveOpportunity(p1); }
+        mp.ActiveOpportunity(p1, ExtraLife); }
 
     @Test(expected = NotImplementedException.class)
     public void activeOpportunity1() throws Exception {
         mp.AddPlayer(p1);
         mp.AddPlayer(p2);
-        mp.ActiveOpportunity(p2); }
+        mp.ActiveOpportunity(p2, ComboPunish); }
 
+        /*
     @Test(expected = IllegalArgumentException.class)
     public void activeOpportunity2() throws Exception {
         mp.ActiveOpportunity(p1); }
-
+*/
     @Test
     public void addPlayer() throws Exception {
         mp.AddPlayer(p1);

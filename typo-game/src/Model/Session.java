@@ -21,12 +21,12 @@ public abstract class Session extends Observable implements Observer {
     public void ActiveOpportunity(Player player,Opportunity opp){
         //give the active opportunity in effect on which player???
         switch (opp.getName()) {
-            case Reverse:
+            /*case Reverse:
                 throw new NotImplementedException();
             case Spotlight:
                 throw new NotImplementedException();
             case ComboBonus:
-                throw new NotImplementedException();
+                throw new NotImplementedException();*/
             case ComboPunish:
                 throw new NotImplementedException();
             case ExtraLife:
