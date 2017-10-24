@@ -394,7 +394,7 @@ public class SessionController implements Initializable, Observer {
 
                 if(Opp != null){
 
-
+                    ClickOpp((int)event.getX(),(int)event.getY());
                 }
 
 
@@ -415,9 +415,16 @@ public class SessionController implements Initializable, Observer {
 
     }
 
+
     public synchronized void typechar(String c) {
 
         sp.TypeCharacter(c, sp.getPlayerOne());
+
+    }
+
+    public synchronized void ClickOpp(int x,int y) {
+
+        sp.mouseclick(x,y, sp.getPlayerOne());
 
     }
 
