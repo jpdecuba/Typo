@@ -3,7 +3,6 @@ package Controller;
 import Model.*;
 import Model.Database.DBHighScore;
 import Model.Repository.HighScoreRepository;
-import Model.Threads.KeyPress;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
