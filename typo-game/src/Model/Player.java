@@ -36,6 +36,7 @@ public class Player extends Observable{
         }
 
     }
+
     public synchronized int getLives() {
 
             return this.lives;
@@ -70,7 +71,7 @@ public class Player extends Observable{
 
 	}
 
-
+    //set Combo only wen it's higher then 1 or 1
 	public void setCombo(int combo) {
 	    synchronized (COMBO) {
             if (combo >= 1) {
@@ -83,10 +84,7 @@ public class Player extends Observable{
 		return this.tempPoints;
 	}
 
-	/**
-	 *
-	 * @param tempPoints
-	 */
+	//add points to tempPoints
 	public void setTempPoints(int tempPoints) {
 	    synchronized(this) {
 
