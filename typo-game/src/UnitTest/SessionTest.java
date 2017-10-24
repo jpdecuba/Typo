@@ -24,7 +24,7 @@ public class SessionTest {
         sp = new Singleplayer(Difficulty.Beginner);
     }
 
-    @Test(expected = NotImplementedException.class)
+    @Test
     public void activeOpportunity() throws Exception {
         mp.AddPlayer(p1);
         mp.ActiveOpportunity(p1, ExtraLife); }
