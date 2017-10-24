@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 public abstract class Session extends Observable implements Observer {
 
@@ -16,6 +17,7 @@ public abstract class Session extends Observable implements Observer {
     private Set currentSet = null;
     private Player playerOne = null;
     private Player playerTwo = null;
+    private Opportunity opp = null;
 
     //Methods
     public void ActiveOpportunity(Player player,Opportunity opp){
@@ -69,6 +71,12 @@ public abstract class Session extends Observable implements Observer {
         if(player != null){
             player.setCombo(player.ComboTimer.getCombo(player.getCombo()));
             player.AwardPoints();
+            Random r = new Random();
+            if(r.nextInt(100) <= 10){
+                opp = new Opportunity(OppName.ExtraLife, difficulty);
+                this.setChanged();
+                this.notifyObservers(opp);
+            }
         }
         if (!sets.isEmpty()){
             currentSet = sets.get(0);
@@ -79,6 +87,14 @@ public abstract class Session extends Observable implements Observer {
         else {
             EndGame();
             throw new NullPointerException("there are no more sets available");
+        }
+    }
+
+    public void mouseclick(int x,int y,Player player){
+        if(opp.CheckHit(x,y)){
+            ActiveOpportunity(player, opp);
+            setChanged();
+            notifyObservers(false);
         }
     }
 
@@ -100,6 +116,11 @@ public abstract class Session extends Observable implements Observer {
             player.WrongKeypress();
             return false;
         }
+    }
+
+    public void getOpportunity(){
+        this.setChanged();
+        this.notifyObservers(opp);
     }
 
     //Properties

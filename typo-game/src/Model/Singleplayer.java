@@ -39,7 +39,7 @@ public class Singleplayer extends Session {
         if(!(boolean)arg){
             EndGame();
         }
-        else{
+        else if((boolean)arg){
             throw new IllegalArgumentException("Session got an unexpected update");
         }
     }
