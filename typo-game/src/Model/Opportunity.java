@@ -6,20 +6,20 @@ import java.util.Observable;
 
 public class Opportunity extends Observable {
 
-    private String name;
+    private OppName name;
     private Difficulty diff;
     private Player p;
 
-    public Opportunity(String name, Difficulty diff) {
+    public Opportunity(OppName name, Difficulty diff) {
         this.name = name;
         this.diff = diff;
     }
 
-    public String getName() {
+    public OppName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(OppName name) {
         this.name = name;
     }
 
