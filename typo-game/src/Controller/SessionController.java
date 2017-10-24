@@ -131,13 +131,7 @@ public class SessionController implements Initializable, Observer {
         timeline.playFromStart();
         Media sound = new Media(new File("typo-game/src/DNBTTLoop3.wav").toURI().toString());
         mp = new MediaPlayer(sound);
-        mp.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                mp.seek(Duration.ZERO);
-            }
-        });
-        mp.setVolume(Double.valueOf(Main.settings.getProperty("Volume")));
+        mp.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
         mp.setCycleCount(AudioClip.INDEFINITE);
         mp.play();
     }
