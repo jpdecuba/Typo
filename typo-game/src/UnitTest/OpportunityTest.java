@@ -16,7 +16,7 @@ public class OpportunityTest{
 
     @Test
     public void getName() throws Exception {
-        assertEquals("test",opp.getName());
+        assertEquals(OppName.ExtraLife,opp.getName());
     }
 
     @Test
