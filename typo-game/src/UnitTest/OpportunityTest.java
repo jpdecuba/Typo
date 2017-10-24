@@ -1,6 +1,7 @@
 package UnitTest;
 
 import Model.Difficulty;
+import Model.OppName;
 import Model.Opportunity;
 import Model.Player;
 import org.junit.Test;
@@ -11,17 +12,17 @@ public class OpportunityTest{
 
     TestObserver testObserver = new TestObserver();
 
-    Opportunity opp = new Opportunity("test", Difficulty.Beginner);
+    Opportunity opp = new Opportunity(OppName.ExtraLife, Difficulty.Beginner);
 
     @Test
     public void getName() throws Exception {
-        assertEquals("test",opp.getName());
+        assertEquals(OppName.ExtraLife,opp.getName());
     }
 
     @Test
     public void setName() throws Exception {
-        opp.setName("toast");
-        assertEquals("toast",opp.getName());
+        opp.setName(OppName.ComboBonus);
+        assertEquals(OppName.ComboBonus,opp.getName());
     }
 
     @Test
@@ -46,7 +47,7 @@ public class OpportunityTest{
 
         TestObserver testObserver2 = new TestObserver();
 
-        Opportunity opp3 = new Opportunity("test", Difficulty.Beginner);
+        Opportunity opp3 = new Opportunity(OppName.ComboPunish, Difficulty.Beginner);
 
         opp3.addObserver(testObserver2);
 

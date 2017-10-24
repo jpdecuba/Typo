@@ -15,6 +15,8 @@ public class SessionTest {
     Player p2 = new Player();
     Set s1 = new Set("TEST1");
     Set s2 = new Set("TEST2");
+    Opportunity ComboPunish = new Opportunity(OppName.ComboPunish, Difficulty.Beginner);
+    Opportunity ExtraLife = new Opportunity(OppName.ExtraLife, Difficulty.Beginner);
 
     @Before
     public void setUp() throws Exception {
@@ -22,21 +24,22 @@ public class SessionTest {
         sp = new Singleplayer(Difficulty.Beginner);
     }
 
-    @Test(expected = NotImplementedException.class)
+    @Test
     public void activeOpportunity() throws Exception {
         mp.AddPlayer(p1);
-        mp.ActiveOpportunity(p1); }
+        mp.ActiveOpportunity(p1, ExtraLife); }
 
     @Test(expected = NotImplementedException.class)
     public void activeOpportunity1() throws Exception {
         mp.AddPlayer(p1);
         mp.AddPlayer(p2);
-        mp.ActiveOpportunity(p2); }
+        mp.ActiveOpportunity(p2, ComboPunish); }
 
+        /*
     @Test(expected = IllegalArgumentException.class)
     public void activeOpportunity2() throws Exception {
         mp.ActiveOpportunity(p1); }
-
+*/
     @Test
     public void addPlayer() throws Exception {
         mp.AddPlayer(p1);
@@ -66,34 +69,34 @@ public class SessionTest {
 
     @Test(expected = NullPointerException.class)
     public void nextSet1() throws Exception {
-        mp.NextSet(null); }
+        mp.NextSet(p1); }
 
     @Test
     public void nextSet() throws Exception {
         mp.sets.add(s1);
         mp.sets.add(s2);
-        Assert.assertEquals(s1, mp.NextSet(null));
-        Assert.assertEquals(s2, mp.NextSet(null));
+        Assert.assertEquals(s1, mp.NextSet(p1));
+        Assert.assertEquals(s2, mp.NextSet(p1));
     }
 
     @Test
     public void typeCharacter() throws Exception {
         mp.sets.add(s1);
-        mp.NextSet(null);
+        mp.NextSet(p1);
         Assert.assertEquals(true, mp.TypeCharacter("T", p1));
     }
 
     @Test
     public void typeCharacter2() throws Exception {
         mp.sets.add(s1);
-        mp.NextSet(null);
+        mp.NextSet(p1);
         Assert.assertEquals(false, mp.TypeCharacter("F", p1));
     }
 
     @Test
     public void getCurrentSet() throws Exception {
         mp.sets.add(s1);
-        mp.NextSet(null);
+        mp.NextSet(p1);
         Assert.assertEquals(s1, mp.getCurrentSet());
     }
 
@@ -101,7 +104,7 @@ public class SessionTest {
     public void typeCharacter3() throws Exception {
         mp.sets.add(s1);
         mp.sets.add(s2);
-        mp.NextSet(null);
+        mp.NextSet(p1);
         Assert.assertEquals(true, mp.TypeCharacter("T", p1));
         Assert.assertEquals(true, mp.TypeCharacter("E", p1));
         Assert.assertEquals(true, mp.TypeCharacter("S", p1));

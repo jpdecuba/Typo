@@ -28,21 +28,11 @@ public class Multiplayer extends Session{
             }
             getPlayerOne().addObserver(this);
             getPlayerTwo().addObserver(this);
-            NextSet(null);
+            NextSet(new Player());
         }
         else{
             throw new NullPointerException("There are not enough players in the lobby");
         }
-        /*
-        if(players.size() > 1){
-            for (Player player: players){
-                player.addObserver(this);
-            }
-        }
-        else{
-            throw new NullPointerException("There are not enough players in the lobby");
-        }
-        */
     }
 
     @Override

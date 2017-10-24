@@ -16,7 +16,7 @@ import java.util.Properties;
 public class Main extends Application {
 
     public static Stage Stage;
-    private static Properties settings;
+    public static Properties settings;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
