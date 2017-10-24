@@ -103,7 +103,7 @@ public abstract class Session extends Observable implements Observer {
 
     //calculate if the character thats hit is correct
     public boolean TypeCharacter(String character, Player player) {
-        String currentletter = currentSet.getCharacters().get(0).getCharacter().toString();
+        String currentletter = currentSet.getCharacters().get(0).getCharacter();
 
         if(character.equals(currentletter)){
             //character is typed correc

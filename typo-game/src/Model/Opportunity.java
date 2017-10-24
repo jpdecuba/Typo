@@ -51,12 +51,7 @@ public class Opportunity extends Observable {
     }
 
     public boolean CheckHit(int x, int y){
-        if(x >= posX && x <= posX+width && y >= posY && y <= posY+length){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return x >= posX && x <= posX + width && y >= posY && y <= posY + length;
     }
 
     //properties anchor
