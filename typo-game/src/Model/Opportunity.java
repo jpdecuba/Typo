@@ -10,8 +10,8 @@ public class Opportunity extends Observable {
     private OppName name;
     private Difficulty diff;
     private Player p;
-    protected int posX, posY;
-    protected int width = 25, length = 25;
+    private int posX, posY;
+    private int width = 25, length = 25;
 
     public Opportunity(OppName name, Difficulty diff) {
         this.name = name;
@@ -50,12 +50,24 @@ public class Opportunity extends Observable {
         this.notifyObservers(this);
     }
 
-    public int CheckHit(int x, int y){
+    public boolean CheckHit(int x, int y){
         if(x >= posX && x <= posX+width && y >= posY && y <= posY+length){
-            return 1;
+            return true;
         }
         else{
-            return 0;
+            return false;
         }
     }
+
+    //properties anchor
+    public int getPosX() { return posX; }
+    public int getPosY() { return posY; }
+    public void setPosX(int posX) { this.posX = posX; }
+    public void setPosY(int posY) { this.posY = posY; }
+
+    //properties scale
+    public int getWidth() { return width; }
+    public int getLength() { return length; }
+    public void setWidth(int width) { this.width = width; }
+    public void setLength(int length) { this.length = length; }
 }
