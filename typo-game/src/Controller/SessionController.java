@@ -87,7 +87,7 @@ public class SessionController implements Initializable, Observer {
     @Override
     public void update(java.util.Observable o, Object arg) {
 
-        if(arg == null) {
+        if (arg == null) {
             loop.stop();
             timer.stop();
 
@@ -98,9 +98,7 @@ public class SessionController implements Initializable, Observer {
 
             System.out.println("end game");
             EndGame();
-        }
-
-        else if(arg.getClass() == Opportunity.class){
+        } else if (arg.getClass() == Opportunity.class) {
 
             Opp = (Opportunity) arg;
             star.setVisible(true);
@@ -109,15 +107,13 @@ public class SessionController implements Initializable, Observer {
             star.setFitWidth(Opp.getWidth());
             star.setFitHeight(Opp.getLength());
 
-        }else if(arg.getClass() == boolean.class){
-            if(!(boolean) arg){
-                Opp = null;
-                star.setVisible(false);
+        } else if (arg.toString().equals("false")) {
+            Opp = null;
+            star.setVisible(false);
             }
-
         }
 
-    }
+
 
     //Start countdown timer for starting the game.
     public void countdownTimer(){
