@@ -15,6 +15,7 @@ public abstract class Session extends Observable implements Observer {
     public ArrayList<Set> sets = new ArrayList<Set>();
     public ArrayList<Opportunity> opportunities = new ArrayList<Opportunity>();
     private Set currentSet = null;
+    private Set lastSet = null;
     private Player playerOne = null;
     private Player playerTwo = null;
     private Opportunity opp = null;
@@ -79,13 +80,15 @@ public abstract class Session extends Observable implements Observer {
             }
         }
         if (!sets.isEmpty()){
-            /*
-            if(difficulty != Difficulty.Beginner || difficulty != Difficulty.Expert){
-                sets.remove(currentSet);
-            }
-            */
             Random r = new Random();
             currentSet = sets.get(r.nextInt(sets.size()));
+            StringBuilder s = new StringBuilder();
+            for (Letter l: currentSet.getCharacters()) {
+                s.append(l.getCharacter());
+            }
+            lastSet = new Set(s.toString());
+            sets.remove(currentSet);
+            sets.add(lastSet);
             player.ComboTimer.setStartTime(LocalDateTime.now());
             return currentSet;
         }
