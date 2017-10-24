@@ -11,10 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sample.Main;
+import sun.rmi.runtime.Log;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +25,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+    private Image img = new Image("/Y.png");
     @FXML
     Button SingleplayerBtn;
 
@@ -36,6 +40,9 @@ public class Controller implements Initializable {
 
     @FXML
     Button ExitBtn;
+
+    @FXML
+    ImageView Logo;
 
     @FXML
     public void btnClick(ActionEvent event) throws IOException {
@@ -59,7 +66,9 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        Logo.setImage(img);
+        Logo.setFitHeight(70);
+        Logo.setFitWidth(70);
     }
 
 

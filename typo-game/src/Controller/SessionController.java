@@ -21,6 +21,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -59,8 +60,11 @@ public class SessionController implements Initializable, Observer {
     Label LivesLB1;
     @FXML
     Label timerLabeltimeStamp;
+    @FXML
+    ImageView star;
 
     private Image img = new Image("/rocket.gif");
+    private Image starImg = new Image("/star.png");
     private GraphicsContext gContext;
     private AnimationTimer loop;
     private Scene scene;
@@ -96,16 +100,19 @@ public class SessionController implements Initializable, Observer {
             EndGame();
         }
 
-        if(arg.getClass() == Opportunity.class){
+        else if(arg.getClass() == Opportunity.class){
 
             Opp = (Opportunity) arg;
-
-
+            star.setVisible(true);
+            star.setX(Opp.getPosX());
+            star.setY(Opp.getPosY());
+            star.setFitWidth(Opp.getWidth());
+            star.setFitHeight(Opp.getLength());
 
         }else if(arg.getClass() == boolean.class){
             if(!(boolean) arg){
                 Opp = null;
-
+                star.setVisible(false);
             }
 
         }
@@ -153,11 +160,12 @@ public class SessionController implements Initializable, Observer {
 
     public void setSession(Session session) {
         this.sp = session;
-
         countdownTimer();
         sp.AddPlayer(new Player());
         pl = sp.getPlayerOne();
         hs = getHighscore();
+        star.setVisible(false);
+        star.setImage(starImg);
     }
 
     public void setScene(Scene scene) {

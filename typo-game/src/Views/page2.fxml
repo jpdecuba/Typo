@@ -3,6 +3,7 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -44,5 +45,6 @@
                 <Font name="Verdana Bold" size="80.0" />
             </font>
         </Label>
+      <ImageView fx:id="star" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>
