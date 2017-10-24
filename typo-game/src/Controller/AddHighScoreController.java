@@ -42,9 +42,16 @@ public class AddHighScoreController implements Initializable {
     }
 
     public void btnSubmit(ActionEvent actionEvent) {
-        if (textField.getText() != "")
         hsRep = new HighScoreRepository(new DBHighScore());
-        HighScore hs = new HighScore(textField.getText(), player.getScore(), difficulty, LocalDate.now());
+        HighScore hs = null;
+        if (textField.getText() != null && !textField.getText().isEmpty())
+        {
+            hs = new HighScore(textField.getText(), player.getScore(), difficulty, LocalDate.now());
+        }
+        else
+        {
+            hs = new HighScore("Unkn0wn", player.getScore(), difficulty, LocalDate.now());
+        }
         hsRep.Save(hs);
         try {
             Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/HighScoreView.fxml")), "High Score");
