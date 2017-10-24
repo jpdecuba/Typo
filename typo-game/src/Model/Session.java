@@ -30,11 +30,7 @@ public abstract class Session extends Observable implements Observer {
             case ComboPunish:
                 throw new NotImplementedException();
             case ExtraLife:
-                if (player == playerOne) {
-                    playerOne.AddLives(1);
-                } else if (player == playerTwo) {
-                    playerTwo.AddLives(1);
-                }
+                player.AddLives(1);
                 break;
         }
     }
