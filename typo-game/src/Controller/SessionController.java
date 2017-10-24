@@ -18,16 +18,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -44,9 +40,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Observer;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
@@ -75,9 +68,11 @@ public class SessionController implements Initializable, Observer {
     private Player pl;
     private AnimationTimer timer;
     private int hs = 0;
-    private Thread keypress;
     private int Lives;
+
     private EventHandler keypressevent;
+    private EventHandler MouseClickEvent;
+
     private int remaining = 5;
     private MediaPlayer mp = null;
     private MediaPlayer effect = null;
@@ -93,7 +88,7 @@ public class SessionController implements Initializable, Observer {
 
             Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
 
-            Main.Stage.getScene().removeEventHandler(KeyEvent.ANY, keypressevent);
+            Main.Stage.getScene().removeEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, MouseClickEvent);
 
 
             System.out.println("end game");
@@ -103,6 +98,14 @@ public class SessionController implements Initializable, Observer {
         if(arg.getClass() == Opportunity.class){
 
             Opp = (Opportunity) arg;
+
+
+
+        }else if(arg.getClass() == boolean.class){
+            if(!(boolean) arg){
+                Opp = null;
+
+            }
 
         }
 
@@ -183,7 +186,7 @@ public class SessionController implements Initializable, Observer {
 
         loop.start();
 
-        startkeypress();
+        startEvents();
 
 
 
@@ -330,13 +333,16 @@ public class SessionController implements Initializable, Observer {
     }
 
 
-    public void startkeypress() {
+    public void startEvents() {
+
 
 
 
 
 
         keypressevent = new EventHandler<KeyEvent>(){
+
+
 
             @Override
             public void handle(KeyEvent keyEvent){
@@ -371,16 +377,34 @@ public class SessionController implements Initializable, Observer {
         };
 
 
+        MouseClickEvent = new EventHandler<javafx.scene.input.MouseEvent>() {
+            @Override
+            public void handle(javafx.scene.input.MouseEvent event) {
+
+                if(Opp != null){
+
+
+                }
+
+
+
+            }
+
+
+        };
+
+
 
 
         Main.Stage.getScene().addEventFilter(KeyEvent.ANY, keypressevent);
+
+        Main.Stage.getScene().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, MouseClickEvent);
 
 
 
     }
 
     public synchronized void typechar(String c) {
-
 
         sp.TypeCharacter(c, sp.getPlayerOne());
 
