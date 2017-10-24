@@ -27,7 +27,7 @@ public class Player extends Observable{
         combo = 1;
         tempPoints = 0;
     }
-    // Adding tempPoints to to score and set tempPoints on zero
+    // Adding tempPoints to score and set tempPoints on zero
     public void AwardPoints() {
 
         synchronized (this) {

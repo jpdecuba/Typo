@@ -84,6 +84,7 @@ public class SessionController implements Initializable, Observer {
 
     private Opportunity Opp;
 
+//update to endgame and change oppertunity on screen
     @Override
     public void update(java.util.Observable o, Object arg) {
 
@@ -153,7 +154,7 @@ public class SessionController implements Initializable, Observer {
         ft.setAutoReverse(true);
         ft.play();
     }
-
+//setsession sessen default values
     public void setSession(Session session) {
         this.sp = session;
         countdownTimer();
@@ -168,9 +169,8 @@ public class SessionController implements Initializable, Observer {
         this.scene = scene;
     }
 
-
+//gamestart methode
     public void meth() {
-
 
         loop = new AnimationTimer() {
             double startX = 100;
@@ -187,13 +187,9 @@ public class SessionController implements Initializable, Observer {
 
         sp.addObserver(this);
 
-
-
         loop.start();
 
         startEvents();
-
-
 
         try {
             sp.Start();
@@ -202,11 +198,9 @@ public class SessionController implements Initializable, Observer {
         }
 
         begintimer();
-
-
     }
 
-
+    //setvalues change collor based on lives change
     private void SetValues() {
 
 
@@ -242,7 +236,7 @@ public class SessionController implements Initializable, Observer {
         Lives = sp.getPlayerOne().getLives();
 
     }
-
+    //Letters Drawning
     private void Letters() {
         int x = 100;
         int y = 100;
@@ -266,7 +260,7 @@ public class SessionController implements Initializable, Observer {
         }
     }
 
-
+    //Animationtimer
     public void begintimer() {
 
         timer = new AnimationTimer() {
@@ -287,7 +281,7 @@ public class SessionController implements Initializable, Observer {
     }
 
 
-
+    //EndGame method switch screen to addhighscore
     private void EndGame() {
         if (sp.getPlayerOne().getLives() == 0){
             effect = new MediaPlayer(sEffect);
@@ -327,7 +321,7 @@ public class SessionController implements Initializable, Observer {
         gContext.setFill(Color.BLACK);
 
     }
-
+    //return highscore
     private int getHighscore() {
         HighScoreRepository hsRep = new HighScoreRepository(new DBHighScore());
         List<HighScore> highscores = hsRep.GetHighScores();
@@ -339,17 +333,9 @@ public class SessionController implements Initializable, Observer {
         return 0;
     }
 
-
+    // startEvents start the evenHandler for keypress and mouseclicks
     public void startEvents() {
-
-
-
-
-
-
         keypressevent = new EventHandler<KeyEvent>(){
-
-
 
             @Override
             public void handle(KeyEvent keyEvent){
@@ -400,24 +386,18 @@ public class SessionController implements Initializable, Observer {
 
         };
 
-
-
-
         Main.Stage.getScene().addEventFilter(KeyEvent.ANY, keypressevent);
-
         Main.Stage.getScene().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, MouseClickEvent);
-
-
 
     }
 
-
+    // typechar methode sends typed char to session
     public synchronized void typechar(String c) {
 
         sp.TypeCharacter(c, sp.getPlayerOne());
 
     }
-
+    // ClickOpp methode sends click posion to session
     public synchronized void ClickOpp(int x,int y) {
 
         sp.mouseclick(x,y, sp.getPlayerOne());
