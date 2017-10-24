@@ -76,6 +76,7 @@ public class SessionController implements Initializable, Observer {
     private int remaining = 5;
     private MediaPlayer mp = null;
     private MediaPlayer effect = null;
+    private Media sEffect = new Media(new File("typo-game/src/chirp.mp3").toURI().toString());
 
     private Opportunity Opp;
 
@@ -208,7 +209,6 @@ public class SessionController implements Initializable, Observer {
         if(Lives != sp.getPlayerOne().getLives() && Lives != 0) {
 
             Platform.runLater(() -> {
-                Media sEffect = new Media(new File("typo-game/src/chirp.mp3").toURI().toString());
                 effect = new MediaPlayer(sEffect);
                 effect.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
                 effect.play();
@@ -230,8 +230,6 @@ public class SessionController implements Initializable, Observer {
 
             });
         }
-
-
 
         ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
         ComboLbl.setText("COMBO: " + String.valueOf(sp.getPlayerOne().getCombo()));
@@ -287,6 +285,11 @@ public class SessionController implements Initializable, Observer {
 
 
     private void EndGame() {
+        if (sp.getPlayerOne().getLives() == 0){
+            effect = new MediaPlayer(sEffect);
+            effect.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
+            effect.play();
+        }
         mp.stop();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddHighScoreView.fxml"));
         Parent parent = null;
