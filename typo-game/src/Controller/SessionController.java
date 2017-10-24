@@ -101,6 +101,10 @@ public class SessionController implements Initializable, Observer {
         } else if (arg.getClass() == Opportunity.class) {
 
             Opp = (Opportunity) arg;
+            Opp.setMinX(0);
+            Opp.setMaxX(1000);
+            Opp.setMinY(0);
+            Opp.setMaxY(1000);
             star.setVisible(true);
             star.setX(Opp.getPosX());
             star.setY(Opp.getPosY());
