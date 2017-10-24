@@ -81,31 +81,29 @@ public class SessionController implements Initializable, Observer {
     private int remaining = 5;
     private MediaPlayer mp = null;
 
+    private Opportunity Opp;
+
     @Override
     public void update(java.util.Observable o, Object arg) {
 
+        if(arg == null) {
+            loop.stop();
+            timer.stop();
 
-        loop.stop();
-        timer.stop();
+            Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
 
-        //GamePlay = false;
-
-        //keyFuction.update();
-
-
-        //keypress.isInterrupted();
-
-        Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
-
-        Main.Stage.getScene().removeEventHandler(KeyEvent.ANY, keypressevent);
+            Main.Stage.getScene().removeEventHandler(KeyEvent.ANY, keypressevent);
 
 
-        System.out.println("end game");
+            System.out.println("end game");
+            EndGame();
+        }
 
+        if(arg.getClass() == Opportunity.class){
 
-        EndGame();
+            Opp = (Opportunity) arg;
 
-
+        }
 
     }
 
@@ -133,6 +131,7 @@ public class SessionController implements Initializable, Observer {
         mp = new MediaPlayer(sound);
         mp.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
         mp.setCycleCount(AudioClip.INDEFINITE);
+
         mp.play();
     }
 
