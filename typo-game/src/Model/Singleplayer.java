@@ -18,13 +18,7 @@ public class Singleplayer extends Session {
     @Override
     public void Start() {
         if(getPlayerOne() != null && getPlayerTwo() == null){
-            if(Database.checkConnection()){
-                setRepository = new SetRepository(new DBSet());
-                try{ sets.addAll(setRepository.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
-            }
-            else {
-                try{ sets.addAll(SetSerialize.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
-            }
+            getAllSets();
             getPlayerOne().addObserver(this);
             NextSet(new Player());
         }
