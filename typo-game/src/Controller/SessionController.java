@@ -80,6 +80,7 @@ public class SessionController implements Initializable, Observer {
     private EventHandler keypressevent;
     private int remaining = 5;
     private MediaPlayer mp = null;
+    private MediaPlayer effect = null;
 
     private Opportunity Opp;
 
@@ -202,8 +203,12 @@ public class SessionController implements Initializable, Observer {
 
 
         if(Lives != sp.getPlayerOne().getLives() && Lives != 0) {
-            Platform.runLater(() -> {
 
+            Platform.runLater(() -> {
+                Media sEffect = new Media(new File("typo-game/src/chirp.mp3").toURI().toString());
+                effect = new MediaPlayer(sEffect);
+                effect.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
+                effect.play();
                 gContext.setFill(Paint.valueOf("RED"));
                 LivesLB1.setTextFill(Paint.valueOf("RED"));
 
@@ -221,7 +226,6 @@ public class SessionController implements Initializable, Observer {
 
 
             });
-
         }
 
 
