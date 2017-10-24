@@ -66,34 +66,34 @@ public class SessionTest {
 
     @Test(expected = NullPointerException.class)
     public void nextSet1() throws Exception {
-        mp.NextSet(null); }
+        mp.NextSet(p1); }
 
     @Test
     public void nextSet() throws Exception {
         mp.sets.add(s1);
         mp.sets.add(s2);
-        Assert.assertEquals(s1, mp.NextSet(null));
-        Assert.assertEquals(s2, mp.NextSet(null));
+        Assert.assertEquals(s1, mp.NextSet(p1));
+        Assert.assertEquals(s2, mp.NextSet(p1));
     }
 
     @Test
     public void typeCharacter() throws Exception {
         mp.sets.add(s1);
-        mp.NextSet(null);
+        mp.NextSet(p1);
         Assert.assertEquals(true, mp.TypeCharacter("T", p1));
     }
 
     @Test
     public void typeCharacter2() throws Exception {
         mp.sets.add(s1);
-        mp.NextSet(null);
+        mp.NextSet(p1);
         Assert.assertEquals(false, mp.TypeCharacter("F", p1));
     }
 
     @Test
     public void getCurrentSet() throws Exception {
         mp.sets.add(s1);
-        mp.NextSet(null);
+        mp.NextSet(p1);
         Assert.assertEquals(s1, mp.getCurrentSet());
     }
 
@@ -101,7 +101,7 @@ public class SessionTest {
     public void typeCharacter3() throws Exception {
         mp.sets.add(s1);
         mp.sets.add(s2);
-        mp.NextSet(null);
+        mp.NextSet(p1);
         Assert.assertEquals(true, mp.TypeCharacter("T", p1));
         Assert.assertEquals(true, mp.TypeCharacter("E", p1));
         Assert.assertEquals(true, mp.TypeCharacter("S", p1));

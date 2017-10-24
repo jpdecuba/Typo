@@ -26,7 +26,7 @@ public class Singleplayer extends Session {
                 try{ sets.addAll(SetSerialize.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
             }
             getPlayerOne().addObserver(this);
-            NextSet(null);
+            NextSet(new Player());
         }
         else{
             throw new NullPointerException("There are not enough players in teh lobby");

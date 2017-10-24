@@ -18,16 +18,24 @@ public abstract class Session extends Observable implements Observer {
     private Player playerTwo = null;
 
     //Methods
-    public void ActiveOpportunity(Player player){
+    public void ActiveOpportunity(Player player,Opportunity opp){
         //give the active opportunity in effect on which player???
-        if(player == playerOne){
-            throw new NotImplementedException();
-        }
-        else if(player == playerTwo){
-            throw new NotImplementedException();
-        }
-        else{
-            throw new IllegalArgumentException("player does not exist in lobby");
+        switch (opp.getName()) {
+            case Reverse:
+                throw new NotImplementedException();
+            case Spotlight:
+                throw new NotImplementedException();
+            case ComboBonus:
+                throw new NotImplementedException();
+            case ComboPunish:
+                throw new NotImplementedException();
+            case ExtraLife:
+                if (player == playerOne) {
+                    playerOne.AddLives(1);
+                } else if (player == playerTwo) {
+                    playerTwo.AddLives(1);
+                }
+                break;
         }
     }
 
