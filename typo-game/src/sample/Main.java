@@ -20,11 +20,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        this.settings = Settings.GetProperties();
-        if(this.settings == null)
+        settings = Settings.GetProperties();
+        if(settings == null)
         {
             Settings.SaveSettings(null);
-            this.settings = Settings.GetProperties();
+            settings = Settings.GetProperties();
         }
         Stage = primaryStage;
         applySettings(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")));

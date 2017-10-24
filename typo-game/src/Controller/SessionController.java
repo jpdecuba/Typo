@@ -210,7 +210,7 @@ public class SessionController implements Initializable, Observer {
     private void SetValues() {
 
 
-        if(Lives != sp.getPlayerOne().getLives() && Lives != 0) {
+        if(Lives != sp.getPlayerOne().getLives() && Lives != 0 &&Lives > sp.getPlayerOne().getLives()) {
 
             Platform.runLater(() -> {
                 effect = new MediaPlayer(sEffect);

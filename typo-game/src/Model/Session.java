@@ -76,7 +76,7 @@ public abstract class Session extends Observable implements Observer {
             player.setCombo(player.ComboTimer.getCombo(player.getCombo()));
             player.AwardPoints();
             Random r = new Random();
-            if(r.nextInt(100) <= 10){
+            if(r.nextInt(100) <= 100){
                 opp = new Opportunity(OppName.ExtraLife, difficulty);
                 this.setChanged();
                 this.notifyObservers(opp);
@@ -120,7 +120,7 @@ public abstract class Session extends Observable implements Observer {
 
     //calculate if the character thats hit is correct
     public boolean TypeCharacter(String character, Player player) {
-        String currentletter = currentSet.getCharacters().get(0).getCharacter().toString();
+        String currentletter = currentSet.getCharacters().get(0).getCharacter();
 
         if(character.equals(currentletter)){
             //character is typed correc

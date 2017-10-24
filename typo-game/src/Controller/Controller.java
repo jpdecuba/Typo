@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Session;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,8 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-    private Image img = new Image("/Y.png");
+    private Image rocket = new Image("/rocket.gif");
+    private Image logo = new Image("/Y.png");
     @FXML
     Button SingleplayerBtn;
 
@@ -43,6 +45,9 @@ public class Controller implements Initializable {
 
     @FXML
     ImageView Logo;
+
+    @FXML
+    ImageView Rocket;
 
     @FXML
     public void btnClick(ActionEvent event) throws IOException {
@@ -66,9 +71,25 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Logo.setImage(img);
-        Logo.setFitHeight(70);
-        Logo.setFitWidth(70);
+        Rocket.setFitHeight(120);
+        Rocket.setFitWidth(120);
+        Logo.setFitHeight(120);
+        Logo.setFitWidth(120);
+        Rocket.setRotate(90);
+        Rocket.setImage(rocket);
+        Logo.setImage(logo);
+        AnimationTimer aT = new AnimationTimer() {
+            int X = -120;
+            @Override
+            public void handle(long now) {
+                if(Rocket.getX() >= screenSize.getWidth()){
+                    X = -120;
+                }
+                Rocket.setX(X);
+                X += 1;
+            }
+        };
+        aT.start();
     }
 
 
