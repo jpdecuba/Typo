@@ -1,6 +1,7 @@
 package Model.Database;
 
 import Model.Difficulty;
+import Model.OppName;
 import Model.Opportunity;
 import Model.Repository.RepositoryInterface.IOpportunityContext;
 import java.sql.*;
@@ -19,7 +20,21 @@ public class DBOpportunity implements IOpportunityContext {
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-                opportunities.add(new Opportunity(rs.getString(1), Difficulty.valueOf(rs.getInt(2))));
+                if (rs.getString(1) == "ComboBonus"){
+                    opportunities.add(new Opportunity(OppName.ComboBonus, Difficulty.valueOf(rs.getInt(2))));
+                }
+                else if(rs.getString(1) == "ComboPunish"){
+                    opportunities.add(new Opportunity(OppName.ComboPunish, Difficulty.valueOf(rs.getInt(2))));
+                }
+                else if(rs.getString(1) == "ExtraLife"){
+                    opportunities.add(new Opportunity(OppName.ExtraLife, Difficulty.valueOf(rs.getInt(2))));
+                }
+                else if(rs.getString(1) == "Reverse"){
+                    opportunities.add(new Opportunity(OppName.Reverse, Difficulty.valueOf(rs.getInt(2))));
+                }
+                else{
+                    opportunities.add(new Opportunity(OppName.Spotlight, Difficulty.valueOf(rs.getInt(2))));
+                }
             }
             return opportunities;
         }
