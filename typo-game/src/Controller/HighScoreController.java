@@ -19,6 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Screen;
@@ -33,6 +34,8 @@ import java.util.ResourceBundle;
 public class HighScoreController implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     HighScoreRepository hsRep;
+    @FXML
+    AnchorPane anchor;
     @FXML
     Button btnMode;
     @FXML
@@ -96,6 +99,9 @@ public class HighScoreController implements Initializable {
         Label col1 = new Label("Rank");
         Label col2 = new Label("Name");
         Label col3 = new Label("Score");
+        col1.setTextFill(Color.WHITE);
+        col2.setTextFill(Color.WHITE);
+        col3.setTextFill(Color.WHITE);
         col1.setFont(Font.font(null, FontWeight.BOLD, 30));
         col2.setFont(Font.font(null, FontWeight.BOLD, 30));
         col3.setFont(Font.font(null, FontWeight.BOLD, 30));
@@ -126,6 +132,7 @@ public class HighScoreController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        anchor.setStyle(" -fx-background-image: url('/space.png')");
         btnBeginner_Easy.setText("Beginner");
         btnExpert_Normal.setText("Expert");
         btnHard.setVisible(false);

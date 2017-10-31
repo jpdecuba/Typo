@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import sample.Main;
 
 import java.io.IOException;
@@ -26,6 +27,8 @@ public class AddHighScoreController implements Initializable {
     private Difficulty difficulty;
     private HighScoreRepository hsRep;
     @FXML
+    AnchorPane anchor;
+    @FXML
     Label scoreLbl;
     @FXML
     TextField textField;
@@ -38,7 +41,7 @@ public class AddHighScoreController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        anchor.setStyle(" -fx-background-image: url('/space.png')");
     }
 
     public void btnSubmit(ActionEvent actionEvent) {

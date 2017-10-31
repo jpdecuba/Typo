@@ -66,7 +66,7 @@ public class Main extends Application {
     {
         Stage.close();
         Stage Stage2 = new Stage();
-        Stage2.getIcons().add(new Image("/Y.png"));
+        Stage2.getIcons().add(new Image("/Logo Zwart.png"));
         Stage2.setTitle("TYPO");
         Stage2.setScene(new Scene(parent));
         Stage2.initStyle(style);
