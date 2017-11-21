@@ -9,14 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="720" minWidth="1240" style="-fx-background-color: #fffafa;"
-            xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Controller.SettingsController">
+<AnchorPane fx:id="anchor" minHeight="720" minWidth="1240" style="-fx-background-color: #fffafa;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SettingsController">
     <children>
-        <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
-              AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <children>
-            <Label text="Settings">
+            <Label text="Settings" textFill="WHITE">
                <font>
                   <Font size="36.0" />
                </font></Label>
@@ -24,11 +21,11 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                      <children>
-                        <Label text="Volume:">
+                        <Label text="Volume:" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font></Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="Screen Mode:">
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Screen Mode:" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font></Label>
@@ -42,12 +39,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#btnClick" prefHeight="60.0" prefWidth="262.5" style="-fx-background-color: b0c4de;" text="Save" textAlignment="CENTER">
+                  <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#btnClick" prefHeight="60.0" prefWidth="262.5" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Save" textAlignment="CENTER">
                      <font>
                         <Font name="Tahoma Bold" size="16.0" />
                      </font>
                   </Button>
-                    <Button fx:id="BackBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick" prefHeight="60.0" prefWidth="262.5" style="-fx-background-color: b0c4de;" text="Back" textAlignment="CENTER">
+                    <Button fx:id="BackBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick" prefHeight="60.0" prefWidth="262.5" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Back" textAlignment="CENTER">
                      <font>
                         <Font name="Tahoma Bold" size="16.0" />
                      </font>

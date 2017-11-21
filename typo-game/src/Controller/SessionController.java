@@ -221,8 +221,8 @@ public class SessionController implements Initializable, Observer {
                             @Override
                             public void run() {
                                 // your code here
-                                gContext.setFill(Paint.valueOf("BlACK"));
-                                LivesLB1.setTextFill(Paint.valueOf("BlACK"));
+                                gContext.setFill(Paint.valueOf("WHITE"));
+                                LivesLB1.setTextFill(Paint.valueOf("WHITE"));
                             }
                         },
                         300
@@ -248,7 +248,7 @@ public class SessionController implements Initializable, Observer {
         gContext.clearRect(0, 0, 3000, 3000);
         gContext.fillRect(canvas.getWidth() - 200, 100, 100, 5);
         gContext.fillRect(canvas.getWidth() - 152.5, 100, 5, canvas.getHeight() - 200);
-        gContext.fillText("High Score: " + hs, canvas.getWidth() - 270, 70);
+        gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
         gContext.drawImage(img, canvas.getWidth() - 197.5, canvas.getHeight() - r - 200, 100, 100);
         try {
             List<Letter> L = sp.getCurrentSet().getCharacters();
@@ -313,6 +313,7 @@ public class SessionController implements Initializable, Observer {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        anchor.setStyle(" -fx-background-image: url('/space.png')");
         gContext = canvas.getGraphicsContext2D();
         anchor.widthProperty().addListener((ov, oldValue, newValue) -> {
             canvas.setWidth(newValue.doubleValue());
@@ -321,7 +322,7 @@ public class SessionController implements Initializable, Observer {
         anchor.heightProperty().addListener((ov, oldValue, newValue) -> {
             canvas.setHeight(newValue.doubleValue());
         });
-        gContext.setFill(Color.BLACK);
+        gContext.setFill(Color.WHITE);
 
     }
     //return highscore

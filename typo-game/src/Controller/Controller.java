@@ -14,6 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -27,7 +28,10 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     private Image rocket = new Image("/rocket.gif");
-    private Image logo = new Image("/Y.png");
+    private Image logo = new Image("/Logo Wit.png");
+    @FXML
+    AnchorPane anchor;
+
     @FXML
     Button SingleplayerBtn;
 
@@ -71,6 +75,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        anchor.setStyle(" -fx-background-image: url('/space.png')");
         Rocket.setFitHeight(120);
         Rocket.setFitWidth(120);
         Logo.setFitHeight(120);
@@ -91,6 +96,5 @@ public class Controller implements Initializable {
         };
         aT.start();
     }
-
 
 }

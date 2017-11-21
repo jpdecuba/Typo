@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.AnchorPane;
 import sample.Main;
 
 import java.io.IOException;
@@ -17,6 +18,8 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
+    @FXML
+    AnchorPane anchor;
     @FXML
     Button BackBtn;
     @FXML
@@ -28,6 +31,7 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        anchor.setStyle(" -fx-background-image: url('/space.png')");
         ScreenModeBox.setItems(FXCollections.observableArrayList("None", "Borderless", "Fullscreen"));
         Properties settings = Settings.GetProperties();
         VolumeSlider.setValue(Double.valueOf(settings.getProperty("Volume")));

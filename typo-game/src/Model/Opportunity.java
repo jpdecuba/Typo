@@ -23,19 +23,15 @@ public class Opportunity extends Observable implements Serializable {
     public OppName getName() {
         return name;
     }
-
     public void setName(OppName name) {
         this.name = name;
     }
-
     public Difficulty getDiff() {
         return diff;
     }
-
     public void setDiff(Difficulty diff) {
         this.diff = diff;
     }
-
     public Player getPlayer() {
         return p;
     }
@@ -61,6 +57,8 @@ public class Opportunity extends Observable implements Serializable {
         posY = r.nextInt(maxY-minY)+minY;
         return posY;
     }
+
+    //set position
     public void setPosX(int posX) { this.posX = posX; }
     public void setPosY(int posY) { this.posY = posY; }
 

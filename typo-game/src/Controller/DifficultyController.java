@@ -5,6 +5,7 @@ import Model.Singleplayer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,9 +17,13 @@ import sample.Main;
 import Controller.*;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class DifficultyController {
+public class DifficultyController implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+    @FXML
+    AnchorPane anchor;
     @FXML
     Button BeginnerBtn;
     @FXML
@@ -55,5 +60,10 @@ public class DifficultyController {
         }
 
         Main.switchPage(parent, title);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        anchor.setStyle(" -fx-background-image: url('/space.png')");
     }
 }
