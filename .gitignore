@@ -26,3 +26,7 @@ workspace.xml
 typo-game/\.DS_Store
 
 \.DS_Store
+
+\.scannerwork/
+
+sonar-project\.properties

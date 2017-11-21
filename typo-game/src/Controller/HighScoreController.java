@@ -9,19 +9,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -31,6 +26,7 @@ import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -38,8 +34,14 @@ public class HighScoreController implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     HighScoreRepository hsRep;
     private Image rocket = new Image("/rocket.png");
+    private List<Label> messages = new ArrayList<>();
+    private int index = 0;
     @FXML
     AnchorPane anchor;
+    @FXML
+    VBox chatBox;
+    @FXML
+    ScrollPane scrollPane;
     @FXML
     Button btnMode;
     @FXML
@@ -51,7 +53,7 @@ public class HighScoreController implements Initializable {
     @FXML
     Button btnBack;
     @FXML
-    Button sendBtn;
+    Button btnSend;
     @FXML
     TextField messageBox;
     @FXML
@@ -138,6 +140,17 @@ public class HighScoreController implements Initializable {
         }
     }
 
+    public void initChatBox(){
+        btnSend.setOnAction(evt->{
+            messages.add(new Label(messageBox.getText()));
+            messages.get(index).setMinWidth(chatBox.getWidth());
+            messages.get(index).setAlignment(Pos.CENTER_LEFT);
+            chatBox.getChildren().add(messages.get(index));
+            index++;
+            messageBox.clear();
+        });
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         anchor.setStyle(" -fx-background-image: url('/space.png')");
@@ -147,6 +160,8 @@ public class HighScoreController implements Initializable {
         hsRep = new HighScoreRepository(new DBHighScore());
         FillGrid(Difficulty.Beginner);
         btnMode.setText("Singleplayer");
-        sendBtn.setStyle(" -fx-background-image: url('/rocket.png'); -fx-background-size: 45px 45px; -fx-rotate: 90; ");
+        btnSend.setStyle(" -fx-background-image: url('/rocket.png'); -fx-background-size: 45px 45px; -fx-rotate: 90; ");
+        initChatBox();
+        scrollPane.vvalueProperty().bind(chatBox.heightProperty());
     }
 }
