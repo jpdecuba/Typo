@@ -14,7 +14,6 @@ public class Player extends Observable implements Serializable{
 
 	private SyncLock LIVES = new SyncLock();
     private SyncLock COMBO = new SyncLock();
-    public ComboTimer ComboTimer = new ComboTimer();
 
 	public int getScore() {
 		return this.score;
