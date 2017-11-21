@@ -17,7 +17,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -34,6 +37,7 @@ import java.util.ResourceBundle;
 public class HighScoreController implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     HighScoreRepository hsRep;
+    private Image rocket = new Image("/rocket.png");
     @FXML
     AnchorPane anchor;
     @FXML
@@ -46,6 +50,10 @@ public class HighScoreController implements Initializable {
     Button btnHard;
     @FXML
     Button btnBack;
+    @FXML
+    Button sendBtn;
+    @FXML
+    TextField messageBox;
     @FXML
     GridPane lvHighscores;
 
@@ -96,7 +104,7 @@ public class HighScoreController implements Initializable {
 
     public void FillGrid(Difficulty difficulty){
         lvHighscores.getChildren().clear();
-        Label col1 = new Label("Rank");
+        Label col1 = new Label("#");
         Label col2 = new Label("Name");
         Label col3 = new Label("Score");
         col1.setTextFill(Color.WHITE);
@@ -139,5 +147,6 @@ public class HighScoreController implements Initializable {
         hsRep = new HighScoreRepository(new DBHighScore());
         FillGrid(Difficulty.Beginner);
         btnMode.setText("Singleplayer");
+        sendBtn.setStyle(" -fx-background-image: url('/rocket.png'); -fx-background-size: 45px 45px; -fx-rotate: 90; ");
     }
 }
