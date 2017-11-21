@@ -18,7 +18,7 @@ public class GameServerThread extends Thread{
     }
 
     public void run() {
-        SocketModel scktModel1 = new SocketModel(new Player(),null,"Start game");
+        //SocketModel scktModel1 = new SocketModel(new Player(),null,"Start game");
 
         try {
             System.err.println("Connecting started");
@@ -40,8 +40,8 @@ public class GameServerThread extends Thread{
 
                 System.out.println(scktModel.toString());
 
-                if (scktModel.getPlayer().equals(scktModel1.getPlayer()) && scktModel.getCmd().equals(scktModel1.getCmd())) {
-                    System.out.println(scktModel1.getCmd());
+                if (scktModel.getCmd() != null) {
+                    System.out.println(scktModel.getCmd());
                     output.writeUTF("Command: " + scktModel.getCmd());
 
                 } else {
