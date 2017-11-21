@@ -24,48 +24,29 @@ public abstract class Session extends Observable implements Observer {
     public void ActiveOpportunity(Player player,Opportunity opp){
         //give the active opportunity in effect on which player???
         switch (opp.getName()) {
-            /*case Reverse:
-                throw new NotImplementedException();
-            case Spotlight:
-                throw new NotImplementedException();
-            case ComboBonus:
-                throw new NotImplementedException();*/
-            case ComboPunish:
-                throw new NotImplementedException();
-            case ExtraLife:
-                player.AddLives(1);
-                break;
+            /*case Reverse: throw new NotImplementedException();
+            case Spotlight: throw new NotImplementedException();
+            case ComboBonus: throw new NotImplementedException();*/
+            case ComboPunish: throw new NotImplementedException();
+            case ExtraLife: player.AddLives(1); break;
         }
     }
 
     public abstract void Start(); //start the game
     public abstract boolean EndGame(); //Ends the current game
 
-
     //adds a player to the game
     public void AddPlayer(Player player){
-        if(playerOne == null && player != playerTwo){
-            playerOne = player;
-        }
-        else if(playerTwo == null && player != playerOne){
-            playerTwo = player;
-        }
-        else{
-            throw new NumberFormatException("there are already two players");
-        }
+        if(playerOne == null && player != playerTwo){ playerOne = player; }
+        else if(playerTwo == null && player != playerOne){ playerTwo = player; }
+        else{ throw new NumberFormatException("there are already two players"); }
     }
 
     //Removes the asked player from the game
     public void RemovePlayer(Player player){
-        if(playerOne == player){
-            playerOne = null;
-        }
-        else if(playerTwo == player){
-            playerTwo = null;
-        }
-        else{
-            throw new IllegalArgumentException("player does not exist in the lobby");
-        }
+        if(playerOne == player){ playerOne = null; }
+        else if(playerTwo == player){ playerTwo = null; }
+        else{ throw new IllegalArgumentException("player does not exist in the lobby"); }
     }
 
     public Set NextSet(Player player){
@@ -83,9 +64,7 @@ public abstract class Session extends Observable implements Observer {
             Random r = new Random();
             currentSet = sets.get(r.nextInt(sets.size()));
             StringBuilder s = new StringBuilder();
-            for (Letter l: currentSet.getCharacters()) {
-                s.append(l.getCharacter());
-            }
+            for (Letter l: currentSet.getCharacters()) { s.append(l.getCharacter()); }
             lastSet = new Set(s.toString());
             sets.remove(currentSet);
             sets.add(lastSet);
@@ -110,8 +89,7 @@ public abstract class Session extends Observable implements Observer {
     public boolean TypeCharacter(String character, Player player) {
         String currentletter = currentSet.getCharacters().get(0).getCharacter().toString();
 
-        if(character.equals(currentletter)){
-            //character is typed correc
+        if(character.equals(currentletter)){ //character is typed correct
             player.setTempPoints(5); //temporary points set to 5
             currentSet.getCharacters().remove(0);
             if(currentSet.getCharacters().isEmpty()){
@@ -119,8 +97,7 @@ public abstract class Session extends Observable implements Observer {
             }
             return true;
         }
-        else{
-            //character is typed incorrect
+        else{ //character is typed incorrect
             player.WrongKeypress();
             return false;
         }
