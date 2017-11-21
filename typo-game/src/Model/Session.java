@@ -20,6 +20,8 @@ public abstract class Session extends Observable implements Observer {
     private Player playerTwo = null;
     private Opportunity opp = null;
 
+    private ComboTimer combotimer = new ComboTimer();
+
     //Methods
     public void ActiveOpportunity(Player player,Opportunity opp){
         //give the active opportunity in effect on which player???
@@ -51,7 +53,7 @@ public abstract class Session extends Observable implements Observer {
 
     public Set NextSet(Player player){
         if(player != null){
-            player.setCombo(player.ComboTimer.getCombo(player.getCombo()));
+            player.setCombo(combotimer.getCombo(player.getCombo()));
             player.AwardPoints();
             Random r = new Random();
             if(r.nextInt(100) <= 10){
@@ -68,7 +70,7 @@ public abstract class Session extends Observable implements Observer {
             lastSet = new Set(s.toString());
             sets.remove(currentSet);
             sets.add(lastSet);
-            player.ComboTimer.setStartTime(LocalDateTime.now());
+            combotimer.setStartTime(LocalDateTime.now());
             return currentSet;
         }
         else {
