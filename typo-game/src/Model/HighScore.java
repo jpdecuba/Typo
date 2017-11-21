@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class HighScore {
+public class HighScore implements Serializable{
     private String name;
     private int score;
     private Difficulty diff;

@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.*;
 
-public enum Difficulty {
+public enum Difficulty implements Serializable{
     Beginner(1),
     Expert(2),
     Easy(3),

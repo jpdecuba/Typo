@@ -1,6 +1,8 @@
 package Model;
 
-public enum OppName {
+import java.io.Serializable;
+
+public enum OppName implements Serializable{
     Reverse,
     Spotlight,
     ComboBonus,

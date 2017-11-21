@@ -1,9 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class Player extends Observable{
+public class Player extends Observable implements Serializable{
 
 	private int score;
 	private int lives;
@@ -11,9 +12,8 @@ public class Player extends Observable{
 	private int tempPoints;
 	private ArrayList<HighScore> highScores;
 
-	private Object LIVES = new Object();
-    private Object COMBO = new Object();
-
+	private SyncLock LIVES = new SyncLock();
+    private SyncLock COMBO = new SyncLock();
     public ComboTimer ComboTimer = new ComboTimer();
 
 	public int getScore() {

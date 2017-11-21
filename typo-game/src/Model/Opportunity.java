@@ -2,10 +2,11 @@ package Model;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Random;
 
-public class Opportunity extends Observable {
+public class Opportunity extends Observable implements Serializable {
 
     private OppName name;
     private Difficulty diff;
