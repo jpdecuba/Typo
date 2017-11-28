@@ -147,7 +147,9 @@ public class HighScoreController implements Initializable {
     public void receiveMessage(String message){
         //System.out.println(message);
         Platform.runLater(() -> {
-            messages.add(new Label(message));
+            Label mess = new Label(message);
+            mess.setFont(Font.font("Verdana", 16));
+            messages.add(mess);
             messages.get(index).setMinWidth(chatBox.getWidth());
             messages.get(index).setAlignment(Pos.CENTER_LEFT);
             chatBox.getChildren().add(messages.get(index));
@@ -159,7 +161,11 @@ public class HighScoreController implements Initializable {
     public void initChatBox(){
         btnSend.setOnAction(evt->{
             try {
-                client.sendMessage(messageBox.getText());
+                if (Main.settings.getProperty("name") != null) {
+                    client.sendMessage(Main.settings.getProperty("name") + ": " + messageBox.getText());
+                }else{
+                    client.sendMessage("Anonymous: " + messageBox.getText());
+                }
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
