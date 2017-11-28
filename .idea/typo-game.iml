@@ -47,5 +47,14 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="mssql-jdbc-6.2.1.jre8" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../FontysPublisher/dist/artifacts/FontysPublisher_jar/FontysPublisher.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
