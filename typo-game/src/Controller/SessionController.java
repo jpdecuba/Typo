@@ -31,6 +31,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 import sample.Main;
@@ -38,6 +39,7 @@ import sample.Main;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -82,21 +84,16 @@ public class SessionController implements Initializable, Observer {
     private MediaPlayer effect = null;
     private Media sEffect = new Media(new File("typo-game/src/chirp.mp3").toURI().toString());
 
-    private Opportunity Opp;
+    private Opportunity Opp = new Opportunity(OppName.Empty, null);
 
 //update to endgame and change oppertunity on screen
     @Override
     public void update(java.util.Observable o, Object arg) {
-
         if (arg == null) {
             loop.stop();
             timer.stop();
-
             Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
-
             Main.Stage.getScene().removeEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, MouseClickEvent);
-
-
             System.out.println("end game");
             EndGame();
         } else if (arg.getClass() == Opportunity.class) {
@@ -110,7 +107,6 @@ public class SessionController implements Initializable, Observer {
             star.setY(Opp.getPosY());
             star.setFitWidth(Opp.getWidth());
             star.setFitHeight(Opp.getLength());
-
         } else if (arg.toString().equals("false")) {
             Opp = null;
             star.setVisible(false);
@@ -143,7 +139,6 @@ public class SessionController implements Initializable, Observer {
         mp = new MediaPlayer(sound);
         mp.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
         mp.setCycleCount(AudioClip.INDEFINITE);
-
         mp.play();
     }
 
@@ -157,6 +152,7 @@ public class SessionController implements Initializable, Observer {
         ft.setAutoReverse(true);
         ft.play();
     }
+
 //setsession sessen default values
     public void setSession(Session session) {
         this.sp = session;
@@ -174,7 +170,6 @@ public class SessionController implements Initializable, Observer {
 
 //gamestart methode
     public void meth() {
-
         loop = new AnimationTimer() {
             double startX = 100;
             double y = 100;
@@ -187,28 +182,17 @@ public class SessionController implements Initializable, Observer {
                 x += speed;
             }
         };
-
         sp.addObserver(this);
-
         loop.start();
-
         startEvents();
-
-        try {
-            sp.Start();
-        } catch (Exception e) {
-            System.out.println("not working");
-        }
-
+        try { sp.Start(); }
+        catch (Exception e) { System.out.println("not working"); }
         begintimer();
     }
 
     //setvalues change collor based on lives change
     private void SetValues() {
-
-
         if(Lives != sp.getPlayerOne().getLives() && Lives != 0 &&Lives > sp.getPlayerOne().getLives()) {
-
             Platform.runLater(() -> {
                 effect = new MediaPlayer(sEffect);
                 effect.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
@@ -227,8 +211,6 @@ public class SessionController implements Initializable, Observer {
                         },
                         300
                 );
-
-
             });
         }
 
@@ -239,50 +221,56 @@ public class SessionController implements Initializable, Observer {
         Lives = sp.getPlayerOne().getLives();
 
     }
-    //Letters Drawning
-    private void Letters() {
-        int x = 100;
-        int y = 100;
+
+    //Letters Drawning:
+    private List<Letter> letters = new ArrayList<Letter>();
+    private boolean rotated = false;
+    //
+    private void Letters(int x, int y, boolean rotate) {
+        if(rotate){ rotate(gContext, 180, x,y); rotated = true; }
+        else if (rotate && rotated){ gContext.restore(); rotated = false;}
+
+        try { //Retrieve the letters from the current set
+            letters = sp.getCurrentSet().getCharacters();
+            for (Letter item : letters) {
+                gContext.setFont(new Font("Verdana", 50));
+                gContext.fillText(item.getCharacter(), x, y, 100);
+                if(rotated){ x -= 35; } else { x += 35; }
+            }
+        } catch (Exception e) { System.out.println("No more letters"); }
+    }
+
+    private void rotate(GraphicsContext gc, double angle, double px, double py) {
+        Rotate r = new Rotate(angle, px, py);
+        gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+    }
+
+    private void Rocket(){ //Show The Rocket on the screen
         double r = ((canvas.getHeight() - 300) / hs) * sp.getPlayerOne().getScore();
         gContext.setFont(new Font("Verdana", 30));
-        gContext.clearRect(0, 0, 3000, 3000);
         gContext.fillRect(canvas.getWidth() - 200, 100, 100, 5);
         gContext.fillRect(canvas.getWidth() - 152.5, 100, 5, canvas.getHeight() - 200);
         gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
         gContext.drawImage(img, canvas.getWidth() - 197.5, canvas.getHeight() - r - 200, 100, 100);
-        try {
-            List<Letter> L = sp.getCurrentSet().getCharacters();
-            for (Letter item : L) {
-                gContext.setFont(new Font("Verdana", 50));
-                gContext.fillText(item.getCharacter(), x, y, 100);
-                x += 35;
-
-            }
-        } catch (Exception e) {
-            System.out.println("No more letters");
-        }
     }
 
     //Animationtimer
     public void begintimer() {
-
         timer = new AnimationTimer() {
-
             public void handle(long now) {
                 SetValues();
-                Letters();
-
+                gContext.clearRect(0, 0, screenSize.getWidth(), screenSize.getHeight());
+                Rocket();
+                Letters(100, 100, true);
             }
         };
         timer.start();
-
     }
 
     @FXML
     public void Quitgame() throws IOException {
         EndGame();
     }
-
 
     //EndGame method switch screen to addhighscore
     private void EndGame() {
@@ -343,36 +331,25 @@ public class SessionController implements Initializable, Observer {
 
             @Override
             public void handle(KeyEvent keyEvent){
-
-
                 String s = keyEvent.getCode().toString();
                 if (keyEvent.getCode() != KeyCode.SHIFT) {
                     if (keyEvent.getEventType() == KEY_PRESSED) {
-
                         if (s.contains("DIGIT")) {
                             s = s.substring(5);
                         }
-
 
                         if (keyEvent.isShiftDown()) {
                             s.toUpperCase();
                         } else {
                             s = s.toLowerCase();
                         }
-
                         //char c = s.charAt(0);
-
                         //System.out.println("key = " + s);
-
                         typechar(s);
                     }
                 }
-
             }
-
-
         };
-
 
         MouseClickEvent = new EventHandler<javafx.scene.input.MouseEvent>() {
             @Override

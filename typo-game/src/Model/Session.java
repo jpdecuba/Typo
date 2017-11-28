@@ -18,7 +18,7 @@ public abstract class Session extends Observable implements Observer {
     private Set lastSet = null;
     private Player playerOne = null;
     private Player playerTwo = null;
-    private Opportunity opp = null;
+    private Opportunity opp = new Opportunity(OppName.Empty, difficulty);
 
     private ComboTimer combotimer = new ComboTimer();
 
@@ -117,10 +117,13 @@ public abstract class Session extends Observable implements Observer {
 
     public void SpawnOpportunity(){
         Random rng = new Random();
-        switch (rng.nextInt(3)){
+        int n = rng.nextInt(3);
+        n = 3;
+        switch (n){
             case 0: opp = new Opportunity(OppName.ExtraLife, difficulty); break;
             case 1: opp = new Opportunity(OppName.ComboBonus, difficulty); break;
             case 2: opp = new Opportunity(OppName.ComboPunish, difficulty); break;
+            case 3: opp = new Opportunity(OppName.Reverse, difficulty); break;
         }
 
     }
