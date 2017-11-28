@@ -1,7 +1,7 @@
 package Model.Chat;
 
-import fontyspublisher.IRemotePropertyListener;
-import fontyspublisher.RemotePublisher;
+import Model.Publisher.IRemotePropertyListener;
+import Model.Publisher.RemotePublisher;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMIClientSocketFactory;
