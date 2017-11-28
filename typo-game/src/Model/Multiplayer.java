@@ -9,7 +9,7 @@ public class Multiplayer extends Session{
 
     //Attributes
     private Database connection;
-    private SetRepository setRepository;
+    private DatabaseClient setRepository;
 
     //Constructor
     public Multiplayer(Difficulty difficulty){
@@ -21,8 +21,8 @@ public class Multiplayer extends Session{
     public void Start(){
         if(getPlayerOne() != null && getPlayerTwo() != null){
             if(Database.checkConnection()){
-                setRepository = new SetRepository(new DBSet());
-                try{ sets.addAll(setRepository.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
+                setRepository = new DatabaseClient(null);
+                try{ sets.addAll(setRepository.getSet(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
             }
             else {
             }

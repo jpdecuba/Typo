@@ -1,6 +1,7 @@
 package Model.SaveProps;
 
 import Model.Database.DBSet;
+import Model.DatabaseClient;
 import Model.Difficulty;
 import Model.Repository.SetRepository;
 import Model.Set;
@@ -13,10 +14,10 @@ public class SetSerialize {
     {
         try
         {
-            SetRepository set = new SetRepository(new DBSet());
+            DatabaseClient set = new DatabaseClient(null);
 
-            List<Set> setsBeginner = set.GetSets(Difficulty.Beginner);
-            List<Set> setsExpert = set.GetSets(Difficulty.Expert);
+            List<Set> setsBeginner = set.getSet(Difficulty.Beginner);
+            List<Set> setsExpert = set.getSet(Difficulty.Expert);
             if(setsBeginner == null || setsExpert == null)
                 return false;
 

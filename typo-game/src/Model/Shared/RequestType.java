@@ -6,4 +6,5 @@ public enum RequestType implements Serializable {
     HighScore,
     Opportunity,
     Sets,
+    SetHighScore
 }

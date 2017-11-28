@@ -11,6 +11,7 @@ public class Settings {
             settings = new Properties();
             settings.setProperty("Volume", "100");
             settings.setProperty("ScreenMode", "Fullscreen");
+            settings.setProperty("name", "Anonymous");
         }
 
         try

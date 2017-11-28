@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -29,11 +30,16 @@
                            <font>
                               <Font size="16.0" />
                            </font></Label>
+                         <Label alignment="CENTER" contentDisplay="CENTER" text="Name:" textFill="WHITE">
+                             <font>
+                                 <Font size="16.0" />
+                             </font></Label>
                      </children></VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" spacing="15.0">
                      <children>
                         <Slider fx:id="VolumeSlider" blockIncrement="1.0" showTickLabels="true" value="100.0" />
                         <ChoiceBox fx:id="ScreenModeBox" prefWidth="150.0" />
+                        <TextField fx:id="NameField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="249.0" />
                      </children></VBox>
                </children>
             </HBox>
@@ -54,6 +60,5 @@
 
             </children>
         </VBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" />
     </children>
 </AnchorPane>

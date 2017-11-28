@@ -1,10 +1,13 @@
 package Controller;
 
+import Model.Chat.Client;
 import Model.Database.DBHighScore;
+import Model.DatabaseClient;
 import Model.Difficulty;
 import Model.HighScore;
 import Model.Repository.HighScoreRepository;
 import Model.Singleplayer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,16 +29,18 @@ import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class HighScoreController implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-    HighScoreRepository hsRep;
+    DatabaseClient hsRep;
     private Image rocket = new Image("/rocket.png");
     private List<Label> messages = new ArrayList<>();
     private int index = 0;
+    private Client client;
     @FXML
     AnchorPane anchor;
     @FXML
@@ -118,7 +123,8 @@ public class HighScoreController implements Initializable {
         lvHighscores.add(col1, 0, 0);
         lvHighscores.add(col2, 1, 0);
         lvHighscores.add(col3, 2, 0);
-        List<HighScore> hscores = hsRep.GetHighScores();
+        List<HighScore> hscores = hsRep.getHighScore();
+
         int count = 0;
         for (HighScore hs: hscores
                 ) {
@@ -140,13 +146,31 @@ public class HighScoreController implements Initializable {
         }
     }
 
-    public void initChatBox(){
-        btnSend.setOnAction(evt->{
-            messages.add(new Label(messageBox.getText()));
+    public void receiveMessage(String message){
+        //System.out.println(message);
+        Platform.runLater(() -> {
+            Label mess = new Label(message);
+            mess.setFont(Font.font("Verdana", 16));
+            messages.add(mess);
             messages.get(index).setMinWidth(chatBox.getWidth());
             messages.get(index).setAlignment(Pos.CENTER_LEFT);
             chatBox.getChildren().add(messages.get(index));
             index++;
+        });
+
+    }
+
+    public void initChatBox(){
+        btnSend.setOnAction(evt->{
+            try {
+                if (Main.settings.getProperty("name") != null) {
+                    client.sendMessage(Main.settings.getProperty("name") + ": " + messageBox.getText());
+                }else{
+                    client.sendMessage("Anonymous: " + messageBox.getText());
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
             messageBox.clear();
         });
     }
@@ -157,11 +181,16 @@ public class HighScoreController implements Initializable {
         btnBeginner_Easy.setText("Beginner");
         btnExpert_Normal.setText("Expert");
         btnHard.setVisible(false);
-        hsRep = new HighScoreRepository(new DBHighScore());
+        hsRep = new DatabaseClient(null);
         FillGrid(Difficulty.Beginner);
         btnMode.setText("Singleplayer");
         btnSend.setStyle(" -fx-background-image: url('/rocket.png'); -fx-background-size: 45px 45px; -fx-rotate: 90; ");
         initChatBox();
         scrollPane.vvalueProperty().bind(chatBox.heightProperty());
+        try {
+            client = new Client("192.168.178.19", 1099, this);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }

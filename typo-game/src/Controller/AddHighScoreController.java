@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Database.DBHighScore;
+import Model.Database.Database;
+import Model.DatabaseClient;
 import Model.Difficulty;
 import Model.HighScore;
 import Model.Player;
@@ -37,6 +39,7 @@ public class AddHighScoreController implements Initializable {
         this.player = player;
         this.difficulty = difficulty;
         scoreLbl.setText("Score: " + String.valueOf(player.getScore()));
+        textField.setText(Main.settings.getProperty("name"));
     }
 
     @Override
@@ -45,7 +48,7 @@ public class AddHighScoreController implements Initializable {
     }
 
     public void btnSubmit(ActionEvent actionEvent) {
-        hsRep = new HighScoreRepository(new DBHighScore());
+        DatabaseClient DBclient = new DatabaseClient(null);
         HighScore hs = null;
         if (textField.getText() != null && !textField.getText().isEmpty())
         {
@@ -55,7 +58,7 @@ public class AddHighScoreController implements Initializable {
         {
             hs = new HighScore("Unkn0wn", player.getScore(), difficulty, LocalDate.now());
         }
-        hsRep.Save(hs);
+        DBclient.SetHighScore(hs);
         try {
             Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/HighScoreView.fxml")), "High Score");
         } catch (IOException e) {
