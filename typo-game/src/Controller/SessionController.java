@@ -75,6 +75,7 @@ public class SessionController implements Initializable, Observer {
     private AnimationTimer timer;
     private int hs = 0;
     private int Lives;
+    private boolean mirrored = false;
 
     private EventHandler keypressevent;
     private EventHandler MouseClickEvent;
@@ -107,9 +108,11 @@ public class SessionController implements Initializable, Observer {
             star.setY(Opp.getPosY());
             star.setFitWidth(Opp.getWidth());
             star.setFitHeight(Opp.getLength());
+            mirrored = false;
         } else if (arg.toString().equals("false")) {
             Opp = null;
             star.setVisible(false);
+            mirrored = true;
             }
         }
 
@@ -227,9 +230,8 @@ public class SessionController implements Initializable, Observer {
     private boolean rotated = false;
     //
     private void Letters(int x, int y, boolean rotate) {
-        if(rotate){ rotate(gContext, 180, x,y); rotated = true; }
-        else if (rotate && rotated){ gContext.restore(); rotated = false;}
-
+        if(rotate && !rotated){ rotate(gContext, 180, x,y); rotated = true; }
+        else if (!rotate && rotated){ gContext.restore(); rotated = false;}
         try { //Retrieve the letters from the current set
             letters = sp.getCurrentSet().getCharacters();
             for (Letter item : letters) {
@@ -261,7 +263,7 @@ public class SessionController implements Initializable, Observer {
                 SetValues();
                 gContext.clearRect(0, 0, screenSize.getWidth(), screenSize.getHeight());
                 Rocket();
-                Letters(100, 100, true);
+                Letters(100, 100, mirrored);
             }
         };
         timer.start();
