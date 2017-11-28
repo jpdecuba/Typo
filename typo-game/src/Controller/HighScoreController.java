@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Database.DBHighScore;
+import Model.DatabaseClient;
 import Model.Difficulty;
 import Model.HighScore;
 import Model.Repository.HighScoreRepository;
@@ -32,7 +33,7 @@ import java.util.ResourceBundle;
 
 public class HighScoreController implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-    HighScoreRepository hsRep;
+    DatabaseClient hsRep;
     private Image rocket = new Image("/rocket.png");
     private List<Label> messages = new ArrayList<>();
     private int index = 0;
@@ -118,7 +119,8 @@ public class HighScoreController implements Initializable {
         lvHighscores.add(col1, 0, 0);
         lvHighscores.add(col2, 1, 0);
         lvHighscores.add(col3, 2, 0);
-        List<HighScore> hscores = hsRep.GetHighScores();
+        List<HighScore> hscores = hsRep.getHighScore();
+
         int count = 0;
         for (HighScore hs: hscores
                 ) {
@@ -157,7 +159,7 @@ public class HighScoreController implements Initializable {
         btnBeginner_Easy.setText("Beginner");
         btnExpert_Normal.setText("Expert");
         btnHard.setVisible(false);
-        hsRep = new HighScoreRepository(new DBHighScore());
+        hsRep = new DatabaseClient(null);
         FillGrid(Difficulty.Beginner);
         btnMode.setText("Singleplayer");
         btnSend.setStyle(" -fx-background-image: url('/rocket.png'); -fx-background-size: 45px 45px; -fx-rotate: 90; ");

@@ -8,7 +8,7 @@ import Model.SaveProps.SetSerialize;
 import java.util.Observable;
 
 public class Singleplayer extends Session {
-    private SetRepository setRepository;
+    private DatabaseClient setRepository;
     //Constructor
     public Singleplayer(Difficulty difficulty){
         setDifficulty(difficulty);
@@ -19,8 +19,8 @@ public class Singleplayer extends Session {
     public void Start() {
         if(getPlayerOne() != null && getPlayerTwo() == null){
             if(Database.checkConnection()){
-                setRepository = new SetRepository(new DBSet());
-                try{ sets.addAll(setRepository.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
+                setRepository = new DatabaseClient(null);
+                try{ sets.addAll(setRepository.getSet(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
             }
             else {
                 try{ sets.addAll(SetSerialize.GetSets(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
