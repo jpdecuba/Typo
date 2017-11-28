@@ -30,16 +30,18 @@ public class DBServer {
     private List<Model.HighScore> Highscorelist;
 
     private List<Set> SetList;
+    private ObjectOutputStream output;
 
-    public DBServer(Socket socket) {
+    public DBServer(Socket socket,ObjectOutputStream out ) {
         this.Socket = socket;
+        this.output = out;
     }
 
     public void DBGet(Request object){
 
 
         try {
-            ObjectOutputStream output = new ObjectOutputStream(Socket.getOutputStream());
+            //ObjectOutputStream output = new ObjectOutputStream(Socket.getOutputStream());
 
             RequestType msg = object.msg;
             Difficulty diff = object.diff;
@@ -47,25 +49,41 @@ public class DBServer {
                 case HighScore:
                     Highscorelist = hsRep.GetHighScores();
                     output.writeObject(Highscorelist);
-                case Opportunity:
-
-                    OppList =  OppRep.GetOpportunities(diff);
-                    output.writeObject(OppList);
+                    break;
 
                 case Sets:
+                    SetList =  SetRep.GetSets(diff);
+                    output.writeObject(SetList);
+                    break;
+
+                case Opportunity:
                     OppList =  OppRep.GetOpportunities(diff);
                     output.writeObject(OppList);
+                    break;
+
+
+                case SetHighScore:
+                    boolean high = hsRep.Save(object.score);
+                    //output.writeObject(high);
                 default:
                     output.writeObject("Message needs to contain request enum");
 
 
             }
+            output.flush();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
 
 
     }
+
+
+
+
+
+
+
 
 
     }
