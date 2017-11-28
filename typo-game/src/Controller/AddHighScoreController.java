@@ -37,6 +37,7 @@ public class AddHighScoreController implements Initializable {
         this.player = player;
         this.difficulty = difficulty;
         scoreLbl.setText("Score: " + String.valueOf(player.getScore()));
+        textField.setText(Main.settings.getProperty("name"));
     }
 
     @Override
