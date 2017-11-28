@@ -67,7 +67,6 @@ public class Player extends Observable implements Serializable{
 
 	public synchronized int getCombo() {
             return this.combo;
-
 	}
 
     //set Combo only wen it's higher then 1 or 1

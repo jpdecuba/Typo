@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import sample.Main;
 
@@ -28,6 +29,8 @@ public class SettingsController implements Initializable {
     Slider VolumeSlider;
     @FXML
     ChoiceBox ScreenModeBox;
+    @FXML
+    TextField NameField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,6 +50,7 @@ public class SettingsController implements Initializable {
                 ScreenModeBox.getSelectionModel().select("None");
                 break;
         }
+        NameField.setText(settings.getProperty("name"));
     }
 
     @FXML
@@ -62,6 +66,12 @@ public class SettingsController implements Initializable {
             settings.setProperty("Volume", String.valueOf(VolumeSlider.getValue()));
             String selection = String.valueOf(ScreenModeBox.getSelectionModel().getSelectedItem());
             settings.setProperty("ScreenMode", selection);
+            String name = NameField.getText();;
+            if(name.trim() == "")
+            {
+                name = "Anonymous";
+            }
+            settings.setProperty("name", name);
             Main.changeSettings(settings ,FXMLLoader.load(getClass().getResource("/Views/sample.fxml")));
         }
     }
