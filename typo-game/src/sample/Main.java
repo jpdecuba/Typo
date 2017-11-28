@@ -2,6 +2,7 @@ package sample;
 
 import Model.SaveProps.SetSerialize;
 import Model.SaveProps.Settings;
+import Model.Sockets.GameServer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +19,12 @@ public class Main extends Application {
     public static Stage Stage;
     public static Properties settings;
 
+    public GameServer server;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+        server = new GameServer();
+
         settings = Settings.GetProperties();
         if(settings == null)
         {

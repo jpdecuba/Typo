@@ -14,7 +14,6 @@ public class Player extends Observable implements Serializable{
 
 	private SyncLock LIVES = new SyncLock();
     private SyncLock COMBO = new SyncLock();
-    public ComboTimer ComboTimer = new ComboTimer();
 
 	public int getScore() {
 		return this.score;
@@ -68,7 +67,6 @@ public class Player extends Observable implements Serializable{
 
 	public synchronized int getCombo() {
             return this.combo;
-
 	}
 
     //set Combo only wen it's higher then 1 or 1
