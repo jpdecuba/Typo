@@ -3,6 +3,7 @@ package Model.GameServer;
 import Model.Difficulty;
 import Model.Multiplayer;
 import Model.Session;
+import com.sun.scenario.effect.impl.prism.PrImage;
 
 import java.io.Serializable;
 import java.net.Socket;
@@ -15,6 +16,8 @@ public class Lobby  implements Serializable{
 
     private String LobbyID;
 
+    protected Multiplayer sessie;
+
     public Lobby(Socket player1, Difficulty gameDiff, String lobbyID) {
         this.player1 = player1;
         this.gameDiff = gameDiff;
@@ -22,6 +25,9 @@ public class Lobby  implements Serializable{
     }
 
     public Socket getPlayer2() {
+        return player2;
+    }
+    public Socket getPlayer() {
         return player2;
     }
 
@@ -47,7 +53,7 @@ public class Lobby  implements Serializable{
 
     public Multiplayer StartGame() {
         Multiplayer item = new Multiplayer(gameDiff);
-
+        sessie = item;
 
         return item;
 
