@@ -45,7 +45,7 @@ public class GameServerThread extends Thread{
                     this.GL.MSG(item);
 
                 }else {
-
+                    System.out.println("No valid request");
                     output.writeUTF("No valid request");
 
 

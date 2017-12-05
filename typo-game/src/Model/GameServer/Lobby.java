@@ -14,7 +14,7 @@ public class Lobby  implements Serializable{
     private Socket player2;
     private Difficulty gameDiff;
 
-    private String LobbyID;
+    protected String LobbyID;
 
     protected Multiplayer sessie;
 
@@ -28,7 +28,7 @@ public class Lobby  implements Serializable{
         return player2;
     }
     public Socket getPlayer() {
-        return player2;
+        return player1;
     }
 
     public void setPlayer2(Socket player2) {
