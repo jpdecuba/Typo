@@ -46,6 +46,7 @@ public class GameLogic {
                 JoinLobby(item, Socket);
                 break;
             case GameUpdate:
+                UpdateGame(request.player);
 
 
         }
