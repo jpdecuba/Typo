@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.SaveProps.Settings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,23 +36,35 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        anchor.setStyle(" -fx-background-image: url('/space.png')");
-        ScreenModeBox.setItems(FXCollections.observableArrayList("None", "Borderless", "Fullscreen"));
-        Properties settings = Settings.GetProperties();
-        VolumeSlider.setValue(Double.valueOf(settings.getProperty("Volume")));
-        switch (settings.getProperty("ScreenMode"))
-        {
-            case "Borderless":
-                ScreenModeBox.getSelectionModel().select("Borderless");
-                break;
-            case "Fullscreen":
-                ScreenModeBox.getSelectionModel().select("Fullscreen");
-                break;
-            default:
-                ScreenModeBox.getSelectionModel().select("None");
-                break;
-        }
-        NameField.setText(settings.getProperty("name"));
+            anchor.setStyle(" -fx-background-image: url('/space.png')");
+            ScreenModeBox.setItems(FXCollections.observableArrayList("None", "Borderless", "Fullscreen"));
+            Properties settings = Settings.GetProperties();
+            VolumeSlider.setValue(Double.valueOf(settings.getProperty("Volume")));
+            switch (settings.getProperty("ScreenMode")) {
+                case "Borderless":
+                    ScreenModeBox.getSelectionModel().select("Borderless");
+                    break;
+                case "Fullscreen":
+                    ScreenModeBox.getSelectionModel().select("Fullscreen");
+                    break;
+                default:
+                    ScreenModeBox.getSelectionModel().select("None");
+                    break;
+            }
+            addTextLimiter(NameField, 13);
+            NameField.setText(settings.getProperty("name"));
+    }
+
+    public static void addTextLimiter(final TextField tf, final int maxLength) {
+        tf.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (tf.getText().length() > maxLength) {
+                    String s = tf.getText().substring(0, maxLength);
+                    tf.setText(s);
+                }
+            }
+        });
     }
 
     @FXML
@@ -66,8 +80,8 @@ public class SettingsController implements Initializable {
             settings.setProperty("Volume", String.valueOf(VolumeSlider.getValue()));
             String selection = String.valueOf(ScreenModeBox.getSelectionModel().getSelectedItem());
             settings.setProperty("ScreenMode", selection);
-            String name = NameField.getText();;
-            if(name.trim() == "")
+            String name = NameField.getText();
+            if(name.trim().equals("") || name.trim().isEmpty())
             {
                 name = "Anonymous";
             }

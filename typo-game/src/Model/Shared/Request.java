@@ -3,6 +3,7 @@ package Model.Shared;
 import Model.Difficulty;
 import Model.GameServer.Lobby;
 import Model.HighScore;
+import Model.Multiplayer;
 import Model.Player;
 
 import java.io.Serializable;
@@ -21,6 +22,8 @@ public class Request implements Serializable {
         public Player player;
 
         public List<Lobby> lobbys;
+
+        public Multiplayer sessie;
 
         public Request(Difficulty diff, RequestType msg) {
             this.diff = diff;
@@ -71,6 +74,11 @@ public class Request implements Serializable {
             this.msg = msg;
             this.lobbys = lobbys;
         }
+
+        public Request(RequestType msg, Multiplayer sessie) {
+        this.msg = msg;
+        this.sessie = sessie;
+    }
 
 
     }

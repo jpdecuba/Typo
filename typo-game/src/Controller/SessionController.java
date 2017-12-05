@@ -225,7 +225,7 @@ public class SessionController implements Initializable, Observer {
 
     }
 
-    //Letters Drawning:
+    //Letters Drawing:
     private List<Letter> letters = new ArrayList<Letter>();
     private boolean rotated = false;
     //
@@ -270,7 +270,7 @@ public class SessionController implements Initializable, Observer {
     }
 
     @FXML
-    public void Quitgame() throws IOException {
+    public void Quitgame() {
         EndGame();
     }
 
