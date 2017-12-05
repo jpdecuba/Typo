@@ -27,6 +27,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 import sample.Main;
@@ -34,10 +35,8 @@ import sample.Main;
 import java.awt.*;
 import java.io.File;
 import java.net.URL;
+import java.util.*;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
 
 import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
@@ -78,6 +77,7 @@ public class MultiplayerController implements Initializable, Observer {
     private EventHandler keypressevent;
     private EventHandler MouseClickEvent;
     private Opportunity Opp = new Opportunity(OppName.Empty, null);
+    private boolean mirrored = false;
 
     public void setSession(Session session) {
         this.mp = session;
@@ -88,6 +88,28 @@ public class MultiplayerController implements Initializable, Observer {
         hs = getHighscore();
         star.setVisible(false);
         star.setImage(starImg);
+    }
+
+    //Letters Drawing:
+    private List<Letter> letters = new ArrayList<Letter>();
+    private boolean rotated = false;
+    //
+    private void Letters(int x, int y, boolean rotate) {
+        if(rotate && !rotated){ rotate(gContext, 180, x,y); rotated = true; }
+        else if (!rotate && rotated){ gContext.restore(); rotated = false;}
+        try { //Retrieve the letters from the current set
+            letters = mp.getCurrentSet().getCharacters();
+            for (Letter item : letters) {
+                gContext.setFont(new Font("Verdana", 50));
+                gContext.fillText(item.getCharacter(), x, y, 100);
+                if(rotated){ x -= 35; } else { x += 35; }
+            }
+        } catch (Exception e) { System.out.println("No more letters"); }
+    }
+
+    private void rotate(GraphicsContext gc, double angle, double px, double py) {
+        Rotate r = new Rotate(angle, px, py);
+        gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
 
     public void countdownTimer(){
@@ -136,7 +158,7 @@ public class MultiplayerController implements Initializable, Observer {
 
             @Override
             public void handle(long now) {
-                //ScoreLbl.setText("SCORE: " + String.valueOf(sp.getPlayerOne().getScore()));
+                ScoreLbl.setText("SCORE: " + String.valueOf(mp.getPlayerOne().getScore()));
                 x += speed;
             }
         };
@@ -169,11 +191,11 @@ public class MultiplayerController implements Initializable, Observer {
         double r = ((canvas.getHeight() - 300) / hs) * mp.getPlayerOne().getScore();
         gContext.setFont(new Font("Verdana", 30));
         gContext.fillRect(canvas.getWidth() - 250, 100, 200, 5);
-        gContext.fillRect(canvas.getWidth() - 52.5, 100, 5, canvas.getHeight() - 200);
-        gContext.fillRect(canvas.getWidth() - 152.5, 100, 5, canvas.getHeight() - 200);
+        gContext.fillRect(canvas.getWidth() - 100, 100, 5, canvas.getHeight() - 200);
+        gContext.fillRect(canvas.getWidth() - 200, 100, 5, canvas.getHeight() - 200);
         gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
-        gContext.drawImage(img2, canvas.getWidth() - 197.5, canvas.getHeight() - r - 200, 100, 100);
-        gContext.drawImage(img, canvas.getWidth() - 297.5, canvas.getHeight() - r - 200, 100, 100);
+        gContext.drawImage(img2, canvas.getWidth() - 146, canvas.getHeight() - r - 200, 100, 100);
+        gContext.drawImage(img, canvas.getWidth() - 246, canvas.getHeight() - r - 200, 100, 100);
     }
 
     public void begintimer() {
@@ -182,7 +204,7 @@ public class MultiplayerController implements Initializable, Observer {
                 SetValues();
                 gContext.clearRect(0, 0, screenSize.getWidth(), screenSize.getHeight());
                 Rocket();
-                //Letters(100, 100, mirrored);
+                Letters(100, 100, mirrored);
             }
         };
         timer.start();
