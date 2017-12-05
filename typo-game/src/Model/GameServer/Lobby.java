@@ -14,7 +14,7 @@ public class Lobby  implements Serializable{
     private Socket player2;
     private Difficulty gameDiff;
 
-    private String LobbyID;
+    protected String LobbyID;
 
     protected Multiplayer sessie;
 

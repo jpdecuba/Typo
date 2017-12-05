@@ -57,6 +57,15 @@ public class GameLogic {
 
 
     public void CreateLobby(Lobby lobby){
+
+        List<Lobby> lobbys =  manger.getLobbys();
+
+
+        for(Lobby item : lobbys){
+            if(item.getGame() == lobby.getGame()){
+                lobby.LobbyID = lobby.LobbyID + String.valueOf(lobbys.size());
+            }
+        }
         manger.AddLobby(lobby);
         this.lobby = lobby;
     }
