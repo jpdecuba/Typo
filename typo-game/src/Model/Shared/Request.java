@@ -26,7 +26,11 @@ public class Request implements Serializable {
             this.diff = diff;
             this.msg = msg;
         }
-
+        public Request(Difficulty diff, RequestType msg,Lobby lobby) {
+            this.diff = diff;
+            this.msg = msg;
+            this.lobby = lobby;
+        }
 
         public Request(RequestType msg,Lobby lobby) {
             this.msg = msg;
