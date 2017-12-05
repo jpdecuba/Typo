@@ -54,7 +54,6 @@ public class Lobby  implements Serializable{
     public Multiplayer StartGame() {
         Multiplayer item = new Multiplayer(gameDiff);
         sessie = item;
-
         return item;
 
     }

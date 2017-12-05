@@ -33,5 +33,6 @@ public class GameServer {
     public static void main(String args[]) throws Exception {
         GameServer server = new GameServer();
         server.runServer();
+        System.err.println("Server start");
     }
 }

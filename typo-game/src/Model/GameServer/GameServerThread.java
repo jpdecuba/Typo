@@ -34,7 +34,7 @@ public class GameServerThread extends Thread{
 
             while (socket.isConnected()) {
 
-                //System.out.println("in loop");
+                System.out.println("Wait for next message");
 
                 Object msg = (Object) input.readObject();
                 //String password = input.readLine();
