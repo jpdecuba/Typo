@@ -7,5 +7,6 @@ public enum OppName implements Serializable{
     Spotlight,
     ComboBonus,
     ComboPunish,
-    ExtraLife
+    ExtraLife,
+    Empty
 }
