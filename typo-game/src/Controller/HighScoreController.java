@@ -5,8 +5,6 @@ import Model.Database.DBHighScore;
 import Model.DatabaseClient;
 import Model.Difficulty;
 import Model.HighScore;
-import Model.Repository.HighScoreRepository;
-import Model.Singleplayer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,10 +12,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -27,7 +26,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sample.Main;
 
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -66,13 +67,12 @@ public class HighScoreController implements Initializable {
 
     @FXML
     public void btnModeClick() {
-        if (btnMode.getText().equals("Singleplayer")){
+        if (btnMode.getText().equals("Singleplayer")) {
             btnMode.setText("Multiplayer");
             btnBeginner_Easy.setText("Easy");
             btnExpert_Normal.setText("Normal");
             btnHard.setVisible(true);
-        }
-        else {
+        } else {
             btnMode.setText("Singleplayer");
             btnBeginner_Easy.setText("Beginner");
             btnExpert_Normal.setText("Expert");
@@ -83,33 +83,28 @@ public class HighScoreController implements Initializable {
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
         Button button = (Button) e.getSource();
-        if (button == btnBeginner_Easy && btnMode.getText().equals("Singleplayer"))
-        {
+        if (button == btnBeginner_Easy && btnMode.getText().equals("Singleplayer")) {
             FillGrid(Difficulty.Beginner);
-        }
-        else if(button == btnBeginner_Easy && btnMode.getText().equals("Multiplayer")) {
+        } else if (button == btnBeginner_Easy && btnMode.getText().equals("Multiplayer")) {
             FillGrid(Difficulty.Easy);
-        }
-        else if(button == btnExpert_Normal && btnMode.getText().equals("Singleplayer")) {
+        } else if (button == btnExpert_Normal && btnMode.getText().equals("Singleplayer")) {
             FillGrid(Difficulty.Expert);
-        }
-        else if(button == btnExpert_Normal && btnMode.getText().equals("Multiplayer")) {
+        } else if (button == btnExpert_Normal && btnMode.getText().equals("Multiplayer")) {
             FillGrid(Difficulty.Medium);
-        }
-        else {
+        } else {
             FillGrid(Difficulty.Hard);
         }
     }
+
     @FXML
     public void btnBackClick(ActionEvent e) throws IOException {
         Button button = (Button) e.getSource();
-        if (button == btnBack)
-        {
+        if (button == btnBack) {
             Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")), "TYPO");
         }
     }
 
-    public void FillGrid(Difficulty difficulty){
+    public void FillGrid(Difficulty difficulty) {
         lvHighscores.getChildren().clear();
         Label col1 = new Label("#");
         Label col2 = new Label("Name");
@@ -126,9 +121,9 @@ public class HighScoreController implements Initializable {
         List<HighScore> hscores = hsRep.getHighScore();
 
         int count = 0;
-        for (HighScore hs: hscores
+        for (HighScore hs : hscores
                 ) {
-            if (count != 10 && hs.getDiff() == difficulty){
+            if (count != 10 && hs.getDiff() == difficulty) {
                 count++;
                 TextField tf = new TextField(String.valueOf(count));
                 TextField tf1 = new TextField(hs.getName());
@@ -146,11 +141,11 @@ public class HighScoreController implements Initializable {
         }
     }
 
-    public void receiveMessage(String message){
+    public void receiveMessage(String message) {
         //System.out.println(message);
         Platform.runLater(() -> {
             Label mess = new Label(message);
-            mess.setFont(Font.font("Verdana", 16));
+            mess.setFont(Font.loadFont("file:typo-game/src/Roboto-Medium.ttf", 16));
             messages.add(mess);
             messages.get(index).setMinWidth(chatBox.getWidth());
             messages.get(index).setAlignment(Pos.CENTER_LEFT);
@@ -160,12 +155,12 @@ public class HighScoreController implements Initializable {
 
     }
 
-    public void initChatBox(){
-        btnSend.setOnAction(evt->{
+    public void initChatBox() {
+        btnSend.setOnAction(evt -> {
             try {
                 if (Main.settings.getProperty("name") != null) {
                     client.sendMessage(Main.settings.getProperty("name") + ": " + messageBox.getText());
-                }else{
+                } else {
                     client.sendMessage("Anonymous: " + messageBox.getText());
                 }
             } catch (RemoteException e) {
@@ -188,7 +183,7 @@ public class HighScoreController implements Initializable {
         initChatBox();
         scrollPane.vvalueProperty().bind(chatBox.heightProperty());
         try {
-            client = new Client("DESKTOP-354OS6S", 1099, this);
+            client = new Client("145.93.48.186", 1099, this);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
