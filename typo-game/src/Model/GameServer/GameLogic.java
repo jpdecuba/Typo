@@ -43,12 +43,13 @@ public class GameLogic {
                 StartGame();
                 break;
             case JoinLobby:
-                Lobby item = new Lobby(Socket,request.diff,request.LobbyID);
-                JoinLobby(item, Socket);
+                JoinLobby(request.lobby, Socket);
                 break;
             case GameUpdate:
                 UpdateGame(request.player);
-
+                break;
+            default:
+                System.out.println("Request not found...");
 
         }
 
