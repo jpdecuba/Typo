@@ -8,6 +8,8 @@ import Model.HighScore;
 import Model.Repository.HighScoreRepository;
 import Model.Singleplayer;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,7 +83,8 @@ public class HighScoreController implements Initializable {
     }
 
     @FXML
-    public void btnClick(ActionEvent e) throws IOException {
+    public void btnClick(ActionEvent e)
+    {
         Button button = (Button) e.getSource();
         if (button == btnBeginner_Easy && btnMode.getText().equals("Singleplayer"))
         {
@@ -107,6 +110,18 @@ public class HighScoreController implements Initializable {
         {
             Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/sample.fxml")), "TYPO");
         }
+    }
+
+    public static void addTextLimiter(final TextField tf, final int maxLength) {
+        tf.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (tf.getText().length() > maxLength) {
+                    String s = tf.getText().substring(0, maxLength);
+                    tf.setText(s);
+                }
+            }
+        });
     }
 
     public void FillGrid(Difficulty difficulty){
@@ -151,6 +166,7 @@ public class HighScoreController implements Initializable {
         Platform.runLater(() -> {
             Label mess = new Label(message);
             mess.setFont(Font.font("Verdana", 16));
+            mess.setWrapText(true);
             messages.add(mess);
             messages.get(index).setMinWidth(chatBox.getWidth());
             messages.get(index).setAlignment(Pos.CENTER_LEFT);
@@ -185,10 +201,11 @@ public class HighScoreController implements Initializable {
         FillGrid(Difficulty.Beginner);
         btnMode.setText("Singleplayer");
         btnSend.setStyle(" -fx-background-image: url('/rocket.png'); -fx-background-size: 45px 45px; -fx-rotate: 90; ");
+        addTextLimiter(messageBox, 250);
         initChatBox();
         scrollPane.vvalueProperty().bind(chatBox.heightProperty());
         try {
-            client = new Client("192.168.178.19", 1099, this);
+            client = new Client("localhost", 1099, this);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
