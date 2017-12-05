@@ -270,7 +270,7 @@ public class SessionController implements Initializable, Observer {
     }
 
     @FXML
-    public void Quitgame() throws IOException {
+    public void Quitgame() {
         EndGame();
     }
 

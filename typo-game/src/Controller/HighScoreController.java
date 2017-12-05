@@ -6,6 +6,8 @@ import Model.DatabaseClient;
 import Model.Difficulty;
 import Model.HighScore;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,7 +83,8 @@ public class HighScoreController implements Initializable {
     }
 
     @FXML
-    public void btnClick(ActionEvent e) throws IOException {
+    public void btnClick(ActionEvent e)
+    {
         Button button = (Button) e.getSource();
         if (button == btnBeginner_Easy && btnMode.getText().equals("Singleplayer")) {
             FillGrid(Difficulty.Beginner);
@@ -104,7 +107,19 @@ public class HighScoreController implements Initializable {
         }
     }
 
-    public void FillGrid(Difficulty difficulty) {
+    public static void addTextLimiter(final TextField tf, final int maxLength) {
+        tf.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (tf.getText().length() > maxLength) {
+                    String s = tf.getText().substring(0, maxLength);
+                    tf.setText(s);
+                }
+            }
+        });
+    }
+
+    public void FillGrid(Difficulty difficulty){
         lvHighscores.getChildren().clear();
         Label col1 = new Label("#");
         Label col2 = new Label("Name");
@@ -146,6 +161,7 @@ public class HighScoreController implements Initializable {
         Platform.runLater(() -> {
             Label mess = new Label(message);
             mess.setFont(Font.loadFont("file:typo-game/src/Roboto-Medium.ttf", 16));
+            mess.setWrapText(true);
             messages.add(mess);
             messages.get(index).setMinWidth(chatBox.getWidth());
             messages.get(index).setAlignment(Pos.CENTER_LEFT);
@@ -180,10 +196,11 @@ public class HighScoreController implements Initializable {
         FillGrid(Difficulty.Beginner);
         btnMode.setText("Singleplayer");
         btnSend.setStyle(" -fx-background-image: url('/rocket.png'); -fx-background-size: 45px 45px; -fx-rotate: 90; ");
+        addTextLimiter(messageBox, 250);
         initChatBox();
         scrollPane.vvalueProperty().bind(chatBox.heightProperty());
         try {
-            client = new Client("145.93.48.186", 1099, this);
+            client = new Client("localhost", 1099, this);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
