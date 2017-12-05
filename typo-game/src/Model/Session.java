@@ -117,15 +117,16 @@ public abstract class Session extends Observable implements Observer {
 
     public void SpawnOpportunity(){
         Random rng = new Random();
-        int n = rng.nextInt(4);
+        int n;
+        if(playerTwo != null){ n = rng.nextInt(4); }
+        else{ n = rng.nextInt(2); }
         //n = 3;
         switch (n){
             case 0: opp = new Opportunity(OppName.ExtraLife, difficulty); break;
             case 1: opp = new Opportunity(OppName.ComboBonus, difficulty); break;
-            case 999: opp = new Opportunity(OppName.ComboPunish, difficulty); break;
+            case 2: opp = new Opportunity(OppName.ComboPunish, difficulty); break;
             case 3: opp = new Opportunity(OppName.Reverse, difficulty); break;
         }
-
     }
 
     //Properties
