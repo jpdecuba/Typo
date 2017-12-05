@@ -10,31 +10,21 @@ import java.net.Socket;
 
 public class Lobby  implements Serializable{
 
-    private Socket player1;
-    private Socket player2;
+
     private Difficulty gameDiff;
 
     protected String LobbyID;
 
     protected Multiplayer sessie;
 
-    public Lobby(Socket player1, Difficulty gameDiff, String lobbyID) {
-        this.player1 = player1;
+    public Lobby(Difficulty gameDiff, String lobbyID) {
         this.gameDiff = gameDiff;
         LobbyID = lobbyID;
     }
 
-    public Socket getPlayer2() {
-        return player2;
-    }
-    public Socket getPlayer() {
-        return player1;
-    }
 
-    public void setPlayer2(Socket player2) {
-        this.player2 = player2;
 
-    }
+
 
     public Difficulty getGame() {
         return gameDiff;

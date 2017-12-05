@@ -2,15 +2,14 @@ package Model.GameServer;
 
 import Model.Multiplayer;
 import Model.Player;
-import Model.Publisher.Publisher;
 import Model.Shared.Request;
 import Model.Shared.RequestType;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.net.PortUnreachableException;
 import java.net.Socket;
 import java.util.List;
+import java.util.Map;
 
 import static Model.Shared.RequestType.GameUpdate;
 import static Model.Shared.RequestType.ServergameStart;
@@ -21,7 +20,7 @@ public class GameLogic {
 
     private ObjectOutputStream output;
 
-    private GameManger manger;
+    private GameManager manger;
 
     private Lobby lobby;
 
@@ -67,6 +66,7 @@ public class GameLogic {
             }
         }
         manger.AddLobby(lobby);
+        manger.sockets.put(Socket,lobby.LobbyID);
         this.lobby = lobby;
     }
 
@@ -89,18 +89,18 @@ public class GameLogic {
 
         for(Lobby item : lobbys){
             if(item.getGame() == lobby.getGame()){
-                item.setPlayer2(socket);
+                manger.sockets.put(Socket,lobby.LobbyID);
                 this.lobby = item;
             }
         }
 
 
-        try {
+/*        try {
             output.writeObject(lobbys);
             output.flush();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void StartGame(){
@@ -112,10 +112,23 @@ public class GameLogic {
                 try {
 
                     Request req = new Request(ServergameStart,object);
-                    output.writeObject(req);
 
-                    ObjectOutputStream output2 = new ObjectOutputStream(item.getPlayer2().getOutputStream());
-                    output2.writeObject(object);
+                    Map<Socket,String> list = manger.sockets;
+
+                    if(list.containsValue(lobby.LobbyID))
+                    {
+                        for(Map.Entry<Socket, String> entry : list.entrySet()) {
+                            Socket key = entry.getKey();
+                            String value = entry.getValue();
+                            if(value == lobby.LobbyID){
+                                ObjectOutputStream ouput1 = new ObjectOutputStream(key.getOutputStream());
+                                ouput1.writeObject(req);
+                                ouput1.flush();
+                            }
+
+                        }
+
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -127,12 +140,22 @@ public class GameLogic {
     public void UpdateGame(Player player){
         try {
             Request request = new Request(GameUpdate,player);
-            ObjectOutputStream ouput1 = new ObjectOutputStream(lobby.getPlayer().getOutputStream());
-            ObjectOutputStream ouput2 = new ObjectOutputStream(lobby.getPlayer2().getOutputStream());
-            ouput1.writeObject(request);
-            ouput2.writeObject(request);
-            ouput1.flush();
-            ouput2.flush();
+            Map<Socket,String> list = manger.sockets;
+
+            if(list.containsValue(lobby.LobbyID))
+            {
+                for(Map.Entry<Socket, String> entry : list.entrySet()) {
+                    Socket key = entry.getKey();
+                    String value = entry.getValue();
+                    if(value == lobby.LobbyID){
+                        ObjectOutputStream ouput1 = new ObjectOutputStream(key.getOutputStream());
+                        ouput1.writeObject(request);
+                        ouput1.flush();
+                    }
+
+                }
+
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

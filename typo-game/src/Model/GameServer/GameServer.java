@@ -8,7 +8,7 @@ import java.net.Socket;
 public class GameServer {
     private ServerSocket serverSocket;
     private Socket socket = null;
-    private GameManger manger;
+    private GameManager manger;
 
     public GameServer() throws Exception {
         ServerSocketFactory socketFactory = (ServerSocketFactory) ServerSocketFactory.getDefault();
