@@ -43,12 +43,13 @@ public class GameLogic {
                 StartGame();
                 break;
             case JoinLobby:
-                Lobby item = new Lobby(Socket,request.diff,request.LobbyID);
-                JoinLobby(item, Socket);
+                JoinLobby(request.lobby, Socket);
                 break;
             case GameUpdate:
                 UpdateGame(request.player);
-
+                break;
+            default:
+                System.out.println("Request not found...");
 
         }
 
@@ -56,6 +57,15 @@ public class GameLogic {
 
 
     public void CreateLobby(Lobby lobby){
+
+        List<Lobby> lobbys =  manger.getLobbys();
+
+
+        for(Lobby item : lobbys){
+            if(item.getGame() == lobby.getGame()){
+                lobby.LobbyID = lobby.LobbyID + String.valueOf(lobbys.size());
+            }
+        }
         manger.AddLobby(lobby);
         this.lobby = lobby;
     }
