@@ -16,6 +16,7 @@ public class GameServer {
     }
 
     private void runServer() {
+
         System.err.println("Waiting for connections...");
 
         while (true) {

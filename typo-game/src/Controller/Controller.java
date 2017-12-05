@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     private Image rocket = new Image("/rocket.gif");
+    private Image rocket2 = new Image("/rocket2.gif");
     private Image logo = new Image("/Logo Wit.png");
     @FXML
     AnchorPane anchor;
@@ -54,6 +55,9 @@ public class Controller implements Initializable {
     ImageView Rocket;
 
     @FXML
+    ImageView Rocket2;
+
+    @FXML
     public void btnClick(ActionEvent event) throws IOException {
         Button button = (Button) event.getSource();
         if (button == SingleplayerBtn){
@@ -78,22 +82,32 @@ public class Controller implements Initializable {
         anchor.setStyle(" -fx-background-image: url('/space.png')");
         Rocket.setFitHeight(120);
         Rocket.setFitWidth(120);
+        Rocket2.setFitHeight(120);
+        Rocket2.setFitWidth(120);
         Logo.setFitHeight(120);
         Logo.setFitWidth(120);
         Rocket.setRotate(90);
         Rocket.setImage(rocket);
+        Rocket2.setRotate(270);
+        Rocket2.setImage(rocket2);
         Logo.setImage(logo);
         AnimationTimer aT = new AnimationTimer() {
             int X = -120;
+            int X2 = (int)anchor.getWidth();
             @Override
             public void handle(long now) {
                 if(Rocket.getX() >= screenSize.getWidth()){
                     X = -120;
+                }else if (Rocket2.getX() <= -120){
+                    X2 = (int)anchor.getWidth();
                 }
                 Rocket.setX(X);
+                Rocket2.setX(X2);
                 X += 1;
+                X2 -= 1;
             }
         };
+        Rocket2.setX((int)anchor.getWidth()+500);
         aT.start();
     }
 
