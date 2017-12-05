@@ -37,7 +37,7 @@ public class DatabaseThread extends Thread{
 
             while (socket.isConnected()) {
 
-                //System.out.println("in loop");
+                System.out.println("in loop");
 
                 Object msg = (Object) input.readObject();
                 //String password = input.readLine();

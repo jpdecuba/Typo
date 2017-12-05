@@ -18,7 +18,7 @@ public class GameServerThread extends Thread{
     }
 
     public void run() {
-
+        //SocketModel scktModel1 = new SocketModel(new Player(),null,"Start game");
 
         try {
             System.err.println("Connecting started");

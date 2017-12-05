@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Difficulty;
+import Model.Multiplayer;
 import Model.Singleplayer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,7 +36,7 @@ public class MultiplayerDifficultyController implements Initializable {
         Button button = (Button) e.getSource();
         if (button == EasyBtn)
         {
-            //difficulty(Difficulty.Beginner, "/Views/page2.fxml","TYPO Singleplayer - Difficulty: Beginner");
+            difficulty(Difficulty.Easy, "/Views/MultiplayerView.fxml","TYPO Singleplayer - Difficulty: Easy");
         }
         else if(button == MediumBtn)
         {
@@ -43,7 +44,7 @@ public class MultiplayerDifficultyController implements Initializable {
         }
         else if(button == HardBtn)
         {
-            //difficulty(Difficulty.Expert, "/Views/page2.fxml","TYPO Singleplayer - Difficulty: Expert");
+            //difficulty(Difficulty.Hard, "/Views/page2.fxml","TYPO Singleplayer - Difficulty: Hard");
         }
         else
         {
@@ -57,9 +58,9 @@ public class MultiplayerDifficultyController implements Initializable {
         Parent parent = loader.load();
         if(difficulty != null)
         {
-            Singleplayer sp = new Singleplayer(difficulty);
-            SessionController controller = loader.getController();
-            controller.setSession(sp);
+            Multiplayer mp = new Multiplayer(difficulty);
+            MultiplayerController controller = loader.getController();
+            controller.setSession(mp);
         }
 
         Main.switchPage(parent, title);

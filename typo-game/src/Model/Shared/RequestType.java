@@ -6,11 +6,5 @@ public enum RequestType implements Serializable {
     HighScore,
     Opportunity,
     Sets,
-    SetHighScore,
-    CreateLobby,
-    GetLobby,
-    StartGame,
-    JoinLobby,
-    GameUpdate,
-    SendLobby
+    SetHighScore
 }

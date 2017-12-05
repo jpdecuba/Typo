@@ -21,7 +21,7 @@ public class DatabaseClient {
         }else {
             SocketFactory socketFactory = (SocketFactory) SocketFactory.getDefault();
             try {
-                this.Socket = (Socket) socketFactory.createSocket("DESKTOP-354OS6S", 8700);
+                this.Socket = (Socket) socketFactory.createSocket("localhost", 8700);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -156,7 +156,7 @@ public class DatabaseClient {
         return false;
     }
 
-    public void flush(){
+    public void flusj(){
 
         try {
             output.flush();
