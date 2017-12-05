@@ -11,6 +11,7 @@ import java.net.Socket;
 
 public class GameServerThread extends Thread{
     protected Socket socket;
+    private GameLogic GL;
 
     public GameServerThread(Socket clientSocket) {
         this.socket =  clientSocket;
@@ -30,7 +31,7 @@ public class GameServerThread extends Thread{
             output = new ObjectOutputStream (socket.getOutputStream());
 
 
-            //this.DB = new DBServer(socket,output);
+            this.GL = new GameLogic(socket,output);
 
             while (socket.isConnected()) {
 
@@ -41,7 +42,7 @@ public class GameServerThread extends Thread{
                 if(msg.getClass() == Request.class){
 
                     Request item = (Request) msg;
-                    //DB.DBGet(item);
+                    this.GL.MSG(item);
 
                 }else {
 

@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.util.List;
 
 import static Model.Shared.RequestType.GameUpdate;
+import static Model.Shared.RequestType.ServergameStart;
 
 public class GameLogic {
 
@@ -99,7 +100,9 @@ public class GameLogic {
             if(item.getGame() == lobby.getGame()){
                 Multiplayer object = item.StartGame();
                 try {
-                    output.writeObject(object);
+
+                    Request req = new Request(ServergameStart,object);
+                    output.writeObject(req);
 
                     ObjectOutputStream output2 = new ObjectOutputStream(item.getPlayer2().getOutputStream());
                     output2.writeObject(object);
