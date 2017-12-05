@@ -1,14 +1,18 @@
 package Model.GameServer;
 
 import Model.Multiplayer;
+import Model.Player;
 import Model.Publisher.Publisher;
 import Model.Shared.Request;
+import Model.Shared.RequestType;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.PortUnreachableException;
 import java.net.Socket;
 import java.util.List;
+
+import static Model.Shared.RequestType.GameUpdate;
 
 public class GameLogic {
 
@@ -41,6 +45,9 @@ public class GameLogic {
                 Lobby item = new Lobby(Socket,request.diff,request.LobbyID);
                 JoinLobby(item, Socket);
                 break;
+            case GameUpdate:
+
+
         }
 
     }
@@ -53,8 +60,9 @@ public class GameLogic {
 
     public void GetLobbys(){
        List<Lobby> lobbys =  manger.getLobbys();
+        Request request = new Request(RequestType.SendLobby, lobbys);
         try {
-            output.writeObject(lobbys);
+            output.writeObject(request);
             output.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,6 +70,8 @@ public class GameLogic {
     }
 
     public void JoinLobby(Lobby lobby, Socket socket){
+
+
         List<Lobby> lobbys =  manger.getLobbys();
 
 
@@ -97,6 +107,23 @@ public class GameLogic {
                 }
             }
         }
+
+    }
+
+    public void UpdateGame(Player player){
+        try {
+            Request request = new Request(GameUpdate,player);
+            ObjectOutputStream ouput1 = new ObjectOutputStream(lobby.getPlayer().getOutputStream());
+            ObjectOutputStream ouput2 = new ObjectOutputStream(lobby.getPlayer2().getOutputStream());
+            ouput1.writeObject(request);
+            ouput2.writeObject(request);
+            ouput1.flush();
+            ouput2.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
