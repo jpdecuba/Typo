@@ -50,11 +50,11 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
                 chat = (IChat) registry.lookup(bindingName);
                 chat.subscribeRemoteListener(this, bindingName);
             } catch (RemoteException ex) {
-                System.out.println("Client: Cannot bind Effectennbeurs");
+                System.out.println("Client: Cannot bind " + bindingName);
                 System.out.println("Client: RemoteException: " + ex.getMessage());
                 chat = null;
             } catch (NotBoundException ex) {
-                System.out.println("Client: Cannot bind Effectennbeurs");
+                System.out.println("Client: Cannot bind " + bindingName);
                 System.out.println("Client: NotBoundException: " + ex.getMessage());
                 chat = null;
             }
@@ -62,9 +62,9 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
 
         // Print result binding student administration
         if (chat != null) {
-            System.out.println("Client: Effectennbeurs bound");
+            System.out.println("Client: " + bindingName + " bound");
         } else {
-            System.out.println("Client: Effectennbeurs is null pointer");
+            System.out.println("Client: " + bindingName + " is null pointer");
         }
     }
 
