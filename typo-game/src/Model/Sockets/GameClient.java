@@ -77,10 +77,10 @@ public class GameClient {
         return null;
     }
 
-    public List<Lobby> GetLobby (Difficulty diff, String lobbyID) {
+    public List<Lobby> GetLobbys () {
 
         try {
-            Request request = new Request(GetLobby,lobbyID);
+            Request request = new Request(null,GetLobby);
             output.writeObject(request);
 
             Object response = objectInput.readObject();
