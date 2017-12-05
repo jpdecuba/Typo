@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="anchor" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.JoinLobbyController">
+    <children>
+      <HBox AnchorPane.bottomAnchor="100" AnchorPane.topAnchor="100" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100">
+          <children>
+
+              <ScrollPane fx:id="scrollPane">
+                  <content>
+                      <VBox fx:id="lobbyBox" alignment="TOP_CENTER" minHeight="${lobbyBox.parent.height}" prefWidth="${lobbyBox.parent.width}" spacing="15" style="-fx-background-color: b0c4de" />
+                  </content>
+              </ScrollPane>
+          </children>
+      </HBox>
+    </children>
+</AnchorPane>
