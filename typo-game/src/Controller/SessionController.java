@@ -288,14 +288,12 @@ public class SessionController implements Initializable, Observer {
         try {
             parent = loader.load();
 
-        if(sp.getPlayerOne() != null)
-        {
+        if(sp.getPlayerOne() != null) {
             AddHighScoreController controller = loader.getController();
             controller.setPlayer(sp.getPlayerOne(), sp.getDifficulty());
         }
 
         Main.switchPage(parent, "Add HighScore");
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -356,35 +354,22 @@ public class SessionController implements Initializable, Observer {
         MouseClickEvent = new EventHandler<javafx.scene.input.MouseEvent>() {
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
-
                 if(Opp != null){
-
                     ClickOpp((int)event.getX(),(int)event.getY());
                 }
-
-
-
             }
-
-
         };
-
         Main.Stage.getScene().addEventFilter(KeyEvent.ANY, keypressevent);
         Main.Stage.getScene().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, MouseClickEvent);
-
     }
 
     // typechar methode sends typed char to session
     public synchronized void typechar(String c) {
-
         sp.TypeCharacter(c, sp.getPlayerOne());
-
     }
     // ClickOpp methode sends click posion to session
     public synchronized void ClickOpp(int x,int y) {
-
         sp.mouseclick(x,y, sp.getPlayerOne());
-
     }
 
 
