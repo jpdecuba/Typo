@@ -64,7 +64,7 @@ public class GameClient {
     public String CreateLobby(Difficulty diff, String lobbyID) {
 
         try {
-            Request request = new Request(CreateLobby,new Lobby(socket,diff,lobbyID));
+            Request request = new Request(CreateLobby,new Lobby(diff,lobbyID));
             output.writeObject(request);
 
             String response = input.readUTF();

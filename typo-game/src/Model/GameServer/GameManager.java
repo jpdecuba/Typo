@@ -3,7 +3,7 @@ package Model.GameServer;
 import java.net.Socket;
 import java.util.*;
 
-public class GameManger {
+public class GameManager {
     protected static List<Lobby> Lobbys = new ArrayList<>();
     protected Map<Socket, String> sockets = new HashMap<>();
     public static List<Lobby> getLobbys() {
