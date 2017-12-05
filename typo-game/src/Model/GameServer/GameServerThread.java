@@ -1,25 +1,22 @@
-package Server;
+package Model.GameServer;
 
 import Model.Shared.Request;
-import Model.Sockets.SocketModel;
+import Server.DBServer;
 
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class DatabaseThread extends Thread{
+public class GameServerThread extends Thread{
     protected Socket socket;
 
-    private DBServer DB;
-
-    public DatabaseThread(Socket clientSocket) {
+    public GameServerThread(Socket clientSocket) {
         this.socket =  clientSocket;
-
     }
 
-
-
     public void run() {
-
 
         try {
             System.err.println("Connecting started");
@@ -33,7 +30,7 @@ public class DatabaseThread extends Thread{
             output = new ObjectOutputStream (socket.getOutputStream());
 
 
-            this.DB = new DBServer(socket,output);
+            //this.DB = new DBServer(socket,output);
 
             while (socket.isConnected()) {
 
@@ -44,7 +41,7 @@ public class DatabaseThread extends Thread{
                 if(msg.getClass() == Request.class){
 
                     Request item = (Request) msg;
-                    DB.DBGet(item);
+                    //DB.DBGet(item);
 
                 }else {
 

@@ -11,7 +11,6 @@ public class GameServer {
 
     public GameServer() throws Exception {
         ServerSocketFactory socketFactory = (ServerSocketFactory) ServerSocketFactory.getDefault();
-        serverSocket = (ServerSocket) socketFactory.createServerSocket(4040);
     }
 
     private void runServer() {
