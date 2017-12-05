@@ -24,13 +24,18 @@ public abstract class Session extends Observable implements Observer {
 
     //Methods
     public void ActiveOpportunity(Player player,Opportunity opp){
+        int combo = 0;
         //give the active opportunity in effect on which player???
         switch (opp.getName()) {
             /*case Reverse: throw new NotImplementedException();
-            case Spotlight: throw new NotImplementedException();
-            case ComboBonus: throw new NotImplementedException();*/
-            case ComboPunish: throw new NotImplementedException();
-            case ExtraLife: player.AddLives(1); break;
+            case Spotlight: throw new NotImplementedException();*/
+            case ComboBonus: //Give the player +1 to combo
+                combo = player.getCombo(); player.setCombo(combo++);
+            case ComboPunish: //give other player -1 to combo
+                if(player == playerOne){ combo = playerTwo.getCombo(); playerTwo.setCombo(combo--);}
+                else if(player == playerTwo){ combo = playerOne.getCombo(); playerOne.setCombo(combo--);} break;
+            case ExtraLife: //Give player +1 to life
+                player.AddLives(1); break;
         }
     }
 
@@ -57,7 +62,7 @@ public abstract class Session extends Observable implements Observer {
             player.AwardPoints();
             Random r = new Random();
             if(r.nextInt(100) <= 10){
-                opp = new Opportunity(OppName.ExtraLife, difficulty);
+                SpawnOpportunity();
                 this.setChanged();
                 this.notifyObservers(opp);
             }
@@ -108,6 +113,16 @@ public abstract class Session extends Observable implements Observer {
     public void getOpportunity(){
         this.setChanged();
         this.notifyObservers(opp);
+    }
+
+    public void SpawnOpportunity(){
+        Random rng = new Random();
+        switch (rng.nextInt(3)){
+            case 0: opp = new Opportunity(OppName.ExtraLife, difficulty); break;
+            case 1: opp = new Opportunity(OppName.ComboBonus, difficulty); break;
+            case 2: opp = new Opportunity(OppName.ComboPunish, difficulty); break;
+        }
+
     }
 
     //Properties
