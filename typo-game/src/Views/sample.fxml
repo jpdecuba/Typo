@@ -57,8 +57,8 @@
                         </Button>
                     </children>
                 </HBox>
-
             </children>
         </VBox>
+        <ImageView fx:id="Rocket2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0"/>
     </children>
 </AnchorPane>

@@ -2,15 +2,12 @@ package Model.GameServer;
 
 import Model.Multiplayer;
 import Model.Player;
-import Model.Publisher.Publisher;
 import Model.Shared.Request;
 import Model.Shared.RequestType;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.net.PortUnreachableException;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +20,7 @@ public class GameLogic {
 
     private ObjectOutputStream output;
 
-    private GameManger manger;
+    private GameManager manger;
 
     private Lobby lobby;
 

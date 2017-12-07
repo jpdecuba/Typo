@@ -61,20 +61,19 @@ public class GameClient {
         return null;
     }
 
-    public String CreateLobby(Difficulty diff, String lobbyID) {
+    public void CreateLobby(Difficulty diff, String lobbyID) {
 
         try {
-            Request request = new Request(CreateLobby,new Lobby(socket,diff,lobbyID));
+            Request request = new Request(CreateLobby,new Lobby(diff,lobbyID));
             output.writeObject(request);
 
-            String response = input.readUTF();
-            System.out.println(response);
-            return response;
+           /* String response = input.readUTF();
+            System.out.println(response);*/
+
 
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-        return null;
     }
 
     public List<Lobby> GetLobbys () {
