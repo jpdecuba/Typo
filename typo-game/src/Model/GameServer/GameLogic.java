@@ -69,8 +69,9 @@ public class GameLogic {
             }
         }
         manger.AddLobby(lobby);
-        manger.sockets.put(lobby.LobbyID,Socket);
+        manger.sockets.put(Socket,lobby.LobbyID);
         this.lobby = lobby;
+        System.out.println(manger.getLobbys().size());
     }
 
     public void GetLobbys(){
@@ -92,7 +93,7 @@ public class GameLogic {
 
         for(Lobby item : lobbys){
             if(item.getGame() == lobby.getGame()){
-                manger.sockets.put(lobby.LobbyID,Socket);
+                manger.sockets.put(Socket,lobby.LobbyID);
                 this.lobby = item;
             }
         }
