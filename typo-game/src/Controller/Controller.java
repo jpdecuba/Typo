@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Session;
 import javafx.animation.AnimationTimer;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import sample.Main;
 import sun.rmi.runtime.Log;
 
@@ -88,26 +90,30 @@ public class Controller implements Initializable {
         Logo.setFitWidth(120);
         Rocket.setRotate(90);
         Rocket.setImage(rocket);
+        Rocket2.setY(screenSize.getHeight()-120);
         Rocket2.setRotate(270);
         Rocket2.setImage(rocket2);
         Logo.setImage(logo);
         AnimationTimer aT = new AnimationTimer() {
             int X = -120;
-            int X2 = (int)anchor.getWidth();
+            double X2 = (int)screenSize.getWidth();
+            double Y = Rocket2.getY();
+            double r = 270;
+
             @Override
             public void handle(long now) {
                 if(Rocket.getX() >= screenSize.getWidth()){
                     X = -120;
                 }else if (Rocket2.getX() <= -120){
-                    X2 = (int)anchor.getWidth();
+                    X2 = anchor.getWidth();
                 }
                 Rocket.setX(X);
                 Rocket2.setX(X2);
+                Rocket2.setY(Y);
                 X += 1;
                 X2 -= 1;
             }
         };
-        Rocket2.setX((int)anchor.getWidth()+500);
         aT.start();
     }
 

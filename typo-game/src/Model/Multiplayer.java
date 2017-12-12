@@ -5,7 +5,9 @@ import Model.Database.Database;
 import Model.Repository.SetRepository;
 import javafx.beans.Observable;
 
-public class Multiplayer extends Session{
+import java.io.Serializable;
+
+public class Multiplayer extends Session implements Serializable{
 
     //Attributes
     private Database connection;

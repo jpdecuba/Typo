@@ -27,9 +27,6 @@ public class GameClient {
         OpenSocket();
     }
 
-    public static void main(String args[]) {
-        new GameClient();
-    }
 
     public void OpenSocket() {
         try {
@@ -85,7 +82,7 @@ public class GameClient {
             Object response = objectInput.readObject();
             if (response.getClass() == Request.class) {
                 Request responseReq = (Request) response;
-                return request.lobbys;
+                return responseReq.lobbys;
             }
             return null;
 

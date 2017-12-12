@@ -32,6 +32,7 @@ public class GameLogic {
 
 
     public void MSG(Request request){
+        System.out.println(request.msg);
         switch (request.msg){
             case GetLobby:
                 GetLobbys();
@@ -56,6 +57,7 @@ public class GameLogic {
 
 
     public void CreateLobby(Lobby lobby){
+        System.out.println(manger.getLobbys().size());
 
         List<Lobby> lobbys =  manger.getLobbys();
 
@@ -68,6 +70,7 @@ public class GameLogic {
         manger.AddLobby(lobby);
         manger.sockets.put(Socket,lobby.LobbyID);
         this.lobby = lobby;
+        System.out.println(manger.getLobbys().size());
     }
 
     public void GetLobbys(){

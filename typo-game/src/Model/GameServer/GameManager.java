@@ -5,7 +5,7 @@ import java.util.*;
 
 public class GameManager {
     protected static List<Lobby> Lobbys = new ArrayList<>();
-    protected Map<Socket, String> sockets = new HashMap<>();
+    protected static Map<Socket, String> sockets = new HashMap<>();
     public static List<Lobby> getLobbys() {
         return Lobbys;
     }

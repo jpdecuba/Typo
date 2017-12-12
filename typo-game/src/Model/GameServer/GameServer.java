@@ -1,5 +1,7 @@
 package Model.GameServer;
 
+import Model.Sockets.GameClient;
+
 import javax.net.ServerSocketFactory;
 import java.io.IOException;
 import java.net.ServerSocket;
