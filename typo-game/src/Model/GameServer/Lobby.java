@@ -30,7 +30,9 @@ public class Lobby  implements Serializable{
         return gameDiff;
     }
 
-
+    public Difficulty getGameDiff() {
+        return gameDiff;
+    }
 
     public String getLobbyID() {
         return LobbyID;
