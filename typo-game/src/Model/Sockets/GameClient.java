@@ -99,6 +99,36 @@ public class GameClient {
         }
     }
 
+    public void JoinLobby(Difficulty diff, Lobby lobby) {
+        try {
+            Request request = new Request(diff,JoinLobby,lobby);
+            output.writeObject(request);
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
+    public void LeaveLobby() {
+        try {
+            Request request = new Request(LeaveLobby);
+            output.writeObject(request);
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
+    public void RemoveLobby() {
+        try {
+            Request request = new Request(RemoveLobby);
+            output.writeObject(request);
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
     public void UpdateGame(Player player) {
         try {
             Request request = new Request(RequestType.GameUpdate,player);
