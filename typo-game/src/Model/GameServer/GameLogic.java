@@ -48,6 +48,9 @@ public class GameLogic {
             case GameUpdate:
                 UpdateGame(request.player);
                 break;
+            case LeaveLobby:
+                LeaveLobby();
+                break;
             default:
                 System.out.println("Request not found...");
 
@@ -137,6 +140,31 @@ public class GameLogic {
                 }
             }
         }
+
+    }
+
+
+    public void CloseConnection() {
+
+        //If client disconnect to remove there name out the names list and there write outputstream
+        if (lobby != null) {
+            GameManager.Lobbys.remove(lobby);
+        }
+        if (Socket != null) {
+            GameManager.sockets.remove(Socket);
+        }
+
+
+    }
+
+
+    public void LeaveLobby() {
+
+        //If client disconnect to remove there name out the names list and there write outputstream
+        if (Socket != null) {
+            GameManager.sockets.remove(Socket);
+        }
+
 
     }
 

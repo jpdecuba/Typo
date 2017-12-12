@@ -76,5 +76,15 @@ public class GameServerThread extends Thread{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        finally {
+            //If client disconnect to remove there name out the names list and there write outputstream
+            try {
+                GL.CloseConnection();
+                socket.close();
+
+            } catch (IOException e) {
+            }
+
+        }
     }
 }
