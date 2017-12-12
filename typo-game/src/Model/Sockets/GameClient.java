@@ -42,20 +42,15 @@ public class GameClient {
         }
     }
 
-    public String StartGame(Difficulty diff) {
+    public void StartGame(Difficulty diff) {
 
         try {
             Request request = new Request(diff,RequestType.StartGame);
             output.writeObject(request);
 
-            String response = input.readUTF();
-            System.out.println(response);
-            return response;
-
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-        return null;
     }
 
     public void CreateLobby(Difficulty diff, String lobbyID) {
@@ -94,34 +89,24 @@ public class GameClient {
         return null;
     }
 
-    public String JoinLobby(Difficulty diff, Lobby lobby) {
+    public void JoinLobby(Difficulty diff, Lobby lobby) {
         try {
             Request request = new Request(diff,JoinLobby,lobby);
             output.writeObject(request);
 
-            String response = input.readUTF();
-            System.out.println(response);
-            return response;
-
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-        return null;
     }
 
-    public String UpdateGame(Player player) {
+    public void UpdateGame(Player player) {
         try {
             Request request = new Request(RequestType.GameUpdate,player);
             output.writeObject(request);
 
-            String response = input.readUTF();
-            System.out.println(response);
-            return response;
-
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-        return null;
     }
 
 
