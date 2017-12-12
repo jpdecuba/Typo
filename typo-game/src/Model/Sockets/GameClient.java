@@ -99,9 +99,9 @@ public class GameClient {
         }
     }
 
-    public void LeaveLobby(Difficulty diff) {
+    public void LeaveLobby() {
         try {
-            Request request = new Request(diff,LeaveLobby);
+            Request request = new Request(LeaveLobby);
             output.writeObject(request);
 
         } catch (IOException ioException) {
@@ -109,9 +109,9 @@ public class GameClient {
         }
     }
 
-    public void RemoveLobby(Difficulty diff) {
+    public void RemoveLobby() {
         try {
-            Request request = new Request(diff,RemoveLobby);
+            Request request = new Request(RemoveLobby);
             output.writeObject(request);
 
         } catch (IOException ioException) {
