@@ -3,13 +3,14 @@ package Controller;
 import Model.Difficulty;
 import Model.Multiplayer;
 import Model.Singleplayer;
+import Model.Sockets.GameClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import sample.Main;
@@ -30,25 +31,59 @@ public class MultiplayerDifficultyController implements Initializable {
     Button HardBtn;
     @FXML
     Button BackBtn;
+    @FXML
+    TextField textField;
+
+    private GameClient GC;
 
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
         Button button = (Button) e.getSource();
         if (button == EasyBtn)
         {
-            difficulty(Difficulty.Easy, "/Views/MultiplayerView.fxml","TYPO Singleplayer - Difficulty: Easy");
+            createLobby(Difficulty.Easy);
+
+            //difficulty(Difficulty.Easy, "/Views/MultiplayerView.fxml","TYPO Singleplayer - Difficulty: Easy");
         }
         else if(button == MediumBtn)
         {
+            createLobby(Difficulty.Medium);
             //difficulty(Difficulty.Medium, "/Views/page2.fxml","TYPO Singleplayer - Difficulty: Medium");
         }
         else if(button == HardBtn)
         {
+            createLobby(Difficulty.Hard);
             //difficulty(Difficulty.Hard, "/Views/page2.fxml","TYPO Singleplayer - Difficulty: Hard");
         }
         else
         {
-            difficulty(null, "/Views/NewOnlineView.fxml","TYPO");
+            if (GC == null) {
+                difficulty(null, "/Views/NewOnlineView.fxml", "TYPO");
+            }
+            else{
+                //GC.DeleteLobby();
+                difficulty(null, "/Views/NewOnlineView.fxml", "TYPO");
+
+            }
+        }
+    }
+
+    public void createLobby(Difficulty difficulty){
+        if (textField.getText() == null || textField.getText().trim().isEmpty())
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Please add a name for the lobby!");
+            alert.showAndWait();
+        }
+        else if (GC != null)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Lobby already created, please wait until someone joins your lobby.");
+            alert.showAndWait();
+        }
+        else {
+            GC = new GameClient();
+            GC.CreateLobby(difficulty, textField.getText());
         }
     }
 

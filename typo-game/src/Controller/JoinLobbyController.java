@@ -42,9 +42,10 @@ public class JoinLobbyController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        GameClient gc2 = new GameClient();
+        anchor.setStyle(" -fx-background-image: url('/space.png')");
+        //GameClient gc2 = new GameClient();
         GC = new GameClient();
-        gc2.CreateLobby(Difficulty.Hard, "abc");
+        //gc2.CreateLobby(Difficulty.Hard, "abc");
 
         List<Lobby> LB = GC.GetLobbys();
         for(Lobby item : LB){
