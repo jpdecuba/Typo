@@ -79,7 +79,7 @@ public class GameServerThread extends Thread{
         finally {
             //If client disconnect to remove there name out the names list and there write outputstream
             try {
-                GL.CloseConnection();
+                GL.LeaveLobby();
                 socket.close();
 
             } catch (IOException e) {

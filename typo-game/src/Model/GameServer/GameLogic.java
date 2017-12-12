@@ -51,6 +51,8 @@ public class GameLogic {
             case LeaveLobby:
                 LeaveLobby();
                 break;
+            case RemoveLobby:
+                RemoveLobby();
             default:
                 System.out.println("Request not found...");
 
@@ -144,7 +146,7 @@ public class GameLogic {
     }
 
 
-    public void CloseConnection() {
+    public void RemoveLobby() {
 
         //If client disconnect to remove there name out the names list and there write outputstream
         if (lobby != null) {
