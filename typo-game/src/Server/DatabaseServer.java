@@ -32,7 +32,7 @@ public class DatabaseServer {
                 System.out.println("I/O error: " + e);
             }
             // new thread for a client
-            new DatabaseThread(socket).start();
+            executor.submit(new DatabaseThread(socket));
         }
     }
 
