@@ -54,6 +54,9 @@ public class GameLogic {
                 break;
             case RemoveLobby:
                 RemoveLobby();
+            case LobbyJoined:
+                UsersJoined();
+
             default:
                 System.out.println("Request not found...");
 
@@ -97,10 +100,12 @@ public class GameLogic {
 
 
         for(Lobby item : lobbys){
-            if(item.getGame() == lobby.getGame()){
+            if(item.LobbyID.equals(lobby.getLobbyID()) ){
                 manger.sockets.put(Socket,lobby.LobbyID);
                 this.lobby = item;
-                UserJoined();
+                UsersJoined();
+                break;
+
             }
         }
 
@@ -113,25 +118,39 @@ public class GameLogic {
         }*/
     }
 
-    public void UserJoined(){
+    public void UsersJoined(){
 
         try {
-            Request req = new Request(LobbyJoined);
+
+
+            int i = 0;
             for (Lobby item : GameManager.Lobbys) {
-                if (item.getGame() == lobby.getGame()) {
+                if(item.LobbyID.equals(lobby.getLobbyID()) ) {
 
-                }
 
-                for (Map.Entry<Socket, String> entry : manger.sockets.entrySet()) {
-                    Socket key = entry.getKey();
-                    String value = entry.getValue();
-                    if (value == lobby.LobbyID) {
-                        ObjectOutputStream ouput1 = new ObjectOutputStream(key.getOutputStream());
-                        ouput1.writeObject(req);
-                        ouput1.flush();
+                    for (Map.Entry<Socket, String> entry : manger.sockets.entrySet()) {
+                        Socket key = entry.getKey();
+                        String value = entry.getValue();
+                        if (value == lobby.LobbyID) {
+                            i++;
+                        }
                     }
 
+                    Request req = new Request(LobbyJoined, i);
+
+                    for (Map.Entry<Socket, String> entry : manger.sockets.entrySet()) {
+                        Socket key = entry.getKey();
+                        String value = entry.getValue();
+                        if (value == lobby.LobbyID) {
+                            ObjectOutputStream ouput1 = new ObjectOutputStream(key.getOutputStream());
+                            ouput1.writeObject(req);
+                            ouput1.flush();
+                        }
+
+                    }
                 }
+
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -144,7 +163,7 @@ public class GameLogic {
 
         List<Lobby> lobbys =  manger.getLobbys();
         for(Lobby item : lobbys ){
-            if(item.getGame() == lobby.getGame()){
+            if(item.LobbyID.equals(lobby.getLobbyID()) ){
                 Multiplayer object = item.StartGame();
                 try {
 

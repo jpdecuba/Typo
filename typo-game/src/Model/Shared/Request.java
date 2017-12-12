@@ -25,9 +25,16 @@ public class Request implements Serializable {
 
         public Multiplayer sessie;
 
+        public int LobbyUsers;
+
         public Request(RequestType msg) {
             this.msg = msg;
         }
+
+    public Request(RequestType msg, int users) {
+        this.msg = msg;
+        this.LobbyUsers = users;
+    }
 
         public Request(Difficulty diff, RequestType msg) {
             this.diff = diff;
