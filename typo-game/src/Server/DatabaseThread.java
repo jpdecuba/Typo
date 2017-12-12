@@ -28,9 +28,9 @@ public class DatabaseThread extends Thread{
             ObjectOutputStream output;
 
 
-
-            input = new ObjectInputStream(socket.getInputStream());
             output = new ObjectOutputStream (socket.getOutputStream());
+            input = new ObjectInputStream(socket.getInputStream());
+
 
 
             this.DB = new DBServer(socket,output);
@@ -39,7 +39,7 @@ public class DatabaseThread extends Thread{
 
                 System.out.println("in loop");
 
-                Object msg = (Object) input.readObject();
+                Object msg = input.readObject();
                 //String password = input.readLine();
                 if(msg.getClass() == Request.class){
 
