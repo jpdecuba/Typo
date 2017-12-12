@@ -99,9 +99,9 @@ public class GameClient {
         }
     }
 
-    public void JoinLobby(Difficulty diff, Lobby lobby) {
+    public void LeaveLobby(Difficulty diff) {
         try {
-            Request request = new Request(diff,JoinLobby,lobby);
+            Request request = new Request(diff,LeaveLobby);
             output.writeObject(request);
 
         } catch (IOException ioException) {
@@ -109,19 +109,9 @@ public class GameClient {
         }
     }
 
-    public void LeaveLobby() {
+    public void RemoveLobby(Difficulty diff) {
         try {
-            Request request = new Request(LeaveLobby);
-            output.writeObject(request);
-
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-    }
-
-    public void RemoveLobby() {
-        try {
-            Request request = new Request(RemoveLobby);
+            Request request = new Request(diff,RemoveLobby);
             output.writeObject(request);
 
         } catch (IOException ioException) {
