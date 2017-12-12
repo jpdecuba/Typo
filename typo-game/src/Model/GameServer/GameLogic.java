@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static Model.Shared.RequestType.GameUpdate;
+import static Model.Shared.RequestType.LobbyJoined;
 import static Model.Shared.RequestType.ServergameStart;
 
 public class GameLogic {
@@ -99,6 +100,7 @@ public class GameLogic {
             if(item.getGame() == lobby.getGame()){
                 manger.sockets.put(Socket,lobby.LobbyID);
                 this.lobby = item;
+                UserJoined();
             }
         }
 
@@ -109,6 +111,33 @@ public class GameLogic {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+    }
+
+    public void UserJoined(){
+
+        try {
+            Request req = new Request(LobbyJoined);
+            for (Lobby item : GameManager.Lobbys) {
+                if (item.getGame() == lobby.getGame()) {
+
+                }
+
+                for (Map.Entry<Socket, String> entry : manger.sockets.entrySet()) {
+                    Socket key = entry.getKey();
+                    String value = entry.getValue();
+                    if (value == lobby.LobbyID) {
+                        ObjectOutputStream ouput1 = new ObjectOutputStream(key.getOutputStream());
+                        ouput1.writeObject(req);
+                        ouput1.flush();
+                    }
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public void StartGame(){
@@ -151,10 +180,12 @@ public class GameLogic {
         //If client disconnect to remove there name out the names list and there write outputstream
         if (lobby != null) {
             GameManager.Lobbys.remove(lobby);
+
         }
         if (Socket != null) {
             GameManager.sockets.remove(Socket);
         }
+        lobby =null;
 
 
     }
@@ -166,7 +197,7 @@ public class GameLogic {
         if (Socket != null) {
             GameManager.sockets.remove(Socket);
         }
-
+        lobby =null;
 
     }
 

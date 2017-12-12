@@ -15,5 +15,6 @@ public enum RequestType implements Serializable {
     SendLobby,
     ServergameStart,
     LeaveLobby,
-    RemoveLobby
+    RemoveLobby,
+    LobbyJoined
 }
