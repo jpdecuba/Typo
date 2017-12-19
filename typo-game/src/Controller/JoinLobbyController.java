@@ -110,6 +110,7 @@ public class JoinLobbyController implements Initializable, Observer {
         Parent parent = loader.load();
         if(difficulty != null)
         {
+            mp.setDifficulty(difficulty);
             MultiplayerController controller = loader.getController();
             controller.setSession(mp, GC);
         }
@@ -130,17 +131,20 @@ public class JoinLobbyController implements Initializable, Observer {
         }
         else if (arg.getClass() == Integer.class) {
             Platform.runLater(()->{
-                Countdown();
+                //Countdown();
             });
 
         }
         else if (arg.getClass() == Multiplayer.class) {
-            try {
-                this.mp = (Multiplayer) arg;
-                difficulty(mp.getDifficulty(), "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + mp.getDifficulty());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Platform.runLater(()->{
+                try {
+                    this.mp = (Multiplayer) arg;
+                    difficulty(mp.getDifficulty(), "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + mp.getDifficulty());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
         }
     }
 

@@ -124,17 +124,20 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
         if (arg.getClass() == Integer.class) {
             Platform.runLater(()->{
                 lblName.setText("Someone has joined: " + (int)arg);
-                Countdown();
+                //Countdown();
             });
 
         }
         else if (arg.getClass() == Multiplayer.class) {
-            try {
-                this.mp = (Multiplayer) arg;
-                difficulty(diff, "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + diff);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Platform.runLater(()->{
+                try {
+                    this.mp = (Multiplayer) arg;
+                    difficulty(diff, "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + diff);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
         }
 
     }

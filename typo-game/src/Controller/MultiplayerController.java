@@ -70,7 +70,7 @@ public class MultiplayerController implements Initializable, Observer {
     private AnimationTimer loop;
     private AnimationTimer timer;
     private int hs = 0;
-    private int remaining = 2;
+    private int remaining = 5;
     private int Lives;
     private MediaPlayer mpl = null;
     private MediaPlayer effect = null;
