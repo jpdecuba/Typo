@@ -4,6 +4,7 @@ import Model.Difficulty;
 import Model.Multiplayer;
 import Model.Singleplayer;
 import Model.Sockets.GameClient;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -113,8 +114,11 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("test");
-        if (arg.getClass() == int.class) {
-            lblName.setText("Someone has joined: " + (int)arg);
+        if (arg.getClass() == Integer.class) {
+            Platform.runLater(()->{
+                lblName.setText("Someone has joined: " + (int)arg);
+            });
+
         }
         //difficulty(diff, "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + diff);
     }
