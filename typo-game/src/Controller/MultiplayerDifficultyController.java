@@ -4,8 +4,11 @@ import Model.Difficulty;
 import Model.Multiplayer;
 import Model.Singleplayer;
 import Model.Sockets.GameClient;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
+import javafx.util.Duration;
 import sample.Main;
 
 import java.io.IOException;
@@ -38,9 +42,12 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
     TextField textField;
     @FXML
     Label lblName;
+    @FXML
+    Label countdownLbl;
 
     private GameClient GC;
     private Difficulty diff;
+    private int remaining = 5;
 
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
@@ -117,9 +124,28 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
         if (arg.getClass() == Integer.class) {
             Platform.runLater(()->{
                 lblName.setText("Someone has joined: " + (int)arg);
+                Countdown();
             });
 
         }
         //difficulty(diff, "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + diff);
+    }
+
+    public void Countdown(){
+        Timeline timeline;
+        timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(1),
+                        new EventHandler<ActionEvent>() {
+                            public void handle(ActionEvent event) {
+                                remaining--;
+                                countdownLbl.setText("Game will start in " + remaining);
+                                if (remaining <= 0) {
+                                    timeline.stop();
+                                }
+                            }
+                        }));
+        timeline.playFromStart();
     }
 }
