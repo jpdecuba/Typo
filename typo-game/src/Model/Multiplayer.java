@@ -93,6 +93,8 @@ public class Multiplayer extends Session implements Serializable{
             sets.remove(currentSet);
             sets.add(lastSet);
             combotimer.setStartTime(LocalDateTime.now());
+            this.setChanged();
+            this.notifyObservers("UpdatePlayer");
             return currentSet;
         }
         else {
