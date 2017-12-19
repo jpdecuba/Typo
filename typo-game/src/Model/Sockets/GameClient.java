@@ -22,6 +22,8 @@ public class GameClient {
     ObjectInputStream objectInput;
     SocketFactory socketFactory;
     Socket socket;
+    public GameClientLogic gcl;
+    GameClientThread gct;
 
     public GameClient() {
         OpenSocket();
@@ -31,11 +33,13 @@ public class GameClient {
     public void OpenSocket() {
         try {
             socketFactory = (SocketFactory) SocketFactory.getDefault();
-            socket = (Socket) socketFactory.createSocket("localhost", 4444);
+            socket = (Socket) socketFactory.createSocket("145.93.40.223", 4444);
 
             output = new ObjectOutputStream(socket.getOutputStream());
             input = new DataInputStream(socket.getInputStream());
             objectInput = new ObjectInputStream(socket.getInputStream());
+            gcl = new GameClientLogic();
+            gct = new GameClientThread(socket, gcl);
         }
         catch (IOException ioException) {
             ioException.printStackTrace();
