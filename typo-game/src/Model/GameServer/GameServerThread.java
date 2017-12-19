@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class GameServerThread extends Thread{
     protected Socket socket;
@@ -66,20 +67,24 @@ public class GameServerThread extends Thread{
 
             socket.close();
 
-        } catch (IOException ioException) {
+        } catch(SocketException e){
+            System.out.println("Socket exception");
+
+        }
+        catch (IOException ioException) {
             try {
                 socket.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Socket closed error");
             }
             ioException.printStackTrace();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Class not found error");
         }
         finally {
             //If client disconnect to remove there name out the names list and there write outputstream
             try {
-                GL.LeaveLobby();
+                GL.RemoveLobby();
                 socket.close();
 
             } catch (IOException e) {
