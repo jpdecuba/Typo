@@ -14,12 +14,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -83,8 +86,7 @@ public class HighScoreController implements Initializable {
     }
 
     @FXML
-    public void btnClick(ActionEvent e)
-    {
+    public void btnClick(ActionEvent e) {
         Button button = (Button) e.getSource();
         if (button == btnBeginner_Easy && btnMode.getText().equals("Singleplayer")) {
             FillGrid(Difficulty.Beginner);
@@ -119,7 +121,7 @@ public class HighScoreController implements Initializable {
         });
     }
 
-    public void FillGrid(Difficulty difficulty){
+    public void FillGrid(Difficulty difficulty) {
         lvHighscores.getChildren().clear();
         Label col1 = new Label("#");
         Label col2 = new Label("Name");
@@ -174,10 +176,13 @@ public class HighScoreController implements Initializable {
     public void initChatBox() {
         btnSend.setOnAction(evt -> {
             try {
-                if (Main.settings.getProperty("name") != null) {
-                    client.sendMessage(Main.settings.getProperty("name") + ": " + messageBox.getText());
+                if (messageBox.getText() == null || messageBox.getText().isEmpty() || messageBox.getText().trim().length() == 0) {
                 } else {
-                    client.sendMessage("Anonymous: " + messageBox.getText());
+                    if (Main.settings.getProperty("name") != null) {
+                        client.sendMessage(Main.settings.getProperty("name") + ": " + messageBox.getText());
+                    } else {
+                        client.sendMessage("Anonymous: " + messageBox.getText());
+                    }
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();
@@ -188,6 +193,7 @@ public class HighScoreController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        btnSend.setDefaultButton(true);
         anchor.setStyle(" -fx-background-image: url('/space.png')");
         btnBeginner_Easy.setText("Beginner");
         btnExpert_Normal.setText("Expert");
@@ -200,7 +206,7 @@ public class HighScoreController implements Initializable {
         initChatBox();
         scrollPane.vvalueProperty().bind(chatBox.heightProperty());
         try {
-            client = new Client("localhost", 1099, this);
+            client = new Client("145.93.48.132", 1099, this);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

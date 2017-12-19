@@ -17,6 +17,8 @@ import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 public class MultiplayerDifficultyController implements Initializable {
@@ -33,8 +35,11 @@ public class MultiplayerDifficultyController implements Initializable {
     Button BackBtn;
     @FXML
     TextField textField;
+    @FXML
+    Label lblName;
 
     private GameClient GC;
+    private Difficulty diff;
 
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
@@ -42,18 +47,14 @@ public class MultiplayerDifficultyController implements Initializable {
         if (button == EasyBtn)
         {
             createLobby(Difficulty.Easy);
-
-            //difficulty(Difficulty.Easy, "/Views/MultiplayerView.fxml","TYPO Singleplayer - Difficulty: Easy");
         }
         else if(button == MediumBtn)
         {
             createLobby(Difficulty.Medium);
-            //difficulty(Difficulty.Medium, "/Views/page2.fxml","TYPO Singleplayer - Difficulty: Medium");
         }
         else if(button == HardBtn)
         {
             createLobby(Difficulty.Hard);
-            //difficulty(Difficulty.Hard, "/Views/page2.fxml","TYPO Singleplayer - Difficulty: Hard");
         }
         else
         {
@@ -69,6 +70,7 @@ public class MultiplayerDifficultyController implements Initializable {
     }
 
     public void createLobby(Difficulty difficulty){
+        this.diff = difficulty;
         if (textField.getText() == null || textField.getText().trim().isEmpty())
         {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -84,6 +86,7 @@ public class MultiplayerDifficultyController implements Initializable {
         else {
             GC = new GameClient();
             GC.CreateLobby(difficulty, textField.getText());
+            lblName.setText("Waiting for opponent to join");
         }
     }
 
@@ -104,5 +107,14 @@ public class MultiplayerDifficultyController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         anchor.setStyle(" -fx-background-image: url('/space.png')");
+    }
+
+    //@Override
+    public void update(Observable o, Object arg) {
+        try {
+            difficulty(diff, "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + diff);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

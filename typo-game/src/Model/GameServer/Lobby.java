@@ -8,7 +8,7 @@ import com.sun.scenario.effect.impl.prism.PrImage;
 import java.io.Serializable;
 import java.net.Socket;
 
-public class Lobby  implements Serializable{
+public class Lobby implements Serializable{
 
 
     private Difficulty gameDiff;
