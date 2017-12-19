@@ -11,7 +11,7 @@
     <children>
         <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <children>
-                <Label text="Lobby Name:" textFill="WHITE">
+                <Label fx:id="lblName" text="Lobby Name:" textFill="WHITE">
                     <font>
                         <Font size="16.0" />
                     </font></Label>
