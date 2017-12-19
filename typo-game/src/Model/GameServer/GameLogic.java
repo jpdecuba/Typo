@@ -39,6 +39,7 @@ public class GameLogic {
                 break;
             case CreateLobby:
                 CreateLobby(request.lobby);
+                break;
             case StartGame:
                 StartGame();
                 break;
@@ -78,7 +79,7 @@ public class GameLogic {
                 for(Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
                     ObjectOutputStream key = entry.getKey();
                     String value = entry.getValue();
-                    if(value == lobby.LobbyID){
+                    if(value.equals(lobby.getLobbyID()) ){
 
                         key.writeObject(request);
                         key.flush();
@@ -202,6 +203,8 @@ public class GameLogic {
                 Multiplayer object = item.StartGame();
                 try {
 
+                    object.Start();
+
                     Request req = new Request(ServergameStart,object);
 
                     Map<ObjectOutputStream,String> list = manger.sockets;
@@ -211,7 +214,7 @@ public class GameLogic {
                         for(Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
                             ObjectOutputStream key = entry.getKey();
                             String value = entry.getValue();
-                            if(value == lobby.LobbyID){
+                            if(value.equals(lobby.getLobbyID()) ){
 
                                 key.writeObject(req);
                                 key.flush();
@@ -265,7 +268,7 @@ public class GameLogic {
                 for(Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
                     ObjectOutputStream key = entry.getKey();
                     String value = entry.getValue();
-                    if(value == lobby.LobbyID){
+                    if(value.equals(lobby.getLobbyID()) ){
                         key.writeObject(request);
                         key.flush();
                     }

@@ -2,13 +2,14 @@ package Model;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
-public abstract class Session extends Observable implements Observer {
+public abstract class Session extends Observable implements Observer, Serializable {
 
     //Attributes
     private Difficulty difficulty;
