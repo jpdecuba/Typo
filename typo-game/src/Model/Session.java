@@ -15,13 +15,13 @@ public abstract class Session extends Observable implements Observer, Serializab
     private Difficulty difficulty;
     public ArrayList<Set> sets = new ArrayList<Set>();
     public ArrayList<Opportunity> opportunities = new ArrayList<Opportunity>();
-    private Set currentSet = null;
-    private Set lastSet = null;
+    protected Set currentSet = null;
+    protected Set lastSet = null;
     private Player playerOne = null;
     private Player playerTwo = null;
-    private Opportunity opp = new Opportunity(OppName.Empty, difficulty);
+    protected Opportunity opp = new Opportunity(OppName.Empty, difficulty);
 
-    private ComboTimer combotimer = new ComboTimer();
+    protected ComboTimer combotimer = new ComboTimer();
 
     //Methods
     public void ActiveOpportunity(Player player,Opportunity opp){
