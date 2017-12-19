@@ -30,7 +30,6 @@ public class GameClientThread extends Thread {
                 output = new DataOutputStream(socket.getOutputStream());
                 input = new ObjectInputStream(socket.getInputStream());
 
-
                 Object msg = (Object) input.readObject();
 
 
@@ -40,16 +39,12 @@ public class GameClientThread extends Thread {
 
                 }
 
-
             }
-
 
             output.close();
             input.close();
 
-
             socket.close();
-
 
         } catch (IOException e) {
             e.printStackTrace();

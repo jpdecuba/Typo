@@ -21,7 +21,7 @@ public class DatabaseClient {
         }else {
             SocketFactory socketFactory = (SocketFactory) SocketFactory.getDefault();
             try {
-                this.Socket = (Socket) socketFactory.createSocket("localhost", 8700);
+                this.Socket = (Socket) socketFactory.createSocket("145.93.48.132", 7676);
             } catch (IOException e) {
                 e.printStackTrace();
             }
