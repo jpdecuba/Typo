@@ -232,7 +232,7 @@ public class GameLogic {
 
         }
         if (Socket != null) {
-            GameManager.sockets.remove(Socket);
+            GameManager.sockets.remove(output);
         }
         lobby =null;
 
@@ -244,7 +244,7 @@ public class GameLogic {
 
         //If client disconnect to remove there name out the names list and there write outputstream
         if (Socket != null) {
-            GameManager.sockets.remove(Socket);
+            GameManager.sockets.remove(output);
         }
         lobby =null;
 
