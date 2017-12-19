@@ -25,8 +25,8 @@ public class GameClientLogic extends Observable {
     private Opportunity opp;
 
 
-    public GameClientLogic(ObjectOutputStream output) {
-        this.output = output;
+    public GameClientLogic() {
+
     }
 
     public void Msg(Request request){
