@@ -21,7 +21,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class MultiplayerDifficultyController implements Initializable {
+public class MultiplayerDifficultyController implements Initializable, Observer {
     Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
     @FXML
     AnchorPane anchor;
@@ -85,6 +85,7 @@ public class MultiplayerDifficultyController implements Initializable {
         }
         else {
             GC = new GameClient();
+            GC.gcl.addObserver(this);
             GC.CreateLobby(difficulty, textField.getText());
             lblName.setText("Waiting for opponent to join");
         }
@@ -109,12 +110,11 @@ public class MultiplayerDifficultyController implements Initializable {
         anchor.setStyle(" -fx-background-image: url('/space.png')");
     }
 
-    //@Override
+    @Override
     public void update(Observable o, Object arg) {
-        try {
-            difficulty(diff, "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + diff);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (arg.getClass() == int.class) {
+            lblName.setText("Someone has joined: " + (int)arg);
         }
+        //difficulty(diff, "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + diff);
     }
 }
