@@ -1,10 +1,7 @@
 package Model.Shared;
 
-import Model.Difficulty;
+import Model.*;
 import Model.GameServer.Lobby;
-import Model.HighScore;
-import Model.Multiplayer;
-import Model.Player;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,6 +24,8 @@ public class Request implements Serializable {
 
         public int LobbyUsers;
 
+        public Opportunity opp;
+
         public Request(RequestType msg) {
             this.msg = msg;
         }
@@ -34,6 +33,11 @@ public class Request implements Serializable {
     public Request(RequestType msg, int users) {
         this.msg = msg;
         this.LobbyUsers = users;
+    }
+
+    public Request(RequestType msg, Opportunity opp) {
+        this.msg = msg;
+        this.opp = opp;
     }
 
         public Request(Difficulty diff, RequestType msg) {
