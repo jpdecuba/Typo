@@ -38,10 +38,7 @@ public class GameClientThread extends Thread {
 
                 if (msg.getClass() == Request.class) {
                     Request item = (Request) msg;
-
                     logic.Msg(item);
-
-
                 }
 
             }

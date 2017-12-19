@@ -1,6 +1,7 @@
 package Model.GameServer;
 
 import Model.Multiplayer;
+import Model.Opportunity;
 import Model.Player;
 import Model.Shared.Request;
 import Model.Shared.RequestType;
@@ -11,9 +12,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 
-import static Model.Shared.RequestType.GameUpdate;
-import static Model.Shared.RequestType.LobbyJoined;
-import static Model.Shared.RequestType.ServergameStart;
+import static Model.Shared.RequestType.*;
 
 public class GameLogic {
 
@@ -56,10 +55,41 @@ public class GameLogic {
                 RemoveLobby();
             case LobbyJoined:
                 UsersJoined();
-
+            case OppertunityActive:
+                Opportuntysend(request.opp);
+                break;
             default:
                 System.out.println("Request not found...");
 
+        }
+
+    }
+
+
+    public void Opportuntysend(Opportunity opp){
+
+
+        try {
+            Request request = new Request(OppertunityActive,opp);
+            Map<Socket,String> list = manger.sockets;
+
+            if(list.containsValue(lobby.LobbyID))
+            {
+                for(Map.Entry<Socket, String> entry : list.entrySet()) {
+                    Socket key = entry.getKey();
+                    String value = entry.getValue();
+                    if(value == lobby.LobbyID){
+                        ObjectOutputStream ouput1 = new ObjectOutputStream(key.getOutputStream());
+                        ouput1.writeObject(request);
+                        ouput1.flush();
+                    }
+
+                }
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

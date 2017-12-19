@@ -2,6 +2,7 @@ package Model.Sockets;
 
 import Model.GameServer.Lobby;
 import Model.Multiplayer;
+import Model.Opportunity;
 import Model.Player;
 import Model.Shared.Request;
 
@@ -21,9 +22,11 @@ public class GameClientLogic extends Observable {
 
     private List<Lobby> lobbys;
 
+    private Opportunity opp;
 
-    public GameClientLogic(ObjectOutputStream output) {
-        this.output = output;
+
+    public GameClientLogic() {
+
     }
 
     public void Msg(Request request){
@@ -49,6 +52,11 @@ public class GameClientLogic extends Observable {
                 lobbys = request.lobbys;
                 setChanged();
                 notifyObservers(lobbys);
+                break;
+            case OppertunityActive:
+                opp = request.opp;
+                setChanged();
+                notifyObservers(opp);
                 break;
 
         }
