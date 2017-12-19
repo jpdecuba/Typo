@@ -1,10 +1,12 @@
 package Model.Sockets;
 
+import Model.GameServer.Lobby;
 import Model.Multiplayer;
 import Model.Player;
 import Model.Shared.Request;
 
 import java.io.ObjectOutputStream;
+import java.util.List;
 import java.util.Observable;
 
 public class GameClientLogic extends Observable {
@@ -16,6 +18,8 @@ public class GameClientLogic extends Observable {
 
     private Player player;
     private int LobbyUsers;
+
+    private List<Lobby> lobbys;
 
 
     public GameClientLogic(ObjectOutputStream output) {
@@ -40,6 +44,12 @@ public class GameClientLogic extends Observable {
                 LobbyUsers = request.LobbyUsers;
                 setChanged();
                 notifyObservers(LobbyUsers);
+                break;
+            case SendLobby:
+                lobbys = request.lobbys;
+                setChanged();
+                notifyObservers(lobbys);
+                break;
 
         }
 
