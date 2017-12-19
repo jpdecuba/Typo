@@ -125,6 +125,7 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
             Platform.runLater(()->{
                 lblName.setText("Someone has joined: " + (int)arg);
                 //Countdown();
+                GC.StartGame(diff);
             });
 
         }
@@ -154,7 +155,7 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
                                 remaining--;
                                 if (remaining <= 0) {
                                     timeline.stop();
-                                    GC.StartGame(diff);
+
                                 }
                             }
                         }));
