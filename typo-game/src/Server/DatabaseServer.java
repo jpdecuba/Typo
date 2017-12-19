@@ -18,7 +18,7 @@ public class DatabaseServer {
 
     public DatabaseServer() throws Exception {
         ServerSocketFactory socketFactory = (ServerSocketFactory) ServerSocketFactory.getDefault();
-        serverSocket = (ServerSocket) socketFactory.createServerSocket(8700);
+        serverSocket = (ServerSocket) socketFactory.createServerSocket(7676);
     }
 
     private void runServer() {
