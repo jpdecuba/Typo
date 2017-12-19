@@ -4,6 +4,7 @@ import Model.Difficulty;
 import Model.GameServer.Lobby;
 import Model.Shared.Request;
 import Model.Sockets.GameClient;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -52,13 +53,14 @@ public class JoinLobbyController implements Initializable, Observer {
         anchor.setStyle(" -fx-background-image: url('/space.png')");
         //GameClient gc2 = new GameClient();
         GC = new GameClient();
+        GC.gcl.addObserver(this);
         //gc2.CreateLobby(Difficulty.Hard, "abc");
 
-        List<Lobby> LB = GC.GetLobbys();
-        for (Lobby item : LB) {
+         GC.GetLobbys();
+      /*  for (Lobby item : LB) {
             AddLobby(item);
             index++;
-        }
+        }*/
     }
 
     public void AddLobby(Lobby lobby) {
@@ -96,9 +98,12 @@ public class JoinLobbyController implements Initializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
         if (arg.getClass() == ArrayList.class) {
-            ArrayList<Lobby> lobbies = (ArrayList<Lobby>) arg;
-            for (Lobby lobby : lobbies){
-                AddLobby(lobby);
+            ArrayList<Lobby> lobbas = (ArrayList<Lobby>) arg;
+            for (Lobby lobby : lobbas){
+                Platform.runLater(()->{
+                    AddLobby(lobby);
+                    index++;
+                });
             }
         }
     }

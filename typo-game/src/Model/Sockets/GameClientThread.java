@@ -42,10 +42,6 @@ public class GameClientThread extends Thread {
 
             }
 
-            input.close();
-
-            socket.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
