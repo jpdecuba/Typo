@@ -8,7 +8,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.List;
 
-public class DatabaseClient {
+public class DatabaseClient implements Serializable{
 
     private Socket Socket;
 
