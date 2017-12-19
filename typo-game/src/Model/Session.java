@@ -136,5 +136,6 @@ public abstract class Session extends Observable implements Observer, Serializab
     public void setDifficulty(Difficulty difficulty) { this.difficulty = difficulty; }
     public Player getPlayerOne() { return playerOne; }
     public Player getPlayerTwo() { return playerTwo; }
+    public void SetPlayerTwo(Player player){ this.playerTwo = player;}
     public Set getCurrentSet() { return currentSet; }
 }
