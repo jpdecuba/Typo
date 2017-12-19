@@ -3,6 +3,7 @@ package Model;
 import Model.Database.DBSet;
 import Model.Database.Database;
 import Model.Repository.SetRepository;
+import Model.Sockets.GameClient;
 import javafx.beans.Observable;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ public class Multiplayer extends Session implements Serializable{
     //Attributes
     private Database connection;
     private DatabaseClient setRepository;
+    private GameClient gc;
 
     //Constructor
     public Multiplayer(Difficulty difficulty){

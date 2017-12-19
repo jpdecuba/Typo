@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Difficulty;
 import Model.GameServer.Lobby;
+import Model.Multiplayer;
 import Model.Shared.Request;
 import Model.Sockets.GameClient;
 import javafx.animation.KeyFrame;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -45,6 +47,7 @@ public class JoinLobbyController implements Initializable, Observer {
     private List<HBox> lobbies = new ArrayList<>();
     private int index = 0;
     private int remaining = 5;
+    private Multiplayer mp;
 
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
@@ -101,6 +104,19 @@ public class JoinLobbyController implements Initializable, Observer {
         lobbyBox.getChildren().add(lobbies.get(index));
     }
 
+    private void difficulty(Difficulty difficulty, String page, String title) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(page));
+        Parent parent = loader.load();
+        if(difficulty != null)
+        {
+            MultiplayerController controller = loader.getController();
+            controller.setSession(mp, GC);
+        }
+
+        Main.switchPage(parent, title);
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         if (arg.getClass() == ArrayList.class) {
@@ -118,6 +134,14 @@ public class JoinLobbyController implements Initializable, Observer {
             });
 
         }
+        else if (arg.getClass() == Multiplayer.class) {
+            try {
+                this.mp = (Multiplayer) arg;
+                difficulty(mp.getDifficulty(), "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + mp.getDifficulty());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void Countdown(){
@@ -132,6 +156,7 @@ public class JoinLobbyController implements Initializable, Observer {
                                 remaining--;
                                 if (remaining <= 0) {
                                     timeline.stop();
+
                                 }
                             }
                         }));

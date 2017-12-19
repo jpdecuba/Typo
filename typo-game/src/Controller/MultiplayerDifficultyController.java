@@ -48,6 +48,7 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
     private GameClient GC;
     private Difficulty diff;
     private int remaining = 5;
+    private Multiplayer mp;
 
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
@@ -105,9 +106,9 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
         Parent parent = loader.load();
         if(difficulty != null)
         {
-            Multiplayer mp = new Multiplayer(difficulty);
+            mp.setDifficulty(diff);
             MultiplayerController controller = loader.getController();
-            controller.setSession(mp);
+            controller.setSession(mp, GC);
         }
 
         Main.switchPage(parent, title);
@@ -127,7 +128,15 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
             });
 
         }
-        //difficulty(diff, "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + diff);
+        else if (arg.getClass() == Multiplayer.class) {
+            try {
+                this.mp = (Multiplayer) arg;
+                difficulty(diff, "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + diff);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     public void Countdown(){
@@ -142,6 +151,7 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
                                 remaining--;
                                 if (remaining <= 0) {
                                     timeline.stop();
+                                    GC.StartGame(diff);
                                 }
                             }
                         }));

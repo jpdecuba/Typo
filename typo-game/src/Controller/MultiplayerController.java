@@ -3,6 +3,7 @@ package Controller;
 import Model.*;
 import Model.Database.DBHighScore;
 import Model.Repository.HighScoreRepository;
+import Model.Sockets.GameClient;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -64,7 +65,7 @@ public class MultiplayerController implements Initializable, Observer {
     private javafx.scene.image.Image img2 = new javafx.scene.image.Image("/rocket2.gif");
     private javafx.scene.image.Image starImg = new Image("/star.png");
     private GraphicsContext gContext;
-    private Session mp;
+    private Multiplayer mp;
     private Player pl;
     private AnimationTimer loop;
     private AnimationTimer timer;
@@ -78,9 +79,11 @@ public class MultiplayerController implements Initializable, Observer {
     private EventHandler MouseClickEvent;
     private Opportunity Opp = new Opportunity(OppName.Empty, null);
     private boolean mirrored = false;
+    private GameClient gc;
 
-    public void setSession(Session session) {
-        this.mp = session;
+    public void setSession(Multiplayer mp, GameClient gameClient) {
+        this.gc = gameClient;
+        this.mp = mp;
         countdownTimer();
         mp.AddPlayer(new Player());
         mp.AddPlayer(new Player());
