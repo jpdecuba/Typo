@@ -112,6 +112,7 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("test");
         if (arg.getClass() == int.class) {
             lblName.setText("Someone has joined: " + (int)arg);
         }

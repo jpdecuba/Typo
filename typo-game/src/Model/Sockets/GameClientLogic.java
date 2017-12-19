@@ -35,28 +35,28 @@ public class GameClientLogic extends Observable {
         switch (request.msg){
             case GameUpdate:
                 player = request.player;
-                setChanged();
                 notifyObservers(player);
+                setChanged();
                 break;
             case ServergameStart:
                 game = request.sessie;
-                setChanged();
                 notifyObservers(game);
+                setChanged();
                 break;
             case LobbyJoined:
                 LobbyUsers = request.LobbyUsers;
-                setChanged();
                 notifyObservers(LobbyUsers);
+                setChanged();
                 break;
             case SendLobby:
                 lobbys = request.lobbys;
-                setChanged();
                 notifyObservers(lobbys);
+                setChanged();
                 break;
             case OppertunityActive:
                 opp = request.opp;
-                setChanged();
                 notifyObservers(opp);
+                setChanged();
                 break;
 
         }
