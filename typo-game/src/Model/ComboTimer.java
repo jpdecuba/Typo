@@ -1,10 +1,11 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.TimerTask;
 
-class Time{
+class Time implements Serializable{
     private LocalDateTime time;
 
     public void setTime(LocalDateTime time) {
@@ -20,14 +21,14 @@ class Time{
     }
 }
 
-public class ComboTimer {
+public class ComboTimer implements Serializable{
     private Time startTime = new Time();
     private Time endTime = new Time();
 
     private float constTime = 5;
     private float amountOfTime = 0;
 
-    public ComboTimer(){
+    public ComboTimer() {
         startTime.setTime(LocalDateTime.now());
         amountOfTime = constTime;
     }

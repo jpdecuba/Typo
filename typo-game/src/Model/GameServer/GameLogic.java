@@ -203,7 +203,7 @@ public class GameLogic {
                 Multiplayer object = item.StartGame();
                 try {
 
-                    object.Start();
+                    //object.Start();
 
                     Request req = new Request(ServergameStart,object);
 
