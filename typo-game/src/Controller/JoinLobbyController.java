@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,7 +17,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import sample.Main;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +33,19 @@ public class JoinLobbyController implements Initializable {
     VBox lobbyBox;
     @FXML
     ScrollPane scrollPane;
+    @FXML
+    Button BackBtn;
 
     private GameClient GC;
     private List<HBox> lobbies = new ArrayList<>();
     private int index = 0;
 
     @FXML
-    public void btnClick() {
-
+    public void btnClick(ActionEvent e) throws IOException {
+        Button button = (Button) e.getSource();
+        if (button == BackBtn) {
+            Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/NewOnlineView.fxml")), "Mode: Multiplayer");
+        }
     }
 
     @Override
@@ -48,13 +56,13 @@ public class JoinLobbyController implements Initializable {
         //gc2.CreateLobby(Difficulty.Hard, "abc");
 
         List<Lobby> LB = GC.GetLobbys();
-        for(Lobby item : LB){
+        for (Lobby item : LB) {
             AddLobby(item);
             index++;
         }
     }
 
-    public void AddLobby(Lobby lobby){
+    public void AddLobby(Lobby lobby) {
         Label mess = new Label(lobby.getLobbyID());
         Label diff = new Label(lobby.getGameDiff().toString());
         mess.setFont(Font.loadFont("file:typo-game/src/Roboto-Medium.ttf", 16));
@@ -66,13 +74,11 @@ public class JoinLobbyController implements Initializable {
                 GC.JoinLobby(lobby.getGameDiff(), lobby);
             }
         });
-        if (lobby.getGameDiff() == Difficulty.Easy){
+        if (lobby.getGameDiff() == Difficulty.Easy) {
             diff.setTextFill(Paint.valueOf("BLUE"));
-        }
-        else if (lobby.getGameDiff() == Difficulty.Medium){
+        } else if (lobby.getGameDiff() == Difficulty.Medium) {
             diff.setTextFill(Paint.valueOf("GREEN"));
-        }
-        else{
+        } else {
             diff.setTextFill(Paint.valueOf("RED"));
         }
         btn.setStyle("-fx-background-color: black; -fx-background-radius: 15");
