@@ -86,6 +86,7 @@ public class MultiplayerController implements Initializable, Observer {
 
     public void setSession(Multiplayer mp, GameClient gameClient) {
         this.gc = gameClient;
+        gc.gcl.addObserver(this);
         this.mp = mp;
         countdownTimer();
         mp.AddPlayer(new Player());
@@ -289,7 +290,9 @@ public class MultiplayerController implements Initializable, Observer {
             star.setVisible(false);
             mirrored = true;
         } else if (arg.getClass() == Player.class){
-            mp.setPlayerTwo();
+            mp.SetPlayerTwo((Player) arg);
+        } else if (arg.toString().equals("UpdatePlayer")){
+            gc.UpdateGame(mp.getPlayerOne());
         }
     }
 
