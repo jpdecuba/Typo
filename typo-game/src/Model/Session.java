@@ -40,6 +40,8 @@ public abstract class Session extends Observable implements Observer, Serializab
         }
     }
 
+    public abstract void AddSets();
+
     public abstract void Start(); //start the game
     public abstract boolean EndGame(); //Ends the current game
 

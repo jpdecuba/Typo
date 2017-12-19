@@ -20,11 +20,17 @@ public class Multiplayer extends Session implements Serializable{
         setDifficulty(difficulty);
     }
 
-
+    @Override
     public void AddSets(){
-            setRepository = new DatabaseClient(null);
-            try{ sets.addAll(setRepository.getSet(getDifficulty())); } catch(Exception e){ e.printStackTrace(); }
-    }
+        if(Database.checkConnection()) {
+            DatabaseClient setRepository2 = new DatabaseClient(null);
+            try {
+                sets.addAll(setRepository2.getSet(getDifficulty()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        }
 
     //start the game
     @Override
