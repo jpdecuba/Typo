@@ -61,7 +61,7 @@ public class MultiplayerDifficultyController implements Initializable {
                 difficulty(null, "/Views/NewOnlineView.fxml", "TYPO");
             }
             else{
-                //GC.DeleteLobby();
+                GC.RemoveLobby();
                 difficulty(null, "/Views/NewOnlineView.fxml", "TYPO");
 
             }
