@@ -2,25 +2,26 @@ package Model;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
-public abstract class Session extends Observable implements Observer {
+public abstract class Session extends Observable implements Observer, Serializable {
 
     //Attributes
     private Difficulty difficulty;
     public ArrayList<Set> sets = new ArrayList<Set>();
     public ArrayList<Opportunity> opportunities = new ArrayList<Opportunity>();
-    private Set currentSet = null;
-    private Set lastSet = null;
+    protected Set currentSet = null;
+    protected Set lastSet = null;
     private Player playerOne = null;
     private Player playerTwo = null;
-    private Opportunity opp = new Opportunity(OppName.Empty, difficulty);
+    protected Opportunity opp = new Opportunity(OppName.Empty, difficulty);
 
-    private ComboTimer combotimer = new ComboTimer();
+    protected ComboTimer combotimer = new ComboTimer();
 
     //Methods
     public void ActiveOpportunity(Player player,Opportunity opp){
@@ -38,6 +39,8 @@ public abstract class Session extends Observable implements Observer {
                 player.AddLives(1); break;
         }
     }
+
+    public abstract void AddSets();
 
     public abstract void Start(); //start the game
     public abstract boolean EndGame(); //Ends the current game
@@ -133,5 +136,6 @@ public abstract class Session extends Observable implements Observer {
     public void setDifficulty(Difficulty difficulty) { this.difficulty = difficulty; }
     public Player getPlayerOne() { return playerOne; }
     public Player getPlayerTwo() { return playerTwo; }
+    public void SetPlayerTwo(Player player){ this.playerTwo = player;}
     public Set getCurrentSet() { return currentSet; }
 }

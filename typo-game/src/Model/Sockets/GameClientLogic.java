@@ -33,7 +33,7 @@ public class GameClientLogic extends Observable {
 
     public void Msg(Request request){
 
-
+        System.out.println(request.msg);
         switch (request.msg){
             case GameUpdate:
                 player = request.player;

@@ -2,8 +2,11 @@ package Controller;
 
 import Model.Difficulty;
 import Model.GameServer.Lobby;
+import Model.Multiplayer;
 import Model.Shared.Request;
 import Model.Sockets.GameClient;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -19,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 import sample.Main;
 
 import java.io.IOException;
@@ -35,10 +40,14 @@ public class JoinLobbyController implements Initializable, Observer {
     ScrollPane scrollPane;
     @FXML
     Button BackBtn;
+    @FXML
+    Label countdownLbl;
 
     private GameClient GC;
     private List<HBox> lobbies = new ArrayList<>();
     private int index = 0;
+    private int remaining = 5;
+    private Multiplayer mp;
 
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
@@ -95,6 +104,20 @@ public class JoinLobbyController implements Initializable, Observer {
         lobbyBox.getChildren().add(lobbies.get(index));
     }
 
+    private void difficulty(Difficulty difficulty, String page, String title) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(page));
+        Parent parent = loader.load();
+        if(difficulty != null)
+        {
+            mp.setDifficulty(difficulty);
+            MultiplayerController controller = loader.getController();
+            controller.setSession(mp, GC);
+        }
+
+        Main.switchPage(parent, title);
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         if (arg.getClass() == ArrayList.class) {
@@ -106,5 +129,41 @@ public class JoinLobbyController implements Initializable, Observer {
                 });
             }
         }
+        else if (arg.getClass() == Integer.class) {
+            Platform.runLater(()->{
+                //Countdown();
+            });
+
+        }
+        else if (arg.getClass() == Multiplayer.class) {
+            Platform.runLater(()->{
+                try {
+                    this.mp = (Multiplayer) arg;
+                    difficulty(mp.getDifficulty(), "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + mp.getDifficulty());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+        }
+    }
+
+    public void Countdown(){
+        Timeline timeline;
+        timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(1),
+                        new EventHandler<ActionEvent>() {
+                            public void handle(ActionEvent event) {
+                                countdownLbl.setText("Game will start in " + remaining);
+                                remaining--;
+                                if (remaining <= 0) {
+                                    timeline.stop();
+
+                                }
+                            }
+                        }));
+        timeline.playFromStart();
     }
 }

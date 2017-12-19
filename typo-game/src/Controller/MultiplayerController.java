@@ -3,6 +3,7 @@ package Controller;
 import Model.*;
 import Model.Database.DBHighScore;
 import Model.Repository.HighScoreRepository;
+import Model.Sockets.GameClient;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -11,8 +12,10 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -34,6 +37,7 @@ import sample.Main;
 
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
@@ -64,12 +68,12 @@ public class MultiplayerController implements Initializable, Observer {
     private javafx.scene.image.Image img2 = new javafx.scene.image.Image("/rocket2.gif");
     private javafx.scene.image.Image starImg = new Image("/star.png");
     private GraphicsContext gContext;
-    private Session mp;
+    private Multiplayer mp;
     private Player pl;
     private AnimationTimer loop;
     private AnimationTimer timer;
     private int hs = 0;
-    private int remaining = 2;
+    private int remaining = 5;
     private int Lives;
     private MediaPlayer mpl = null;
     private MediaPlayer effect = null;
@@ -78,9 +82,12 @@ public class MultiplayerController implements Initializable, Observer {
     private EventHandler MouseClickEvent;
     private Opportunity Opp = new Opportunity(OppName.Empty, null);
     private boolean mirrored = false;
+    private GameClient gc;
 
-    public void setSession(Session session) {
-        this.mp = session;
+    public void setSession(Multiplayer mp, GameClient gameClient) {
+        this.gc = gameClient;
+        gc.gcl.addObserver(this);
+        this.mp = mp;
         countdownTimer();
         mp.AddPlayer(new Player());
         mp.AddPlayer(new Player());
@@ -188,15 +195,15 @@ public class MultiplayerController implements Initializable, Observer {
     }
 
     private void Rocket(){ //Show The Rocket on the screen
-        double m1 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerOne().getScore();
-        double m2 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerTwo().getScore();
-        gContext.setFont(new Font("Verdana", 30));
-        gContext.fillRect(canvas.getWidth() - 250, 100, 200, 5);
-        gContext.fillRect(canvas.getWidth() - 100, 100, 5, canvas.getHeight() - 200);
-        gContext.fillRect(canvas.getWidth() - 200, 100, 5, canvas.getHeight() - 200);
-        gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
-        gContext.drawImage(img2, canvas.getWidth() - 146, canvas.getHeight() - m1 - 200, 100, 100);
-        gContext.drawImage(img, canvas.getWidth() - 246, canvas.getHeight() - m2 - 200, 100, 100);
+            double m1 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerOne().getScore();
+            double m2 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerTwo().getScore();
+            gContext.setFont(new Font("Verdana", 30));
+            gContext.fillRect(canvas.getWidth() - 250, 100, 200, 5);
+            gContext.fillRect(canvas.getWidth() - 100, 100, 5, canvas.getHeight() - 200);
+            gContext.fillRect(canvas.getWidth() - 200, 100, 5, canvas.getHeight() - 200);
+            gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
+            gContext.drawImage(img2, canvas.getWidth() - 146, canvas.getHeight() - m1 - 200, 100, 100);
+            gContext.drawImage(img, canvas.getWidth() - 246, canvas.getHeight() - m2 - 200, 100, 100);
     }
 
     public void begintimer() {
@@ -259,7 +266,66 @@ public class MultiplayerController implements Initializable, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        if (arg == null) {
+            loop.stop();
+            timer.stop();
+            Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
+            Main.Stage.getScene().removeEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, MouseClickEvent);
+            System.out.println("end game");
+            EndGame();
+        } else if (arg.getClass() == Opportunity.class) {
+            Opp = (Opportunity) arg;
+            Opp.setMinX(50);
+            Opp.setMaxX((int)canvas.getWidth() - 250);
+            Opp.setMinY(150);
+            Opp.setMaxY((int)canvas.getHeight() - 50);
+            star.setVisible(true);
+            star.setX(Opp.getPosX());
+            star.setY(Opp.getPosY());
+            star.setFitWidth(Opp.getWidth());
+            star.setFitHeight(Opp.getLength());
+            mirrored = false;
+        } else if (arg.toString().equals("false")) {
+            Opp = null;
+            star.setVisible(false);
+            mirrored = true;
+        } else if (arg.getClass() == Player.class){
+            Player player =(Player) arg;
+            mp.SetPlayerTwo(player);
+            Platform.runLater(()->{
+                Rocket();
+            });
+        } else if (arg.toString().equals("UpdatePlayer")){
+            gc.UpdateGame(mp.getPlayerOne());
+        }
+    }
 
+
+    //EndGame method switch screen to addhighscore
+    private void EndGame() {
+        if (mp.getPlayerOne().getLives() == 0 || mp.getPlayerTwo().getLives() == 0){
+            effect = new MediaPlayer(sEffect);
+            effect.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
+            effect.play();
+        }
+        mpl.stop();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddHighScoreView.fxml"));
+        Parent parent = null;
+        Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
+        try {
+            parent = loader.load();
+
+            if(mp.getPlayerOne() != null)
+            {
+                AddHighScoreController controller = loader.getController();
+                controller.setPlayer(mp.getPlayerOne(), mp.getDifficulty());
+            }
+
+            Main.switchPage(parent, "Add HighScore");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void startEvents() {

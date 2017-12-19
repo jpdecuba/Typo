@@ -58,6 +58,18 @@ public class GameClient {
         }
     }
 
+
+    public void UpdatePlayer(Player player) {
+
+        try {
+            Request request = new Request(RequestType.GameUpdate,player);
+            output.writeObject(request);
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
     public void CreateLobby(Difficulty diff, String lobbyID) {
 
         try {

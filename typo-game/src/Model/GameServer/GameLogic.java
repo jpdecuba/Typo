@@ -39,6 +39,7 @@ public class GameLogic {
                 break;
             case CreateLobby:
                 CreateLobby(request.lobby);
+                break;
             case StartGame:
                 StartGame();
                 break;
@@ -78,7 +79,7 @@ public class GameLogic {
                 for(Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
                     ObjectOutputStream key = entry.getKey();
                     String value = entry.getValue();
-                    if(value == lobby.LobbyID){
+                    if(value.equals(lobby.getLobbyID()) ){
 
                         key.writeObject(request);
                         key.flush();
@@ -108,6 +109,7 @@ public class GameLogic {
         }
         manger.AddLobby(lobby);
         manger.sockets.put(output,lobby.LobbyID);
+
         this.lobby = lobby;
         System.out.println(manger.getLobbys().size());
     }
@@ -123,7 +125,7 @@ public class GameLogic {
         }
     }
 
-    public void JoinLobby(Lobby lobby, Socket socket){
+    public synchronized void JoinLobby(Lobby lobby, Socket socket){
 
 
         List<Lobby> lobbys =  manger.getLobbys();
@@ -148,7 +150,7 @@ public class GameLogic {
         }*/
     }
 
-    public void UsersJoined(){
+    public synchronized void UsersJoined(){
 
         try {
 
@@ -161,10 +163,13 @@ public class GameLogic {
                     for (Map.Entry<ObjectOutputStream, String> entry : manger.sockets.entrySet()) {
                         ObjectOutputStream key = entry.getKey();
                         String value = entry.getValue();
-                        if (value == lobby.LobbyID) {
+                        System.out.println(value);
+                        if (value.equals(lobby.LobbyID)) {
                             i++;
                         }
                     }
+
+                    System.out.println("aantal gebruikers in list " + i + " list size " + manger.sockets.size());
 
                     Request req = new Request(LobbyJoined, i);
 
@@ -178,6 +183,7 @@ public class GameLogic {
                         }
 
                     }
+                    output.writeObject(req);
                 }
 
 
@@ -197,6 +203,8 @@ public class GameLogic {
                 Multiplayer object = item.StartGame();
                 try {
 
+                    object.AddSets();
+
                     Request req = new Request(ServergameStart,object);
 
                     Map<ObjectOutputStream,String> list = manger.sockets;
@@ -206,7 +214,7 @@ public class GameLogic {
                         for(Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
                             ObjectOutputStream key = entry.getKey();
                             String value = entry.getValue();
-                            if(value == lobby.LobbyID){
+                            if(value.equals(lobby.getLobbyID()) ){
 
                                 key.writeObject(req);
                                 key.flush();
@@ -232,7 +240,7 @@ public class GameLogic {
 
         }
         if (Socket != null) {
-            GameManager.sockets.remove(Socket);
+            GameManager.sockets.remove(output);
         }
         lobby =null;
 
@@ -244,7 +252,7 @@ public class GameLogic {
 
         //If client disconnect to remove there name out the names list and there write outputstream
         if (Socket != null) {
-            GameManager.sockets.remove(Socket);
+            GameManager.sockets.remove(output);
         }
         lobby =null;
 
@@ -260,7 +268,7 @@ public class GameLogic {
                 for(Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
                     ObjectOutputStream key = entry.getKey();
                     String value = entry.getValue();
-                    if(value == lobby.LobbyID){
+                    if(value.equals(lobby.getLobbyID()) ){
                         key.writeObject(request);
                         key.flush();
                     }

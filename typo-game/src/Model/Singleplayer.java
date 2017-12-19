@@ -14,6 +14,11 @@ public class Singleplayer extends Session {
         setDifficulty(difficulty);
     }
 
+    @Override
+    public void AddSets() {
+
+    }
+
     //start the game
     @Override
     public void Start() {
