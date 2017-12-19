@@ -4,6 +4,8 @@ import Model.Difficulty;
 import Model.GameServer.Lobby;
 import Model.Shared.Request;
 import Model.Sockets.GameClient;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 import sample.Main;
 
 import java.io.IOException;
@@ -35,10 +38,13 @@ public class JoinLobbyController implements Initializable, Observer {
     ScrollPane scrollPane;
     @FXML
     Button BackBtn;
+    @FXML
+    Label countdownLbl;
 
     private GameClient GC;
     private List<HBox> lobbies = new ArrayList<>();
     private int index = 0;
+    private int remaining = 5;
 
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
@@ -106,5 +112,29 @@ public class JoinLobbyController implements Initializable, Observer {
                 });
             }
         }
+        else if (arg.getClass() == Integer.class) {
+            Platform.runLater(()->{
+                Countdown();
+            });
+
+        }
+    }
+
+    public void Countdown(){
+        Timeline timeline;
+        timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(1),
+                        new EventHandler<ActionEvent>() {
+                            public void handle(ActionEvent event) {
+                                countdownLbl.setText("Game will start in " + remaining);
+                                remaining--;
+                                if (remaining <= 0) {
+                                    timeline.stop();
+                                }
+                            }
+                        }));
+        timeline.playFromStart();
     }
 }
