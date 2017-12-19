@@ -13,13 +13,14 @@ public class GameClientThread extends Thread {
     protected Socket socket;
 
     private ObjectInputStream input;
-    private DataOutputStream output;
+
 
     private GameClientLogic logic;
 
-    public GameClientThread(Socket socket, GameClientLogic logic) {
-        this.socket = socket;
+    public GameClientThread(ObjectInputStream input, GameClientLogic logic,Socket socket) {
+        this.input = input;
         this.logic = logic;
+        this.socket = socket;
     }
 
     public void run() {
@@ -30,8 +31,6 @@ public class GameClientThread extends Thread {
 
                 System.out.println("in loop");
 
-                output = new DataOutputStream(socket.getOutputStream());
-                input = new ObjectInputStream(socket.getInputStream());
 
                 Object msg = (Object) input.readObject();
 
@@ -43,7 +42,6 @@ public class GameClientThread extends Thread {
 
             }
 
-            output.close();
             input.close();
 
             socket.close();

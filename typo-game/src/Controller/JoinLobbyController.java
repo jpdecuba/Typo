@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Difficulty;
 import Model.GameServer.Lobby;
+import Model.Shared.Request;
 import Model.Sockets.GameClient;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,11 +22,9 @@ import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
-public class JoinLobbyController implements Initializable {
+public class JoinLobbyController implements Initializable, Observer {
 
     @FXML
     AnchorPane anchor;
@@ -92,5 +91,15 @@ public class JoinLobbyController implements Initializable {
         lobbies.get(index).setMinWidth(lobbyBox.getWidth());
         lobbies.get(index).setAlignment(Pos.CENTER_LEFT);
         lobbyBox.getChildren().add(lobbies.get(index));
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (arg.getClass() == ArrayList.class) {
+            ArrayList<Lobby> lobbies = (ArrayList<Lobby>) arg;
+            for (Lobby lobby : lobbies){
+                AddLobby(lobby);
+            }
+        }
     }
 }

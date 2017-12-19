@@ -39,7 +39,8 @@ public class GameClient {
             input = new DataInputStream(socket.getInputStream());
             objectInput = new ObjectInputStream(socket.getInputStream());
             gcl = new GameClientLogic();
-            gct = new GameClientThread(socket, gcl);
+            gct = new GameClientThread(objectInput, gcl, socket);
+            gct.start();
         }
         catch (IOException ioException) {
             ioException.printStackTrace();
@@ -78,18 +79,18 @@ public class GameClient {
             Request request = new Request(null,GetLobby);
             output.writeObject(request);
 
-            Object response = objectInput.readObject();
-            if (response.getClass() == Request.class) {
-                Request responseReq = (Request) response;
-                return responseReq.lobbys;
-            }
+//            Object response = objectInput.readObject();
+//            if (response.getClass() == Request.class) {
+//                Request responseReq = (Request) response;
+//                return responseReq.lobbys;
+//            }
             return null;
 
         } catch (IOException ioException) {
-            ioException.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+            ioException.printStackTrace();}
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
         return null;
     }
 
