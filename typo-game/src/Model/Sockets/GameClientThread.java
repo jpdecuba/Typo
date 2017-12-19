@@ -15,8 +15,11 @@ public class GameClientThread extends Thread {
     private ObjectInputStream input;
     private DataOutputStream output;
 
-    public GameClientThread(Socket socket) {
+    private GameClientLogic logic;
+
+    public GameClientThread(Socket socket, GameClientLogic logic) {
         this.socket = socket;
+        this.logic = logic;
     }
 
     public void run() {
@@ -35,6 +38,8 @@ public class GameClientThread extends Thread {
 
                 if (msg.getClass() == Request.class) {
                     Request item = (Request) msg;
+
+                    logic.Msg(item);
 
 
                 }
