@@ -195,15 +195,15 @@ public class MultiplayerController implements Initializable, Observer {
     }
 
     private void Rocket(){ //Show The Rocket on the screen
-        double m1 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerOne().getScore();
-        double m2 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerTwo().getScore();
-        gContext.setFont(new Font("Verdana", 30));
-        gContext.fillRect(canvas.getWidth() - 250, 100, 200, 5);
-        gContext.fillRect(canvas.getWidth() - 100, 100, 5, canvas.getHeight() - 200);
-        gContext.fillRect(canvas.getWidth() - 200, 100, 5, canvas.getHeight() - 200);
-        gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
-        gContext.drawImage(img2, canvas.getWidth() - 146, canvas.getHeight() - m1 - 200, 100, 100);
-        gContext.drawImage(img, canvas.getWidth() - 246, canvas.getHeight() - m2 - 200, 100, 100);
+            double m1 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerOne().getScore();
+            double m2 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerTwo().getScore();
+            gContext.setFont(new Font("Verdana", 30));
+            gContext.fillRect(canvas.getWidth() - 250, 100, 200, 5);
+            gContext.fillRect(canvas.getWidth() - 100, 100, 5, canvas.getHeight() - 200);
+            gContext.fillRect(canvas.getWidth() - 200, 100, 5, canvas.getHeight() - 200);
+            gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
+            gContext.drawImage(img2, canvas.getWidth() - 146, canvas.getHeight() - m1 - 200, 100, 100);
+            gContext.drawImage(img, canvas.getWidth() - 246, canvas.getHeight() - m2 - 200, 100, 100);
     }
 
     public void begintimer() {
@@ -290,7 +290,11 @@ public class MultiplayerController implements Initializable, Observer {
             star.setVisible(false);
             mirrored = true;
         } else if (arg.getClass() == Player.class){
-            mp.SetPlayerTwo((Player) arg);
+            Player player =(Player) arg;
+            mp.SetPlayerTwo(player);
+            Platform.runLater(()->{
+                Rocket();
+            });
         } else if (arg.toString().equals("UpdatePlayer")){
             gc.UpdateGame(mp.getPlayerOne());
         }
