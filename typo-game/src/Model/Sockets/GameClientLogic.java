@@ -25,6 +25,8 @@ public class GameClientLogic extends Observable {
     private Opportunity opp;
 
 
+
+
     public GameClientLogic() {
 
     }
@@ -58,6 +60,12 @@ public class GameClientLogic extends Observable {
                 setChanged();
                 notifyObservers(opp);
                 break;
+            case GetLobby:
+                lobbys = request.lobbys;
+                setChanged();
+                notifyObservers(lobbys);
+                break;
+                
 
         }
 

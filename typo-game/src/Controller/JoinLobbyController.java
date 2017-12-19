@@ -2,7 +2,9 @@ package Controller;
 
 import Model.Difficulty;
 import Model.GameServer.Lobby;
+import Model.Shared.Request;
 import Model.Sockets.GameClient;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -21,11 +23,9 @@ import sample.Main;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
-public class JoinLobbyController implements Initializable {
+public class JoinLobbyController implements Initializable, Observer {
 
     @FXML
     AnchorPane anchor;
@@ -53,13 +53,14 @@ public class JoinLobbyController implements Initializable {
         anchor.setStyle(" -fx-background-image: url('/space.png')");
         //GameClient gc2 = new GameClient();
         GC = new GameClient();
+        GC.gcl.addObserver(this);
         //gc2.CreateLobby(Difficulty.Hard, "abc");
 
-        List<Lobby> LB = GC.GetLobbys();
-        for (Lobby item : LB) {
+         GC.GetLobbys();
+      /*  for (Lobby item : LB) {
             AddLobby(item);
             index++;
-        }
+        }*/
     }
 
     public void AddLobby(Lobby lobby) {
@@ -92,5 +93,18 @@ public class JoinLobbyController implements Initializable {
         lobbies.get(index).setMinWidth(lobbyBox.getWidth());
         lobbies.get(index).setAlignment(Pos.CENTER_LEFT);
         lobbyBox.getChildren().add(lobbies.get(index));
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (arg.getClass() == ArrayList.class) {
+            ArrayList<Lobby> lobbas = (ArrayList<Lobby>) arg;
+            for (Lobby lobby : lobbas){
+                Platform.runLater(()->{
+                    AddLobby(lobby);
+                    index++;
+                });
+            }
+        }
     }
 }
