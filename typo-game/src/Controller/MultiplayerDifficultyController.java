@@ -120,7 +120,6 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("test");
         if (arg.getClass() == Integer.class) {
             Platform.runLater(()->{
                 lblName.setText("Someone has joined: " + (int)arg);
@@ -139,8 +138,8 @@ public class MultiplayerDifficultyController implements Initializable, Observer 
                 new KeyFrame(Duration.seconds(1),
                         new EventHandler<ActionEvent>() {
                             public void handle(ActionEvent event) {
-                                remaining--;
                                 countdownLbl.setText("Game will start in " + remaining);
+                                remaining--;
                                 if (remaining <= 0) {
                                     timeline.stop();
                                 }
