@@ -69,6 +69,7 @@ public class Multiplayer extends Session implements Serializable{
     //end the game after update
     @Override
     public boolean EndGame() {
+        setChanged(); notifyObservers();
         return false;
     }
 

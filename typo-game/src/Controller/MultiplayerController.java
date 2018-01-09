@@ -202,7 +202,7 @@ public class MultiplayerController implements Initializable, Observer {
 
     @FXML
     public void Quitgame() {
-
+        EndGame();
     }
 
     //return highscore
