@@ -108,18 +108,30 @@ public class MultiplayerController implements Initializable, Observer {
     //Letters Drawing:
     private List<Letter> letters = new ArrayList<Letter>();
     private boolean rotated = false;
+
     //
     private void Letters(int x, int y, boolean rotate) {
-        if(rotate && !rotated){ rotate(gContext, 180, x,y); rotated = true; }
-        else if (!rotate && rotated){ gContext.restore(); rotated = false;}
+        if (rotate && !rotated) {
+            rotate(gContext, 180, x, y);
+            rotated = true;
+        } else if (!rotate && rotated) {
+            gContext.restore();
+            rotated = false;
+        }
         try { //Retrieve the letters from the current set
             letters = mp.getCurrentSet().getCharacters();
             for (Letter item : letters) {
                 gContext.setFont(new Font("Verdana", 50));
                 gContext.fillText(item.getCharacter(), x, y, 100);
-                if(rotated){ x -= 35; } else { x += 35; }
+                if (rotated) {
+                    x -= 35;
+                } else {
+                    x += 35;
+                }
             }
-        } catch (Exception e) { System.out.println("No more letters"); }
+        } catch (Exception e) {
+            System.out.println("No more letters");
+        }
     }
 
     private void rotate(GraphicsContext gc, double angle, double px, double py) {
@@ -127,7 +139,7 @@ public class MultiplayerController implements Initializable, Observer {
         gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
 
-    public void countdownTimer(){
+    public void countdownTimer() {
         Timeline timeline;
         timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -153,7 +165,7 @@ public class MultiplayerController implements Initializable, Observer {
         mpl.play();
     }
 
-    public void SetTimerLabel(){
+    public void SetTimerLabel() {
         timerLabeltimeStamp.setText(String.valueOf(remaining));
         FadeTransition ft = new FadeTransition(Duration.millis(1000), timerLabeltimeStamp);
         ft.setFromValue(1.0);
@@ -180,8 +192,11 @@ public class MultiplayerController implements Initializable, Observer {
         mp.addObserver(this);
         loop.start();
         startEvents();
-        try { mp.Start(); }
-        catch (Exception e) { System.out.println("not working"); }
+        try {
+            mp.Start();
+        } catch (Exception e) {
+            System.out.println("not working");
+        }
         begintimer();
     }
 
@@ -194,24 +209,24 @@ public class MultiplayerController implements Initializable, Observer {
     private int getHighscore() {
         HighScoreRepository hsRep = new HighScoreRepository(new DBHighScore());
         List<HighScore> highscores = hsRep.GetHighScores();
-        for (HighScore h : highscores){
-            if (h.getDiff() == mp.getDifficulty()){
+        for (HighScore h : highscores) {
+            if (h.getDiff() == mp.getDifficulty()) {
                 return h.getScore();
             }
         }
         return 0;
     }
 
-    private void Rocket(){ //Show The Rocket on the screen
-            double m2 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerOne().getScore();
-            double m1 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerTwo().getScore();
-            gContext.setFont(new Font("Verdana", 30));
-            gContext.fillRect(canvas.getWidth() - 250, 100, 200, 5);
-            gContext.fillRect(canvas.getWidth() - 100, 100, 5, canvas.getHeight() - 200);
-            gContext.fillRect(canvas.getWidth() - 200, 100, 5, canvas.getHeight() - 200);
-            gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
-            gContext.drawImage(img2, canvas.getWidth() - 146, canvas.getHeight() - m1 - 200, 100, 100);
-            gContext.drawImage(img, canvas.getWidth() - 246, canvas.getHeight() - m2 - 200, 100, 100);
+    private void Rocket() { //Show The Rocket on the screen
+        double m2 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerOne().getScore();
+        double m1 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerTwo().getScore();
+        gContext.setFont(new Font("Verdana", 30));
+        gContext.fillRect(canvas.getWidth() - 250, 100, 200, 5);
+        gContext.fillRect(canvas.getWidth() - 100, 100, 5, canvas.getHeight() - 200);
+        gContext.fillRect(canvas.getWidth() - 200, 100, 5, canvas.getHeight() - 200);
+        gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
+        gContext.drawImage(img2, canvas.getWidth() - 146, canvas.getHeight() - m1 - 200, 100, 100);
+        gContext.drawImage(img, canvas.getWidth() - 246, canvas.getHeight() - m2 - 200, 100, 100);
     }
 
     public void begintimer() {
@@ -228,7 +243,7 @@ public class MultiplayerController implements Initializable, Observer {
 
     //setvalues change collor based on lives change
     private void SetValues() {
-        if(Lives != mp.getPlayerOne().getLives() && Lives != 0 &&Lives > mp.getPlayerOne().getLives()) {
+        if (Lives != mp.getPlayerOne().getLives() && Lives != 0 && Lives > mp.getPlayerOne().getLives()) {
             Platform.runLater(() -> {
                 effect = new MediaPlayer(sEffect);
                 effect.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
@@ -284,9 +299,9 @@ public class MultiplayerController implements Initializable, Observer {
         } else if (arg.getClass() == Opportunity.class) {
             Opp = (Opportunity) arg;
             Opp.setMinX(50);
-            Opp.setMaxX((int)canvas.getWidth() - 250);
+            Opp.setMaxX((int) canvas.getWidth() - 250);
             Opp.setMinY(150);
-            Opp.setMaxY((int)canvas.getHeight() - 50);
+            Opp.setMaxY((int) canvas.getHeight() - 50);
             star.setVisible(true);
             star.setX(Opp.getPosX());
             star.setY(Opp.getPosY());
@@ -297,14 +312,15 @@ public class MultiplayerController implements Initializable, Observer {
             Opp = null;
             star.setVisible(false);
             mirrored = true;
-        } else if (arg.getClass() == Player.class){
-            Player player =(Player) arg;
-            if (localhost.getHostAddress().equals(player.getIpAddress()))
-            mp.SetPlayerTwo(player);
-            Platform.runLater(()->{
-                Rocket();
-            });
-        } else if (arg.toString().equals("UpdateGame")){
+        } else if (arg.getClass() == Player.class) {
+            Player player = (Player) arg;
+            if (localhost.getHostAddress().equals(player.getIpAddress())) {
+                mp.SetPlayerTwo(player);
+                Platform.runLater(() -> {
+                    Rocket();
+                });
+            }
+        } else if (arg.toString().equals("UpdateGame")) {
             Player p = mp.getPlayerOne();
             gc.UpdateGame(new PlayerData(p.getScore(), p.getLives(), localhost.getHostAddress()));
         }
@@ -313,7 +329,7 @@ public class MultiplayerController implements Initializable, Observer {
 
     //EndGame method switch screen to addhighscore
     private void EndGame() {
-        if (mp.getPlayerOne().getLives() == 0 || mp.getPlayerTwo().getLives() == 0){
+        if (mp.getPlayerOne().getLives() == 0 || mp.getPlayerTwo().getLives() == 0) {
             effect = new MediaPlayer(sEffect);
             effect.setVolume(Double.valueOf(Main.settings.getProperty("Volume")) / 100);
             effect.play();
@@ -325,8 +341,7 @@ public class MultiplayerController implements Initializable, Observer {
         try {
             parent = loader.load();
 
-            if(mp.getPlayerOne() != null)
-            {
+            if (mp.getPlayerOne() != null) {
                 AddHighScoreController controller = loader.getController();
                 controller.setPlayer(mp.getPlayerOne(), mp.getDifficulty());
             }
@@ -339,10 +354,10 @@ public class MultiplayerController implements Initializable, Observer {
     }
 
     public void startEvents() {
-        keypressevent = new EventHandler<KeyEvent>(){
+        keypressevent = new EventHandler<KeyEvent>() {
 
             @Override
-            public void handle(KeyEvent keyEvent){
+            public void handle(KeyEvent keyEvent) {
                 String s = keyEvent.getCode().toString();
                 if (keyEvent.getCode() != KeyCode.SHIFT) {
                     if (keyEvent.getEventType() == KEY_PRESSED) {
@@ -367,11 +382,10 @@ public class MultiplayerController implements Initializable, Observer {
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
 
-                if(Opp != null){
+                if (Opp != null) {
 
-                    ClickOpp((int)event.getX(),(int)event.getY());
+                    ClickOpp((int) event.getX(), (int) event.getY());
                 }
-
 
 
             }
@@ -390,10 +404,11 @@ public class MultiplayerController implements Initializable, Observer {
         mp.TypeCharacter(c, mp.getPlayerOne());
 
     }
-    // ClickOpp methode sends click posion to session
-    public synchronized void ClickOpp(int x,int y) {
 
-        mp.mouseclick(x,y, mp.getPlayerOne());
+    // ClickOpp methode sends click posion to session
+    public synchronized void ClickOpp(int x, int y) {
+
+        mp.mouseclick(x, y, mp.getPlayerOne());
 
     }
 }
