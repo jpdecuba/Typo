@@ -36,7 +36,7 @@ public class GameClientLogic extends Observable {
         System.out.println(request.msg);
         switch (request.msg){
             case GameUpdate:
-                player = request.player;
+                player = new Player(request.player);
                 setChanged();
                 notifyObservers(player);
                 break;
