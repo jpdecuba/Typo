@@ -202,6 +202,7 @@ public class GameLogic {
         for(Lobby item : lobbys ){
             if(item.LobbyID.equals(lobby.getLobbyID()) ){
                 Multiplayer object = item.StartGame();
+                GameManager.Lobbys.remove(item);
                 try {
 
                     object.AddSets();
