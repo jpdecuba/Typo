@@ -3,6 +3,7 @@ package Model.GameServer;
 import Model.Multiplayer;
 import Model.Opportunity;
 import Model.Player;
+import Model.PlayerData;
 import Model.Shared.Request;
 import Model.Shared.RequestType;
 
