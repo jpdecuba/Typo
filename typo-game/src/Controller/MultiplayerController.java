@@ -195,8 +195,8 @@ public class MultiplayerController implements Initializable, Observer {
     }
 
     private void Rocket(){ //Show The Rocket on the screen
-            double m1 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerOne().getScore();
-            double m2 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerTwo().getScore();
+            double m2 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerOne().getScore();
+            double m1 = ((canvas.getHeight() - 300) / hs) * mp.getPlayerTwo().getScore();
             gContext.setFont(new Font("Verdana", 30));
             gContext.fillRect(canvas.getWidth() - 250, 100, 200, 5);
             gContext.fillRect(canvas.getWidth() - 100, 100, 5, canvas.getHeight() - 200);
