@@ -1,10 +1,7 @@
 package Model.Sockets;
 
-import Model.Difficulty;
+import Model.*;
 import Model.GameServer.Lobby;
-import Model.OppName;
-import Model.Opportunity;
-import Model.Player;
 import Model.Shared.Request;
 import Model.Shared.RequestType;
 
@@ -58,7 +55,7 @@ public class GameClient {
         }
     }
 
-
+/*
     public void UpdatePlayer(Player player) {
 
         try {
@@ -69,7 +66,7 @@ public class GameClient {
             ioException.printStackTrace();
         }
     }
-
+*/
     public void CreateLobby(Difficulty diff, String lobbyID) {
 
         try {
