@@ -31,9 +31,10 @@ public class GameLogic {
     }
 
 
-    public void MSG(Request request) {
+
+    public void MSG(Request request){
         System.out.println(request.msg);
-        switch (request.msg) {
+        switch (request.msg){
             case GetLobby:
                 GetLobbys();
                 break;
@@ -67,18 +68,19 @@ public class GameLogic {
     }
 
 
-    public void Opportuntysend(Opportunity opp) {
+    public void Opportuntysend(Opportunity opp){
 
 
         try {
-            Request request = new Request(OppertunityActive, opp);
-            Map<ObjectOutputStream, String> list = manger.sockets;
+            Request request = new Request(OppertunityActive,opp);
+            Map<ObjectOutputStream,String> list = manger.sockets;
 
-            if (list.containsValue(lobby.LobbyID)) {
-                for (Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
+            if(list.containsValue(lobby.LobbyID))
+            {
+                for(Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
                     ObjectOutputStream key = entry.getKey();
                     String value = entry.getValue();
-                    if (value.equals(lobby.getLobbyID())) {
+                    if(value.equals(lobby.getLobbyID()) ){
 
                         key.writeObject(request);
                         key.flush();
@@ -95,26 +97,26 @@ public class GameLogic {
     }
 
 
-    public void CreateLobby(Lobby lobby) {
+    public void CreateLobby(Lobby lobby){
         System.out.println(manger.getLobbys().size());
 
-        List<Lobby> lobbys = manger.getLobbys();
+        List<Lobby> lobbys =  manger.getLobbys();
 
 
-        for (Lobby item : lobbys) {
-            if (item.getGame() == lobby.getGame()) {
+        for(Lobby item : lobbys){
+            if(item.getGame() == lobby.getGame()){
                 lobby.LobbyID = lobby.LobbyID + String.valueOf(lobbys.size());
             }
         }
         manger.AddLobby(lobby);
-        manger.sockets.put(output, lobby.LobbyID);
+        manger.sockets.put(output,lobby.LobbyID);
 
         this.lobby = lobby;
         System.out.println(manger.getLobbys().size());
     }
 
-    public void GetLobbys() {
-        List<Lobby> lobbys = manger.getLobbys();
+    public void GetLobbys(){
+       List<Lobby> lobbys =  manger.getLobbys();
         Request request = new Request(RequestType.SendLobby, lobbys);
         try {
             output.writeObject(request);
@@ -124,15 +126,15 @@ public class GameLogic {
         }
     }
 
-    public synchronized void JoinLobby(Lobby lobby, Socket socket) {
+    public synchronized void JoinLobby(Lobby lobby, Socket socket){
 
 
-        List<Lobby> lobbys = manger.getLobbys();
+        List<Lobby> lobbys =  manger.getLobbys();
 
 
-        for (Lobby item : lobbys) {
-            if (item.LobbyID.equals(lobby.getLobbyID())) {
-                manger.sockets.put(output, lobby.LobbyID);
+        for(Lobby item : lobbys){
+            if(item.LobbyID.equals(lobby.getLobbyID()) ){
+                manger.sockets.put(output,lobby.LobbyID);
                 this.lobby = item;
                 UsersJoined();
                 break;
@@ -149,14 +151,14 @@ public class GameLogic {
         }*/
     }
 
-    public synchronized void UsersJoined() {
+    public synchronized void UsersJoined(){
 
         try {
 
 
             int i = 0;
             for (Lobby item : GameManager.Lobbys) {
-                if (item.LobbyID.equals(lobby.getLobbyID())) {
+                if(item.LobbyID.equals(lobby.getLobbyID()) ) {
 
 
                     for (Map.Entry<ObjectOutputStream, String> entry : manger.sockets.entrySet()) {
@@ -194,25 +196,26 @@ public class GameLogic {
 
     }
 
-    public void StartGame() {
+    public void StartGame(){
 
-        List<Lobby> lobbys = manger.getLobbys();
-        for (Lobby item : lobbys) {
-            if (item.LobbyID.equals(lobby.getLobbyID())) {
+        List<Lobby> lobbys =  manger.getLobbys();
+        for(Lobby item : lobbys ){
+            if(item.LobbyID.equals(lobby.getLobbyID()) ){
                 Multiplayer object = item.StartGame();
                 try {
 
                     object.AddSets();
 
-                    Request req = new Request(ServergameStart, object);
+                    Request req = new Request(ServergameStart,object);
 
-                    Map<ObjectOutputStream, String> list = manger.sockets;
+                    Map<ObjectOutputStream,String> list = manger.sockets;
 
-                    if (list.containsValue(lobby.LobbyID)) {
-                        for (Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
+                    if(list.containsValue(lobby.LobbyID))
+                    {
+                        for(Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
                             ObjectOutputStream key = entry.getKey();
                             String value = entry.getValue();
-                            if (value.equals(lobby.getLobbyID())) {
+                            if(value.equals(lobby.getLobbyID()) ){
 
                                 key.writeObject(req);
                                 key.flush();
@@ -240,7 +243,7 @@ public class GameLogic {
         if (Socket != null) {
             GameManager.sockets.remove(output);
         }
-        lobby = null;
+        lobby =null;
 
 
     }
@@ -252,20 +255,21 @@ public class GameLogic {
         if (Socket != null) {
             GameManager.sockets.remove(output);
         }
-        lobby = null;
+        lobby =null;
 
     }
 
-    public void UpdateGame(PlayerData player) {
+    public void UpdateGame(PlayerData player){
         try {
-            Request request = new Request(GameUpdate, player);
-            Map<ObjectOutputStream, String> list = manger.sockets;
+            Request request = new Request(GameUpdate,player);
+            Map<ObjectOutputStream,String> list = manger.sockets;
 
-            if (list.containsValue(lobby.LobbyID)) {
-                for (Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
+            if(list.containsValue(lobby.LobbyID))
+            {
+                for(Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
                     ObjectOutputStream key = entry.getKey();
                     String value = entry.getValue();
-                    if (value.equals(lobby.getLobbyID())) {
+                    if(value.equals(lobby.getLobbyID()) ){
                         key.writeObject(request);
                         key.flush();
                     }
