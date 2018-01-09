@@ -265,7 +265,7 @@ public class GameLogic {
                 for (Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
                     ObjectOutputStream key = entry.getKey();
                     String value = entry.getValue();
-                    if (key != output) {
+                    if (key.equals(output)) {
                         if (value.equals(lobby.getLobbyID())) {
                             key.writeObject(request);
                             key.flush();
