@@ -64,7 +64,7 @@ public class Request implements Serializable {
         this.score = score;
     }
     //Request for sending player object en lobbyID
-    public Request(RequestType msg,PlayerData player,String lobbyID) {
+    public Request(RequestType msg, PlayerData player, String lobbyID) {
         this.msg = msg;
         this.player = player;
         this.LobbyID = lobbyID;
