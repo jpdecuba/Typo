@@ -40,27 +40,27 @@
                                     <children>
                                         <Button fx:id="btnMode" mnemonicParsing="false" onAction="#btnModeClick" prefHeight="60.0" prefWidth="220" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Singleplayer" textAlignment="CENTER">
                                             <font>
-                                                <Font ipAddress="Tahoma Bold" size="16.0" />
+                                                <Font name="Tahoma Bold" size="16.0" />
                                             </font>
                                         </Button>
                                         <Button fx:id="btnBeginner_Easy" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick" prefHeight="60.0" prefWidth="220" style="-fx-background-color: b0c4de; -fx-background-radius: 10;" text="Beginner" textAlignment="CENTER">
                                             <font>
-                                                <Font ipAddress="Tahoma Bold" size="16.0" />
+                                                <Font name="Tahoma Bold" size="16.0" />
                                             </font>
                                         </Button>
                                         <Button fx:id="btnExpert_Normal" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick" prefHeight="60.0" prefWidth="220" style="-fx-background-color: b0c4de; -fx-background-radius: 10;" text="Expert" textAlignment="CENTER">
                                             <font>
-                                                <Font ipAddress="Tahoma Bold" size="16.0" />
+                                                <Font name="Tahoma Bold" size="16.0" />
                                             </font>
                                         </Button>
                                         <Button fx:id="btnHard" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick" prefHeight="60.0" prefWidth="220" style="-fx-background-color: b0c4de; -fx-background-radius: 10;" text="Hard" textAlignment="CENTER">
                                             <font>
-                                                <Font ipAddress="Tahoma Bold" size="16.0" />
+                                                <Font name="Tahoma Bold" size="16.0" />
                                             </font>
                                         </Button>
                                         <Button fx:id="btnBack" alignment="CENTER" mnemonicParsing="false" onAction="#btnBackClick" prefHeight="60.0" prefWidth="220" style="-fx-background-color: b0c4de; -fx-background-radius: 10;" text="Back" textAlignment="CENTER">
                                             <font>
-                                                <Font ipAddress="Tahoma Bold" size="16.0" />
+                                                <Font name="Tahoma Bold" size="16.0" />
                                             </font>
                                         </Button>
                                     </children>

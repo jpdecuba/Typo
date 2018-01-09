@@ -11,17 +11,17 @@
             <children>
                 <Button fx:id="JoinBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick" prefHeight="60.0" prefWidth="540.0" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Join Game">
                     <font>
-                        <Font ipAddress="Tahoma Bold" size="16.0" />
+                        <Font name="Tahoma Bold" size="16.0" />
                     </font>
                 </Button>
                 <Button fx:id="CreateBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick" prefHeight="60.0" prefWidth="540.0" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Create Game">
                     <font>
-                        <Font ipAddress="Tahoma Bold" size="16.0" />
+                        <Font name="Tahoma Bold" size="16.0" />
                     </font>
                 </Button>
                 <Button fx:id="BackBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick" prefHeight="60.0" prefWidth="540.0" style="-fx-background-color: Black; -fx-background-radius: 15;" text="Back" textFill="LIGHTSTEELBLUE">
                     <font>
-                        <Font ipAddress="Tahoma Bold" size="16.0" />
+                        <Font name="Tahoma Bold" size="16.0" />
                     </font>
                 </Button>
             </children>
