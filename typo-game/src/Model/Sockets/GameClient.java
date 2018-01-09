@@ -33,7 +33,7 @@ public class GameClient {
     public void OpenSocket() {
         try {
             socketFactory = (SocketFactory) SocketFactory.getDefault();
-            socket = (Socket) socketFactory.createSocket("145.93.40.223", 4444);
+            socket = (Socket) socketFactory.createSocket("145.93.133.91", 4444);
 
             output = new ObjectOutputStream(socket.getOutputStream());
             input = new DataInputStream(socket.getInputStream());

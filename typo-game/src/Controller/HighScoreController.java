@@ -206,7 +206,7 @@ public class HighScoreController implements Initializable {
         initChatBox();
         scrollPane.vvalueProperty().bind(chatBox.heightProperty());
         try {
-            client = new Client("145.93.48.132", 1099, this);
+            client = new Client("145.93.133.91", 1099, this);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
