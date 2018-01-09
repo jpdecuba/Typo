@@ -296,7 +296,7 @@ public class MultiplayerController implements Initializable, Observer {
                 Rocket();
             });
         } else if (arg.toString().equals("UpdateGame")){
-            gc.UpdatePlayer(mp.getPlayerOne());
+            gc.UpdateGame(mp.getPlayerOne());
         }
     }
 

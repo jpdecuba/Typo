@@ -258,7 +258,7 @@ public class GameLogic {
 
     }
 
-    public void UpdateGame(Player player){
+    public void UpdateGame(PlayerData player){
         try {
             Request request = new Request(GameUpdate,player);
             Map<ObjectOutputStream,String> list = manger.sockets;

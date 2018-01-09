@@ -136,7 +136,7 @@ public class GameClient {
         }
     }
 
-    public void UpdateGame(Player player) {
+    public void UpdateGame(PlayerData player) {
         try {
             Request request = new Request(RequestType.GameUpdate,player);
             output.writeObject(request);
