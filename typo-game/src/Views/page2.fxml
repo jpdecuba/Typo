@@ -14,7 +14,7 @@
         <HBox alignment="TOP_LEFT" layoutX="14.0" layoutY="12.0" prefHeight="85.0" prefWidth="500.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
             <Label fx:id="ScoreLbl" text="SCORE: " textFill="white">
                 <font>
-                    <Font name="Verdana Bold" size="50.0" />
+                    <Font ipAddress="Verdana Bold" size="50.0" />
                 </font>
             </Label>
         </HBox>
@@ -23,26 +23,26 @@
             <children>
                   <Label fx:id="ComboLbl" text="COMBO: " textFill="white">
                       <font>
-                          <Font name="Verdana Bold" size="25.0" />
+                          <Font ipAddress="Verdana Bold" size="25.0" />
                       </font>
                   </Label>
                 <Label fx:id="LivesLB1" text="Lives: " textFill="white">
                     <font>
-                        <Font name="Verdana Bold" size="25.0" />
+                        <Font ipAddress="Verdana Bold" size="25.0" />
                     </font>
                 </Label>
             </children>
          </VBox>
             <Button fx:id="Quit" alignment="CENTER_RIGHT" mnemonicParsing="false" onMouseClicked="#Quitgame" style="-fx-background-color: #b0c4de; -fx-background-radius: 5;" text="Quit">
                 <font>
-                    <Font name="Verdana Bold" size="12.0" />
+                    <Font ipAddress="Verdana Bold" size="12.0" />
                 </font>
             </Button>
         </HBox>
         <Canvas fx:id="canvas" height="469.0" width="482.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
         <Label fx:id="timerLabeltimeStamp" alignment="CENTER" text="" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" textFill="white">
             <font>
-                <Font name="Verdana Bold" size="80.0" />
+                <Font ipAddress="Verdana Bold" size="80.0" />
             </font>
         </Label>
       <ImageView fx:id="star" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />

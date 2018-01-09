@@ -38,7 +38,9 @@ import sample.Main;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.*;
 import java.util.List;
 
@@ -83,8 +85,14 @@ public class MultiplayerController implements Initializable, Observer {
     private Opportunity Opp = new Opportunity(OppName.Empty, null);
     private boolean mirrored = false;
     private GameClient gc;
+    private InetAddress localhost;
 
     public void setSession(Multiplayer mp, GameClient gameClient) {
+        try {
+            localhost = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         this.gc = gameClient;
         gc.gcl.addObserver(this);
         this.mp = mp;
@@ -297,7 +305,7 @@ public class MultiplayerController implements Initializable, Observer {
             });
         } else if (arg.toString().equals("UpdateGame")){
             Player p = mp.getPlayerOne();
-            gc.UpdateGame(new PlayerData(p.getScore(), p.getLives()));
+            gc.UpdateGame(new PlayerData(p.getScore(), p.getLives(), localhost.getHostAddress()));
         }
     }
 

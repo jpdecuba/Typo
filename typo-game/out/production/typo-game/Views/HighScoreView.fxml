@@ -33,7 +33,7 @@
                                         text="Singleplayer" textFill="LIGHTSTEELBLUE"
                                         textAlignment="CENTER">
                                     <font>
-                                        <Font name="Tahoma Bold" size="16.0"/>
+                                        <Font ipAddress="Tahoma Bold" size="16.0"/>
                                     </font>
                                 </Button>
                                 <Button fx:id="btnBeginner_Easy" alignment="CENTER" mnemonicParsing="false"
@@ -43,7 +43,7 @@
                                         text="Beginner"
                                         textAlignment="CENTER">
                                     <font>
-                                        <Font name="Tahoma Bold" size="16.0"/>
+                                        <Font ipAddress="Tahoma Bold" size="16.0"/>
                                     </font>
                                 </Button>
                                 <Button fx:id="btnExpert_Normal" alignment="CENTER" mnemonicParsing="false"
@@ -53,7 +53,7 @@
                                         text="Expert"
                                         textAlignment="CENTER">
                                     <font>
-                                        <Font name="Tahoma Bold" size="16.0"/>
+                                        <Font ipAddress="Tahoma Bold" size="16.0"/>
                                     </font>
                                 </Button>
                                 <Button fx:id="btnHard" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick"
@@ -62,7 +62,7 @@
                                         text="Hard"
                                         textAlignment="CENTER">
                                     <font>
-                                        <Font name="Tahoma Bold" size="16.0"/>
+                                        <Font ipAddress="Tahoma Bold" size="16.0"/>
                                     </font>
                                 </Button>
                                 <Button fx:id="btnBack" alignment="CENTER" mnemonicParsing="false"
@@ -72,7 +72,7 @@
                                         textFill="LIGHTSTEELBLUE"
                                         textAlignment="CENTER">
                                     <font>
-                                        <Font name="Tahoma Bold" size="16.0"/>
+                                        <Font ipAddress="Tahoma Bold" size="16.0"/>
                                     </font>
                                 </Button>
                             </children>

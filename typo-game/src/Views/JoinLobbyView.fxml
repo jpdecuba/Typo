@@ -23,7 +23,7 @@
                         prefWidth="262.5" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Refresh"
                         textAlignment="CENTER">
                     <font>
-                        <Font name="Tahoma Bold" size="16.0"/>
+                        <Font ipAddress="Tahoma Bold" size="16.0"/>
                     </font>
                 </Button>
                 <Button fx:id="BackBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick"
@@ -31,7 +31,7 @@
                         prefWidth="262.5" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Back"
                         textAlignment="CENTER">
                     <font>
-                        <Font name="Tahoma Bold" size="16.0"/>
+                        <Font ipAddress="Tahoma Bold" size="16.0"/>
                     </font>
                 </Button>
                 <ScrollPane fx:id="scrollPane" minHeight="500">
