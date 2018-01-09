@@ -11,7 +11,7 @@ public class Player extends Observable implements Serializable{
 	private int combo;
 	private int tempPoints;
 	private ArrayList<HighScore> highScores;
-
+    private String ipAddress;
 	private SyncLock LIVES = new SyncLock();
     private SyncLock COMBO = new SyncLock();
 
@@ -29,6 +29,7 @@ public class Player extends Observable implements Serializable{
     public Player(PlayerData pd){
 	    this.score = pd.getScore();
 	    this.lives = pd.getLives();
+	    this.ipAddress = pd.getIpAddress();
 	    combo = 1;
 	    tempPoints = 0;
     }
@@ -96,5 +97,9 @@ public class Player extends Observable implements Serializable{
     }
     public void setHighScores(ArrayList<HighScore> highScores) {
         this.highScores = highScores;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
     }
 }

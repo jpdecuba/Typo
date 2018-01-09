@@ -299,6 +299,7 @@ public class MultiplayerController implements Initializable, Observer {
             mirrored = true;
         } else if (arg.getClass() == Player.class){
             Player player =(Player) arg;
+            if (localhost.getHostAddress().equals(player.getIpAddress()))
             mp.SetPlayerTwo(player);
             Platform.runLater(()->{
                 Rocket();

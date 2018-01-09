@@ -9,9 +9,7 @@ import Model.Shared.RequestType;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Map;
 
@@ -27,16 +25,9 @@ public class GameLogic {
 
     private Lobby lobby;
 
-    private InetAddress localhost;
-
     public GameLogic(Socket socket, ObjectOutputStream output) {
         Socket = socket;
         this.output = output;
-        try {
-            localhost = InetAddress.getLocalHost();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -274,12 +265,11 @@ public class GameLogic {
                 for (Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {
                     ObjectOutputStream key = entry.getKey();
                     String value = entry.getValue();
-                    if (!player.getIpAddress().equals(localhost.getHostAddress())) {
-                        if (value.equals(lobby.getLobbyID())) {
-                            key.writeObject(request);
-                            key.flush();
-                        }
+                    if (value.equals(lobby.getLobbyID())) {
+                        key.writeObject(request);
+                        key.flush();
                     }
+
                 }
 
             }
