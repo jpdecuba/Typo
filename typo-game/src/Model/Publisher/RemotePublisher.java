@@ -19,15 +19,6 @@ public class RemotePublisher extends UnicastRemoteObject
 
     // Local publisher
     Publisher publisher;
-    
-    /**
-     * Default no-arg constructor for RemotePublisher.
-     * 
-     * @throws RemoteException
-     */
-    public RemotePublisher() throws RemoteException {
-        publisher = new Publisher();
-    }
 
     /**
      * Constructor for RemotePublisher. Property listeners may subscribe to given properties.

@@ -11,9 +11,6 @@ public class GameManager {
     public static List<Lobby> getLobbys() {
         return Lobbys;
     }
-
-
-
     public static void AddLobby(Lobby lobby){
         Lobbys.add(lobby);
     }
