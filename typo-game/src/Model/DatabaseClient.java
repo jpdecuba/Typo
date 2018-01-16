@@ -140,11 +140,8 @@ public class DatabaseClient implements Serializable{
         Request RequestSets = new Request(null, RequestType.SetHighScore,highScore);
 
 
-
-
         output.writeObject(RequestSets);
-
-        //BufferedInputStream socketRead = new BufferedInputStream(Socket.getInputStream());
+        output.flush();
         return true;
 
 

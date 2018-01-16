@@ -64,6 +64,7 @@ public class DBServer {
 
                 case SetHighScore:
                     boolean high = hsRep.Save(object.score);
+                    break;
                     //output.writeObject(high);
                 default:
                     output.writeObject("Message needs to contain request enum");
