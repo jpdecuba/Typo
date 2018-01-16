@@ -54,25 +54,15 @@ public class Opportunity extends Observable implements Serializable {
     }
     public int getPosY() {
         Random r = new Random();
-        posY = r.nextInt(maxY-minY)+minY;
+        posY = r.nextInt(maxY - minY) + minY;
         return posY;
     }
-
-    //set position
-    public void setPosX(int posX) { this.posX = posX; }
-    public void setPosY(int posY) { this.posY = posY; }
 
     //properties scale
     public int getWidth() { return width; }
     public int getLength() { return length; }
-    public void setWidth(int width) { this.width = width; }
-    public void setLength(int length) { this.length = length; }
 
     //properties Boundry
-    public int getMinX() { return minX; }
-    public int getMinY() { return minY; }
-    public int getMaxX() { return maxX; }
-    public int getMaxY() { return maxY; }
     public void setMinX(int minX) { this.minX = minX; }
     public void setMinY(int minY) { this.minY = minY; }
     public void setMaxX(int maxX) { this.maxX = maxX; }

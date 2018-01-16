@@ -9,12 +9,8 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 
 public class GameClientThread extends Thread {
-
     protected Socket socket;
-
     private ObjectInputStream input;
-
-
     private GameClientLogic logic;
 
     public GameClientThread(ObjectInputStream input, GameClientLogic logic,Socket socket) {
@@ -24,30 +20,20 @@ public class GameClientThread extends Thread {
     }
 
     public void run() {
-
         try {
 
             while (socket.isConnected()) {
-
                 System.out.println("in loop");
-
-
                 Object msg = (Object) input.readObject();
-
-
                 if (msg.getClass() == Request.class) {
                     Request item = (Request) msg;
                     logic.Msg(item);
                 }
-
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
-
-
 }

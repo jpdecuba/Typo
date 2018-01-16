@@ -109,15 +109,15 @@ public class MultiplayerController implements Initializable, Observer {
     private List<Letter> letters = new ArrayList<Letter>();
     private boolean rotated = false;
 
-    //
     private void Letters(int x, int y, boolean rotate) {
         if (rotate && !rotated) {
             rotate(gContext, 180, x, y);
             rotated = true;
-        } else if (!rotate && rotated) {
+        } else if (rotate && rotated) {
             gContext.restore();
             rotated = false;
         }
+
         try { //Retrieve the letters from the current set
             letters = mp.getCurrentSet().getCharacters();
             for (Letter item : letters) {
@@ -268,9 +268,7 @@ public class MultiplayerController implements Initializable, Observer {
         ScoreLbl.setText("SCORE: " + String.valueOf(mp.getPlayerOne().getScore()));
         ComboLbl.setText("COMBO: " + String.valueOf(mp.getPlayerOne().getCombo()));
         LivesLB1.setText("LIVES:    " + String.valueOf(mp.getPlayerOne().getLives()));
-
         Lives = mp.getPlayerOne().getLives();
-
     }
 
     @Override
@@ -340,14 +338,11 @@ public class MultiplayerController implements Initializable, Observer {
         Main.Stage.getScene().removeEventFilter(KeyEvent.ANY, keypressevent);
         try {
             parent = loader.load();
-
             if (mp.getPlayerOne() != null) {
                 AddHighScoreController controller = loader.getController();
                 controller.setPlayer(mp.getPlayerOne(), mp.getDifficulty());
             }
-
             Main.switchPage(parent, "Add HighScore");
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -364,14 +359,11 @@ public class MultiplayerController implements Initializable, Observer {
                         if (s.contains("DIGIT")) {
                             s = s.substring(5);
                         }
-
                         if (keyEvent.isShiftDown()) {
                             s.toUpperCase();
                         } else {
                             s = s.toLowerCase();
                         }
-                        //char c = s.charAt(0);
-                        //System.out.println("key = " + s);
                         typechar(s);
                     }
                 }
@@ -381,34 +373,22 @@ public class MultiplayerController implements Initializable, Observer {
         MouseClickEvent = new EventHandler<javafx.scene.input.MouseEvent>() {
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
-
                 if (Opp != null) {
-
                     ClickOpp((int) event.getX(), (int) event.getY());
                 }
-
-
             }
-
-
         };
-
         Main.Stage.getScene().addEventFilter(KeyEvent.ANY, keypressevent);
         Main.Stage.getScene().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_CLICKED, MouseClickEvent);
-
     }
 
     // typechar methode sends typed char to session
     public synchronized void typechar(String c) {
-
         mp.TypeCharacter(c, mp.getPlayerOne());
-
     }
 
     // ClickOpp methode sends click posion to session
     public synchronized void ClickOpp(int x, int y) {
-
         mp.mouseclick(x, y, mp.getPlayerOne());
-
     }
 }

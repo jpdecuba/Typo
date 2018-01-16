@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public class Player extends Observable implements Serializable{
-
 	private int score;
 	private int lives;
 	private int combo;
 	private int tempPoints;
 	private ArrayList<HighScore> highScores;
     private String ipAddress;
-	private SyncLock LIVES = new SyncLock();
-    private SyncLock COMBO = new SyncLock();
+	private Object LIVES;
+    private Object COMBO;
 
 	public int getScore() {
 		return this.score;
@@ -98,7 +97,6 @@ public class Player extends Observable implements Serializable{
     public void setHighScores(ArrayList<HighScore> highScores) {
         this.highScores = highScores;
     }
-
     public String getIpAddress() {
         return ipAddress;
     }

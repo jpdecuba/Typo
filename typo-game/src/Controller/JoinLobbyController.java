@@ -60,16 +60,9 @@ public class JoinLobbyController implements Initializable, Observer {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         anchor.setStyle(" -fx-background-image: url('/space.png')");
-        //GameClient gc2 = new GameClient();
         GC = new GameClient();
         GC.gcl.addObserver(this);
-        //gc2.CreateLobby(Difficulty.Hard, "abc");
-
-         GC.GetLobbys();
-      /*  for (Lobby item : LB) {
-            AddLobby(item);
-            index++;
-        }*/
+        GC.GetLobbys();
     }
 
     public void AddLobby(Lobby lobby) {
@@ -114,7 +107,6 @@ public class JoinLobbyController implements Initializable, Observer {
             MultiplayerController controller = loader.getController();
             controller.setSession(mp, GC);
         }
-
         Main.switchPage(parent, title);
     }
 
@@ -129,12 +121,6 @@ public class JoinLobbyController implements Initializable, Observer {
                 });
             }
         }
-        else if (arg.getClass() == Integer.class) {
-            Platform.runLater(()->{
-                //Countdown();
-            });
-
-        }
         else if (arg.getClass() == Multiplayer.class) {
             Platform.runLater(()->{
                 try {
@@ -144,26 +130,6 @@ public class JoinLobbyController implements Initializable, Observer {
                     e.printStackTrace();
                 }
             });
-
         }
-    }
-
-    public void Countdown(){
-        Timeline timeline;
-        timeline = new Timeline();
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.getKeyFrames().add(
-                new KeyFrame(Duration.seconds(1),
-                        new EventHandler<ActionEvent>() {
-                            public void handle(ActionEvent event) {
-                                countdownLbl.setText("Game will start in " + remaining);
-                                remaining--;
-                                if (remaining <= 0) {
-                                    timeline.stop();
-
-                                }
-                            }
-                        }));
-        timeline.playFromStart();
     }
 }

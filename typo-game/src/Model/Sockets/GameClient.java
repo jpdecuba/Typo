@@ -46,61 +46,30 @@ public class GameClient {
     }
 
     public void StartGame(Difficulty diff) {
-
         try {
             Request request = new Request(diff,RequestType.StartGame);
             output.writeObject(request);
-
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
     }
 
-/*
-    public void UpdatePlayer(Player player) {
-
-        try {
-            Request request = new Request(RequestType.GameUpdate,player);
-            output.writeObject(request);
-
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-    }
-*/
     public void CreateLobby(Difficulty diff, String lobbyID) {
-
         try {
             Request request = new Request(CreateLobby,new Lobby(diff,lobbyID));
             output.writeObject(request);
-
-           /* String response = input.readUTF();
-            System.out.println(response);*/
-
-
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
     }
 
     public List<Lobby> GetLobbys () {
-
         try {
             Request request = new Request(null,GetLobby);
             output.writeObject(request);
-
-//            Object response = objectInput.readObject();
-//            if (response.getClass() == Request.class) {
-//                Request responseReq = (Request) response;
-//                return responseReq.lobbys;
-//            }
             return null;
-
         } catch (IOException ioException) {
             ioException.printStackTrace();}
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
         return null;
     }
 
@@ -108,7 +77,6 @@ public class GameClient {
         try {
             Request request = new Request(diff,JoinLobby,lobby);
             output.writeObject(request);
-
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -118,7 +86,6 @@ public class GameClient {
         try {
             Request request = new Request(LeaveLobby);
             output.writeObject(request);
-
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -128,7 +95,6 @@ public class GameClient {
         try {
             Request request = new Request(RemoveLobby);
             output.writeObject(request);
-
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -138,7 +104,6 @@ public class GameClient {
         try {
             Request request = new Request(RequestType.GameUpdate,player);
             output.writeObject(request);
-
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }

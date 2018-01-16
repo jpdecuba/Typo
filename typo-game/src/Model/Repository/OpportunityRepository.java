@@ -8,12 +8,10 @@ import java.util.*;
 
 public class OpportunityRepository {
     private IOpportunityContext context;
-
     public OpportunityRepository(IOpportunityContext context)
     {
         this.context = context;
     }
-
     public List<Opportunity> GetOpportunities(Difficulty difficulty)
     {
         return context.GetOpportunities(difficulty);

@@ -28,8 +28,8 @@ public abstract class Session extends Observable implements Observer, Serializab
         int combo = 0;
         //give the active opportunity in effect on which player???
         switch (opp.getName()) {
-            /*case Reverse: throw new NotImplementedException();
-            case Spotlight: throw new NotImplementedException();*/
+            case Reverse: ; break; //tell other players client to reverse characters
+            //case Spotlight: throw new NotImplementedException();
             case ComboBonus: //Give the player +1 to combo
                 combo = player.getCombo(); player.setCombo(combo++);
             case ComboPunish: //give other player -1 to combo
