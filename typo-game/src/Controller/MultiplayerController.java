@@ -366,7 +366,6 @@ public class MultiplayerController implements Initializable, Observer {
                         }
 
                         if (keyEvent.isShiftDown()) {
-                            s.toUpperCase();
                         } else {
                             s = s.toLowerCase();
                         }

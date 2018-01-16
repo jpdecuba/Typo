@@ -68,8 +68,10 @@ public class Player extends Observable implements Serializable{
     }
 
 
-	public synchronized int getCombo() {
+	public int getCombo() {
+        synchronized (COMBO) {
             return this.combo;
+        }
 	}
 
     //set Combo only wen it's higher then 1 or 1
@@ -82,7 +84,9 @@ public class Player extends Observable implements Serializable{
 	}
 
 	public int getTempPoints() {
-		return this.tempPoints;
+        synchronized(this) {
+            return this.tempPoints;
+        }
 	}
 
 	//add points to tempPoints

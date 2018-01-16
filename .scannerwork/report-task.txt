@@ -1,6 +1,6 @@
-projectKey=my:Typo
+projectKey=my:TypoGame
 serverUrl=http://localhost:9000
 serverVersion=6.7.0.33306
-dashboardUrl=http://localhost:9000/dashboard/index/my:Typo
-ceTaskId=AV_ejCDi2kgmsscOVHNj
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AV_ejCDi2kgmsscOVHNj
+dashboardUrl=http://localhost:9000/dashboard/index/my:TypoGame
+ceTaskId=AWD_D9VVil3t3fSPpr2D
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWD_D9VVil3t3fSPpr2D

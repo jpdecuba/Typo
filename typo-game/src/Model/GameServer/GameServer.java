@@ -10,7 +10,9 @@ import java.net.Socket;
 public class GameServer {
     private ServerSocket serverSocket;
     private Socket socket = null;
-    private GameManager manger;
+
+
+    private boolean start = true;
 
     public GameServer() throws Exception {
         ServerSocketFactory socketFactory = (ServerSocketFactory) ServerSocketFactory.getDefault();
@@ -21,7 +23,7 @@ public class GameServer {
 
         System.err.println("Waiting for connections...");
 
-        while (true) {
+        while (start) {
             try {
                 System.out.println("wait");
                 socket = serverSocket.accept();

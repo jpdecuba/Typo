@@ -14,6 +14,8 @@ public class DatabaseServer {
     private ServerSocket serverSocket;
     private Socket socket = null;
 
+    private boolean start = true;
+
     private ExecutorService executor = Executors.newCachedThreadPool();
 
     public DatabaseServer() throws Exception {
@@ -24,7 +26,7 @@ public class DatabaseServer {
     private void runServer() {
         System.err.println("Waiting for connections...");
 
-        while (true) {
+        while (start) {
             try {
                 System.out.println("waiting for client...");
                 socket = serverSocket.accept();

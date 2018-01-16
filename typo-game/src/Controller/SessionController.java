@@ -341,7 +341,6 @@ public class SessionController implements Initializable, Observer {
                         }
 
                         if (keyEvent.isShiftDown()) {
-                            s.toUpperCase();
                         } else {
                             s = s.toLowerCase();
                         }
