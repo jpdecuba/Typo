@@ -81,7 +81,6 @@ public class JoinLobbyController implements Initializable, Observer {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (lobby.)
                 GC.JoinLobby(lobby.getGameDiff(), lobby);
             }
         });
