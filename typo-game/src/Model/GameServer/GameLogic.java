@@ -242,7 +242,7 @@ public class GameLogic {
 
         }
         if (Socket != null) {
-            //GameManager.sockets.remove(output);
+            GameManager.sockets.remove(output);
         }
         lobby =null;
 
