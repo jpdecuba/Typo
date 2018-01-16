@@ -2,6 +2,7 @@ package Model;
 
 import Model.Shared.Request;
 import Model.Shared.RequestType;
+import sample.Main;
 
 import javax.net.SocketFactory;
 import java.io.*;
@@ -21,7 +22,7 @@ public class DatabaseClient implements Serializable{
         }else {
             SocketFactory socketFactory = (SocketFactory) SocketFactory.getDefault();
             try {
-                this.Socket = (Socket) socketFactory.createSocket("145.93.133.91", 7676);
+                this.Socket = (Socket) socketFactory.createSocket(Main.settings.getProperty("ip"), 7676);
             } catch (IOException e) {
                 e.printStackTrace();
             }

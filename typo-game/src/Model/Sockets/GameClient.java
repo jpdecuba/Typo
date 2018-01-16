@@ -4,6 +4,7 @@ import Model.*;
 import Model.GameServer.Lobby;
 import Model.Shared.Request;
 import Model.Shared.RequestType;
+import sample.Main;
 
 import javax.net.SocketFactory;
 import java.io.*;
@@ -30,7 +31,7 @@ public class GameClient {
     public void OpenSocket() {
         try {
             socketFactory = (SocketFactory) SocketFactory.getDefault();
-            socket = (Socket) socketFactory.createSocket("145.93.133.91", 4444);
+            socket = (Socket) socketFactory.createSocket(Main.settings.getProperty("ip"), 4444);
 
             output = new ObjectOutputStream(socket.getOutputStream());
             input = new DataInputStream(socket.getInputStream());
