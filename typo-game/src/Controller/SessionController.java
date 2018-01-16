@@ -108,11 +108,11 @@ public class SessionController implements Initializable, Observer {
             star.setY(Opp.getPosY());
             star.setFitWidth(Opp.getWidth());
             star.setFitHeight(Opp.getLength());
-            mirrored = false;
+            //mirrored = false;
         } else if (arg.toString().equals("false")) {
             Opp = null;
             star.setVisible(false);
-            mirrored = true;
+            //mirrored = true;
             }
         }
 
@@ -230,22 +230,23 @@ public class SessionController implements Initializable, Observer {
     private boolean rotated = false;
     //
     private void Letters(int x, int y, boolean rotate) {
-        if(rotate && !rotated){ rotate(gContext, 180, x,y); rotated = true; }
-        else if (!rotate && rotated){ gContext.restore(); rotated = false;}
+       // if(rotate && !rotated){ rotate(gContext, 180, x,y); rotated = true; }
+       // else if (!rotate && rotated){ gContext.restore(); rotated = false;}
         try { //Retrieve the letters from the current set
             letters = sp.getCurrentSet().getCharacters();
             for (Letter item : letters) {
                 gContext.setFont(new Font("Verdana", 50));
                 gContext.fillText(item.getCharacter(), x, y, 100);
-                if(rotated){ x -= 35; } else { x += 35; }
+               // if(rotated){ x -= 35; } else { x += 35; }
             }
         } catch (Exception e) { System.out.println("No more letters"); }
     }
-
+/*
     private void rotate(GraphicsContext gc, double angle, double px, double py) {
         Rotate r = new Rotate(angle, px, py);
         gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
+*/
 
     private void Rocket(){ //Show The Rocket on the screen
         double r = ((canvas.getHeight() - 300) / hs) * sp.getPlayerOne().getScore();
