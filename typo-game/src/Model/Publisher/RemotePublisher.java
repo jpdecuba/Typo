@@ -14,8 +14,7 @@ import java.util.List;
  * 
  * @author Frank Peeters, Nico Kuijpers
  */
-public class RemotePublisher extends UnicastRemoteObject 
-    implements IRemotePublisherForListener, IRemotePublisherForDomain {
+public class RemotePublisher extends UnicastRemoteObject implements IRemotePublisherForListener, IRemotePublisherForDomain {
 
     // Local publisher
     Publisher publisher;
