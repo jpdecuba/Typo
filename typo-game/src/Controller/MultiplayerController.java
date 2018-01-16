@@ -207,8 +207,8 @@ public class MultiplayerController implements Initializable, Observer {
 
     //return highscore
     private int getHighscore() {
-        HighScoreRepository hsRep = new HighScoreRepository(new DBHighScore());
-        List<HighScore> highscores = hsRep.GetHighScores();
+        DatabaseClient hsRep = new DatabaseClient(null);
+        List<HighScore> highscores = hsRep.getHighScore();
         for (HighScore h : highscores) {
             if (h.getDiff() == mp.getDifficulty()) {
                 return h.getScore();
