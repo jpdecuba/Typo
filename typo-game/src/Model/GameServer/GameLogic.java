@@ -201,6 +201,7 @@ public class GameLogic {
         List<Lobby> lobbys =  manger.getLobbys();
         for(Lobby item : lobbys ){
             if(item.LobbyID.equals(lobby.getLobbyID()) ){
+                item.setFull();
                 Multiplayer object = item.StartGame();
                 //GameManager.Lobbys.remove(item);
                 try {

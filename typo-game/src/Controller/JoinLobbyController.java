@@ -56,8 +56,8 @@ public class JoinLobbyController implements Initializable, Observer {
         Button button = (Button) e.getSource();
         if (button == backBtn) {
             Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/NewOnlineView.fxml")), "Mode: Multiplayer");
-        }else if(button == refreshBtn){
-            Platform.runLater(()->{
+        } else if (button == refreshBtn) {
+            Platform.runLater(() -> {
                 index = 0;
                 lobbyBox.getChildren().clear();
                 lobbies.clear();
@@ -125,10 +125,12 @@ public class JoinLobbyController implements Initializable, Observer {
         if (arg.getClass() == ArrayList.class) {
             ArrayList<Lobby> lobbas = (ArrayList<Lobby>) arg;
             for (Lobby lobby : lobbas) {
-                Platform.runLater(() -> {
-                    AddLobby(lobby);
-                    index++;
-                });
+                if (!lobby.getFull()) {
+                    Platform.runLater(() -> {
+                        AddLobby(lobby);
+                        index++;
+                    });
+                }
             }
         } else if (arg.getClass() == Integer.class) {
             Platform.runLater(() -> {

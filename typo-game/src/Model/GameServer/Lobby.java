@@ -8,10 +8,11 @@ import com.sun.scenario.effect.impl.prism.PrImage;
 import java.io.Serializable;
 import java.net.Socket;
 
-public class Lobby implements Serializable{
+public class Lobby implements Serializable {
 
 
     private Difficulty gameDiff;
+    private boolean full = false;
 
     protected String LobbyID;
 
@@ -21,9 +22,6 @@ public class Lobby implements Serializable{
         this.gameDiff = gameDiff;
         LobbyID = lobbyID;
     }
-
-
-
 
 
     public Difficulty getGame() {
@@ -42,6 +40,14 @@ public class Lobby implements Serializable{
         LobbyID = lobbyID;
     }
 
+    public boolean getFull() {
+        return full;
+    }
+
+    public void setFull() {
+        full = true;
+    }
+
 
     public Multiplayer StartGame() {
         Multiplayer item = new Multiplayer(gameDiff);
@@ -49,9 +55,6 @@ public class Lobby implements Serializable{
         return item;
 
     }
-
-
-
 
 
 }

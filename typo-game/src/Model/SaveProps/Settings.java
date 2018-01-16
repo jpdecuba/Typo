@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Properties;
 
 public class Settings {
+
     public static boolean SaveSettings(Properties settings)
     {
         if(settings == null)
