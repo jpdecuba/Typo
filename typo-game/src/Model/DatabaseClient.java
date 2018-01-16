@@ -1,5 +1,6 @@
 package Model;
 
+import Model.SaveProps.Settings;
 import Model.Shared.Request;
 import Model.Shared.RequestType;
 
@@ -21,7 +22,7 @@ public class DatabaseClient implements Serializable{
         }else {
             SocketFactory socketFactory = (SocketFactory) SocketFactory.getDefault();
             try {
-                this.Socket = (Socket) socketFactory.createSocket("145.93.134.27", 7676);
+                this.Socket = (Socket) socketFactory.createSocket(Settings.GetIp(), 7676);
             } catch (IOException e) {
                 e.printStackTrace();
             }
