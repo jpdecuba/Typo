@@ -4,6 +4,16 @@ import java.io.*;
 import java.util.Properties;
 
 public class Settings {
+
+
+
+
+    public static String GetIp(){
+
+        return "145.93.134.27";
+    }
+
+
     public static boolean SaveSettings(Properties settings)
     {
         if(settings == null)
@@ -44,4 +54,11 @@ public class Settings {
             return null;
         }
     }
+
+
+
+
+
+
+
 }
