@@ -12,7 +12,8 @@ public class DBSet implements ISetContext{
     @Override
     public List<Set> GetSets(Difficulty difficulty) {
         List<Set> sets = new ArrayList<>();
-        try {
+        try
+        {
             String sql = "SELECT letters FROM [Set] WHERE Difficultyid = ?";
             PreparedStatement statement = Database.connection().prepareStatement(sql);
             statement.setInt(1, difficulty.getValue());
@@ -22,7 +23,9 @@ public class DBSet implements ISetContext{
                 sets.add(new Set(rs.getString(1)));
             }
             return sets;
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex)
+        {
             ex.printStackTrace();
         }
         return null;

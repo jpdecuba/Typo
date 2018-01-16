@@ -14,11 +14,16 @@ import javafx.stage.StageStyle;
 import java.util.Properties;
 
 public class Main extends Application {
+
     public static Stage Stage;
     public static Properties settings;
 
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+
         settings = Settings.GetProperties();
         if(settings == null)
         {
@@ -35,8 +40,10 @@ public class Main extends Application {
         });
     }
 
-    public static void changeSettings(Properties properties, Parent parent) {
-        if(Settings.SaveSettings(properties)) {
+    public static void changeSettings(Properties properties, Parent parent)
+    {
+        if(Settings.SaveSettings(properties))
+        {
             settings = properties;
             applySettings(parent);
         }

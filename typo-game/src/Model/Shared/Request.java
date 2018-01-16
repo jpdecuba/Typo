@@ -8,14 +8,22 @@ import java.util.List;
 
 public class Request implements Serializable {
     public Difficulty diff;
+
     public RequestType msg;
+
     public HighScore score;
     public Lobby lobby;
+
     public String LobbyID;
+
     public PlayerData player;
+
     public List<Lobby> lobbys;
+
     public Multiplayer sessie;
+
     public int LobbyUsers;
+
     public Opportunity opp;
 
     public Request(RequestType msg) {
@@ -84,4 +92,6 @@ public class Request implements Serializable {
         this.msg = msg;
         this.sessie = sessie;
     }
+
+
 }

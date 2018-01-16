@@ -19,6 +19,7 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
     private HighScoreController controller;
 
     public Client(String ipAddress, int portNumber, HighScoreController controller) throws RemoteException {
+
         this.controller = controller;
         // Locate registry at IP address and port number
         try {
@@ -39,7 +40,9 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
         }
 
         // Print contents of registry
-        if (registry != null) { printContentsRegistry(); }
+        if (registry != null) {
+            printContentsRegistry();
+        }
 
         // Bind student administration using registry
         if (registry != null) {
@@ -56,6 +59,7 @@ public class Client extends UnicastRemoteObject implements IRemotePropertyListen
                 chat = null;
             }
         }
+
         // Print result binding student administration
         if (chat != null) {
             System.out.println("Client: " + bindingName + " bound");

@@ -5,7 +5,6 @@ import Model.Database.DBHighScore;
 import Model.DatabaseClient;
 import Model.Difficulty;
 import Model.HighScore;
-import Model.SaveProps.Settings;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -207,7 +206,7 @@ public class HighScoreController implements Initializable {
         initChatBox();
         scrollPane.vvalueProperty().bind(chatBox.heightProperty());
         try {
-            client = new Client(Settings.GetIP(), 1099, this);
+            client = new Client("145.93.134.27", 1099, this);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

@@ -51,6 +51,13 @@ public class Publisher {
      * Number of threads in thread pool.
      */
     private final int nrThreads = 10;
+    
+    /**
+     * Default no-arg constructor for Publisher.
+     */
+    public Publisher() {
+        this(new String[0]);
+    }
 
     /**
      * Constructor for Publisher. Property listeners may subscribe to given
@@ -229,9 +236,16 @@ public class Publisher {
      * @param property empty string not allowed
      */
     public void registerProperty(String property) {
-        if (property.equals("")) { throw new RuntimeException("a property cannot be an empty string"); }
-        if (propertyListeners.containsKey(property)) { return; }
+        if (property.equals("")) {
+            throw new RuntimeException("a property cannot be an empty string");
+        }
+        
+        if (propertyListeners.containsKey(property)) {
+            return;
+        }
+        
         propertyListeners.put(property, Collections.synchronizedList(new ArrayList<>()));
+        
         setPropertiesString();
     }
 
@@ -266,6 +280,7 @@ public class Publisher {
                 }
             }
         }
+        
         setPropertiesString();
     }
 

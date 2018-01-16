@@ -25,7 +25,19 @@ public class SocketModel implements Serializable{
         this.player = player;
     }
 
+    public Opportunity getOpp() {
+        return opp;
+    }
+
+    public void setOpp(Opportunity opp) {
+        this.opp = opp;
+    }
+
     public String getCmd() {
         return cmd;
+    }
+
+    public void setCmd(String cmd) {
+        this.cmd = cmd;
     }
 }

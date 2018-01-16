@@ -86,6 +86,7 @@ public class Multiplayer extends Session implements Serializable{
             }
         }
         if (!sets.isEmpty()){
+            //Random r = new Random();
             currentSet = sets.get(index++);
             StringBuilder s = new StringBuilder();
             for (Letter l: currentSet.getCharacters()) { s.append(l.getCharacter()); }

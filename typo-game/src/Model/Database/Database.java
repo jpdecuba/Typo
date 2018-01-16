@@ -9,14 +9,28 @@ public class Database {
     public static Connection connection(){
         Connection con = null;
         Properties properties = new Properties();
-        try {
+        try
+        {
             InputStream input = new FileInputStream(new File("config.properties").getAbsolutePath());
             properties.load(input);
+            
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             con = DriverManager.getConnection(properties.getProperty("path"), properties.getProperty("user"), properties.getProperty("password"));
-        } catch (FileNotFoundException ex) {
+        }
+        catch (FileNotFoundException ex)
+        {
             ex.printStackTrace();
-        } catch (IOException|ClassNotFoundException|SQLException ex){
+        }
+        catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+        catch (ClassNotFoundException ex)
+        {
+            ex.printStackTrace();
+        }
+        catch (SQLException ex)
+        {
             ex.printStackTrace();
         }
         return con;
@@ -29,7 +43,8 @@ public class Database {
         try{
             PreparedStatement statement = con.prepareStatement(query);
             isOpen = true;
-        } catch (Exception e){
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
         return isOpen;

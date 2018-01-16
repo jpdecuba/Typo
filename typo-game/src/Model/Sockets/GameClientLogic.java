@@ -11,17 +11,28 @@ import java.util.List;
 import java.util.Observable;
 
 public class GameClientLogic extends Observable {
+
+
     private ObjectOutputStream output;
+
     private Multiplayer game;
+
     private Player player;
     private int LobbyUsers;
+
     private List<Lobby> lobbys;
+
     private Opportunity opp;
 
+
+
+
     public GameClientLogic() {
+
     }
 
     public void Msg(Request request){
+
         System.out.println(request.msg);
         switch (request.msg){
             case GameUpdate:
@@ -54,6 +65,9 @@ public class GameClientLogic extends Observable {
                 setChanged();
                 notifyObservers(lobbys);
                 break;
+                
+
         }
+
     }
 }

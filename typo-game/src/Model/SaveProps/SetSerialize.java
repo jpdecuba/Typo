@@ -10,23 +10,31 @@ import java.io.*;
 import java.util.List;
 
 public class SetSerialize {
-    public static boolean SaveSets() {
-        try {
+    public static boolean SaveSets()
+    {
+        try
+        {
             DatabaseClient set = new DatabaseClient(null);
+
             List<Set> setsBeginner = set.getSet(Difficulty.Beginner);
             List<Set> setsExpert = set.getSet(Difficulty.Expert);
-            if(setsBeginner == null || setsExpert == null){ return false; }
+            if(setsBeginner == null || setsExpert == null)
+                return false;
+
             File file = new File(System.getenv("APPDATA") + "\\Typo");
             file.mkdirs();
             if(Write(file.getCanonicalPath() + "\\BeginnerSets.ser", setsBeginner) && Write(file.getCanonicalPath() + "\\ExpertSets.ser", setsExpert))
                     return true;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
         return false;
     }
 
-    private static boolean Write(String path, List<Set> sets) {
+    private static boolean Write(String path, List<Set> sets)
+    {
         try {
             FileOutputStream fileOut = new FileOutputStream(path);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -34,29 +42,36 @@ public class SetSerialize {
             out.close();
             fileOut.close();
             return true;
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
             return false;
         }
     }
 
-    public static List<Set> GetSets(Difficulty difficulty) {
-        try {
+    public static List<Set> GetSets(Difficulty difficulty)
+    {
+        try
+        {
             String path = System.getenv("APPDATA") + "\\Typo\\";
-            if(difficulty == Difficulty.Beginner){
+            if(difficulty == Difficulty.Beginner)
                 path += "BeginnerSets.ser";
-            } else {
+            else
                 path += "ExpertSets.ser";
-            }
             FileInputStream fileIn = new FileInputStream(path);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             List<Set> sets = (List<Set>) in.readObject();
             in.close();
             fileIn.close();
             return sets;
-        } catch (IOException ex) {
+        }
+        catch (IOException ex)
+        {
             ex.printStackTrace();
-        } catch (ClassNotFoundException c) {
+        }
+        catch (ClassNotFoundException c)
+        {
             System.out.println("List<Set> class not found");
             c.printStackTrace();
         }

@@ -20,6 +20,28 @@ import java.util.List;
  * @author Frank Peeters, Nico Kuijpers
  */
 public interface IRemotePublisherForDomain extends Remote {
+    
+    /**
+     * Register property. Register property at this publisher. From now on
+     * listeners can subscribe to this property. Nothing changes in case given
+     * property was already registered. 
+     *
+     * @param property empty string not allowed
+     * @throws RemoteException
+     */
+    public void registerProperty(String property) throws RemoteException;
+
+    /**
+     * Unregister property. Unregister property at this publisher. From now on
+     * listeners subscribed to this property will not be informed on changes.
+     * In case given property is null-String, all properties (except null) will
+     * be unregistered.
+     *
+     * @param property registered property at this publisher
+     * @throws RemoteException
+     */
+    public void unregisterProperty(String property) throws RemoteException;
+
     /**
      * Inform all listeners subscribed to property. All listeners subscribed
      * to given property as well as all listeners subscribed to null-String

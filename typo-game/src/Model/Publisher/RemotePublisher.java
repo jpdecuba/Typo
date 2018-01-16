@@ -14,10 +14,20 @@ import java.util.List;
  * 
  * @author Frank Peeters, Nico Kuijpers
  */
-public class RemotePublisher extends UnicastRemoteObject implements IRemotePublisherForListener, IRemotePublisherForDomain {
+public class RemotePublisher extends UnicastRemoteObject 
+    implements IRemotePublisherForListener, IRemotePublisherForDomain {
 
     // Local publisher
     Publisher publisher;
+    
+    /**
+     * Default no-arg constructor for RemotePublisher.
+     * 
+     * @throws RemoteException
+     */
+    public RemotePublisher() throws RemoteException {
+        publisher = new Publisher();
+    }
 
     /**
      * Constructor for RemotePublisher. Property listeners may subscribe to given properties.
@@ -35,10 +45,36 @@ public class RemotePublisher extends UnicastRemoteObject implements IRemotePubli
         publisher.subscribeRemoteListener(listener, property);
     }
     
+    /**
+     * Subscribe local property listener. Local listener will be subscribed to
+     * given property. In case given property is the null-String, the listener
+     * will be subscribed to all properties.
+     *
+     * @param listener local property listener to be subscribed
+     * @param property null-String allowed
+     */
+    public void subscribeLocalListener(ILocalPropertyListener listener, String property) {
+
+        // Subscribe local property listener
+        publisher.subscribeLocalListener(listener, property);
+    }
+    
     @Override
     public void unsubscribeRemoteListener(IRemotePropertyListener listener, String property)
             throws RemoteException {
         publisher.unsubscribeRemoteListener(listener, property);
+    }
+    
+    /**
+     * Unsubscribe local property listener. Listener will be unsubscribed from 
+     * given property. In case given property is the null-string, the listener 
+     * will be unsubscribed from all properties.
+     *
+     * @param listener property listener to be unsubscribed
+     * @param property null-String allowed
+     */
+    public void unsubscribeLocalListener(ILocalPropertyListener listener, String property) {
+        publisher.unsubscribeLocalListener(listener, property);
     }
 
     @Override
