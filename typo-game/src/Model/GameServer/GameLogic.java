@@ -49,8 +49,10 @@ public class GameLogic {
                 break;
             case RemoveLobby:
                 RemoveLobby();
+                break;
             case LobbyJoined:
                 UsersJoined();
+                break;
             case OppertunityActive:
                 Opportuntysend(request.opp);
                 break;

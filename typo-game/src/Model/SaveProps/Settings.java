@@ -36,4 +36,8 @@ public class Settings {
             return null;
         }
     }
+
+    public static String GetIP(){
+        return "145.93.134.27";
+    }
 }

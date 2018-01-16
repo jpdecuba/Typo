@@ -2,6 +2,7 @@ package Model.Sockets;
 
 import Model.*;
 import Model.GameServer.Lobby;
+import Model.SaveProps.Settings;
 import Model.Shared.Request;
 import Model.Shared.RequestType;
 import sample.Main;
@@ -31,7 +32,7 @@ public class GameClient {
     public void OpenSocket() {
         try {
             socketFactory = (SocketFactory) SocketFactory.getDefault();
-            socket = (Socket) socketFactory.createSocket(Main.settings.getProperty("ip"), 4444);
+            socket = (Socket) socketFactory.createSocket(Settings.GetIP(), 4444);
 
             output = new ObjectOutputStream(socket.getOutputStream());
             input = new DataInputStream(socket.getInputStream());
