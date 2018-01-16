@@ -179,20 +179,14 @@ public class GameLogic {
 
     public void RemoveLobby() {
         //If client disconnect to remove there name out the names list and there write outputstream
-        if (lobby != null) {
-            GameManager.Lobbys.remove(lobby);
-        }
-        if (Socket != null) {
-            GameManager.sockets.remove(output);
-        }
+        if (lobby != null) { GameManager.Lobbys.remove(lobby); }
+        if (Socket != null) { GameManager.sockets.remove(output); }
         lobby =null;
     }
 
     public void LeaveLobby() {
         //If client disconnect to remove there name out the names list and there write outputstream
-        if (Socket != null) {
-            GameManager.sockets.remove(output);
-        }
+        if (Socket != null) { GameManager.sockets.remove(output); }
         lobby =null;
     }
 
@@ -200,7 +194,6 @@ public class GameLogic {
         try {
             Request request = new Request(GameUpdate,player);
             Map<ObjectOutputStream,String> list = manger.sockets;
-
             if(list.containsValue(lobby.LobbyID))
             {
                 for(Map.Entry<ObjectOutputStream, String> entry : list.entrySet()) {

@@ -44,9 +44,7 @@ public class DBOpportunity implements IOpportunityContext {
                 opportunities.add(new Opportunity(name, Difficulty.valueOf(rs.getInt(2))));
             }
             return opportunities;
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
