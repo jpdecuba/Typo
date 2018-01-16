@@ -33,8 +33,11 @@ public abstract class Session extends Observable implements Observer, Serializab
             case ComboBonus: //Give the player +1 to combo
                 combo = player.getCombo(); player.setCombo(combo++);
             case ComboPunish: //give other player -1 to combo
-                if(player == playerOne){ combo = playerTwo.getCombo(); playerTwo.setCombo(combo--);}
-                else if(player == playerTwo){ combo = playerOne.getCombo(); playerOne.setCombo(combo--);} break;
+                try{
+                    if(player == playerOne){ combo = playerTwo.getCombo(); playerTwo.setCombo(combo--);}
+                    else if(player == playerTwo){ combo = playerOne.getCombo(); playerOne.setCombo(combo--);} break;
+                } catch (NullPointerException npe) {
+                }
             case ExtraLife: //Give player +1 to life
                 player.AddLives(1); break;
         }

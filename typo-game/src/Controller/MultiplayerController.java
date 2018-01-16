@@ -125,6 +125,7 @@ public class MultiplayerController implements Initializable, Observer {
             for (Letter item : letters) {
                 gContext.setFont(new Font("Verdana", 50));
                 gContext.fillText(item.getCharacter(), x, y, 100);
+                x += 35;
                 /*
                 if (rotated) {
                     x -= 35;
