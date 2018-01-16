@@ -33,8 +33,11 @@ public abstract class Session extends Observable implements Observer, Serializab
             case ComboBonus: //Give the player +1 to combo
                 combo = player.getCombo(); player.setCombo(combo++);
             case ComboPunish: //give other player -1 to combo
-                if(player == playerOne){ combo = playerTwo.getCombo(); playerTwo.setCombo(combo--);}
-                else if(player == playerTwo){ combo = playerOne.getCombo(); playerOne.setCombo(combo--);} break;
+                try{
+                    if(player == playerOne){ combo = playerTwo.getCombo(); playerTwo.setCombo(combo--);}
+                    else if(player == playerTwo){ combo = playerOne.getCombo(); playerOne.setCombo(combo--);} break;
+                } catch (NullPointerException npe) {
+                }
             case ExtraLife: //Give player +1 to life
                 player.AddLives(1); break;
         }
@@ -120,13 +123,13 @@ public abstract class Session extends Observable implements Observer, Serializab
 
     public void SpawnOpportunity(){
         Random rng = new Random();
-        int n = rng.nextInt(4);
+        int n = rng.nextInt(3);
         //n = 3;
         switch (n){
             case 0: opp = new Opportunity(OppName.ExtraLife, difficulty); break;
             case 1: opp = new Opportunity(OppName.ComboBonus, difficulty); break;
-            case 999: opp = new Opportunity(OppName.ComboPunish, difficulty); break;
-            case 3: opp = new Opportunity(OppName.Reverse, difficulty); break;
+            case 2: opp = new Opportunity(OppName.ComboPunish, difficulty); break;
+            //case 3: opp = new Opportunity(OppName.Reverse, difficulty); break;
         }
 
     }

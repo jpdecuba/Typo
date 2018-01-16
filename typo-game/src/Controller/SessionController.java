@@ -53,6 +53,8 @@ public class SessionController implements Initializable, Observer {
     @FXML
     AnchorPane anchor;
     @FXML
+    AnchorPane buyscreen;
+    @FXML
     Button Quit;
     @FXML
     Label ScoreLbl;
@@ -79,7 +81,7 @@ public class SessionController implements Initializable, Observer {
 
     private EventHandler keypressevent;
     private EventHandler MouseClickEvent;
-
+    private boolean bought = false;
     private int remaining = 5;
     private MediaPlayer mp = null;
     private MediaPlayer effect = null;
@@ -108,11 +110,11 @@ public class SessionController implements Initializable, Observer {
             star.setY(Opp.getPosY());
             star.setFitWidth(Opp.getWidth());
             star.setFitHeight(Opp.getLength());
-            mirrored = false;
+            //mirrored = false;
         } else if (arg.toString().equals("false")) {
             Opp = null;
             star.setVisible(false);
-            mirrored = true;
+            //mirrored = true;
             }
         }
 
@@ -230,30 +232,42 @@ public class SessionController implements Initializable, Observer {
     private boolean rotated = false;
     //
     private void Letters(int x, int y, boolean rotate) {
-        if(rotate && !rotated){ rotate(gContext, 180, x,y); rotated = true; }
-        else if (!rotate && rotated){ gContext.restore(); rotated = false;}
+       // if(rotate && !rotated){ rotate(gContext, 180, x,y); rotated = true; }
+       // else if (!rotate && rotated){ gContext.restore(); rotated = false;}
         try { //Retrieve the letters from the current set
             letters = sp.getCurrentSet().getCharacters();
             for (Letter item : letters) {
                 gContext.setFont(new Font("Verdana", 50));
                 gContext.fillText(item.getCharacter(), x, y, 100);
-                if(rotated){ x -= 35; } else { x += 35; }
+                x += 35;
+               // if(rotated){ x -= 35; } else { x += 35; }
             }
         } catch (Exception e) { System.out.println("No more letters"); }
     }
-
+/*
     private void rotate(GraphicsContext gc, double angle, double px, double py) {
         Rotate r = new Rotate(angle, px, py);
         gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
+*/
 
     private void Rocket(){ //Show The Rocket on the screen
         double r = ((canvas.getHeight() - 300) / hs) * sp.getPlayerOne().getScore();
-        gContext.setFont(new Font("Verdana", 30));
-        gContext.fillRect(canvas.getWidth() - 200, 100, 100, 5);
-        gContext.fillRect(canvas.getWidth() - 152.5, 100, 5, canvas.getHeight() - 200);
-        gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
-        gContext.drawImage(img, canvas.getWidth() - 197.5, canvas.getHeight() - r - 200, 100, 100);
+        if (canvas.getHeight() - r > 0 || bought == true) {
+            buyscreen.setVisible(false);
+            gContext.setFont(new Font("Verdana", 30));
+            gContext.fillRect(canvas.getWidth() - 200, 100, 100, 5);
+            gContext.fillRect(canvas.getWidth() - 152.5, 100, 5, canvas.getHeight() - 200);
+            gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
+            gContext.drawImage(img, canvas.getWidth() - 197.5, canvas.getHeight() - r - 200, 100, 100);
+        }
+        else {
+            buyscreen.setVisible(true);
+        }
+    }
+
+    public void Buy(){
+        bought = true;
     }
 
     //Animationtimer
