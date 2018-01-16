@@ -11,9 +11,6 @@ public class GameServer {
     private ServerSocket serverSocket;
     private Socket socket = null;
 
-
-    private boolean start = true;
-
     public GameServer() throws Exception {
         ServerSocketFactory socketFactory = (ServerSocketFactory) ServerSocketFactory.getDefault();
         serverSocket = (ServerSocket) socketFactory.createServerSocket(4444);
@@ -23,7 +20,7 @@ public class GameServer {
 
         System.err.println("Waiting for connections...");
 
-        while (start) {
+        while (true) {
             try {
                 System.out.println("wait");
                 socket = serverSocket.accept();
