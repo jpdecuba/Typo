@@ -53,6 +53,8 @@ public class SessionController implements Initializable, Observer {
     @FXML
     AnchorPane anchor;
     @FXML
+    AnchorPane buyscreen;
+    @FXML
     Button Quit;
     @FXML
     Label ScoreLbl;
@@ -79,7 +81,7 @@ public class SessionController implements Initializable, Observer {
 
     private EventHandler keypressevent;
     private EventHandler MouseClickEvent;
-
+    private boolean bought = false;
     private int remaining = 5;
     private MediaPlayer mp = null;
     private MediaPlayer effect = null;
@@ -249,11 +251,21 @@ public class SessionController implements Initializable, Observer {
 
     private void Rocket(){ //Show The Rocket on the screen
         double r = ((canvas.getHeight() - 300) / hs) * sp.getPlayerOne().getScore();
-        gContext.setFont(new Font("Verdana", 30));
-        gContext.fillRect(canvas.getWidth() - 200, 100, 100, 5);
-        gContext.fillRect(canvas.getWidth() - 152.5, 100, 5, canvas.getHeight() - 200);
-        gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
-        gContext.drawImage(img, canvas.getWidth() - 197.5, canvas.getHeight() - r - 200, 100, 100);
+        if (canvas.getHeight() - r > 0 || bought == true) {
+            buyscreen.setVisible(false);
+            gContext.setFont(new Font("Verdana", 30));
+            gContext.fillRect(canvas.getWidth() - 200, 100, 100, 5);
+            gContext.fillRect(canvas.getWidth() - 152.5, 100, 5, canvas.getHeight() - 200);
+            gContext.fillText("High Score: " + hs, canvas.getWidth() - 280, 70);
+            gContext.drawImage(img, canvas.getWidth() - 197.5, canvas.getHeight() - r - 200, 100, 100);
+        }
+        else {
+            buyscreen.setVisible(true);
+        }
+    }
+
+    public void Buy(){
+        bought = true;
     }
 
     //Animationtimer
