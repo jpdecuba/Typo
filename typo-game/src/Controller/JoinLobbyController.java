@@ -39,7 +39,9 @@ public class JoinLobbyController implements Initializable, Observer {
     @FXML
     ScrollPane scrollPane;
     @FXML
-    Button BackBtn;
+    Button backBtn;
+    @FXML
+    Button refreshBtn;
     @FXML
     Label countdownLbl;
 
@@ -52,24 +54,26 @@ public class JoinLobbyController implements Initializable, Observer {
     @FXML
     public void btnClick(ActionEvent e) throws IOException {
         Button button = (Button) e.getSource();
-        if (button == BackBtn) {
+        if (button == backBtn) {
             Main.switchPage(FXMLLoader.load(getClass().getResource("/Views/NewOnlineView.fxml")), "Mode: Multiplayer");
+        }else if(button == refreshBtn){
+            Platform.runLater(()->{
+                index = 0;
+                lobbyBox.getChildren().clear();
+                lobbies.clear();
+            });
+            GC = new GameClient();
+            GC.gcl.addObserver(this);
+            GC.GetLobbys();
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         anchor.setStyle(" -fx-background-image: url('/space.png')");
-        //GameClient gc2 = new GameClient();
         GC = new GameClient();
         GC.gcl.addObserver(this);
-        //gc2.CreateLobby(Difficulty.Hard, "abc");
-
-         GC.GetLobbys();
-      /*  for (Lobby item : LB) {
-            AddLobby(item);
-            index++;
-        }*/
+        GC.GetLobbys();
     }
 
     public void AddLobby(Lobby lobby) {
@@ -104,12 +108,10 @@ public class JoinLobbyController implements Initializable, Observer {
         lobbyBox.getChildren().add(lobbies.get(index));
     }
 
-    private void difficulty(Difficulty difficulty, String page, String title) throws IOException
-    {
+    private void difficulty(Difficulty difficulty, String page, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(page));
         Parent parent = loader.load();
-        if(difficulty != null)
-        {
+        if (difficulty != null) {
             mp.setDifficulty(difficulty);
             MultiplayerController controller = loader.getController();
             controller.setSession(mp, GC);
@@ -122,21 +124,18 @@ public class JoinLobbyController implements Initializable, Observer {
     public void update(Observable o, Object arg) {
         if (arg.getClass() == ArrayList.class) {
             ArrayList<Lobby> lobbas = (ArrayList<Lobby>) arg;
-            for (Lobby lobby : lobbas){
-                Platform.runLater(()->{
+            for (Lobby lobby : lobbas) {
+                Platform.runLater(() -> {
                     AddLobby(lobby);
                     index++;
                 });
             }
-        }
-        else if (arg.getClass() == Integer.class) {
-            Platform.runLater(()->{
-                //Countdown();
+        } else if (arg.getClass() == Integer.class) {
+            Platform.runLater(() -> {
             });
 
-        }
-        else if (arg.getClass() == Multiplayer.class) {
-            Platform.runLater(()->{
+        } else if (arg.getClass() == Multiplayer.class) {
+            Platform.runLater(() -> {
                 try {
                     this.mp = (Multiplayer) arg;
                     difficulty(mp.getDifficulty(), "/Views/MultiplayerView.fxml", "TYPO Multiplayer - Difficulty: " + mp.getDifficulty());
@@ -146,24 +145,5 @@ public class JoinLobbyController implements Initializable, Observer {
             });
 
         }
-    }
-
-    public void Countdown(){
-        Timeline timeline;
-        timeline = new Timeline();
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.getKeyFrames().add(
-                new KeyFrame(Duration.seconds(1),
-                        new EventHandler<ActionEvent>() {
-                            public void handle(ActionEvent event) {
-                                countdownLbl.setText("Game will start in " + remaining);
-                                remaining--;
-                                if (remaining <= 0) {
-                                    timeline.stop();
-
-                                }
-                            }
-                        }));
-        timeline.playFromStart();
     }
 }

@@ -18,7 +18,7 @@
                     <font>
                         <Font size="16.0" />
                     </font></Label>
-                <Button fx:id="RefrshBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick"
+                <Button fx:id="refreshBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick"
                         prefHeight="60.0"
                         prefWidth="262.5" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Refresh"
                         textAlignment="CENTER">
@@ -26,7 +26,7 @@
                         <Font name="Tahoma Bold" size="16.0"/>
                     </font>
                 </Button>
-                <Button fx:id="BackBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick"
+                <Button fx:id="backBtn" alignment="CENTER" mnemonicParsing="false" onAction="#btnClick"
                         prefHeight="60.0"
                         prefWidth="262.5" style="-fx-background-color: b0c4de; -fx-background-radius: 15;" text="Back"
                         textAlignment="CENTER">
