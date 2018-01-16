@@ -78,6 +78,16 @@ public class RemotePublisher extends UnicastRemoteObject
     }
 
     @Override
+    public void registerProperty(String property) throws RemoteException {
+        publisher.registerProperty(property);
+    }
+
+    @Override
+    public void unregisterProperty(String property) throws RemoteException {
+        publisher.unregisterProperty(property);
+    }
+
+    @Override
     public void inform(String property, Object oldValue, Object newValue)
             throws RemoteException {
         publisher.inform(property, oldValue, newValue);
