@@ -7,7 +7,7 @@ public class HighScore implements Serializable{
     private String name;
     private int score;
     private Difficulty diff;
-    private transient LocalDate date;
+    private LocalDate date;
 
     public HighScore(String name, int score, Difficulty diff, LocalDate date) {
         this.name = name;
