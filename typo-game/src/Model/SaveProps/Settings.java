@@ -12,6 +12,7 @@ public class Settings {
             settings.setProperty("Volume", "100");
             settings.setProperty("ScreenMode", "Fullscreen");
             settings.setProperty("name", "Anonymous");
+            settings.setProperty("ip", "Localhost");
         }
 
         try
